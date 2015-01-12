@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS `bcnet`.`biobankattributelists` (
+  `biobankAttributeListsId` bigint(20) NOT NULL AUTO_INCREMENT,
+  `biobankDbId` bigint(20) NOT NULL,
+  `attributeListName` varchar(255) NOT NULL,
+  `attributeListValue` varchar(255) NOT NULL,
+  PRIMARY KEY (`biobankAttributeListsId`),
+  KEY `IX_6DA6C50B` (`biobankDbId`,`attributeListName`),
+  KEY `IX_56503876` (`biobankDbId`,`attributeListName`,`attributeListValue`),
+  KEY `IX_A81162A` (`biobankDbId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

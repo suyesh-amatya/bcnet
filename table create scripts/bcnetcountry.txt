@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS `bcnet`.`bcnetcountry` (
+  `countryCode` varchar(75) NOT NULL,
+  `name` varchar(75) DEFAULT NULL,
+  PRIMARY KEY (`countryCode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

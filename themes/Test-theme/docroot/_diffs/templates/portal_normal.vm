@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="$css_class" dir="#language ("lang.dir")" lang="$w3c_language_id">
+
+<head>
+  <title>$the_title - $company_name</title>
+
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="MJ" name="author">
+
+  $theme.include($top_head_include)
+
+  <link href="$css_folder/bootstrap-v2.3.2.min.css" rel="stylesheet" type="text/css" />
+  <link href="$css_folder/bootstrap-v3.0.0.min.css" rel="stylesheet" type="text/css" />
+  <link href="$css_folder/custom.css" rel="stylesheet" type="text/css" />
+
+  <script src="$javascript_folder/jquery-2.0.3.min.js"></script>
+  <script src="$javascript_folder/bootstrap-v3.0.0.min.js"></script>
+</head>
+
+<body class="$css_class">
+
+  $theme.include($body_top_include)
+
+  #if ($permissionChecker.isOmniadmin())
+    #dockbar()
+  #end
+
+  <div id="wrapper">
+
+    <header id="banner" role="banner">
+
+      #if ($permissionChecker.isOmniadmin())
+        <nav class="navbar navbar-static-top" id="navigation">
+      #else
+        <nav class="navbar navbar-fixed-top" id="navigation">
+      #end
+
+      <a class="navbar-toggle" data-target=".nav-collapse" data-toggle="collapse">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </a>
+
+      <span class="navbar-brand">Families-Friends</span>
+
+      <div class="nav-collapse collapse">
+        <ul class="nav navbar-nav">
+
+          #if ($has_navigation)
+            #parse ("$full_templates_path/navigation.vm")
+          #end
+
+          #if ($is_signed_in)
+            <li><a class="glyphicon glyphicon-user" href="$sign_out_url"><span> $user_name - Sign Out</span></a></li>
+          #end
+
+        </ul>
+      </div>
+
+      </nav>
+
+    </header>
+
+    <div id="content">
+      <nav id="breadcrumbs">#breadcrumbs()</nav>
+
+      #if ($selectable)
+        $theme.include($content_include)
+      #else
+        $portletDisplay.recycle()
+
+        $portletDisplay.setTitle($the_title)
+
+        $theme.wrapPortlet("portlet.vm", $content_include)
+      #end
+    </div>
+
+    <footer id="footer" role="contentinfo">
+      <div class="col col-sm-6">© Yourcompany.com</div>
+    </footer>
+
+  </div>
+
+  $theme.include($body_bottom_include)
+
+  $theme.include($bottom_include)
+
+</body>
+
+</html>
