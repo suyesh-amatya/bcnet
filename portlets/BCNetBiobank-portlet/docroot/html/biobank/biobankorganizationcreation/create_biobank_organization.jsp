@@ -2,7 +2,7 @@
 
 <%
 	
-	
+	long optionsPageTemplate_option = GetterUtil.getLong(portletPreferences.getValue("optionsPageTemplate", "0"));
 	List<JuristicPerson> juristicPersons = JuristicPersonLocalServiceUtil.getAllJuristicPersons();
 	List<Country> countries = CountryLocalServiceUtil.getAllCountries();
 
@@ -19,7 +19,8 @@
 <aui:form action="<%= createBiobankOrganizationURL %>" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-		
+		<!-- hidden elements direct from config -->
+		<aui:input name="pagetemplate" type="hidden" value ="<%= optionsPageTemplate_option %>" />
 		
 		<aui:row>
 			<aui:column columnWidth="30">

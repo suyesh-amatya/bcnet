@@ -14,12 +14,18 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -54,11 +60,23 @@ public class BiobankOrganizationCreationPortlet extends MVCPortlet {
 		//com.liferay.portal.kernel.workflow.WorkflowConstants.STATUS_APPROVED
         String comments = null;
         boolean site = true;
+        
+        
+        
         ServiceContext  serviceContext = null;
 		Organization organization = OrganizationLocalServiceUtil.addOrganization(userId, parentOrganizationId, name, type, regionId, countryId, 
 				statusId, comments, site, serviceContext);
 		long organizationId = organization.getOrganizationId();
 		
+		long pageTemplate = ParamUtil.getLong(request, "pagetemplate");
+		if(site){
+			try {
+				createPages(organization, pageTemplate);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		String biobankId = ParamUtil.getString(request, "biobankId");
 		String acronym = ParamUtil.getString(request, "acronym");
@@ -92,6 +110,27 @@ public class BiobankOrganizationCreationPortlet extends MVCPortlet {
 		
 	}
 	
+	
+	private void createPages(Organization organization , long publicLayoutSetPrototypeId) throws Exception {
+		try {
+			boolean isPrivateLayout = false;
+			Group organizationGroup = organization.getGroup();
+			
+			long groupId = organizationGroup.getGroupId();
+		    LayoutSetPrototype prototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(publicLayoutSetPrototypeId);
+		    boolean layoutSetPrototypeLinkEnabled = true;
+		    LayoutSetLocalServiceUtil.updateLayoutSetPrototypeLinkEnabled(groupId, isPrivateLayout,
+		            layoutSetPrototypeLinkEnabled, prototype.getUuid());
+		    
+		    LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, isPrivateLayout);
+		    SitesUtil.mergeLayoutSetPrototypeLayouts(organizationGroup, layoutSet);
+		} catch (Exception e) {
+			System.out.println("------------------------------------------------------");
+			System.out.println("Exception in creating organization pages!");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 	public void deleteBiobank(ActionRequest request, ActionResponse response) throws Exception{
 		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
