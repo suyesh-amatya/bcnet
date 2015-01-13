@@ -14,6 +14,8 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.KeyValuePair" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.Constants" %>
 <%@ page import="com.liferay.portal.service.GroupLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
@@ -28,7 +30,9 @@
 <%@page import="com.liferay.portal.service.OrganizationLocalServiceUtil"%>
 <%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
 
-
+<!-- Includes for searching the Site Templates -->
+<%@ page import="com.liferay.portal.service.LayoutSetPrototypeServiceUtil" %>
+<%@ page import="com.liferay.portal.model.LayoutSetPrototype" %>
 
 
 <%@ page import="java.util.List" %>

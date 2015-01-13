@@ -85,6 +85,7 @@
 	<portlet>
 		<portlet-name>biobank-organization-creation</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>com.bcnet.portlet.biobank.BiobankOrganizationCreationConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js

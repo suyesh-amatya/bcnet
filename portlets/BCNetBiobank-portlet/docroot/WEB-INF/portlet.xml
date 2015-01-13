@@ -279,10 +279,17 @@
 				/html/biobank/biobankorganizationcreation/create_biobank_organization.jsp
 			</value>
 		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/biobank/biobankorganizationcreation/config.jsp
+			</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
 		</supports>
 		<portlet-info>
 			<title>Biobank Organization Creation</title>
