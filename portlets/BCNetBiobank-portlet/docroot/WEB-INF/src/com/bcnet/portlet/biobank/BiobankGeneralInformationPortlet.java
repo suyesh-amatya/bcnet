@@ -1,5 +1,6 @@
 package com.bcnet.portlet.biobank;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -12,11 +13,15 @@ import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -74,19 +79,17 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 	}
 	
 	
-	public void deleteBiobank(ActionRequest request, ActionResponse response) throws Exception{
+		
+	public void deleteBiobankOrganization(ActionRequest request, ActionResponse response) throws IOException{
 		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
+		
 		try {
-			Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);
-			
-			OrganizationLocalServiceUtil.deleteOrganization(organization);
-			try{
-				BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);
-			}
-			catch(Exception e){
-				System.out.println("No biobank with id: "+biobankDbId+" exists.");
-			}
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);			
+			OrganizationLocalServiceUtil.deleteOrganization(organization);			
+			BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);			
 			BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeListsBybiobankDbId(biobankDbId);
+			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+			response.sendRedirect(themeDisplay.getURLPortal());
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,8 +97,6 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 

@@ -321,6 +321,18 @@ public class BiobankGeneralInformationLocalServiceWrapper
 			countryCode);
 	}
 
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> findAllBiobankOrganizations(
+		int begin, int end) {
+		return _biobankGeneralInformationLocalService.findAllBiobankOrganizations(begin,
+			end);
+	}
+
+	@Override
+	public int findAllBiobankOrganizationsCount() {
+		return _biobankGeneralInformationLocalService.findAllBiobankOrganizationsCount();
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

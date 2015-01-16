@@ -85,6 +85,7 @@ public class BiobankAttributeListsLocalServiceImpl
 					findBybiobankDbId_attributeListName_attributeListValue(biobankDbId, attributeListName, attributeListValue);
 		} catch (NoSuchBiobankAttributeListsException e) {
 			// TODO Auto-generated catch block
+			System.out.println("No such BiobankAttributeLists exists!");
 			e.printStackTrace();
 		}
 		
@@ -102,24 +103,14 @@ public class BiobankAttributeListsLocalServiceImpl
 	
 
 	public BiobankAttributeLists deleteBiobankAttributeListsBybiobankDbId(long biobankDbId){
-		List<BiobankAttributeLists> biobankAttributeLists = null;
+		
 		try {
-			biobankAttributeLists = getBiobankAtrributeListsByBiobankDbId(biobankDbId);
-			System.out.println(biobankAttributeLists);
-		} catch (SystemException e1) {
+			biobankAttributeListsPersistence.removeBybiobankDbId(biobankDbId);
+		} catch (SystemException e) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e.printStackTrace();
 		}
-		for(BiobankAttributeLists biobankAttributeList: biobankAttributeLists){
-			try {
-				biobankAttributeListsPersistence.remove(biobankAttributeList);
-			} catch (SystemException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 		return null;
-		
-		
 	}
 }

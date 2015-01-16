@@ -32,4 +32,9 @@ public interface BiobankGeneralInformationFinder {
 
 	public int findBiobanksCountByKeywordsCountry(
 		java.lang.String[] partskeywords, java.lang.String countryCode);
+
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> findAllBiobankOrganizations(
+		int begin, int end);
+
+	public int findAllBiobankOrganizationsCount();
 }

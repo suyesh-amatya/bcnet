@@ -31,20 +31,20 @@
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:renderURL>
 
-<portlet:actionURL name="deleteBiobank" var="deleteURL">
+<portlet:actionURL name="deleteBiobankOrganization" var="deleteBiobankOrganizationURL">
 		<portlet:param name="biobankDbId" value="<%= String.valueOf(organizationId) %>" />
-		<portlet:param name="redirect" value="<%= themeDisplay.getURLPortal() %>" />
+		<%-- <portlet:param name="redirect" value="<%= themeDisplay.getURLPortal() %>" /> --%>
 </portlet:actionURL>
-<liferay-ui:icon-delete url="<%= deleteURL.toString() %>" />
+
 
 <div class="list-group">
   <span class="list-group-item-active">
     <b><%=organization.getName() %></b>
     <a href="<%=addBiobankGeneralInformationURL.toString()%>">
-    	<span style="float:right;">
-    		<liferay-ui:icon image="edit" message="Edit Biobank"/>
-    	</span>
+   		<liferay-ui:icon image="edit" message="Edit Biobank" cssClass="biobankOrganizationEdit"/>
     </a>
+    <liferay-ui:icon-delete url="<%= deleteBiobankOrganizationURL.toString() %>" message="Delete Biobank" cssClass="biobankOrganizationDelete"
+   			confirmation="Are you sure you want to delete it?"/>
   </span>
   <span class="list-group-item">BiobankId: <b><%=biobankGeneralInformation.getBiobankId() %></b></span>
   <span class="list-group-item">Acronym: <b><%=biobankGeneralInformation.getAcronym() %></b></span>

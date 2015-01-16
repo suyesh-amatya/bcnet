@@ -12,6 +12,24 @@ a.jp{
 	left: -60px;
 }
 
+
+div .list-group{
+	position: relative;
+}
+
+
+div .list-group .biobankOrganizationDelete{
+	position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+div .list-group .biobankOrganizationEdit {
+	position: absolute;
+	top: 10px;
+	right: 40px;
+}
+
 /***Bootstrap Mimic Start***/
 .container .collapse {
 	display:block !important;

@@ -17,21 +17,8 @@ package com.bcnet.portlet.biobank.service.impl;
 import java.util.List;
 
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformation;
-import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.base.BiobankGeneralInformationLocalServiceBaseImpl;
 import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinderUtil;
-import com.liferay.portal.kernel.dao.orm.Criterion;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Organization;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 /**
  * The implementation of the biobank general information local service.
@@ -73,5 +60,13 @@ public class BiobankGeneralInformationLocalServiceImpl
 	public int findBiobanksCountByKeywordsCountry(String keywords, String countryCode){
 		String[] partskeywords = keywords.split("\\s+");
 		return BiobankGeneralInformationFinderUtil.findBiobanksCountByKeywordsCountry(partskeywords, countryCode);
+	}
+	
+	public List<BiobankGeneralInformation> findAllBiobankOrganizations(int begin, int end){
+		return BiobankGeneralInformationFinderUtil.findAllBiobankOrganizations(begin, end);
+	}
+	
+	public int findAllBiobankOrganizationsCount(){
+		return BiobankGeneralInformationFinderUtil.findAllBiobankOrganizationsCount();
 	}
 }

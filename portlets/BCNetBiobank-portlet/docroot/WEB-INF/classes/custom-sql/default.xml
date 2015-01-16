@@ -76,4 +76,31 @@
 		) dummy;
     ]]>
 	</sql>
+	
+	
+	<sql id="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findAllBiobankOrganizations">
+	<![CDATA[
+		SELECT biobank.*, organization_.name
+		FROM 
+			biobank 
+				INNER JOIN
+			organization_
+				ON biobank.biobankDbId = organization_.organizationId
+    ]]>
+	</sql>
+	
+	
+	<sql id="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findAllBiobankOrganizationsCount">
+	<![CDATA[
+		SELECT COUNT(*) from
+		(
+		SELECT biobank.*, organization_.name
+		FROM 
+			biobank 
+				INNER JOIN
+			organization_
+				ON biobank.biobankDbId = organization_.organizationId
+		) dummy;
+    ]]>
+	</sql>
 </custom-sql>

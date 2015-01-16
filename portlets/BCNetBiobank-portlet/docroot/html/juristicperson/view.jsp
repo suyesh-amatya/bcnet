@@ -6,7 +6,7 @@
 <%
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
-
+<liferay-ui:error key="juristicPersonError" message="This Juristic Person is associated with some biobank. So it cannot be deleted."/>
 <aui:button-row>
 	<portlet:renderURL var="addJuristicPersonURL">
 		<portlet:param name="mvcPath" value="/html/juristicperson/edit_juristicperson.jsp" />

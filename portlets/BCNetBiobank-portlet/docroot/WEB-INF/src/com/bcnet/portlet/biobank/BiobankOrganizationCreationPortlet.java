@@ -36,10 +36,12 @@ public class BiobankOrganizationCreationPortlet extends MVCPortlet {
 
 	public void createBiobankOrganization(ActionRequest request, ActionResponse response) throws Exception{
 		
-		_createBiobankOrganization(request);
-
-		sendRedirect(request, response);
+		BiobankGeneralInformation biobank = _createBiobankOrganization(request);
 		
+		Organization organization = OrganizationLocalServiceUtil.getOrganization(biobank.getBiobankDbId());
+		
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		response.sendRedirect(themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL());
 
 	}
 

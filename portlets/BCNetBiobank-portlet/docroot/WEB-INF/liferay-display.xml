@@ -12,5 +12,6 @@
 		<portlet id="main-navigation-menu"></portlet>
 		<portlet id="biobank-general-information"></portlet>
 		<portlet id="biobank-organization-creation"></portlet>
+		<portlet id="biobank-organization-lister"></portlet>
 	</category>
 </display>

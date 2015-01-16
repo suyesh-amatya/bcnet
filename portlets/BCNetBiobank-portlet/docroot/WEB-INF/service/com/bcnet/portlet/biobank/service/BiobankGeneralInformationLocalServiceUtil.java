@@ -308,6 +308,15 @@ public class BiobankGeneralInformationLocalServiceUtil {
 				   .findBiobanksCountByKeywordsCountry(keywords, countryCode);
 	}
 
+	public static java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> findAllBiobankOrganizations(
+		int begin, int end) {
+		return getService().findAllBiobankOrganizations(begin, end);
+	}
+
+	public static int findAllBiobankOrganizationsCount() {
+		return getService().findAllBiobankOrganizationsCount();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

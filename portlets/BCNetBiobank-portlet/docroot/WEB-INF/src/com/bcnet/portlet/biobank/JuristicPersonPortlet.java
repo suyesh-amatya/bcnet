@@ -15,6 +15,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -62,11 +64,16 @@ public class JuristicPersonPortlet extends MVCPortlet {
 		sendRedirect(request, response);
 	}
 	
-	public void deleteJuristicPerson(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException{
+	public void deleteJuristicPerson(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException {
 		
 		long juristicPersonId = ParamUtil.getLong(request, "juristicPersonId");
 		
-		JuristicPersonLocalServiceUtil.deleteJuristicPerson(juristicPersonId);
+		try{
+			JuristicPersonLocalServiceUtil.deleteJuristicPerson(juristicPersonId);
+		}
+		catch(Exception e){
+			SessionErrors.add(request, "juristicPersonError", SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+		}
 		
 		sendRedirect(request, response);
 	}

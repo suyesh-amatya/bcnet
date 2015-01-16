@@ -51,6 +51,15 @@ public class BiobankGeneralInformationFinderUtil {
 			countryCode);
 	}
 
+	public static java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> findAllBiobankOrganizations(
+		int begin, int end) {
+		return getFinder().findAllBiobankOrganizations(begin, end);
+	}
+
+	public static int findAllBiobankOrganizationsCount() {
+		return getFinder().findAllBiobankOrganizationsCount();
+	}
+
 	public static BiobankGeneralInformationFinder getFinder() {
 		if (_finder == null) {
 			_finder = (BiobankGeneralInformationFinder)PortletBeanLocatorUtil.locate(com.bcnet.portlet.biobank.service.ClpSerializer.getServletContextName(),

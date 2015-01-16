@@ -141,6 +141,14 @@ public class BiobankGeneralInformationLocalServiceClp
 		_methodParameterTypes22 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
+
+		_methodName23 = "findAllBiobankOrganizations";
+
+		_methodParameterTypes23 = new String[] { "int", "int" };
+
+		_methodName24 = "findAllBiobankOrganizationsCount";
+
+		_methodParameterTypes24 = new String[] {  };
 	}
 
 	@Override
@@ -834,6 +842,53 @@ public class BiobankGeneralInformationLocalServiceClp
 		return ((Integer)returnObj).intValue();
 	}
 
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> findAllBiobankOrganizations(
+		int begin, int end) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23, new Object[] { begin, end });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int findAllBiobankOrganizationsCount() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -879,4 +934,8 @@ public class BiobankGeneralInformationLocalServiceClp
 	private String[] _methodParameterTypes21;
 	private String _methodName22;
 	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

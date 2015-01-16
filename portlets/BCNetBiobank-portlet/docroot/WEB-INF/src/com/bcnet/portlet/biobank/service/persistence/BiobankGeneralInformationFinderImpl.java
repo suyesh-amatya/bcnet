@@ -22,6 +22,8 @@ public class BiobankGeneralInformationFinderImpl extends BasePersistenceImpl<Bio
 	private static final String COUNT_BY_ID_ACRONYM_NAME_COUNTRY = "com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.countByIdAcronymNameCountry";
 	private static final String FIND_BIOBANKS_BY_KEYWORD_COUNTRY = "com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findBiobanksByKeywordsCountry";
 	private static final String COUNT_BIOBANKS_BY_KEYWORD_COUNTRY = "com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findBiobanksCountByKeywordsCountry";
+	private static final String FIND_ALL_BIOBANK_ORGANIZATIONS = "com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findAllBiobankOrganizations";
+	private static final String COUNT_ALL_BIOBANK_ORGANIZATIONS = "com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findAllBiobankOrganizationsCount";
 
 	
 	public List<BiobankGeneralInformation> findByIdAcronymNameCountry(String code, String acronym, String name, String countryCode, int begin, int end){
@@ -300,4 +302,65 @@ public class BiobankGeneralInformationFinderImpl extends BasePersistenceImpl<Bio
 
 	    return 0;
 	}
+	
+	
+	
+	
+	public List<BiobankGeneralInformation> findAllBiobankOrganizations(int begin, int end){
+		
+		Session session = null;
+	    try {
+	        session = openSession();
+	        
+	        
+	        String sql = CustomSQLUtil.get(FIND_ALL_BIOBANK_ORGANIZATIONS);
+	        
+	        SQLQuery q = session.createSQLQuery(sql);
+	        q.setCacheable(false);
+	        q.addEntity("BiobankGeneralInformation", BiobankGeneralInformationImpl.class);
+
+	        
+	        return (List<BiobankGeneralInformation>) QueryUtil.list(q, getDialect(), begin, end);
+	    } catch (Exception e) {
+	        try {
+	            throw new SystemException(e);
+	        } catch (SystemException se) {
+	            se.printStackTrace();
+	        }
+	    } finally {
+	        closeSession(session);
+	    }
+
+	    return null;
+	}
+	
+	
+	
+	public int findAllBiobankOrganizationsCount(){
+		
+		Session session = null;
+	    try {
+	        session = openSession();
+	        
+	        String sql = CustomSQLUtil.get(COUNT_ALL_BIOBANK_ORGANIZATIONS);
+	        SQLQuery q = session.createSQLQuery(sql);
+	        q.setCacheable(false);
+
+
+	        BigInteger count = (BigInteger)q.uniqueResult();
+            return count.intValue();
+	    } catch (Exception e) {
+	        try {
+	            throw new SystemException(e);
+	        } catch (SystemException se) {
+	            se.printStackTrace();
+	        }
+	    } finally {
+	        closeSession(session);
+	    }
+
+	    return 0;
+	}
+	
+
 }

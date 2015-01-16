@@ -139,6 +139,14 @@ public class BiobankGeneralInformationLocalServiceClpInvoker {
 		_methodParameterTypes81 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
+
+		_methodName82 = "findAllBiobankOrganizations";
+
+		_methodParameterTypes82 = new String[] { "int", "int" };
+
+		_methodName83 = "findAllBiobankOrganizationsCount";
+
+		_methodParameterTypes83 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -272,6 +280,17 @@ public class BiobankGeneralInformationLocalServiceClpInvoker {
 				(java.lang.String)arguments[1]);
 		}
 
+		if (_methodName82.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
+			return BiobankGeneralInformationLocalServiceUtil.findAllBiobankOrganizations(((Integer)arguments[0]).intValue(),
+				((Integer)arguments[1]).intValue());
+		}
+
+		if (_methodName83.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
+			return BiobankGeneralInformationLocalServiceUtil.findAllBiobankOrganizationsCount();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -319,4 +338,8 @@ public class BiobankGeneralInformationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes80;
 	private String _methodName81;
 	private String[] _methodParameterTypes81;
+	private String _methodName82;
+	private String[] _methodParameterTypes82;
+	private String _methodName83;
+	private String[] _methodParameterTypes83;
 }

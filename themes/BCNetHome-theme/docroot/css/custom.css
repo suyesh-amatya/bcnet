@@ -7,11 +7,7 @@
 	background-color:#f4f6f7;
 }
 
-a.jp{
-	position: relative;
-	top: 30px;
-	left: -60px;
-}
+
 
 /***Portlet Start***/
 
@@ -29,6 +25,34 @@ div#_biobanksearch_WAR_BCNetBiobankportlet_biobankGeneralInformationsSearchConta
 
 div .biobankSearchAccordionTitle span.title-text{
 	color: #0af;
+}
+
+a.jp{
+	position: relative;
+	top: 30px;
+	left: -60px;
+}
+
+
+div .well{
+	position: relative;
+}
+
+
+div .well .biobankOrganizationDelete{
+	position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+div .well .biobankOrganizationEdit {
+	position: absolute;
+	top: 5px;
+	right: 30px;
+}
+
+div#_biobankorganizationlister_WAR_BCNetBiobankportlet_biobankGeneralInformationsSearchContainer{
+	display: none;
 }
 
 /***Portlet End***/

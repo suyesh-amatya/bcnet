@@ -1,6 +1,6 @@
 <%@ include file="/html/init.jsp" %>
 <%!
-   com.liferay.portal.kernel.dao.search.SearchContainer<Biobank> searchContainer = null;
+   com.liferay.portal.kernel.dao.search.SearchContainer<BiobankGeneralInformation> searchContainer = null;
 %>
 
 <%
@@ -52,14 +52,6 @@
 	
 	</aui:fieldset>
 </aui:form>
-
-
-
-<%-- <liferay-ui:panel-container accordion="false">
-    <liferay-ui:panel title="1" defaultState=""> 1 Content </liferay-ui:panel>
-    <liferay-ui:panel title="2"> 2 Content</liferay-ui:panel>
-    <liferay-ui:panel title="3"> 3 Content</liferay-ui:panel>
-</liferay-ui:panel-container>  --%>
 
 
 
