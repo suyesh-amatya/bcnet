@@ -4,8 +4,6 @@ import java.io.IOException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletException;
-
 import com.bcnet.portlet.biobank.model.BiobankAttributeLists;
 import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;

@@ -1,8 +1,6 @@
 package com.bcnet.portlet.biobank;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
@@ -72,7 +70,7 @@ public class JuristicPersonPortlet extends MVCPortlet {
 			JuristicPersonLocalServiceUtil.deleteJuristicPerson(juristicPersonId);
 		}
 		catch(Exception e){
-			SessionErrors.add(request, "juristicPersonError", SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+			SessionErrors.add(request, "juristicPersonError");
 		}
 		
 		sendRedirect(request, response);

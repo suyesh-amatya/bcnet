@@ -1,26 +1,19 @@
 package com.bcnet.portlet.biobank;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
-import com.bcnet.portlet.biobank.model.BiobankAttributeLists;
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformation;
 import com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationImpl;
 import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 

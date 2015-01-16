@@ -9,7 +9,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
 
 
-<liferay-ui:success key="biobankOrganizationDeleteSuccess" message="Greeting saved successfully!" />
+
 <liferay-ui:search-container emptyResultsMessage="biobank-empty-results-message">
 
 <%
