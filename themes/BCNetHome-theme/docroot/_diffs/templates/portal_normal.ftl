@@ -79,7 +79,7 @@ ${theme.include(body_top_include)}
 						create_account_url.setPortletMode("view");
 						create_account_url.setParameter("saveLastPath", "0");
 						create_account_url.setParameter("struts_action", "/login/create_account");-->
-						<a href="http://localhost:8080/web/guest/home?p_p_id=58&p_p_lifecycle=1&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Fcreate_account" data-redirect="${is_login_redirect_required?string}" id="register" rel="nofollow">Register</a>
+						<a href="${themeDisplay.getURLPortal()}/web/guest/home?p_p_id=58&p_p_lifecycle=1&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Fcreate_account" data-redirect="${is_login_redirect_required?string}" id="register" rel="nofollow">Register</a>
 						</div>
 					</#if>
 					
