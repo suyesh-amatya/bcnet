@@ -134,28 +134,6 @@ public class BiobankOrganizationCreationPortlet extends MVCPortlet {
 		}
 	}
 	
-	public void deleteBiobank(ActionRequest request, ActionResponse response) throws Exception{
-		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
-		try {
-			Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);
-			
-			OrganizationLocalServiceUtil.deleteOrganization(organization);
-			try{
-				BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);
-			}
-			catch(Exception e){
-				System.out.println("No biobank with id: "+biobankDbId+" exists.");
-			}
-			BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeListsBybiobankDbId(biobankDbId);
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
+	
 	
 }

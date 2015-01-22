@@ -4,4 +4,8 @@
 <hook>
 	<language-properties>content/Language.properties</language-properties>
     <custom-jsp-dir>/META-INF/custom_jsps</custom-jsp-dir>
+    <struts-action>
+        <struts-action-path>/login/create_account</struts-action-path>
+        <struts-action-impl>com.bcnet.hook.login.CustomCreateAccountAction</struts-action-impl>
+    </struts-action>
 </hook>

@@ -143,25 +143,33 @@ System.out.println(countries);
 				</c:if>
 			</aui:input>
 			
-			<liferay-ui:custom-attribute
-		        className="<%= User.class.getName() %>"
-		        classPK="<%= 0 %>"
-		        editable="<%= true %>"
-		        label="<%= true %>"
-		        name="countryCode"
-    		/>
+			<aui:select name="countryCode" label='Country' required="true">
+				<aui:option>Select</aui:option>
+				<%
+					for (Country country : countries) {
+				%>
+				
+						<aui:option  value="<%= country.getCountryCode() %>"><%=country.getName() %></aui:option>
+				
+				<%
+					}
+				%>
+				
+			</aui:select>
+			
+			
 		</aui:col>
 		
 
 		<aui:col width="<%= 50 %>">
 		
-    <liferay-ui:custom-attribute-list
+    <%-- <liferay-ui:custom-attribute-list
         className="<%= User.class.getName() %>"
         classPK="<%= 0 %>"
         editable="<%= true %>"
         label="<%= true %>"
         
-    />
+    /> --%>
      
 
 			<c:if test="<%= PropsValues.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD %>">
