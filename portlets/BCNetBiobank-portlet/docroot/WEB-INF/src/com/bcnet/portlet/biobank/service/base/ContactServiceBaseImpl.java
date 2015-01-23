@@ -22,7 +22,6 @@ import com.bcnet.portlet.biobank.service.persistence.BiobankContactPersistence;
 import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder;
 import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationPersistence;
 import com.bcnet.portlet.biobank.service.persistence.ContactPersistence;
-import com.bcnet.portlet.biobank.service.persistence.CountryPersistence;
 import com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -359,62 +358,6 @@ public abstract class ContactServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Returns the country local service.
-	 *
-	 * @return the country local service
-	 */
-	public com.bcnet.portlet.biobank.service.CountryLocalService getCountryLocalService() {
-		return countryLocalService;
-	}
-
-	/**
-	 * Sets the country local service.
-	 *
-	 * @param countryLocalService the country local service
-	 */
-	public void setCountryLocalService(
-		com.bcnet.portlet.biobank.service.CountryLocalService countryLocalService) {
-		this.countryLocalService = countryLocalService;
-	}
-
-	/**
-	 * Returns the country remote service.
-	 *
-	 * @return the country remote service
-	 */
-	public com.bcnet.portlet.biobank.service.CountryService getCountryService() {
-		return countryService;
-	}
-
-	/**
-	 * Sets the country remote service.
-	 *
-	 * @param countryService the country remote service
-	 */
-	public void setCountryService(
-		com.bcnet.portlet.biobank.service.CountryService countryService) {
-		this.countryService = countryService;
-	}
-
-	/**
-	 * Returns the country persistence.
-	 *
-	 * @return the country persistence
-	 */
-	public CountryPersistence getCountryPersistence() {
-		return countryPersistence;
-	}
-
-	/**
-	 * Sets the country persistence.
-	 *
-	 * @param countryPersistence the country persistence
-	 */
-	public void setCountryPersistence(CountryPersistence countryPersistence) {
-		this.countryPersistence = countryPersistence;
-	}
-
-	/**
 	 * Returns the juristic person local service.
 	 *
 	 * @return the juristic person local service
@@ -674,12 +617,6 @@ public abstract class ContactServiceBaseImpl extends BaseServiceImpl
 	protected com.bcnet.portlet.biobank.service.ContactService contactService;
 	@BeanReference(type = ContactPersistence.class)
 	protected ContactPersistence contactPersistence;
-	@BeanReference(type = com.bcnet.portlet.biobank.service.CountryLocalService.class)
-	protected com.bcnet.portlet.biobank.service.CountryLocalService countryLocalService;
-	@BeanReference(type = com.bcnet.portlet.biobank.service.CountryService.class)
-	protected com.bcnet.portlet.biobank.service.CountryService countryService;
-	@BeanReference(type = CountryPersistence.class)
-	protected CountryPersistence countryPersistence;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.JuristicPersonLocalService.class)
 	protected com.bcnet.portlet.biobank.service.JuristicPersonLocalService juristicPersonLocalService;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.JuristicPersonService.class)

@@ -4,7 +4,7 @@
 	
 	long optionsPageTemplate_option = GetterUtil.getLong(portletPreferences.getValue("optionsPageTemplate", "0"));
 	List<JuristicPerson> juristicPersons = JuristicPersonLocalServiceUtil.getAllJuristicPersons();
-	List<Country> countries = CountryLocalServiceUtil.getAllCountries();
+	List<Country> countries = CountryServiceUtil.getCountries();
 
 	String redirect = ParamUtil.getString(request, "redirect");
 	
@@ -97,7 +97,7 @@
 						for (Country country : countries) {
 					%>
 					
-							<aui:option  value="<%= country.getCountryCode() %>"><%=country.getName() %></aui:option>
+							<aui:option  value="<%= country.getA2() %>"><%=country.getName().toUpperCase() %></aui:option>
 					
 					<%
 						}

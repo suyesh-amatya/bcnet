@@ -15,9 +15,6 @@
 --%>
 
 <%@ include file="/html/portlet/login/init.jsp" %>
-<%@ page import="com.bcnet.portlet.biobank.model.Country" %>
-<%@ page import="com.bcnet.portlet.biobank.service.CountryLocalServiceUtil"%> 
-<%@ page import="java.util.List" %>
 
 
 
@@ -34,8 +31,7 @@ birthdayCalendar.set(Calendar.DATE, 1);
 birthdayCalendar.set(Calendar.YEAR, 1970);
 
 
-List<Country> countries = CountryLocalServiceUtil.getAllCountries();
-System.out.println(countries);
+
 %>
 
 <portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>" var="createAccountURL">
@@ -143,39 +139,15 @@ System.out.println(countries);
 				</c:if>
 			</aui:input>
 			
-			<aui:select name="countryCode" label='Country' required="true">
-				<aui:option>Select</aui:option>
-				<%
-					for (Country country : countries) {
-				%>
-				
-						<aui:option  value="<%= country.getCountryCode() %>"><%=country.getName() %></aui:option>
-				
-				<%
-					}
-				%>
-				
-			</aui:select>
-			
-			
 		</aui:col>
 		
 
 		<aui:col width="<%= 50 %>">
-		
-    <%-- <liferay-ui:custom-attribute-list
-        className="<%= User.class.getName() %>"
-        classPK="<%= 0 %>"
-        editable="<%= true %>"
-        label="<%= true %>"
-        
-    /> --%>
-     
 
 			<c:if test="<%= PropsValues.LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD %>">
-				<aui:input label="password" name="password1" size="30" type="password" value="" />
+				<aui:input label="password" name="password1" size="30" type="password" value="" required="true"/>
 
-				<aui:input label="enter-again" name="password2" size="30" type="password" value="">
+				<aui:input label="enter-again" name="password2" size="30" type="password" value="" required="true">
 					<aui:validator name="equalTo">
 						'#<portlet:namespace />password1'
 					</aui:validator>

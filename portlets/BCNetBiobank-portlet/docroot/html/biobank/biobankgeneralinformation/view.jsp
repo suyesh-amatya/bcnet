@@ -67,13 +67,13 @@
 		String countryName = "";
 		
 		try {
-			countryName = CountryLocalServiceUtil.getCountry
+			countryName = CountryServiceUtil.getCountryByA2
 					(biobankGeneralInformation.getCountryCode()).getName();
 		} 
 		catch (Exception e) {
 		}
 	%>
-	<span class="list-group-item">Country: <b><%=countryName %></b></span>
+	<span class="list-group-item">Country: <b><%=countryName.toUpperCase() %></b></span>
 	
 	<span class="list-group-item">Description: <b><%=biobankGeneralInformation.getDescription() %></b></span>
 	<span class="list-group-item">Backup: <b><%=biobankGeneralInformation.getBackup()== true?"yes":"no" %></b></span>

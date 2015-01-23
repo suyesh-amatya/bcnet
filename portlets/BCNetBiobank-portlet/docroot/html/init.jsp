@@ -24,11 +24,14 @@
 <%@ page import="com.liferay.portal.model.Layout" %>
 <%@ page import="com.liferay.portal.model.Organization" %>
 <%@page import="com.liferay.portal.model.Group"%>
+<%@page import="com.liferay.portal.model.Country"%>
+
 
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
 
 <%@page import="com.liferay.portal.service.OrganizationLocalServiceUtil"%>
 <%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.CountryServiceUtil" %>
 
 <!-- Includes for searching the Site Templates -->
 <%@ page import="com.liferay.portal.service.LayoutSetPrototypeServiceUtil" %>
@@ -44,14 +47,12 @@
 <%@ page import="com.bcnet.portlet.biobank.model.BiobankAttributeLists" %>
 <%@ page import="com.bcnet.portlet.biobank.model.JuristicPerson" %>
 <%@ page import="com.bcnet.portlet.biobank.model.Contact" %>
-<%@ page import="com.bcnet.portlet.biobank.model.Country" %>
 <%@ page import="com.bcnet.portlet.biobank.model.Biobank" %>
 <%@ page import="com.bcnet.portlet.biobank.model.BiobankGeneralInformation" %>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.JuristicPersonLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.ContactLocalServiceUtil"%>
-<%@ page import="com.bcnet.portlet.biobank.service.CountryLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil"%>
 

@@ -25,8 +25,6 @@ import com.bcnet.portlet.biobank.service.BiobankGeneralInformationServiceUtil;
 import com.bcnet.portlet.biobank.service.ClpSerializer;
 import com.bcnet.portlet.biobank.service.ContactLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.ContactServiceUtil;
-import com.bcnet.portlet.biobank.service.CountryLocalServiceUtil;
-import com.bcnet.portlet.biobank.service.CountryServiceUtil;
 import com.bcnet.portlet.biobank.service.JuristicPersonLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.JuristicPersonServiceUtil;
 
@@ -63,9 +61,6 @@ public class ClpMessageListener extends BaseMessageListener {
 			ContactLocalServiceUtil.clearService();
 
 			ContactServiceUtil.clearService();
-			CountryLocalServiceUtil.clearService();
-
-			CountryServiceUtil.clearService();
 			JuristicPersonLocalServiceUtil.clearService();
 
 			JuristicPersonServiceUtil.clearService();

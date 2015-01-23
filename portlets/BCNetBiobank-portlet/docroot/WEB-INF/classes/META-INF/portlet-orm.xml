@@ -73,15 +73,6 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.CountryModelImpl">
-		<attributes>
-			<id name="countryCode" />
-			<basic name="name" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.JuristicPersonModelImpl">
 		<attributes>
 			<id name="juristicPersonId" />
@@ -111,10 +102,6 @@
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.ContactImpl" name="Contact">
 		<table name="contact" />
-		<attributes />
-	</entity>
-	<entity class="com.bcnet.portlet.biobank.model.impl.CountryImpl" name="Country">
-		<table name="bcnetcountry" />
 		<attributes />
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.JuristicPersonImpl" name="JuristicPerson">

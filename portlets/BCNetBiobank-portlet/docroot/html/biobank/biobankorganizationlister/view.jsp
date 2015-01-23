@@ -30,7 +30,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		<%
 			Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankGeneralInformation.getBiobankDbId());
 			String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
-			String countryName = CountryLocalServiceUtil.getCountry(biobankGeneralInformation.getCountryCode()).getName();
+			String countryName = CountryServiceUtil.getCountryByA2(biobankGeneralInformation.getCountryCode()).getName();
 			
 		%>
 		
@@ -50,7 +50,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 				
 			<br/>
 			
-			<%=countryName%>
+			<%=countryName.toUpperCase()%>
 			
 			<br/>
 			

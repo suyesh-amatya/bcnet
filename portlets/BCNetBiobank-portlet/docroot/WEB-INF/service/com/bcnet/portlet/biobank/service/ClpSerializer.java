@@ -19,7 +19,6 @@ import com.bcnet.portlet.biobank.model.BiobankAttributeListsClp;
 import com.bcnet.portlet.biobank.model.BiobankContactClp;
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformationClp;
 import com.bcnet.portlet.biobank.model.ContactClp;
-import com.bcnet.portlet.biobank.model.CountryClp;
 import com.bcnet.portlet.biobank.model.JuristicPersonClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -130,10 +129,6 @@ public class ClpSerializer {
 			return translateInputContact(oldModel);
 		}
 
-		if (oldModelClassName.equals(CountryClp.class.getName())) {
-			return translateInputCountry(oldModel);
-		}
-
 		if (oldModelClassName.equals(JuristicPersonClp.class.getName())) {
 			return translateInputJuristicPerson(oldModel);
 		}
@@ -206,16 +201,6 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateInputCountry(BaseModel<?> oldModel) {
-		CountryClp oldClpModel = (CountryClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getCountryRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
 	public static Object translateInputJuristicPerson(BaseModel<?> oldModel) {
 		JuristicPersonClp oldClpModel = (JuristicPersonClp)oldModel;
 
@@ -266,11 +251,6 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.bcnet.portlet.biobank.model.impl.ContactImpl")) {
 			return translateOutputContact(oldModel);
-		}
-
-		if (oldModelClassName.equals(
-					"com.bcnet.portlet.biobank.model.impl.CountryImpl")) {
-			return translateOutputCountry(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -382,10 +362,6 @@ public class ClpSerializer {
 			return new com.bcnet.portlet.biobank.NoSuchContactException();
 		}
 
-		if (className.equals("com.bcnet.portlet.biobank.NoSuchCountryException")) {
-			return new com.bcnet.portlet.biobank.NoSuchCountryException();
-		}
-
 		if (className.equals(
 					"com.bcnet.portlet.biobank.NoSuchJuristicPersonException")) {
 			return new com.bcnet.portlet.biobank.NoSuchJuristicPersonException();
@@ -443,16 +419,6 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setContactRemoteModel(oldModel);
-
-		return newModel;
-	}
-
-	public static Object translateOutputCountry(BaseModel<?> oldModel) {
-		CountryClp newModel = new CountryClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setCountryRemoteModel(oldModel);
 
 		return newModel;
 	}

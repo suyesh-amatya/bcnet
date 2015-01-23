@@ -17,9 +17,6 @@
 	<bean id="com.bcnet.portlet.biobank.service.ContactLocalService" class="com.bcnet.portlet.biobank.service.impl.ContactLocalServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.ContactService" class="com.bcnet.portlet.biobank.service.impl.ContactServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.persistence.ContactPersistence" class="com.bcnet.portlet.biobank.service.persistence.ContactPersistenceImpl" parent="basePersistence" />
-	<bean id="com.bcnet.portlet.biobank.service.CountryLocalService" class="com.bcnet.portlet.biobank.service.impl.CountryLocalServiceImpl" />
-	<bean id="com.bcnet.portlet.biobank.service.CountryService" class="com.bcnet.portlet.biobank.service.impl.CountryServiceImpl" />
-	<bean id="com.bcnet.portlet.biobank.service.persistence.CountryPersistence" class="com.bcnet.portlet.biobank.service.persistence.CountryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.bcnet.portlet.biobank.service.JuristicPersonLocalService" class="com.bcnet.portlet.biobank.service.impl.JuristicPersonLocalServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.JuristicPersonService" class="com.bcnet.portlet.biobank.service.impl.JuristicPersonServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistence" class="com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistenceImpl" parent="basePersistence" />

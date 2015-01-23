@@ -5,7 +5,7 @@
 
 <%
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
-	List<Country> countries = CountryLocalServiceUtil.getAllCountries();
+	List<Country> countries = CountryServiceUtil.getCountries();
 	
 	String countryCode =  ParamUtil.getString (request, "countryCode");
 	String keywords = ParamUtil.getString(request, "keywords");
@@ -36,7 +36,7 @@
 						for (Country country : countries) {
 					%>
 					
-							<aui:option selected="<%= country.getCountryCode() == countryCode %>" value="<%= country.getCountryCode() %>"><%=country.getName() %></aui:option>
+							<aui:option selected="<%= country.getA2() == countryCode %>" value="<%= country.getA2() %>"><%=country.getName().toUpperCase() %></aui:option>
 					
 					<%
 						}
@@ -77,13 +77,13 @@
 			String countryName = "";
 	
 			try {
-				countryName = CountryLocalServiceUtil.getCountry
+				countryName = CountryServiceUtil.getCountryByA2
 						(biobankGeneralInformation.getCountryCode()).getName();
 			} 
 			catch (Exception e) {
 			}
 
-			String title = "<b>"+biobankGeneralInformation.getBiobankName()+"</b>"+"<br/>"+countryName+"<br/><a href="+biobankGeneralInformation.getUrl()+">"+biobankGeneralInformation.getUrl()+"</a>";
+			String title = "<b>"+biobankGeneralInformation.getBiobankName()+"</b>"+"<br/>"+countryName.toUpperCase()+"<br/><a href="+biobankGeneralInformation.getUrl()+">"+biobankGeneralInformation.getUrl()+"</a>";
 			String attributeListName = "";
 			String attributeListValue = "";
 		%>

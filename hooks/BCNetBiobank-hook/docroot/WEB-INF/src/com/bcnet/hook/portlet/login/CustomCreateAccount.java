@@ -1,4 +1,4 @@
-package com.bcnet.hook.login;
+package com.bcnet.hook.portlet.login;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -25,16 +25,13 @@ import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
-public class CustomCreateAccountAction extends BaseStrutsPortletAction{
+public class CustomCreateAccount extends BaseStrutsPortletAction{
 	public void processAction(
             StrutsPortletAction originalStrutsPortletAction,
-            PortletConfig portletConfig, ActionRequest actionRequest,
-            ActionResponse actionResponse)
-        throws Exception {actionRequest.setAttribute("ExpandoAttribute--countryCode--", ParamUtil.getString(actionRequest, "countryCode"));
-        actionRequest.setAttribute("countryCode", ParamUtil.getString(actionRequest, "countryCode"));
-		/*originalStrutsPortletAction.processAction(
-	            originalStrutsPortletAction, portletConfig, actionRequest,
-	            actionResponse);
+            PortletConfig portletConfig, ActionRequest request,
+            ActionResponse response)
+        throws Exception {
+		/*
 		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 		System.out.println("Country"+ParamUtil.getString(actionRequest, "countryCode"));
 		//String emailAddress = ParamUtil.getString(actionRequest, "emailAddress");
@@ -61,18 +58,18 @@ public class CustomCreateAccountAction extends BaseStrutsPortletAction{
 		 
 		 
         originalStrutsPortletAction.processAction(
-            originalStrutsPortletAction, portletConfig, actionRequest,
-            actionResponse);
+            originalStrutsPortletAction, portletConfig, request,
+            response);
     }
 	
 	public String render(
             StrutsPortletAction originalStrutsPortletAction,
-            PortletConfig portletConfig, RenderRequest renderRequest,
-            RenderResponse renderResponse)
+            PortletConfig portletConfig, RenderRequest request,
+            RenderResponse response)
         throws Exception {
  
         return originalStrutsPortletAction.render(
-                originalStrutsPortletAction, portletConfig, renderRequest, renderResponse);
+                originalStrutsPortletAction, portletConfig, request, response);
  
     }
 }

@@ -16,7 +16,7 @@
 	}
 	
 	List<JuristicPerson> juristicPersons = JuristicPersonLocalServiceUtil.getAllJuristicPersons();
-	List<Country> countries = CountryLocalServiceUtil.getAllCountries();
+	List<Country> countries = CountryServiceUtil.getCountries();
 
 	String redirect = ParamUtil.getString(request, "redirect");
 	
@@ -108,7 +108,7 @@
 						for (Country country : countries) {
 					%>
 					
-							<aui:option selected="<%= biobankGeneralInformation != null && country.getCountryCode() == biobankGeneralInformation.getCountryCode() %>" value="<%= country.getCountryCode() %>"><%=country.getName() %></aui:option>
+							<aui:option selected="<%= biobankGeneralInformation != null && country.getA2() == biobankGeneralInformation.getCountryCode() %>" value="<%= country.getA2() %>"><%=country.getName().toUpperCase() %></aui:option>
 					
 					<%
 						}

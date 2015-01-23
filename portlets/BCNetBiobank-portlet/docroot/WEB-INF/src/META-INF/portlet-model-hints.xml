@@ -41,10 +41,6 @@
 		<field name="department" type="String" />
 		<field name="orcId" type="String" />
 	</model>
-	<model name="com.bcnet.portlet.biobank.model.Country">
-		<field name="countryCode" type="String" />
-		<field name="name" type="String" />
-	</model>
 	<model name="com.bcnet.portlet.biobank.model.JuristicPerson">
 		<field name="juristicPersonId" type="long" />
 		<field name="name" type="String" />

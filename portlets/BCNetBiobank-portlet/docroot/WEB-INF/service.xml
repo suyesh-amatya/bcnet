@@ -35,10 +35,10 @@
         <column name="orcId" type="String"></column>
     </entity>
     
-    <entity name="Country" local-service="true" remote-service="true" table="bcnetcountry">
+    <!-- <entity name="Country" local-service="true" remote-service="true" table="bcnetcountry">
         <column name="countryCode" type="String" primary="true"></column>
         <column name="name" type="String"></column>
-    </entity>
+    </entity> -->
     
    <!--  <entity name="Biobank" local-service="true" remote-service="true" table="biobank">
 		<column name="biobankDbId" type="long" primary="true" />
