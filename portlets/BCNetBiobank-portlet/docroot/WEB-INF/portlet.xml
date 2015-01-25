@@ -16,6 +16,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Biobank Atrribute Lists Master</title>
 			<short-title>Biobank Atrribute Lists Master</short-title>
@@ -49,6 +50,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Juristic Person</title>
 			<short-title>Juristic Person</short-title>
@@ -82,6 +84,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Contact</title>
 			<short-title>Contact</short-title>
@@ -115,6 +118,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Biobank</title>
 			<short-title>Biobank</short-title>
@@ -148,6 +152,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Biobank Attribute Lists</title>
 			<short-title>Biobank Attribute Lists</short-title>
@@ -181,6 +186,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Biobank Search</title>
 			<short-title>Biobank Search</short-title>
@@ -214,6 +220,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Main Navigation Menu</title>
 			<short-title>Main Navigation Menu</short-title>
@@ -249,6 +256,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Biobank General Information</title>
 			<short-title>Biobank General Information</short-title>
@@ -291,6 +299,7 @@
 			<portlet-mode>view</portlet-mode>
 			<portlet-mode>config</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Biobank Organization Creation</title>
 			<short-title>Biobank Organization Creation</short-title>
@@ -326,9 +335,44 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Biobank Organization Lister</title>
 			<short-title>Biobank Organization Lister</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>biobank-contact</portlet-name>
+		<display-name>Biobank Contact</display-name>
+		<portlet-class>
+			com.bcnet.portlet.biobank.BiobankContactPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/html/biobank/biobankcontact/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Biobank Contact</title>
+			<short-title>Biobank Contact</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

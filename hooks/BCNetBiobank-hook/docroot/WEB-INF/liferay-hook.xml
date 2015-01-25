@@ -5,11 +5,7 @@
 	<language-properties>content/Language.properties</language-properties>
     <custom-jsp-dir>/META-INF/custom_jsps</custom-jsp-dir>
     <struts-action>
-        <struts-action-path>/login/create_account</struts-action-path>
-        <struts-action-impl>com.bcnet.hook.portlet.login.CustomCreateAccount</struts-action-impl>
-    </struts-action>
-    <struts-action>
-        <struts-action-path>/users_admin/edit_user</struts-action-path>
-        <struts-action-impl>com.bcnet.hook.portlet.users_admin.user.CustomEditUser</struts-action-impl>
+        <struts-action-path>/my_account/edit_user</struts-action-path>
+        <struts-action-impl>com.bcnet.hook.portlet.users_admin.user.CustomEditUserAction</struts-action-impl>
     </struts-action>
 </hook>
