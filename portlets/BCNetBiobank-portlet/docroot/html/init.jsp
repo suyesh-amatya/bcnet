@@ -16,6 +16,9 @@
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Constants" %>
+<%@ page import="com.liferay.portal.kernel.util.PropsKeys" %>
+<%@ page import="com.liferay.portal.kernel.util.PropsUtil" %>
+
 <%@ page import="com.liferay.portal.service.GroupLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
@@ -28,6 +31,7 @@
 <%@page import="com.liferay.portal.model.Group"%>
 <%@page import="com.liferay.portal.model.Country"%>
 <%@page import="com.liferay.portal.model.User"%>
+<%@page import="com.liferay.portal.model.Company"%>
 <%@page import="com.liferay.portal.model.GroupConstants"%>
 
 
@@ -35,6 +39,7 @@
 
 <%@page import="com.liferay.portal.service.UserLocalServiceUtil"%>
 <%@page import="com.liferay.portal.service.OrganizationLocalServiceUtil"%>
+<%@page import="com.liferay.portal.service.CompanyLocalServiceUtil"%>
 <%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.service.CountryServiceUtil" %>
 
