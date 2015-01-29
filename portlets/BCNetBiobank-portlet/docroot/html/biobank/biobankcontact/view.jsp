@@ -1,4 +1,5 @@
 <%@ include file="/html/init.jsp" %>
+
 <%!
    com.liferay.portal.kernel.dao.search.SearchContainer<User> searchContainer = null;
 %>
@@ -30,17 +31,12 @@ List<User> users = UserLocalServiceUtil.getOrganizationUsers(organizationId, sea
 		results="<%= users %>"
 	/>
 
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.User"
+	<liferay-ui:search-container-row 
+		className="com.liferay.portal.model.User" 
 		keyProperty="userId"
 		modelVar="selUser" escapedModel="<%= true %>"
 	>
 	
-		<%-- <liferay-portlet:renderURL var="rowURL">
-			<portlet:param name="struts_action" value="/users_admin/edit_user" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="p_u_i_d" value="<%= String.valueOf(selUser.getUserId()) %>" />
-		</liferay-portlet:renderURL> --%>
 		
 		<%
 			//https://www.liferay.com/community/forums/-/message_boards/message/46258637
@@ -50,26 +46,24 @@ List<User> users = UserLocalServiceUtil.getOrganizationUsers(organizationId, sea
 			LiferayPortletURL userAccountURL = PortletURLFactoryUtil.create(request, PortletKeys.USERS_ADMIN, myAccountPlid, PortletRequest.RENDER_PHASE);
 			userAccountURL.setDoAsGroupId(themeDisplay.getSiteGroupId());
 			userAccountURL.setParameter("struts_action", "/users_admin/edit_user");
-			userAccountURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
+			//userAccountURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 			userAccountURL.setParameter("backURL", redirect);
 			userAccountURL.setWindowState(LiferayWindowState.POP_UP);
 			
 			String portletId = (String) request.getAttribute(WebKeys.PORTLET_ID);
-			
-			System.out.println(selUser.getUserId());
+			String portletNamespace = PortalUtil.getPortletNamespace(portletId);
 		%>
 		
-		<c:set var="portletURL" value="<%=userAccountURL%>" />
-		<c:set var="p_u_i_d" value="<%=selUser.getUserId()%>" />
-		<aui:input name="userId" type="hidden" value="<%=selUser.getUserId() %>"></aui:input>
-		<liferay-ui:search-container-column-text
-			href="#"
+		<c:set var="portletNamespace" value="<%=portletNamespace%>" />
+		<c:set var="userAccountURL" value="${userAccountURL}" />
+		<c:out value="${userAccountURL}"/>
+		<liferay-ui:search-container-column-text 
 			name="name"
-			value="<%= selUser.getFullName()%>"
-			cssClass="userPopUp"
-		/>
+		>
+			<aui:a href="#" cssClass="userPopUp" id="<%=String.valueOf(selUser.getUserId())%>"><%=selUser.getFullName()%></aui:a>
+			
+		</liferay-ui:search-container-column-text>
 		
-
 		<liferay-ui:search-container-column-text
 			name="email"
 			property="emailAddress" href="<%=\"mailto:\"+selUser.getEmailAddress()%>"
@@ -110,12 +104,23 @@ List<User> users = UserLocalServiceUtil.getOrganizationUsers(organizationId, sea
 </liferay-ui:search-container>
 
 <aui:script>
-	AUI().use('aui-base', function(A){
-		A.all(".userPopUp").on('click',function(){
-			var portletURL = '${portletURL}';
+	AUI().use('aui-base', 'liferay-portlet-url', function(A){
+		A.all("a.userPopUp").on('click',function(){
+		
+		
+		
+			var userIdWithPortletNameSpace = event.currentTarget.getAttribute('id');
+			var portletNamespace = '${portletNamespace}';
+			
+			
+			var userId = userIdWithPortletNameSpace.replace(portletNamespace, '');
+			
+			//var portletURL = new Liferay.PortletURL();
+			//portletURL.setParameter("p_u_i_d", userId);
+			//portletURL.setParameter("p_u_i_d", userId);
+			
+			var portletURL = '${userAccountURL}';
 			console.log(portletURL);
-			var inputValue = A.one('input[name=userId]').get('value');
-			console.log(inputValue);
 			Liferay.Util.openWindow(
 				{
 					dialog: {
@@ -124,9 +129,11 @@ List<User> users = UserLocalServiceUtil.getOrganizationUsers(organizationId, sea
 						modal: true,
 						centered: true
 					},
-					uri: '${portletURL}'
+					uri: portletURL
 				}
 			);
 		});
 	});
 </aui:script>
+
+

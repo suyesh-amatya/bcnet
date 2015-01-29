@@ -22,11 +22,15 @@ public class CustomEditUserAction extends BaseStrutsPortletAction{
         throws Exception {
 		
 		long userId = ParamUtil.getLong(actionRequest, "userId");
-		User user = UserLocalServiceUtil.getUser(userId);
 		
-		long juristicPersonId = ParamUtil.getLong(actionRequest, "juristicPersonId");
+		if(userId > 0){
+			User user = UserLocalServiceUtil.getUser(userId);
+			
+			long juristicPersonId = ParamUtil.getLong(actionRequest, "juristicPersonId");
+			
+			user.getExpandoBridge().setAttribute("juristicPersonId", juristicPersonId);
+		}
 		
-		user.getExpandoBridge().setAttribute("juristicPersonId", juristicPersonId);
 		
 		
 		originalStrutsPortletAction.processAction(
