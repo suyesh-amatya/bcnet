@@ -1,5 +1,6 @@
 <%@ include file="/html/init.jsp" %>
 
+
 <%
 	Organization organization = null;
 	BiobankGeneralInformation biobankGeneralInformation = null;

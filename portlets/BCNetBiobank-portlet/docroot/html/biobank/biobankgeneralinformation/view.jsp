@@ -1,6 +1,16 @@
 <%@ include file="/html/init.jsp" %>
 
 <%
+// Parameters for permission Checking
+long groupId = scopeGroupId;
+String name = portletDisplay.getRootPortletId();
+String primKey = portletDisplay.getResourcePK();
+String actionId_edit_biobank_general_information = "EDIT_BIOBANK_GENERAL_INFORMATION";
+
+%>
+
+
+<%
 	Organization organization = null;
 	long organizationId = 0;
 	BiobankGeneralInformation biobankGeneralInformation = null;
@@ -40,9 +50,14 @@
 <div class="list-group">
   <span class="list-group-item-active">
     <b><%=organization.getName() %></b>
+  				
+	<c:choose>		
+	<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_general_information) %>">
     <a href="<%=addBiobankGeneralInformationURL.toString()%>">
    		<liferay-ui:icon image="edit" message="Edit Biobank" cssClass="biobankOrganizationEdit"/>
     </a>
+    </c:when>
+    </c:choose>
     <liferay-ui:icon-delete url="<%= deleteBiobankOrganizationURL.toString() %>" message="Delete Biobank" cssClass="biobankOrganizationDelete"
    			confirmation="Are you sure you want to delete it?"/>
   </span>
