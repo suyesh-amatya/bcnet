@@ -5,11 +5,10 @@
 
 <resource-action-mapping>
 	<portlet-resource>
-		<portlet-name>biobank-general-information</portlet-name>
+		<portlet-name>biobank-attribute-lists</portlet-name>
 		<permissions>
 			<supports>
-				<action-key>EDIT_BIOBANK_GENERAL_INFORMATION</action-key>
-				<action-key>DELETE_BIOBANK</action-key>
+				<action-key>EDIT_BIOBANK_ATTRIBUTE_LISTS</action-key>
 			</supports>
 			<site-member-defaults>
 				<action-key>VIEW</action-key>

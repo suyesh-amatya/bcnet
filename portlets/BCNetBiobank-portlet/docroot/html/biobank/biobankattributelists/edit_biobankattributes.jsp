@@ -1,6 +1,14 @@
 <%@ include file="/html/init.jsp" %>
 
 <%
+// Parameters for permission Checking
+long groupId = scopeGroupId;
+String name = portletDisplay.getRootPortletId();
+String primKey = portletDisplay.getResourcePK();
+String actionId_edit_biobank_attribute_lists = "EDIT_BIOBANK_ATTRIBUTE_LISTS";
+%>
+
+<%
 	Organization organization = null;
 	long organizationId = 0;
 	BiobankGeneralInformation biobankGeneralInformation = null;
@@ -556,16 +564,22 @@
 	String selectedad = renderResponse.getNamespace() + "selectAll("+ renderResponse.getNamespace() + "selectedad);";
 
 %>
-	<aui:button-row>
-		<aui:button type="submit" onClick="<%=availabletor+\"\"+selectedtor+\"\"+availabledm+\"\"
-			+selecteddm+\"\"+availabledb+\"\"+selecteddb+\"\"+availablesf+\"\"+selectedsf
-			+\"\"+availablem+\"\"+selectedm+\"\"+availablegp+\"\"+selectedgp+\"\"+availablepp+\"\"+selectedpp
-			+\"\"+availablemp+\"\"+selectedmp+\"\"+availableep+\"\"+selectedep
-			+\"\"+availablebdas+\"\"+selectedbdas+\"\"+availablecs+\"\"+selectedcs
-			+\"\"+availableas+\"\"+selectedas+\"\"+availablead+\"\"+selectedad%>" />
 
-		<aui:button onClick="<%=cancelURL.toString()%>"  type="cancel" />
-	</aui:button-row>
+
+	<c:choose>		
+		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_attribute_lists) %>">
+			<aui:button-row>
+				<aui:button type="submit" onClick="<%=availabletor+\"\"+selectedtor+\"\"+availabledm+\"\"
+					+selecteddm+\"\"+availabledb+\"\"+selecteddb+\"\"+availablesf+\"\"+selectedsf
+					+\"\"+availablem+\"\"+selectedm+\"\"+availablegp+\"\"+selectedgp+\"\"+availablepp+\"\"+selectedpp
+					+\"\"+availablemp+\"\"+selectedmp+\"\"+availableep+\"\"+selectedep
+					+\"\"+availablebdas+\"\"+selectedbdas+\"\"+availablecs+\"\"+selectedcs
+					+\"\"+availableas+\"\"+selectedas+\"\"+availablead+\"\"+selectedad%>" />
+		
+				<aui:button onClick="<%=cancelURL.toString()%>"  type="cancel" />
+			</aui:button-row>
+		</c:when>
+    </c:choose>
 </aui:form>
 
 <script type="text/javascript">

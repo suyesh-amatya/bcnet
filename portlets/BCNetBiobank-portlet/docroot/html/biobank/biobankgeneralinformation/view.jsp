@@ -6,7 +6,7 @@ long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
 String actionId_edit_biobank_general_information = "EDIT_BIOBANK_GENERAL_INFORMATION";
-
+String actionId_delete_biobank = "DELETE_BIOBANK";
 %>
 
 
@@ -52,14 +52,19 @@ String actionId_edit_biobank_general_information = "EDIT_BIOBANK_GENERAL_INFORMA
     <b><%=organization.getName() %></b>
   				
 	<c:choose>		
-	<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_general_information) %>">
-    <a href="<%=addBiobankGeneralInformationURL.toString()%>">
-   		<liferay-ui:icon image="edit" message="Edit Biobank" cssClass="biobankOrganizationEdit"/>
-    </a>
-    </c:when>
+		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_general_information) %>">
+		    <a href="<%=addBiobankGeneralInformationURL.toString()%>">
+		   		<liferay-ui:icon image="edit" message="Edit Biobank" cssClass="biobankOrganizationEdit"/>
+		    </a>
+	    </c:when>
     </c:choose>
-    <liferay-ui:icon-delete url="<%= deleteBiobankOrganizationURL.toString() %>" message="Delete Biobank" cssClass="biobankOrganizationDelete"
-   			confirmation="Are you sure you want to delete it?"/>
+    
+    <c:choose>		
+		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_biobank) %>">
+		    <liferay-ui:icon-delete url="<%= deleteBiobankOrganizationURL.toString() %>" message="Delete Biobank" cssClass="biobankOrganizationDelete"
+		   			confirmation="Are you sure you want to delete it?"/>
+   		</c:when>
+    </c:choose>
   </span>
   <span class="list-group-item">BiobankId: <b><%=biobankGeneralInformation.getBiobankId() %></b></span>
   <span class="list-group-item">Acronym: <b><%=biobankGeneralInformation.getAcronym() %></b></span>
