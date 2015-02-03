@@ -3,4 +3,5 @@
 <resource-action-mapping>
 	<resource file="resource-actions/biobankgeneralinformation.xml" />
 	<resource file="resource-actions/biobankattributelists.xml" />
+	<resource file="resource-actions/biobankorganizationlister.xml" />
 </resource-action-mapping>
