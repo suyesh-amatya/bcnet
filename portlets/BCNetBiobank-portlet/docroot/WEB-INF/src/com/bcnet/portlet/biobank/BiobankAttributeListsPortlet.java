@@ -226,4 +226,13 @@ public class BiobankAttributeListsPortlet extends MVCPortlet {
         }
 	}
 	
+	public void deleteBiobankAttributeLists(ActionRequest request,
+            ActionResponse response) throws IOException{
+		
+		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
+		BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeListsBybiobankDbId(biobankDbId);
+		
+		sendRedirect(request, response);
+	}
+	
 }

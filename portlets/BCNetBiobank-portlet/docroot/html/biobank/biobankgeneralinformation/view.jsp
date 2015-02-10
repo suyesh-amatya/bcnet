@@ -42,8 +42,8 @@ String actionId_delete_biobank = "DELETE_BIOBANK";
 </portlet:renderURL>
 
 <portlet:actionURL name="deleteBiobankOrganization" var="deleteBiobankOrganizationURL">
-		<portlet:param name="biobankDbId" value="<%= String.valueOf(organizationId) %>" />
-		<%-- <portlet:param name="redirect" value="<%= themeDisplay.getURLPortal() %>" /> --%>
+	<portlet:param name="biobankDbId" value="<%= String.valueOf(organizationId) %>" />
+	<%-- <portlet:param name="redirect" value="<%= themeDisplay.getURLPortal() %>" /> --%>
 </portlet:actionURL>
 
 

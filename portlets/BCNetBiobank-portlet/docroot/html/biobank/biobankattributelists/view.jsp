@@ -25,8 +25,6 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 	
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
-	String attributeListName = "";
-	String attributeListValue = "";
 %>
 
 <portlet:renderURL var="editBiobankAttributesURL">
@@ -34,55 +32,66 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:renderURL>
 
-<portlet:actionURL name="deleteBiobankAttributessdd" var="deleteBiobankAttributesURL">
-
+<portlet:actionURL name="deleteBiobankAttributeLists" var="deleteBiobankAttributesURL">
+	<portlet:param name="biobankDbId" value="<%= String.valueOf(organizationId) %>" />
 </portlet:actionURL>
 
 <div class="list-group">
 	<span class="list-group-item-active">
 		Attributes and Services for <b><%=biobankGeneralInformation.getBiobankName()%></b>
-		<a href="<%=editBiobankAttributesURL.toString()%>">
-			<liferay-ui:icon image="edit" message="Edit Biobank Attributes and Services" cssClass="biobankOrganizationEdit"/>
-		</a>
-		<liferay-ui:icon-delete url="<%= deleteBiobankAttributesURL.toString() %>" message="Delete Biobank" cssClass="biobankOrganizationDelete"
-				confirmation="Are you sure you want to delete it?"/>
+		<c:choose>		
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_attribute_lists) %>">
+				<a href="<%=editBiobankAttributesURL.toString()%>">
+					<liferay-ui:icon image="edit" message="Edit Biobank Attributes and Services" cssClass="biobankOrganizationEdit"/>
+				</a>
+			</c:when>
+		</c:choose>
+		<c:choose>		
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_biobank_attribute_lists) %>">
+				<liferay-ui:icon-delete url="<%= deleteBiobankAttributesURL.toString() %>" message="Delete Biobank Attributes and Services" cssClass="biobankOrganizationDelete"
+						confirmation="Are you sure you want to delete it?"/>
+			</c:when>
+		</c:choose>
 	</span>
 
 
 <%		
 			
 			
-			List<BiobankAttributeLists> biobankAttributeLists = biobankGeneralInformation.getBiobankAttributeLists();
-			if(biobankAttributeLists.size() != 0){
-				String result = "";
-				for(BiobankAttributeLists biobankAttribute : biobankAttributeLists){
-				
-	
-					if(!attributeListName.equalsIgnoreCase(biobankAttribute.getAttributeListName())){
-						result = "<span class=\"list-group-item\">";
-						attributeListName = biobankAttribute.getAttributeListName();
-						attributeListValue += biobankAttribute.getAttributeListValue(); 
-					
-		%>
-	
-		<%
+	List<BiobankAttributeLists> biobankAttributeLists = biobankGeneralInformation.getBiobankAttributeLists();
+	if(biobankAttributeLists.size() != 0){
+		String attributeListName = "";
+		String attributeListValue = "";
+		String result = "";
+		int counter = 0;
+		int counterPreviousValue = 0;
 		
-					
-					}
-					else{ attributeListValue += biobankAttribute.getAttributeListValue(); 
-						%>
-						<span class="list-group-item">
-						<b><%=attributeListName %>:</b><%=attributeListValue %>
-					</span>
-						<%
-						
-					}
-					
-				
+		for(BiobankAttributeLists biobankAttribute : biobankAttributeLists){
+
+			if(!attributeListName.equalsIgnoreCase(biobankAttribute.getAttributeListName())){
+				if(counter > counterPreviousValue){
+					result += "</span>";
 				}
+				result += "<span class=\"list-group-item\">";
+				attributeListName = biobankAttribute.getAttributeListName();
+				result += "<b>"+ attributeListName+ ":</b> ";
+				attributeListValue = biobankAttribute.getAttributeListValue();
+				result += attributeListValue; 
+			 
 			}
 			else{
-				 out.println("No Services and Facilities Available For This Biobank");
+				counterPreviousValue = counter;
+				counter++;
+				attributeListValue = biobankAttribute.getAttributeListValue(); 
+				result += ", "+attributeListValue;
 			}
-		%>
-</div>			
+		}
+		
+		out.println(result);
+		
+	}
+	else{
+		 out.println("<span class=\"list-group-item\">No Services and Facilities Available For This Biobank</span>");
+	}
+%>
+</div>

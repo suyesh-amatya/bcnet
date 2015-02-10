@@ -1,12 +1,5 @@
 <%@ include file="/html/init.jsp" %>
 
-<%
-// Parameters for permission Checking
-long groupId = scopeGroupId;
-String name = portletDisplay.getRootPortletId();
-String primKey = portletDisplay.getResourcePK();
-String actionId_edit_biobank_attribute_lists = "EDIT_BIOBANK_ATTRIBUTE_LISTS";
-%>
 
 <%
 	Organization organization = null;
@@ -28,7 +21,7 @@ String actionId_edit_biobank_attribute_lists = "EDIT_BIOBANK_ATTRIBUTE_LISTS";
 		biobankGeneralInformation = BiobankGeneralInformationLocalServiceUtil.createBiobankGeneralInformation(organizationId);
 	}
 	
-	String redirect = PortalUtil.getCurrentURL(renderRequest);
+	String redirect = ParamUtil.getString(request, "redirect");
 	String cancelURL = themeDisplay.getURLPortal() + "/web" + organization.getGroup().getFriendlyURL();
 	
 	/* Type of Repository Lists for input-move-boxes */
@@ -566,20 +559,16 @@ String actionId_edit_biobank_attribute_lists = "EDIT_BIOBANK_ATTRIBUTE_LISTS";
 %>
 
 
-	<c:choose>		
-		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_attribute_lists) %>">
-			<aui:button-row>
-				<aui:button type="submit" onClick="<%=availabletor+\"\"+selectedtor+\"\"+availabledm+\"\"
-					+selecteddm+\"\"+availabledb+\"\"+selecteddb+\"\"+availablesf+\"\"+selectedsf
-					+\"\"+availablem+\"\"+selectedm+\"\"+availablegp+\"\"+selectedgp+\"\"+availablepp+\"\"+selectedpp
-					+\"\"+availablemp+\"\"+selectedmp+\"\"+availableep+\"\"+selectedep
-					+\"\"+availablebdas+\"\"+selectedbdas+\"\"+availablecs+\"\"+selectedcs
-					+\"\"+availableas+\"\"+selectedas+\"\"+availablead+\"\"+selectedad%>" />
-		
-				<aui:button onClick="<%=cancelURL.toString()%>"  type="cancel" />
-			</aui:button-row>
-		</c:when>
-    </c:choose>
+	<aui:button-row>
+		<aui:button type="submit" onClick="<%=availabletor+\"\"+selectedtor+\"\"+availabledm+\"\"
+			+selecteddm+\"\"+availabledb+\"\"+selecteddb+\"\"+availablesf+\"\"+selectedsf
+			+\"\"+availablem+\"\"+selectedm+\"\"+availablegp+\"\"+selectedgp+\"\"+availablepp+\"\"+selectedpp
+			+\"\"+availablemp+\"\"+selectedmp+\"\"+availableep+\"\"+selectedep
+			+\"\"+availablebdas+\"\"+selectedbdas+\"\"+availablecs+\"\"+selectedcs
+			+\"\"+availableas+\"\"+selectedas+\"\"+availablead+\"\"+selectedad%>" />
+
+		<aui:button onClick="<%=redirect.toString()%>"  type="cancel" />
+	</aui:button-row>
 </aui:form>
 
 <script type="text/javascript">

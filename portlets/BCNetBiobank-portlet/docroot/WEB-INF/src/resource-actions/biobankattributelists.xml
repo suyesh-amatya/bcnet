@@ -9,6 +9,7 @@
 		<permissions>
 			<supports>
 				<action-key>EDIT_BIOBANK_ATTRIBUTE_LISTS</action-key>
+				<action-key>DELETE_BIOBANK_ATTRIBUTE_LISTS</action-key>
 			</supports>
 			<site-member-defaults>
 				<action-key>VIEW</action-key>
