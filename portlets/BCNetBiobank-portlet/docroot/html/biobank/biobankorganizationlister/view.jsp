@@ -74,7 +74,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 			
 			<br/>
 			
-			<a href="<%=biobankGeneralInformation.getUrl()%>"><b><%= biobankGeneralInformation.getUrl() %></b></a>
+			<a href="<%=biobankGeneralInformation.getUrl()%>" target="_blank"><b><%= biobankGeneralInformation.getUrl() %></b></a>
 			
 		</div>
 		

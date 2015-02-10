@@ -48,27 +48,27 @@ String actionId_delete_biobank = "DELETE_BIOBANK";
 
 
 <div class="list-group">
-  <span class="list-group-item-active">
-    <b><%=organization.getName() %></b>
-  				
-	<c:choose>		
-		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_general_information) %>">
-		    <a href="<%=addBiobankGeneralInformationURL.toString()%>">
-		   		<liferay-ui:icon image="edit" message="Edit Biobank" cssClass="biobankOrganizationEdit"/>
-		    </a>
-	    </c:when>
-    </c:choose>
-    
-    <c:choose>		
-		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_biobank) %>">
-		    <liferay-ui:icon-delete url="<%= deleteBiobankOrganizationURL.toString() %>" message="Delete Biobank" cssClass="biobankOrganizationDelete"
-		   			confirmation="Are you sure you want to delete it?"/>
-   		</c:when>
-    </c:choose>
-  </span>
-  <span class="list-group-item">BiobankId: <b><%=biobankGeneralInformation.getBiobankId() %></b></span>
-  <span class="list-group-item">Acronym: <b><%=biobankGeneralInformation.getAcronym() %></b></span>
-  <span class="list-group-item">URL: <aui:a href="<%=biobankGeneralInformation.getUrl() %>" target="blank"><b><%=biobankGeneralInformation.getUrl() %></b></aui:a></span>
+	<span class="list-group-item-active">
+		<b><%=organization.getName() %></b>
+		
+		<c:choose>		
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_general_information) %>">
+				<a href="<%=addBiobankGeneralInformationURL.toString()%>">
+				<liferay-ui:icon image="edit" message="Edit Biobank" cssClass="biobankOrganizationEdit"/>
+				</a>
+			</c:when>
+		</c:choose>
+		
+		<c:choose>		
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_biobank) %>">
+				<liferay-ui:icon-delete url="<%= deleteBiobankOrganizationURL.toString() %>" message="Delete Biobank" cssClass="biobankOrganizationDelete"
+				confirmation="Are you sure you want to delete it?"/>
+			</c:when>
+		</c:choose>
+	</span>
+	<span class="list-group-item">BiobankId: <b><%=biobankGeneralInformation.getBiobankId() %></b></span>
+	<span class="list-group-item">Acronym: <b><%=biobankGeneralInformation.getAcronym() %></b></span>
+	<span class="list-group-item">URL: <aui:a href="<%=biobankGeneralInformation.getUrl() %>" target="blank"><b><%=biobankGeneralInformation.getUrl() %></b></aui:a></span>
   
 	<%
 		String juristicPersonName = "";
@@ -81,7 +81,7 @@ String actionId_delete_biobank = "DELETE_BIOBANK";
 		}
 	%>
   
-  <span class="list-group-item">Juristic Person: <b><%=juristicPersonName %></b></span>
+	<span class="list-group-item">Juristic Person: <b><%=juristicPersonName %></b></span>
   
 	<%
 		String countryName = "";

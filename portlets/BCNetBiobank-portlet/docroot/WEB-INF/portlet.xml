@@ -145,7 +145,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/biobank/biobankattributelists/edit_biobankattributes.jsp</value>
+			<value>/html/biobank/biobankattributelists/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
