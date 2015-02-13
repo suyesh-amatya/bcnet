@@ -1,21 +1,35 @@
 package com.bcnet.portlet.biobank;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformation;
 import com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationImpl;
 import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -23,13 +37,45 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  */
 public class BiobankGeneralInformationPortlet extends MVCPortlet {
 
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse){
+		String organizationName = ParamUtil.getString(resourceRequest, "name");
+		
+		long organizationId = ParamUtil.getLong(resourceRequest, "biobankDbId");
+		String prevOrganizationName = null;
+		try {
+			prevOrganizationName = OrganizationLocalServiceUtil.getOrganization(organizationId).getName();
+		} catch (PortalException | SystemException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		boolean organizationNameExists = false;
+		try {
+			JSONObject json = JSONFactoryUtil.createJSONObject();
+			
+			for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
+				
+				if(organization.getName().equalsIgnoreCase(organizationName) && !organization.getName().equalsIgnoreCase(prevOrganizationName)){
+					organizationNameExists = true;
+					json.put("organizationNameExists", organizationNameExists == true ? true : false);
+					resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
+					
+					break;
+				}
+			}
+		} catch (SystemException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	public void updateBiobankGeneralInfomration(ActionRequest request, ActionResponse response) throws Exception{
 		
 		_updateBiobankGeneralInfomration(request);
 
 		sendRedirect(request, response);
 		
-
 	}
 
 	private BiobankGeneralInformation _updateBiobankGeneralInfomration(ActionRequest request) throws PortalException, SystemException {
@@ -44,7 +90,7 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 		String description = ParamUtil.getString(request, "description");
 		boolean backup = ParamUtil.getBoolean(request, "backup");
 		boolean trainingCourses = ParamUtil.getBoolean(request, "trainingCourses");
-		
+		SessionMessages.add(request, PortalUtil.getPortletId(request) + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 		BiobankGeneralInformation biobankGeneralInformation;
 		
 		try{
@@ -57,7 +103,12 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 		
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);
 		organization.setName(name);
-		OrganizationLocalServiceUtil.updateOrganization(organization);
+		try{
+			OrganizationLocalServiceUtil.updateOrganization(organization);
+		}
+		catch(Exception e){
+			SessionErrors.add(request, "duplicate-name");
+		}
 		
 		biobankGeneralInformation.setBiobankId(biobankId);
 		biobankGeneralInformation.setAcronym(acronym);
@@ -78,7 +129,20 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
 		
 		try {
-			Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);			
+			Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);	
+			
+			List<User> users = UserLocalServiceUtil.getOrganizationUsers(biobankDbId);
+			
+			for(User user : users){
+				long userid = user.getUserId();
+				List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(userid, organization.getGroup().getGroupId());
+				long[] userid_array = { userid };
+				for (UserGroupRole ugr : usergrouprolles) {
+					UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userid_array, organization.getGroup().getGroupId(), ugr.getRoleId());
+				}
+				OrganizationLocalServiceUtil.deleteUserOrganization(userid, organization);
+			}
+			
 			OrganizationLocalServiceUtil.deleteOrganization(organization);			
 			BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);			
 			BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeListsBybiobankDbId(biobankDbId);

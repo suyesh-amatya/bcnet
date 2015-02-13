@@ -20,6 +20,7 @@
 	List<Country> countries = CountryServiceUtil.getCountries();
 
 	String redirect = ParamUtil.getString(request, "redirect");
+	String currentURL = PortalUtil.getCurrentURL(request);
 	
 %>
 
@@ -29,7 +30,7 @@
 
 
 
-<aui:form action="<%= editBiobankGeneralInfomrationURL %>" method="POST" name="fm">
+<aui:form action="<%= editBiobankGeneralInfomrationURL %>" method="POST" name="fm" onSubmit="event.preventDefault();">
 	<aui:fieldset>
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 		<aui:input name="biobankDbId" type="hidden" value='<%= biobankGeneralInformation == null ? "" : biobankGeneralInformation.getBiobankDbId() %>'/>
@@ -40,6 +41,10 @@
 					 defined. So the input box will not be displayed if "type" is not specified. -->
 				
 				<aui:input name="name" label='Name <i class="icon-asterisk"></i>' type="text" value="<%=organization.getName() %>"/>
+				<!-- <div id="organizationNameError" style="display:none;">test</div> -->
+				<div class="form-validator-stack help-inline" id="organizationNameError" style="display:none;">
+					<div role="alert" class="required">The Name is already taken.</div>
+				</div>
 			</aui:column>
 			<aui:column columnWidth="30">
 				<aui:input name="biobankId" label='Biobank Id <i class="icon-asterisk"></i>' />
@@ -162,7 +167,7 @@
 	</aui:button-row>
 </aui:form>
 
-<aui:script use="aui-base,aui-form-validator">
+<%-- <aui:script use="aui-base,aui-form-validator">
 	AUI().use('aui-base',' aui-form-validator',function(A){
 		var rules = {
       		<portlet:namespace/>name: {
@@ -213,7 +218,7 @@
 	});
 	
 </aui:script>
-
+ --%>
 <aui:script>
 	function <portlet:namespace />showPopup(url) {
 	
@@ -236,14 +241,14 @@
 	
 </aui:script>
 
-<aui:script>
+<%-- <aui:script>
     Liferay.provide(window, 'refreshPortlet', function() {
         var curPortlet = '#p_p_id<portlet:namespace/>';
         Liferay.Portlet.refresh(curPortlet);
     },
     ['aui-dialog','aui-dialog-iframe']
     );
-</aui:script>
+</aui:script> --%>
 
 <aui:script>
     Liferay.provide(window, 'refreshJuristicPersonPortlet', function(juristicPersonId, name) {
@@ -265,3 +270,95 @@
     );
 </aui:script>
 
+<portlet:resourceURL var="checkOrganizationNameURL"></portlet:resourceURL>
+
+<aui:script use="aui-base,aui-form-validator,aui-io-request">
+	AUI().use('aui-base','aui-form-validator','aui-io-request', function(A){
+		var rules = {
+	      		<portlet:namespace/>name: {
+	        		required: true
+	      		},
+	      		
+	      		<portlet:namespace/>biobankId: {
+	        		required: true
+	      		},
+	      		
+	      		<portlet:namespace/>url: {
+	        		url: true
+	      		},
+	      		
+	      		<portlet:namespace/>juristicPersonId: {
+	        		required: true
+	      		},
+	      		
+	      		<portlet:namespace/>countryCode: {
+	        		required: true
+	      		},
+	      	};
+
+		var fieldStrings = {
+			<portlet:namespace/>name: {
+		    	required: 'The Name field is required.'
+		  	},
+		  	
+		  	<portlet:namespace/>biobankId: {
+		    	required: 'The Biobank Id field is required.'
+		  	},
+		  	
+		  	<portlet:namespace/>juristicPersonId: {
+		    	required: 'Please select the Juristic Person.'
+		  	},
+		  	
+		  	<portlet:namespace/>countryCode: {
+		    	required: 'Please select the Country.'
+		  	},
+		};
+		
+		var validator = new A.FormValidator({
+        	boundingBox: '#<portlet:namespace/>fm',
+	        fieldStrings: fieldStrings,
+	        rules: rules,
+	        showAllMessages:true
+      	});
+      	
+      	
+		var organizationNameExists = false;
+		var organizationId = A.one("#<portlet:namespace/>biobankDbId").get("value");
+		var url = '<%=checkOrganizationNameURL.toString()%>';
+		
+		A.one("#<portlet:namespace/>name").on('blur',function(event){
+			A.one('#organizationNameError').hide();
+		});
+		
+		A.one("#<portlet:namespace/>fm").on('submit',function(event){
+			
+			var organizationName = A.one("#<portlet:namespace/>name").get("value");
+			A.io.request(
+				url, 
+				{
+			        method: 'get',
+			        data: {
+			        	<portlet:namespace/>name :organizationName,
+			        	<portlet:namespace/>biobankDbId :organizationId
+			        },
+			        dataType: 'json',
+	        		on:{
+			        	success: function(){
+			        		if(this.get('responseData')!=null && this.get('responseData').organizationNameExists){
+				        		A.one("#<portlet:namespace/>name").get('parentNode').removeClass('success').addClass('error');
+				        		A.one("#<portlet:namespace/>name").addClass('error-field lfr-input-text').removeClass('success-field');
+				        		A.one("#<portlet:namespace/>name").get('parentNode').append(A.one('#organizationNameError').show());
+			        		}
+			        		else{
+			        			A.one('#organizationNameError').hide();
+			        			if(!validator.hasErrors()){
+				        			document.<portlet:namespace/>fm.submit();
+			        			}
+			        		}
+			        	}
+		        	}
+       		});
+        });
+	});
+
+</aui:script>

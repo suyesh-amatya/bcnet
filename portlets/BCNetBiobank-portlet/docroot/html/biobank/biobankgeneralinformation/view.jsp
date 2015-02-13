@@ -34,7 +34,7 @@ String actionId_delete_biobank = "DELETE_BIOBANK";
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 
 %>
-
+<liferay-ui:error key="duplicate-name" message="Biobank Name Already Taken!" />
 <portlet:renderURL var="addBiobankGeneralInformationURL">
 	<portlet:param name="mvcPath" value="/html/biobank/biobankgeneralinformation/edit_biobank_general_information.jsp" />
 	<portlet:param name="biobankDbId" value="<%= String.valueOf(organizationId) %>" />
@@ -99,58 +99,3 @@ String actionId_delete_biobank = "DELETE_BIOBANK";
 	<span class="list-group-item">Backup: <b><%=biobankGeneralInformation.getBackup()== true?"yes":"no" %></b></span>
 	<span class="list-group-item">Training Courses: <b><%=biobankGeneralInformation.getTrainingCourses()== true?"yes":"no" %></b></span>
 </div>
-
-
-
-<%-- <aui:fieldset>
-	<aui:row>
-		<aui:column>Name:</aui:column><aui:column><b><%=organization.getName() %></b></aui:column>
-	</aui:row>
-	<aui:row>
-		<aui:column>BiobankId:</aui:column><aui:column><b><%=biobank.getBiobankId() %></b></aui:column>
-	</aui:row>
-	<aui:row>
-		<aui:column>Acronym:</aui:column><aui:column><b><%=biobank.getAcronym() %></b></aui:column>
-	</aui:row>
-	<aui:row>
-		<aui:column>URL:</aui:column><aui:column><b><%=biobank.getUrl() %></b></aui:column>
-	</aui:row>
-	
-	<%
-		/* String juristicPersonName = "";
-
-		try {
-			juristicPersonName = JuristicPersonLocalServiceUtil.getJuristicPerson
-					(biobank.getJuristicPersonId()).getName();
-		} 
-		catch (Exception e) {
-		} */
-	%>
-	<aui:row>
-		<aui:column>Juristic Person:</aui:column><aui:column><b><%=juristicPersonName %></b></aui:column>
-	</aui:row>
-	
-	<%
-		/* String countryName = "";
-	
-		try {
-			countryName = CountryLocalServiceUtil.getCountry
-					(biobank.getCountryCode()).getName();
-		} 
-		catch (Exception e) {
-		} */
-	%>
-		
-	<aui:row>
-		<aui:column>Country:</aui:column><aui:column><b><%=countryName %></b></aui:column>
-	</aui:row>
-	<aui:row>
-		<aui:column>Description:</aui:column><aui:column><b><%=biobank.getDescription() %></b></aui:column>
-	</aui:row>
-	<aui:row>
-		<aui:column>Backup:</aui:column><aui:column><b><%= biobank.getBackup()== true?"yes":"no" %></b></aui:column>
-	</aui:row>
-	<aui:row>
-		<aui:column>Training Courses:</aui:column><aui:column><b><%= biobank.getTrainingCourses()== true?"yes":"no" %></b></aui:column>
-	</aui:row>
-</aui:fieldset> --%>
