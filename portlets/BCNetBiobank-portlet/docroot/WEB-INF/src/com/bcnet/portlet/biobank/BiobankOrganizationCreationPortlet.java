@@ -9,7 +9,6 @@ import javax.portlet.ResourceResponse;
 
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformation;
 import com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationImpl;
-import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;

@@ -29,8 +29,8 @@ public class CustomEditUserAction extends BaseStrutsPortletAction{
 			long juristicPersonId = ParamUtil.getLong(actionRequest, "juristicPersonId");
 			
 			user.getExpandoBridge().setAttribute("juristicPersonId", juristicPersonId);
+			
 		}
-		
 		
 		
 		originalStrutsPortletAction.processAction(
