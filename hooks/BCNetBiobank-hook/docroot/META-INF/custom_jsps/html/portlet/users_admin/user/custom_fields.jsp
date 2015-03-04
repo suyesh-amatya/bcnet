@@ -20,6 +20,7 @@
 
 <%
 	User selUser = (User)request.getAttribute("user.selUser");
+		
 	List<JuristicPerson> juristicPersons = JuristicPersonLocalServiceUtil.getAllJuristicPersons();
 		 
 	Long result= (Long)selUser.getExpandoBridge().getAttribute("juristicPersonId");
@@ -31,6 +32,7 @@
 <h3><liferay-ui:message key="custom-fields" /></h3>
 
 <aui:fieldset>
+	<aui:input name="userId" type="hidden" value="<%=selUser.getUserId() %>"></aui:input>
 	<aui:select name="juristicPersonId" label='Juristic Person' >
 		<aui:option>Select</aui:option>
 		<%
