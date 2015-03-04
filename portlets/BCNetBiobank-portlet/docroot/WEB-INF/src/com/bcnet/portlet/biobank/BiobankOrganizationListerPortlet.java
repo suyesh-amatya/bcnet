@@ -28,6 +28,7 @@ public class BiobankOrganizationListerPortlet extends MVCPortlet {
 		
 		try {
 			Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);
+			long organizationid = organization.getOrganizationId();
 			
 			List<User> users = UserLocalServiceUtil.getOrganizationUsers(biobankDbId);
 			
@@ -38,6 +39,11 @@ public class BiobankOrganizationListerPortlet extends MVCPortlet {
 				for (UserGroupRole ugr : usergrouprolles) {
 					UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userid_array, organization.getGroup().getGroupId(), ugr.getRoleId());
 				}
+				
+				String user_positions = user.getExpandoBridge().getAttribute("Role within the organisation").toString();
+				String new_user_positions = user_positions.replaceAll("(?m)(?<=^|;)"+organizationid+"[^;]*;", "");
+				user.getExpandoBridge().setAttribute("Role within the organisation", new_user_positions);
+				
 				OrganizationLocalServiceUtil.deleteUserOrganization(userid, organization);
 			}
 			
