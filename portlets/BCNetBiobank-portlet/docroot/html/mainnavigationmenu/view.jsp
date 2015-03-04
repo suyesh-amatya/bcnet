@@ -2,13 +2,13 @@
 
 <%
   	//System.out.println((String) request.getAttribute(WebKeys.PORTLET_ID));
- %>
+%>
 
 
 <nav class="sort-pages modify-pages" id="navigation" role="navigation">
 	<ul role="menubar" id="topmenu">
 		<%
-		List<Layout> mainlayouts = LayoutLocalServiceUtil.getLayouts(10181, false);
+		List<Layout> mainlayouts = LayoutLocalServiceUtil.getLayouts(10184, false);
 		int count = 0;
 		String menuepoint = "";
 		for(Layout mainlayout : mainlayouts) {

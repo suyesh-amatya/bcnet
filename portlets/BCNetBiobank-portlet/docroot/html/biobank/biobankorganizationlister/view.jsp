@@ -1,4 +1,13 @@
 <%@ include file="/html/init.jsp" %>
+
+<%
+// Parameters for permission Checking
+long groupId = scopeGroupId;
+String name = portletDisplay.getRootPortletId();
+String primKey = portletDisplay.getResourcePK();
+String actionId_delete_biobank = "DELETE_BIOBANK";
+%>
+
 <%!
    com.liferay.portal.kernel.dao.search.SearchContainer<BiobankGeneralInformation> searchContainer = null;
 
@@ -42,11 +51,22 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
 		<div class="well">
 			<a href="<%=orgPath%>"><b><%= biobankGeneralInformation.getBiobankName() %></b></a>
+			<%
+				boolean biobankOwner = false;
+				for (UserGroupRole ugr : UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId(), organization.getGroupId())) {
+					if(ugr.getRole().getName().equalsIgnoreCase("Biobank Owner"))
+						biobankOwner = true;    
+				}
 			
-			<liferay-ui:icon-delete url="<%= deleteBiobankOrganizationURL.toString() %>" 
-				message="<%= \"Delete \"+biobankGeneralInformation.getBiobankName()+\"\" %>" 
-				confirmation="<%= \"Are you sure you want to delete \"+biobankGeneralInformation.getBiobankName()+\"?\" %>"
-				cssClass="biobankOrganizationDelete"/>
+				if(biobankOwner || permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_biobank)){
+			%>
+					<liferay-ui:icon-delete url="<%= deleteBiobankOrganizationURL.toString() %>" 
+						message="<%= \"Delete \"+biobankGeneralInformation.getBiobankName()+\"\" %>" 
+						confirmation="<%= \"Are you sure you want to delete \"+biobankGeneralInformation.getBiobankName()+\"?\" %>"
+						cssClass="biobankOrganizationDelete"/>
+   			<%
+				}
+   			%>
 				
 			<br/>
 			
@@ -54,7 +74,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 			
 			<br/>
 			
-			<a href="<%=biobankGeneralInformation.getUrl()%>"><b><%= biobankGeneralInformation.getUrl() %></b></a>
+			<a href="<%=biobankGeneralInformation.getUrl()%>" target="_blank"><b><%= biobankGeneralInformation.getUrl() %></b></a>
 			
 		</div>
 		

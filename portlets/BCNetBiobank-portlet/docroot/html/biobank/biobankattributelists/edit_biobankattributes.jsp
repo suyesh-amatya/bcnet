@@ -1,5 +1,6 @@
 <%@ include file="/html/init.jsp" %>
 
+
 <%
 	Organization organization = null;
 	long organizationId = 0;
@@ -20,7 +21,7 @@
 		biobankGeneralInformation = BiobankGeneralInformationLocalServiceUtil.createBiobankGeneralInformation(organizationId);
 	}
 	
-	String redirect = PortalUtil.getCurrentURL(renderRequest);
+	String redirect = ParamUtil.getString(request, "redirect");
 	String cancelURL = themeDisplay.getURLPortal() + "/web" + organization.getGroup().getFriendlyURL();
 	
 	/* Type of Repository Lists for input-move-boxes */
@@ -556,6 +557,8 @@
 	String selectedad = renderResponse.getNamespace() + "selectAll("+ renderResponse.getNamespace() + "selectedad);";
 
 %>
+
+
 	<aui:button-row>
 		<aui:button type="submit" onClick="<%=availabletor+\"\"+selectedtor+\"\"+availabledm+\"\"
 			+selecteddm+\"\"+availabledb+\"\"+selecteddb+\"\"+availablesf+\"\"+selectedsf
@@ -564,7 +567,7 @@
 			+\"\"+availablebdas+\"\"+selectedbdas+\"\"+availablecs+\"\"+selectedcs
 			+\"\"+availableas+\"\"+selectedas+\"\"+availablead+\"\"+selectedad%>" />
 
-		<aui:button onClick="<%=cancelURL.toString()%>"  type="cancel" />
+		<aui:button onClick="<%=redirect.toString()%>"  type="cancel" />
 	</aui:button-row>
 </aui:form>
 

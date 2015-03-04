@@ -1,14 +1,20 @@
 package com.bcnet.portlet.biobank;
 
+import java.io.IOException;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformation;
 import com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationImpl;
-import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -34,6 +40,30 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 public class BiobankOrganizationCreationPortlet extends MVCPortlet {
  
 
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse){
+		String organizationName = ParamUtil.getString(resourceRequest, "name");
+		
+		boolean organizationNameExists = false;
+		try {
+			JSONObject json = JSONFactoryUtil.createJSONObject();
+			
+			for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
+				
+				if(organization.getName().equalsIgnoreCase(organizationName)){
+					organizationNameExists = true;
+					json.put("organizationNameExists", organizationNameExists == true ? true : false);
+					resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
+					
+					break;
+				}
+			}
+		} catch (SystemException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void createBiobankOrganization(ActionRequest request, ActionResponse response) throws Exception{
 		
 		BiobankGeneralInformation biobank = _createBiobankOrganization(request);
