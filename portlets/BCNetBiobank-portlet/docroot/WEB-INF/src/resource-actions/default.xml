@@ -4,4 +4,6 @@
 	<resource file="resource-actions/biobankgeneralinformation.xml" />
 	<resource file="resource-actions/biobankattributelists.xml" />
 	<resource file="resource-actions/biobankorganizationlister.xml" />
+	<resource file="resource-actions/biobankattributelistsmaster.xml" />
+	<resource file="resource-actions/juristicperson.xml" />
 </resource-action-mapping>
