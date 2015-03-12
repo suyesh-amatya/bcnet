@@ -51,11 +51,15 @@
 			name="address"
 			property="address"
 		/>
-
-		<liferay-ui:search-container-column-jsp
-			align="right"
-			path="/html/juristicperson/juristicperson_actions.jsp"
-		/>
+		<c:choose>		
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_juristic_person) ||  
+									permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_juristic_person) %>">
+				<liferay-ui:search-container-column-jsp
+					align="right"
+					path="/html/juristicperson/juristicperson_actions.jsp"
+				/>
+			</c:when>
+		</c:choose>
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />
