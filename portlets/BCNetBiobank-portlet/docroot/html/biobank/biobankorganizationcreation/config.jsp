@@ -12,7 +12,7 @@ long optionsPageTemplate_cfg = GetterUtil.getLong(portletPreferences.getValue("o
 				<%
 				List<LayoutSetPrototype> site_templates = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 				%>
-				<aui:select label="Select PageTemplate for Organisation" name="preferences--optionsPageTemplate--">
+				<aui:select label="Select PageTemplate for Organization" name="preferences--optionsPageTemplate--">
 					<aui:option value="0" selected='<%= optionsPageTemplate_cfg == 0 ? true : false %>' >No Page</aui:option>
 					<% for(LayoutSetPrototype site_template : site_templates) { %>
 						<aui:option value="<%= site_template.getPrimaryKey() %>" selected='<%= optionsPageTemplate_cfg == site_template.getPrimaryKey() ? true : false %>' ><%= site_template.getName() %></aui:option>

@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -72,9 +74,12 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 	public void updateBiobankGeneralInfomration(ActionRequest request, ActionResponse response) throws Exception{
 		
 		_updateBiobankGeneralInfomration(request);
-
-		sendRedirect(request, response);
 		
+		//sendRedirect(request, response);
+		
+		Organization organization = OrganizationLocalServiceUtil.getOrganization(ParamUtil.getLong(request, "biobankDbId"));
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		response.sendRedirect(themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL());
 	}
 
 	private BiobankGeneralInformation _updateBiobankGeneralInfomration(ActionRequest request) throws PortalException, SystemException {
@@ -102,6 +107,11 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 		
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);
 		organization.setName(name);
+		
+		Group group = organization.getGroup();
+		group.setFriendlyURL("/"+name);
+		GroupLocalServiceUtil.updateGroup(group);
+		
 		try{
 			OrganizationLocalServiceUtil.updateOrganization(organization);
 		}
