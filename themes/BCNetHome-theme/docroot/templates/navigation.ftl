@@ -1,5 +1,9 @@
 <nav class="${nav_css_class}" id="navigation" role="navigation">
 	<ul aria-label="<@liferay.language key="site-pages" />" role="menubar" id="topmenu">
+		<#assign RoleLocalServiceUtil = serviceLocator.findService("com.liferay.portal.service.RoleLocalService")/>
+		<#assign curatorRole = RoleLocalServiceUtil.getRole(company_id, "Curator")/>
+		<#assign administratorRole = RoleLocalServiceUtil.getRole(company_id, "Administrator")/>
+		<#assign UserLocalServiceUtil = serviceLocator.findService("com.liferay.portal.service.UserLocalService")/>
 		
 		<#assign parentfirst=true/>
 		
@@ -55,9 +59,17 @@
 								<#assign nav_item_child_last_css = "lastli"/>
 							</#if>
 							
-							<li ${nav_child_attr_selected} class="${nav_child_css_class} ${nav_item_child_first_css} ${nav_item_child_last_css}" id="layout_${nav_child.getLayoutId()}" role="presentation">
-								<a aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">${nav_child.getName()}</a>
-							</li>
+							<#if nav_child.getName() == "Add Biobank">
+								<#if UserLocalServiceUtil.hasRoleUser(administratorRole.getRoleId(), user_id) || UserLocalServiceUtil.hasRoleUser(curatorRole.getRoleId(), user_id)>
+									<li ${nav_child_attr_selected} class="${nav_child_css_class} ${nav_item_child_first_css} ${nav_item_child_last_css}" id="layout_${nav_child.getLayoutId()}" role="presentation">
+										<a aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">${nav_child.getName()}</a>
+									</li>
+								</#if>
+							<#else>
+								<li ${nav_child_attr_selected} class="${nav_child_css_class} ${nav_item_child_first_css} ${nav_item_child_last_css}" id="layout_${nav_child.getLayoutId()}" role="presentation">
+									<a aria-labelledby="layout_${nav_child.getLayoutId()}" href="${nav_child.getURL()}" ${nav_child.getTarget()} role="menuitem">${nav_child.getName()}</a>
+								</li>
+							</#if>
 							
 							<#assign i = i + 1/>
 						</#list>
