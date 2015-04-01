@@ -109,7 +109,7 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 		organization.setName(name);
 		
 		Group group = organization.getGroup();
-		group.setFriendlyURL("/"+name);
+		group.setFriendlyURL("/"+name.trim().replaceAll(" +", " ").replaceAll(" ", "-").toLowerCase());
 		GroupLocalServiceUtil.updateGroup(group);
 		
 		try{

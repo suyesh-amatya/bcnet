@@ -2,6 +2,9 @@
 
 <%
   	//System.out.println((String) request.getAttribute(WebKeys.PORTLET_ID));
+	Role curatorRole = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), "Curator");
+	Role administratorRole = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), "Administrator");
+	
 %>
 
 
@@ -46,10 +49,20 @@
 					}
 					childcount++;
 					//for(Layout childsetup : mainlayout.getChildren()) {
-						
+					
+					if(childsetup.getNameCurrentValue().equals("Add Biobank")){
+						if(UserLocalServiceUtil.hasRoleUser(administratorRole.getRoleId(), themeDisplay.getUserId()) 
+								|| UserLocalServiceUtil.hasRoleUser(curatorRole.getRoleId(), themeDisplay.getUserId())){
+							menuepoint += "<li id=\"layout_" + childsetup.getLayoutId() + "\"  " +childli + "  role=\"presentation\">";
+							menuepoint += "<a role=\"menuitem\" href=\"" + childsetup.getFriendlyURL() + "\" aria-labelledby=\"layout_" + childsetup.getLayoutId() + "\"><span>" + childsetup.getNameCurrentValue() +"</span></a>";
+							menuepoint += "</li>";
+						}
+					}
+					else{
 						menuepoint += "<li id=\"layout_" + childsetup.getLayoutId() + "\"  " +childli + "  role=\"presentation\">";
 						menuepoint += "<a role=\"menuitem\" href=\"" + childsetup.getFriendlyURL() + "\" aria-labelledby=\"layout_" + childsetup.getLayoutId() + "\"><span>" + childsetup.getNameCurrentValue() +"</span></a>";
 						menuepoint += "</li>";
+					}
 					//}
 					
 				}

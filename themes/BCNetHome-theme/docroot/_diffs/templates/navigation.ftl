@@ -1,3 +1,4 @@
+<#-- The navigation.ftl is not used for BCNetHome-theme -->
 <nav class="${nav_css_class}" id="navigation" role="navigation">
 	<ul aria-label="<@liferay.language key="site-pages" />" role="menubar" id="topmenu">
 		<#assign RoleLocalServiceUtil = serviceLocator.findService("com.liferay.portal.service.RoleLocalService")/>

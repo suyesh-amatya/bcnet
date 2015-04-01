@@ -2170,6 +2170,9 @@ h1.portlet-title {
 .aui .biobank-search-button {
   margin-top: 25px; }
 
+div#topmenu-position .portlet-borderless-bar {
+  display: none; }
+
 div#_biobanksearch_WAR_BCNetBiobankportlet_biobankGeneralInformationsSearchContainer {
   display: none; }
 

@@ -32,7 +32,7 @@
 
 <aui:form action="<%= editBiobankGeneralInfomrationURL %>" method="POST" name="fm" onSubmit="event.preventDefault();">
 	<aui:fieldset>
-		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+		<%-- <aui:input name="redirect" type="hidden" value="<%= redirect %>" /> --%>
 		<aui:input name="biobankDbId" type="hidden" value='<%= biobankGeneralInformation == null ? "" : biobankGeneralInformation.getBiobankDbId() %>'/>
 		
 		<aui:row>

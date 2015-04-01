@@ -94,6 +94,9 @@ ${theme.include(body_top_include)}
 				<div id="topmenu-position">
 					<#if has_navigation || is_signed_in>
 						<#--<#include "${full_templates_path}/navigation.ftl" />-->
+						
+						<#-- Dynamically injecting mainnavigationmenu portlet-->
+						
 						<#assign locPortletId = "mainnavigationmenu_WAR_BCNetBiobankportlet" />
 						 
 						<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />

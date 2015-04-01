@@ -87,8 +87,11 @@ ${theme.include(body_top_include)}
 				
 				<div id="topmenu-position">
 					<#if has_navigation || is_signed_in>
-						<#include "${full_templates_path}/navigation.ftl" />
-						<#--<#assign locPortletId = "mainnavigationmenu_WAR_BCNetBiobankportlet" />
+						<#--<#include "${full_templates_path}/navigation.ftl" />-->
+						
+						<#-- Dynamically injecting mainnavigationmenu portlet-->
+						
+						<#assign locPortletId = "mainnavigationmenu_WAR_BCNetBiobankportlet" />
 						 
 						<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
 						<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
@@ -98,7 +101,7 @@ ${theme.include(body_top_include)}
 							<#assign temp = portletSetup.store() />
 						</#if>
 						      
-						${theme.runtime(locPortletId, "", "")}-->
+						${theme.runtime(locPortletId, "", "")}
 					</#if>
 				</div>
 				

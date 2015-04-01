@@ -18,6 +18,10 @@ h1.portlet-title{
 	margin-top: 25px;
 }
 
+div#topmenu-position .portlet-borderless-bar{
+	display:none;
+}
+
 div#_biobanksearch_WAR_BCNetBiobankportlet_biobankGeneralInformationsSearchContainer{
 	display: none;
 }

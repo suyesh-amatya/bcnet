@@ -35,6 +35,7 @@
 <%@page import="com.liferay.portal.model.Company"%>
 <%@page import="com.liferay.portal.model.GroupConstants"%>
 <%@ page import="com.liferay.portal.model.UserGroupRole" %>
+<%@ page import="com.liferay.portal.model.Role" %>
 
 
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
@@ -45,6 +46,7 @@
 <%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.service.CountryServiceUtil" %>
 <%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
+<%@page import="com.liferay.portal.service.RoleLocalServiceUtil"%>
 
 <!-- Includes for searching the Site Templates -->
 <%@ page import="com.liferay.portal.service.LayoutSetPrototypeServiceUtil" %>
