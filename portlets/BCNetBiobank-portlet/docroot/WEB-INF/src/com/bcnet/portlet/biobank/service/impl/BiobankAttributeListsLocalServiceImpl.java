@@ -62,14 +62,14 @@ public class BiobankAttributeListsLocalServiceImpl
 	}
 	
 	
-	public List<BiobankAttributeLists> getBiobankAtrributeListsByBiobankDbId(long biobankDbId)
+	public List<BiobankAttributeLists> getBiobankAttributeListsByBiobankDbId(long biobankDbId)
 		throws SystemException{
 	
 		return biobankAttributeListsPersistence.findBybiobankDbId(biobankDbId);
 	}
 	
 	
-	public List<BiobankAttributeLists> getBiobankAtrributeListsByBiobankDbId_AttributeListName
+	public List<BiobankAttributeLists> getBiobankAttributeListsByBiobankDbId_AttributeListName
 		(long biobankDbId, String attributeListName)
 			throws SystemException{
 		
@@ -77,7 +77,7 @@ public class BiobankAttributeListsLocalServiceImpl
 	}
 	
 	
-	public BiobankAttributeLists getBiobankAtrributeListsByBiobankDbId_AttributeListName_AttributeListValue
+	public BiobankAttributeLists getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue
 		(long biobankDbId, String attributeListName, String attributeListValue) throws SystemException{
 
 		try {
@@ -96,7 +96,7 @@ public class BiobankAttributeListsLocalServiceImpl
 	public BiobankAttributeLists deleteBiobankAttributeLists(long biobankDbId, String attributeListName, String attributeListValue) throws SystemException{
 		
 		BiobankAttributeLists biobankAttributeLists = 
-				getBiobankAtrributeListsByBiobankDbId_AttributeListName_AttributeListValue(biobankDbId, attributeListName, attributeListValue);
+				getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue(biobankDbId, attributeListName, attributeListValue);
 		
 		return biobankAttributeListsPersistence.remove(biobankAttributeLists);
 	}

@@ -60,3 +60,9 @@ create table juristicperson (
 	url VARCHAR(75) null,
 	address VARCHAR(75) null
 );
+
+create table samplecollectionattributelistsmaster (
+	samplecollectionAttributeListsMasterId LONG not null primary key,
+	attributeListName VARCHAR(75) null,
+	attributeListValue VARCHAR(75) null
+);

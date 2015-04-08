@@ -14,12 +14,11 @@
 
 package com.bcnet.portlet.biobank.service;
 
-import com.bcnet.portlet.biobank.model.BiobankAtrributeListsMasterClp;
 import com.bcnet.portlet.biobank.model.BiobankAttributeListsClp;
-import com.bcnet.portlet.biobank.model.BiobankContactClp;
+import com.bcnet.portlet.biobank.model.BiobankAttributeListsMasterClp;
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformationClp;
-import com.bcnet.portlet.biobank.model.ContactClp;
 import com.bcnet.portlet.biobank.model.JuristicPersonClp;
+import com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMasterClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -107,17 +106,13 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
-		if (oldModelClassName.equals(
-					BiobankAtrributeListsMasterClp.class.getName())) {
-			return translateInputBiobankAtrributeListsMaster(oldModel);
-		}
-
 		if (oldModelClassName.equals(BiobankAttributeListsClp.class.getName())) {
 			return translateInputBiobankAttributeLists(oldModel);
 		}
 
-		if (oldModelClassName.equals(BiobankContactClp.class.getName())) {
-			return translateInputBiobankContact(oldModel);
+		if (oldModelClassName.equals(
+					BiobankAttributeListsMasterClp.class.getName())) {
+			return translateInputBiobankAttributeListsMaster(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -125,12 +120,13 @@ public class ClpSerializer {
 			return translateInputBiobankGeneralInformation(oldModel);
 		}
 
-		if (oldModelClassName.equals(ContactClp.class.getName())) {
-			return translateInputContact(oldModel);
-		}
-
 		if (oldModelClassName.equals(JuristicPersonClp.class.getName())) {
 			return translateInputJuristicPerson(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					SampleCollectionAttributeListsMasterClp.class.getName())) {
+			return translateInputSampleCollectionAttributeListsMaster(oldModel);
 		}
 
 		return oldModel;
@@ -148,17 +144,6 @@ public class ClpSerializer {
 		return newList;
 	}
 
-	public static Object translateInputBiobankAtrributeListsMaster(
-		BaseModel<?> oldModel) {
-		BiobankAtrributeListsMasterClp oldClpModel = (BiobankAtrributeListsMasterClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getBiobankAtrributeListsMasterRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
 	public static Object translateInputBiobankAttributeLists(
 		BaseModel<?> oldModel) {
 		BiobankAttributeListsClp oldClpModel = (BiobankAttributeListsClp)oldModel;
@@ -170,10 +155,11 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateInputBiobankContact(BaseModel<?> oldModel) {
-		BiobankContactClp oldClpModel = (BiobankContactClp)oldModel;
+	public static Object translateInputBiobankAttributeListsMaster(
+		BaseModel<?> oldModel) {
+		BiobankAttributeListsMasterClp oldClpModel = (BiobankAttributeListsMasterClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getBiobankContactRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getBiobankAttributeListsMasterRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -191,20 +177,21 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateInputContact(BaseModel<?> oldModel) {
-		ContactClp oldClpModel = (ContactClp)oldModel;
+	public static Object translateInputJuristicPerson(BaseModel<?> oldModel) {
+		JuristicPersonClp oldClpModel = (JuristicPersonClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getContactRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getJuristicPersonRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
 		return newModel;
 	}
 
-	public static Object translateInputJuristicPerson(BaseModel<?> oldModel) {
-		JuristicPersonClp oldClpModel = (JuristicPersonClp)oldModel;
+	public static Object translateInputSampleCollectionAttributeListsMaster(
+		BaseModel<?> oldModel) {
+		SampleCollectionAttributeListsMasterClp oldClpModel = (SampleCollectionAttributeListsMasterClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getJuristicPersonRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getSampleCollectionAttributeListsMasterRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -229,18 +216,13 @@ public class ClpSerializer {
 		String oldModelClassName = oldModelClass.getName();
 
 		if (oldModelClassName.equals(
-					"com.bcnet.portlet.biobank.model.impl.BiobankAtrributeListsMasterImpl")) {
-			return translateOutputBiobankAtrributeListsMaster(oldModel);
-		}
-
-		if (oldModelClassName.equals(
 					"com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl")) {
 			return translateOutputBiobankAttributeLists(oldModel);
 		}
 
 		if (oldModelClassName.equals(
-					"com.bcnet.portlet.biobank.model.impl.BiobankContactImpl")) {
-			return translateOutputBiobankContact(oldModel);
+					"com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsMasterImpl")) {
+			return translateOutputBiobankAttributeListsMaster(oldModel);
 		}
 
 		if (oldModelClassName.equals(
@@ -249,13 +231,13 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.bcnet.portlet.biobank.model.impl.ContactImpl")) {
-			return translateOutputContact(oldModel);
+					"com.bcnet.portlet.biobank.model.impl.JuristicPersonImpl")) {
+			return translateOutputJuristicPerson(oldModel);
 		}
 
 		if (oldModelClassName.equals(
-					"com.bcnet.portlet.biobank.model.impl.JuristicPersonImpl")) {
-			return translateOutputJuristicPerson(oldModel);
+					"com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterImpl")) {
+			return translateOutputSampleCollectionAttributeListsMaster(oldModel);
 		}
 
 		return oldModel;
@@ -339,18 +321,13 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
-					"com.bcnet.portlet.biobank.NoSuchBiobankAtrributeListsMasterException")) {
-			return new com.bcnet.portlet.biobank.NoSuchBiobankAtrributeListsMasterException();
-		}
-
-		if (className.equals(
 					"com.bcnet.portlet.biobank.NoSuchBiobankAttributeListsException")) {
 			return new com.bcnet.portlet.biobank.NoSuchBiobankAttributeListsException();
 		}
 
 		if (className.equals(
-					"com.bcnet.portlet.biobank.NoSuchBiobankContactException")) {
-			return new com.bcnet.portlet.biobank.NoSuchBiobankContactException();
+					"com.bcnet.portlet.biobank.NoSuchBiobankAttributeListsMasterException")) {
+			return new com.bcnet.portlet.biobank.NoSuchBiobankAttributeListsMasterException();
 		}
 
 		if (className.equals(
@@ -358,27 +335,17 @@ public class ClpSerializer {
 			return new com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException();
 		}
 
-		if (className.equals("com.bcnet.portlet.biobank.NoSuchContactException")) {
-			return new com.bcnet.portlet.biobank.NoSuchContactException();
-		}
-
 		if (className.equals(
 					"com.bcnet.portlet.biobank.NoSuchJuristicPersonException")) {
 			return new com.bcnet.portlet.biobank.NoSuchJuristicPersonException();
 		}
 
+		if (className.equals(
+					"com.bcnet.portlet.biobank.NoSuchSampleCollectionAttributeListsMasterException")) {
+			return new com.bcnet.portlet.biobank.NoSuchSampleCollectionAttributeListsMasterException();
+		}
+
 		return throwable;
-	}
-
-	public static Object translateOutputBiobankAtrributeListsMaster(
-		BaseModel<?> oldModel) {
-		BiobankAtrributeListsMasterClp newModel = new BiobankAtrributeListsMasterClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setBiobankAtrributeListsMasterRemoteModel(oldModel);
-
-		return newModel;
 	}
 
 	public static Object translateOutputBiobankAttributeLists(
@@ -392,12 +359,13 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateOutputBiobankContact(BaseModel<?> oldModel) {
-		BiobankContactClp newModel = new BiobankContactClp();
+	public static Object translateOutputBiobankAttributeListsMaster(
+		BaseModel<?> oldModel) {
+		BiobankAttributeListsMasterClp newModel = new BiobankAttributeListsMasterClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
-		newModel.setBiobankContactRemoteModel(oldModel);
+		newModel.setBiobankAttributeListsMasterRemoteModel(oldModel);
 
 		return newModel;
 	}
@@ -413,22 +381,23 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateOutputContact(BaseModel<?> oldModel) {
-		ContactClp newModel = new ContactClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setContactRemoteModel(oldModel);
-
-		return newModel;
-	}
-
 	public static Object translateOutputJuristicPerson(BaseModel<?> oldModel) {
 		JuristicPersonClp newModel = new JuristicPersonClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setJuristicPersonRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputSampleCollectionAttributeListsMaster(
+		BaseModel<?> oldModel) {
+		SampleCollectionAttributeListsMasterClp newModel = new SampleCollectionAttributeListsMasterClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setSampleCollectionAttributeListsMasterRemoteModel(oldModel);
 
 		return newModel;
 	}

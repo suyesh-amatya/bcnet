@@ -16,13 +16,12 @@ package com.bcnet.portlet.biobank.service.base;
 
 import com.bcnet.portlet.biobank.model.JuristicPerson;
 import com.bcnet.portlet.biobank.service.JuristicPersonService;
-import com.bcnet.portlet.biobank.service.persistence.BiobankAtrributeListsMasterPersistence;
+import com.bcnet.portlet.biobank.service.persistence.BiobankAttributeListsMasterPersistence;
 import com.bcnet.portlet.biobank.service.persistence.BiobankAttributeListsPersistence;
-import com.bcnet.portlet.biobank.service.persistence.BiobankContactPersistence;
 import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder;
 import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationPersistence;
-import com.bcnet.portlet.biobank.service.persistence.ContactPersistence;
 import com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistence;
+import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsMasterPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -53,63 +52,6 @@ public abstract class JuristicPersonServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * Never modify or reference this class directly. Always use {@link com.bcnet.portlet.biobank.service.JuristicPersonServiceUtil} to access the juristic person remote service.
 	 */
-
-	/**
-	 * Returns the biobank atrribute lists master local service.
-	 *
-	 * @return the biobank atrribute lists master local service
-	 */
-	public com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterLocalService getBiobankAtrributeListsMasterLocalService() {
-		return biobankAtrributeListsMasterLocalService;
-	}
-
-	/**
-	 * Sets the biobank atrribute lists master local service.
-	 *
-	 * @param biobankAtrributeListsMasterLocalService the biobank atrribute lists master local service
-	 */
-	public void setBiobankAtrributeListsMasterLocalService(
-		com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterLocalService biobankAtrributeListsMasterLocalService) {
-		this.biobankAtrributeListsMasterLocalService = biobankAtrributeListsMasterLocalService;
-	}
-
-	/**
-	 * Returns the biobank atrribute lists master remote service.
-	 *
-	 * @return the biobank atrribute lists master remote service
-	 */
-	public com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterService getBiobankAtrributeListsMasterService() {
-		return biobankAtrributeListsMasterService;
-	}
-
-	/**
-	 * Sets the biobank atrribute lists master remote service.
-	 *
-	 * @param biobankAtrributeListsMasterService the biobank atrribute lists master remote service
-	 */
-	public void setBiobankAtrributeListsMasterService(
-		com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterService biobankAtrributeListsMasterService) {
-		this.biobankAtrributeListsMasterService = biobankAtrributeListsMasterService;
-	}
-
-	/**
-	 * Returns the biobank atrribute lists master persistence.
-	 *
-	 * @return the biobank atrribute lists master persistence
-	 */
-	public BiobankAtrributeListsMasterPersistence getBiobankAtrributeListsMasterPersistence() {
-		return biobankAtrributeListsMasterPersistence;
-	}
-
-	/**
-	 * Sets the biobank atrribute lists master persistence.
-	 *
-	 * @param biobankAtrributeListsMasterPersistence the biobank atrribute lists master persistence
-	 */
-	public void setBiobankAtrributeListsMasterPersistence(
-		BiobankAtrributeListsMasterPersistence biobankAtrributeListsMasterPersistence) {
-		this.biobankAtrributeListsMasterPersistence = biobankAtrributeListsMasterPersistence;
-	}
 
 	/**
 	 * Returns the biobank attribute lists local service.
@@ -169,60 +111,60 @@ public abstract class JuristicPersonServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Returns the biobank contact local service.
+	 * Returns the biobank attribute lists master local service.
 	 *
-	 * @return the biobank contact local service
+	 * @return the biobank attribute lists master local service
 	 */
-	public com.bcnet.portlet.biobank.service.BiobankContactLocalService getBiobankContactLocalService() {
-		return biobankContactLocalService;
+	public com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalService getBiobankAttributeListsMasterLocalService() {
+		return biobankAttributeListsMasterLocalService;
 	}
 
 	/**
-	 * Sets the biobank contact local service.
+	 * Sets the biobank attribute lists master local service.
 	 *
-	 * @param biobankContactLocalService the biobank contact local service
+	 * @param biobankAttributeListsMasterLocalService the biobank attribute lists master local service
 	 */
-	public void setBiobankContactLocalService(
-		com.bcnet.portlet.biobank.service.BiobankContactLocalService biobankContactLocalService) {
-		this.biobankContactLocalService = biobankContactLocalService;
+	public void setBiobankAttributeListsMasterLocalService(
+		com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalService biobankAttributeListsMasterLocalService) {
+		this.biobankAttributeListsMasterLocalService = biobankAttributeListsMasterLocalService;
 	}
 
 	/**
-	 * Returns the biobank contact remote service.
+	 * Returns the biobank attribute lists master remote service.
 	 *
-	 * @return the biobank contact remote service
+	 * @return the biobank attribute lists master remote service
 	 */
-	public com.bcnet.portlet.biobank.service.BiobankContactService getBiobankContactService() {
-		return biobankContactService;
+	public com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterService getBiobankAttributeListsMasterService() {
+		return biobankAttributeListsMasterService;
 	}
 
 	/**
-	 * Sets the biobank contact remote service.
+	 * Sets the biobank attribute lists master remote service.
 	 *
-	 * @param biobankContactService the biobank contact remote service
+	 * @param biobankAttributeListsMasterService the biobank attribute lists master remote service
 	 */
-	public void setBiobankContactService(
-		com.bcnet.portlet.biobank.service.BiobankContactService biobankContactService) {
-		this.biobankContactService = biobankContactService;
+	public void setBiobankAttributeListsMasterService(
+		com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterService biobankAttributeListsMasterService) {
+		this.biobankAttributeListsMasterService = biobankAttributeListsMasterService;
 	}
 
 	/**
-	 * Returns the biobank contact persistence.
+	 * Returns the biobank attribute lists master persistence.
 	 *
-	 * @return the biobank contact persistence
+	 * @return the biobank attribute lists master persistence
 	 */
-	public BiobankContactPersistence getBiobankContactPersistence() {
-		return biobankContactPersistence;
+	public BiobankAttributeListsMasterPersistence getBiobankAttributeListsMasterPersistence() {
+		return biobankAttributeListsMasterPersistence;
 	}
 
 	/**
-	 * Sets the biobank contact persistence.
+	 * Sets the biobank attribute lists master persistence.
 	 *
-	 * @param biobankContactPersistence the biobank contact persistence
+	 * @param biobankAttributeListsMasterPersistence the biobank attribute lists master persistence
 	 */
-	public void setBiobankContactPersistence(
-		BiobankContactPersistence biobankContactPersistence) {
-		this.biobankContactPersistence = biobankContactPersistence;
+	public void setBiobankAttributeListsMasterPersistence(
+		BiobankAttributeListsMasterPersistence biobankAttributeListsMasterPersistence) {
+		this.biobankAttributeListsMasterPersistence = biobankAttributeListsMasterPersistence;
 	}
 
 	/**
@@ -302,62 +244,6 @@ public abstract class JuristicPersonServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Returns the contact local service.
-	 *
-	 * @return the contact local service
-	 */
-	public com.bcnet.portlet.biobank.service.ContactLocalService getContactLocalService() {
-		return contactLocalService;
-	}
-
-	/**
-	 * Sets the contact local service.
-	 *
-	 * @param contactLocalService the contact local service
-	 */
-	public void setContactLocalService(
-		com.bcnet.portlet.biobank.service.ContactLocalService contactLocalService) {
-		this.contactLocalService = contactLocalService;
-	}
-
-	/**
-	 * Returns the contact remote service.
-	 *
-	 * @return the contact remote service
-	 */
-	public com.bcnet.portlet.biobank.service.ContactService getContactService() {
-		return contactService;
-	}
-
-	/**
-	 * Sets the contact remote service.
-	 *
-	 * @param contactService the contact remote service
-	 */
-	public void setContactService(
-		com.bcnet.portlet.biobank.service.ContactService contactService) {
-		this.contactService = contactService;
-	}
-
-	/**
-	 * Returns the contact persistence.
-	 *
-	 * @return the contact persistence
-	 */
-	public ContactPersistence getContactPersistence() {
-		return contactPersistence;
-	}
-
-	/**
-	 * Sets the contact persistence.
-	 *
-	 * @param contactPersistence the contact persistence
-	 */
-	public void setContactPersistence(ContactPersistence contactPersistence) {
-		this.contactPersistence = contactPersistence;
-	}
-
-	/**
 	 * Returns the juristic person local service.
 	 *
 	 * @return the juristic person local service
@@ -412,6 +298,63 @@ public abstract class JuristicPersonServiceBaseImpl extends BaseServiceImpl
 	public void setJuristicPersonPersistence(
 		JuristicPersonPersistence juristicPersonPersistence) {
 		this.juristicPersonPersistence = juristicPersonPersistence;
+	}
+
+	/**
+	 * Returns the sample collection attribute lists master local service.
+	 *
+	 * @return the sample collection attribute lists master local service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService getSampleCollectionAttributeListsMasterLocalService() {
+		return sampleCollectionAttributeListsMasterLocalService;
+	}
+
+	/**
+	 * Sets the sample collection attribute lists master local service.
+	 *
+	 * @param sampleCollectionAttributeListsMasterLocalService the sample collection attribute lists master local service
+	 */
+	public void setSampleCollectionAttributeListsMasterLocalService(
+		com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService sampleCollectionAttributeListsMasterLocalService) {
+		this.sampleCollectionAttributeListsMasterLocalService = sampleCollectionAttributeListsMasterLocalService;
+	}
+
+	/**
+	 * Returns the sample collection attribute lists master remote service.
+	 *
+	 * @return the sample collection attribute lists master remote service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterService getSampleCollectionAttributeListsMasterService() {
+		return sampleCollectionAttributeListsMasterService;
+	}
+
+	/**
+	 * Sets the sample collection attribute lists master remote service.
+	 *
+	 * @param sampleCollectionAttributeListsMasterService the sample collection attribute lists master remote service
+	 */
+	public void setSampleCollectionAttributeListsMasterService(
+		com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterService sampleCollectionAttributeListsMasterService) {
+		this.sampleCollectionAttributeListsMasterService = sampleCollectionAttributeListsMasterService;
+	}
+
+	/**
+	 * Returns the sample collection attribute lists master persistence.
+	 *
+	 * @return the sample collection attribute lists master persistence
+	 */
+	public SampleCollectionAttributeListsMasterPersistence getSampleCollectionAttributeListsMasterPersistence() {
+		return sampleCollectionAttributeListsMasterPersistence;
+	}
+
+	/**
+	 * Sets the sample collection attribute lists master persistence.
+	 *
+	 * @param sampleCollectionAttributeListsMasterPersistence the sample collection attribute lists master persistence
+	 */
+	public void setSampleCollectionAttributeListsMasterPersistence(
+		SampleCollectionAttributeListsMasterPersistence sampleCollectionAttributeListsMasterPersistence) {
+		this.sampleCollectionAttributeListsMasterPersistence = sampleCollectionAttributeListsMasterPersistence;
 	}
 
 	/**
@@ -585,24 +528,18 @@ public abstract class JuristicPersonServiceBaseImpl extends BaseServiceImpl
 		}
 	}
 
-	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterLocalService.class)
-	protected com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterLocalService biobankAtrributeListsMasterLocalService;
-	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterService.class)
-	protected com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterService biobankAtrributeListsMasterService;
-	@BeanReference(type = BiobankAtrributeListsMasterPersistence.class)
-	protected BiobankAtrributeListsMasterPersistence biobankAtrributeListsMasterPersistence;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalService.class)
 	protected com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalService biobankAttributeListsLocalService;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankAttributeListsService.class)
 	protected com.bcnet.portlet.biobank.service.BiobankAttributeListsService biobankAttributeListsService;
 	@BeanReference(type = BiobankAttributeListsPersistence.class)
 	protected BiobankAttributeListsPersistence biobankAttributeListsPersistence;
-	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankContactLocalService.class)
-	protected com.bcnet.portlet.biobank.service.BiobankContactLocalService biobankContactLocalService;
-	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankContactService.class)
-	protected com.bcnet.portlet.biobank.service.BiobankContactService biobankContactService;
-	@BeanReference(type = BiobankContactPersistence.class)
-	protected BiobankContactPersistence biobankContactPersistence;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalService.class)
+	protected com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalService biobankAttributeListsMasterLocalService;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterService.class)
+	protected com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterService biobankAttributeListsMasterService;
+	@BeanReference(type = BiobankAttributeListsMasterPersistence.class)
+	protected BiobankAttributeListsMasterPersistence biobankAttributeListsMasterPersistence;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalService.class)
 	protected com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalService biobankGeneralInformationLocalService;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.BiobankGeneralInformationService.class)
@@ -611,18 +548,18 @@ public abstract class JuristicPersonServiceBaseImpl extends BaseServiceImpl
 	protected BiobankGeneralInformationPersistence biobankGeneralInformationPersistence;
 	@BeanReference(type = BiobankGeneralInformationFinder.class)
 	protected BiobankGeneralInformationFinder biobankGeneralInformationFinder;
-	@BeanReference(type = com.bcnet.portlet.biobank.service.ContactLocalService.class)
-	protected com.bcnet.portlet.biobank.service.ContactLocalService contactLocalService;
-	@BeanReference(type = com.bcnet.portlet.biobank.service.ContactService.class)
-	protected com.bcnet.portlet.biobank.service.ContactService contactService;
-	@BeanReference(type = ContactPersistence.class)
-	protected ContactPersistence contactPersistence;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.JuristicPersonLocalService.class)
 	protected com.bcnet.portlet.biobank.service.JuristicPersonLocalService juristicPersonLocalService;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.JuristicPersonService.class)
 	protected com.bcnet.portlet.biobank.service.JuristicPersonService juristicPersonService;
 	@BeanReference(type = JuristicPersonPersistence.class)
 	protected JuristicPersonPersistence juristicPersonPersistence;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService.class)
+	protected com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService sampleCollectionAttributeListsMasterLocalService;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterService.class)
+	protected com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterService sampleCollectionAttributeListsMasterService;
+	@BeanReference(type = SampleCollectionAttributeListsMasterPersistence.class)
+	protected SampleCollectionAttributeListsMasterPersistence sampleCollectionAttributeListsMasterPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

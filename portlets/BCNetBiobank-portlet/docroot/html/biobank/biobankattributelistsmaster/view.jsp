@@ -1,6 +1,6 @@
 <%@ include file="/html/init.jsp" %>
 <%!
-   com.liferay.portal.kernel.dao.search.SearchContainer<BiobankAtrributeListsMaster> searchContainer = null;
+   com.liferay.portal.kernel.dao.search.SearchContainer<BiobankAttributeListsMaster> searchContainer = null;
 %>
 
 <%
@@ -20,31 +20,31 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 <%= scopeGroupId %>
 
 <aui:button-row>
-	<portlet:renderURL var="addBiobankAtrributeListsMasterURL">
-		<portlet:param name="mvcPath" value="/html/biobankatrributelistsmaster/edit_biobankatrributelistsmaster.jsp" />
+	<portlet:renderURL var="addBiobankAttributeListsMasterURL">
+		<portlet:param name="mvcPath" value="/html/biobank/biobankattributelistsmaster/edit_biobankattributelistsmaster.jsp" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 	<c:choose>		
 		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_add_biobank_attribute_lists_master) %>">
-			<aui:button onClick="<%= addBiobankAtrributeListsMasterURL.toString() %>" value="add-biobankAtrributeListsMaster" />
+			<aui:button onClick="<%= addBiobankAttributeListsMasterURL.toString() %>" value="add-biobankAttributeListsMaster" />
 		</c:when>
 	</c:choose>
 </aui:button-row>
 
-<liferay-ui:search-container emptyResultsMessage="biobankAtrributeListsMaster-empty-results-message">
+<liferay-ui:search-container emptyResultsMessage="biobankAttributeListsMaster-empty-results-message">
 	<liferay-ui:search-container-results
-		results="<%= BiobankAtrributeListsMasterLocalServiceUtil.getAllBiobankAtrributeListsMasters(searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= BiobankAtrributeListsMasterLocalServiceUtil.getBiobankAtrributeListsMastersCount() %>"
+		results="<%= BiobankAttributeListsMasterLocalServiceUtil.getAllBiobankAttributeListsMasters(searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= BiobankAttributeListsMasterLocalServiceUtil.getBiobankAttributeListsMastersCount() %>"
 	/>
 
 	<liferay-ui:search-container-row
-		className="com.bcnet.portlet.biobank.model.BiobankAtrributeListsMaster"
-		keyProperty="biobankAtrributeListsMasterId"
-		modelVar="biobankAtrributeListsMaster" escapedModel="<%= true %>"
+		className="com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster"
+		keyProperty="biobankAttributeListsMasterId"
+		modelVar="biobankAttributeListsMaster" escapedModel="<%= true %>"
 	>
 		<liferay-ui:search-container-column-text
 			name="attributeListName"
-			value="<%= biobankAtrributeListsMaster.getAttributeListName() %>"
+			value="<%= biobankAttributeListsMaster.getAttributeListName() %>"
 		/>
 
 		<liferay-ui:search-container-column-text
@@ -56,7 +56,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 									permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_biobank_attribute_lists_master) %>">
 				<liferay-ui:search-container-column-jsp
 					align="right"
-					path="/html/biobankatrributelistsmaster/biobankatrributelistsmaster_actions.jsp"
+					path="/html/biobank/biobankattributelistsmaster/biobankattributelistsmaster_actions.jsp"
 				/>
 			</c:when>
 		</c:choose>

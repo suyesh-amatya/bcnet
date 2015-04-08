@@ -5,7 +5,7 @@
 
 <resource-action-mapping>
 	<portlet-resource>
-		<portlet-name>biobank-atrribute-lists-master</portlet-name>
+		<portlet-name>biobank-attribute-lists-master</portlet-name>
 		<permissions>
 			<supports>
 				<action-key>ADD_BIOBANK_ATTRIBUTE_LISTS_MASTER</action-key>

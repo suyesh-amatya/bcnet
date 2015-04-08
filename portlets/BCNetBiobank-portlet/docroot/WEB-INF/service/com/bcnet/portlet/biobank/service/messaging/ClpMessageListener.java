@@ -14,19 +14,17 @@
 
 package com.bcnet.portlet.biobank.service.messaging;
 
-import com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterLocalServiceUtil;
-import com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankAttributeListsServiceUtil;
-import com.bcnet.portlet.biobank.service.BiobankContactLocalServiceUtil;
-import com.bcnet.portlet.biobank.service.BiobankContactServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationServiceUtil;
 import com.bcnet.portlet.biobank.service.ClpSerializer;
-import com.bcnet.portlet.biobank.service.ContactLocalServiceUtil;
-import com.bcnet.portlet.biobank.service.ContactServiceUtil;
 import com.bcnet.portlet.biobank.service.JuristicPersonLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.JuristicPersonServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -46,24 +44,21 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
-			BiobankAtrributeListsMasterLocalServiceUtil.clearService();
-
-			BiobankAtrributeListsMasterServiceUtil.clearService();
 			BiobankAttributeListsLocalServiceUtil.clearService();
 
 			BiobankAttributeListsServiceUtil.clearService();
-			BiobankContactLocalServiceUtil.clearService();
+			BiobankAttributeListsMasterLocalServiceUtil.clearService();
 
-			BiobankContactServiceUtil.clearService();
+			BiobankAttributeListsMasterServiceUtil.clearService();
 			BiobankGeneralInformationLocalServiceUtil.clearService();
 
 			BiobankGeneralInformationServiceUtil.clearService();
-			ContactLocalServiceUtil.clearService();
-
-			ContactServiceUtil.clearService();
 			JuristicPersonLocalServiceUtil.clearService();
 
 			JuristicPersonServiceUtil.clearService();
+			SampleCollectionAttributeListsMasterLocalServiceUtil.clearService();
+
+			SampleCollectionAttributeListsMasterServiceUtil.clearService();
 		}
 	}
 }

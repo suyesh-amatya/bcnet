@@ -122,15 +122,15 @@ public class BiobankAttributeListsLocalServiceClp
 				"long", "java.lang.String", "java.lang.String"
 			};
 
-		_methodName20 = "getBiobankAtrributeListsByBiobankDbId";
+		_methodName20 = "getBiobankAttributeListsByBiobankDbId";
 
 		_methodParameterTypes20 = new String[] { "long" };
 
-		_methodName21 = "getBiobankAtrributeListsByBiobankDbId_AttributeListName";
+		_methodName21 = "getBiobankAttributeListsByBiobankDbId_AttributeListName";
 
 		_methodParameterTypes21 = new String[] { "long", "java.lang.String" };
 
-		_methodName22 = "getBiobankAtrributeListsByBiobankDbId_AttributeListName_AttributeListValue";
+		_methodName22 = "getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue";
 
 		_methodParameterTypes22 = new String[] {
 				"long", "java.lang.String", "java.lang.String"
@@ -745,7 +745,7 @@ public class BiobankAttributeListsLocalServiceClp
 	}
 
 	@Override
-	public java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAtrributeListsByBiobankDbId(
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAttributeListsByBiobankDbId(
 		long biobankDbId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -774,7 +774,7 @@ public class BiobankAttributeListsLocalServiceClp
 	}
 
 	@Override
-	public java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAtrributeListsByBiobankDbId_AttributeListName(
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAttributeListsByBiobankDbId_AttributeListName(
 		long biobankDbId, java.lang.String attributeListName)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -808,7 +808,7 @@ public class BiobankAttributeListsLocalServiceClp
 	}
 
 	@Override
-	public com.bcnet.portlet.biobank.model.BiobankAttributeLists getBiobankAtrributeListsByBiobankDbId_AttributeListName_AttributeListValue(
+	public com.bcnet.portlet.biobank.model.BiobankAttributeLists getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue(
 		long biobankDbId, java.lang.String attributeListName,
 		java.lang.String attributeListValue)
 		throws com.liferay.portal.kernel.exception.SystemException {

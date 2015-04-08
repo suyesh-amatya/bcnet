@@ -6,4 +6,5 @@
 	<resource file="resource-actions/biobankorganizationlister.xml" />
 	<resource file="resource-actions/biobankattributelistsmaster.xml" />
 	<resource file="resource-actions/juristicperson.xml" />
+	<resource file="resource-actions/samplecollectionattributelistsmaster.xml" />
 </resource-action-mapping>

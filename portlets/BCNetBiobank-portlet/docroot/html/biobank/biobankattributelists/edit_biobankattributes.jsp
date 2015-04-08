@@ -25,16 +25,16 @@
 	String cancelURL = themeDisplay.getURLPortal() + "/web" + organization.getGroup().getFriendlyURL();
 	
 	/* Type of Repository Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> typeOfRepositoryList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Type of Repository");
+	List<BiobankAttributeListsMaster> typeOfRepositoryList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Type of Repository");
 	
 	List<BiobankAttributeLists> biobankTypeOfRepositoryList = BiobankAttributeListsLocalServiceUtil.
-								getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Type of Repository");
+								getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Type of Repository");
 			
 	List<KeyValuePair> leftTypeOfRepositoryList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightTypeOfRepositoryList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: typeOfRepositoryList){
+	for(BiobankAttributeListsMaster attributeMaster: typeOfRepositoryList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankTypeOfRepositoryList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -53,16 +53,16 @@
 	} 
 	
 	/* Data Management Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> dataManagementList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Data Management");
+	List<BiobankAttributeListsMaster> dataManagementList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Data Management");
 	
 	List<BiobankAttributeLists> biobankDataManagementList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Data Management");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Data Management");
 			
 	List<KeyValuePair> leftDataManagementList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightDataManagementList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: dataManagementList){
+	for(BiobankAttributeListsMaster attributeMaster: dataManagementList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankDataManagementList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -81,16 +81,16 @@
 	}	
 	
 	/* Database Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> databaseList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Database");
+	List<BiobankAttributeListsMaster> databaseList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Database");
 	
 	List<BiobankAttributeLists> biobankDatabaseList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Database");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Database");
 			
 	List<KeyValuePair> leftDatabaseList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightDatabaseList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: databaseList){
+	for(BiobankAttributeListsMaster attributeMaster: databaseList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankDatabaseList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -110,16 +110,16 @@
 	
 	
 	/* Storage Facility Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> storageFacilityList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Storage Facility");
+	List<BiobankAttributeListsMaster> storageFacilityList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Storage Facility");
 	
 	List<BiobankAttributeLists> biobankStorageFacilityList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Storage Facility");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Storage Facility");
 			
 	List<KeyValuePair> leftStorageFacilityList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightStorageFacilityList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: storageFacilityList){
+	for(BiobankAttributeListsMaster attributeMaster: storageFacilityList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankStorageFacilityList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -139,16 +139,16 @@
 	
 	
 	/* Monitoring Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> monitoringList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Monitoring");
+	List<BiobankAttributeListsMaster> monitoringList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Monitoring");
 	
 	List<BiobankAttributeLists> biobankMonitoringList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Monitoring");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Monitoring");
 			
 	List<KeyValuePair> leftMonitoringList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightMonitoringList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: monitoringList){
+	for(BiobankAttributeListsMaster attributeMaster: monitoringList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankMonitoringList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -168,16 +168,16 @@
 	
 	
 	/* Genetic Platform Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> geneticPlatformList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Genetic Platform");
+	List<BiobankAttributeListsMaster> geneticPlatformList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Genetic Platform");
 	
 	List<BiobankAttributeLists> biobankGeneticPlatformList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Genetic Platform");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Genetic Platform");
 			
 	List<KeyValuePair> leftGeneticPlatformList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightGeneticPlatformList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: geneticPlatformList){
+	for(BiobankAttributeListsMaster attributeMaster: geneticPlatformList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankGeneticPlatformList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -197,16 +197,16 @@
 	
 	
 	/* Proteomics Platform Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> proteomicsPlatformList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Proteomics Platform");
+	List<BiobankAttributeListsMaster> proteomicsPlatformList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Proteomics Platform");
 	
 	List<BiobankAttributeLists> biobankProteomicsPlatformList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Proteomics Platform");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Proteomics Platform");
 			
 	List<KeyValuePair> leftProteomicsPlatformList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightProteomicsPlatformList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: proteomicsPlatformList){
+	for(BiobankAttributeListsMaster attributeMaster: proteomicsPlatformList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankProteomicsPlatformList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -226,16 +226,16 @@
 	
 	
 	/* Metabolomics Platform Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> metabolomicsPlatformList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Metabolomics Platform");
+	List<BiobankAttributeListsMaster> metabolomicsPlatformList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Metabolomics Platform");
 	
 	List<BiobankAttributeLists> biobankMetabolomicsPlatformList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Metabolomics Platform");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Metabolomics Platform");
 			
 	List<KeyValuePair> leftMetabolomicsPlatformList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightMetabolomicsPlatformList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: metabolomicsPlatformList){
+	for(BiobankAttributeListsMaster attributeMaster: metabolomicsPlatformList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankMetabolomicsPlatformList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -255,16 +255,16 @@
 	
 	
 	/* Epigenomics Platform Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> epigenomicsPlatformList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Epigenomics Platform");
+	List<BiobankAttributeListsMaster> epigenomicsPlatformList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Epigenomics Platform");
 	
 	List<BiobankAttributeLists> biobankEpigenomicsPlatformList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Epigenomics Platform");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Epigenomics Platform");
 			
 	List<KeyValuePair> leftEpigenomicsPlatformList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightEpigenomicsPlatformList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: epigenomicsPlatformList){
+	for(BiobankAttributeListsMaster attributeMaster: epigenomicsPlatformList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankEpigenomicsPlatformList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -284,16 +284,16 @@
 	
 	
 	/* Bioinformatics Data Analysis Service Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> bioinformaticsDataAnalysisServiceList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Bioinformatics Data Analysis Service");
+	List<BiobankAttributeListsMaster> bioinformaticsDataAnalysisServiceList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Bioinformatics Data Analysis Service");
 	
 	List<BiobankAttributeLists> biobankBioinformaticsDataAnalysisServiceList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Bioinformatics Data Analysis Service");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Bioinformatics Data Analysis Service");
 			
 	List<KeyValuePair> leftBioinformaticsDataAnalysisServiceList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightBioinformaticsDataAnalysisServiceList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: bioinformaticsDataAnalysisServiceList){
+	for(BiobankAttributeListsMaster attributeMaster: bioinformaticsDataAnalysisServiceList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankBioinformaticsDataAnalysisServiceList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -313,16 +313,16 @@
 	
 	
 	/* Complementary Services Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> complementaryServicesList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Complementary Services");
+	List<BiobankAttributeListsMaster> complementaryServicesList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Complementary Services");
 	
 	List<BiobankAttributeLists> biobankComplementaryServicesList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Complementary Services");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Complementary Services");
 			
 	List<KeyValuePair> leftComplementaryServicesList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightComplementaryServicesList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: complementaryServicesList){
+	for(BiobankAttributeListsMaster attributeMaster: complementaryServicesList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankComplementaryServicesList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -342,16 +342,16 @@
 	
 	
 	/* Automation Services Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> automationServicesList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Automation Services");
+	List<BiobankAttributeListsMaster> automationServicesList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Automation Services");
 	
 	List<BiobankAttributeLists> biobankAutomationServicesList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Automation Services");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Automation Services");
 			
 	List<KeyValuePair> leftAutomationServicesList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightAutomationServicesList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: automationServicesList){
+	for(BiobankAttributeListsMaster attributeMaster: automationServicesList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankAutomationServicesList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){
@@ -371,16 +371,16 @@
 	
 	
 	/* Available Documents Lists for input-move-boxes */
-	List<BiobankAtrributeListsMaster> availableDocumentsList = BiobankAtrributeListsMasterLocalServiceUtil.
-										getBiobankAtrributeListsMasterByAttributeListName("Available Documents");
+	List<BiobankAttributeListsMaster> availableDocumentsList = BiobankAttributeListsMasterLocalServiceUtil.
+										getBiobankAttributeListsMasterByAttributeListName("Available Documents");
 	
 	List<BiobankAttributeLists> biobankAvailableDocumentsList = BiobankAttributeListsLocalServiceUtil.
-			getBiobankAtrributeListsByBiobankDbId_AttributeListName(organizationId, "Available Documents");
+			getBiobankAttributeListsByBiobankDbId_AttributeListName(organizationId, "Available Documents");
 			
 	List<KeyValuePair> leftAvailableDocumentsList = new ArrayList<KeyValuePair>();
 	List<KeyValuePair> rightAvailableDocumentsList = new ArrayList<KeyValuePair>();
 	
-	for(BiobankAtrributeListsMaster attributeMaster: availableDocumentsList){
+	for(BiobankAttributeListsMaster attributeMaster: availableDocumentsList){
 		boolean selected = false;
 		for(BiobankAttributeLists attribute: biobankAvailableDocumentsList){
 			if(attributeMaster.getAttributeListValue().equals(attribute.getAttributeListValue())){

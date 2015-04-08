@@ -7,16 +7,6 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.BiobankAtrributeListsMasterModelImpl">
-		<attributes>
-			<id name="biobankAttributeListsMasterId" />
-			<basic name="attributeListName" />
-			<basic name="attributeListValue" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsModelImpl">
 		<attributes>
 			<id name="biobankAttributeListsId" />
@@ -28,11 +18,11 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.BiobankContactModelImpl">
-		<id-class class="com.bcnet.portlet.biobank.service.persistence.BiobankContactPK" />
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsMasterModelImpl">
 		<attributes>
-			<id name="biobankDbId" />
-			<id name="contactId" />
+			<id name="biobankAttributeListsMasterId" />
+			<basic name="attributeListName" />
+			<basic name="attributeListValue" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -54,25 +44,6 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.ContactModelImpl">
-		<attributes>
-			<id name="contactId" />
-			<basic name="firstName" />
-			<basic name="lastName" />
-			<basic name="phone" />
-			<basic name="email" />
-			<basic name="address" />
-			<basic name="zip" />
-			<basic name="city" />
-			<basic name="countryCode" />
-			<basic name="juristicPersonId" />
-			<basic name="department" />
-			<basic name="orcId" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.JuristicPersonModelImpl">
 		<attributes>
 			<id name="juristicPersonId" />
@@ -84,28 +55,34 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankAtrributeListsMasterImpl" name="BiobankAtrributeListsMaster">
-		<table name="biobankattributelistsmaster" />
-		<attributes />
-	</entity>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterModelImpl">
+		<attributes>
+			<id name="samplecollectionAttributeListsMasterId" />
+			<basic name="attributeListName" />
+			<basic name="attributeListValue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl" name="BiobankAttributeLists">
 		<table name="biobankattributelists" />
 		<attributes />
 	</entity>
-	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankContactImpl" name="BiobankContact">
-		<table name="biobankcontact" />
+	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsMasterImpl" name="BiobankAttributeListsMaster">
+		<table name="biobankattributelistsmaster" />
 		<attributes />
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationImpl" name="BiobankGeneralInformation">
 		<table name="biobank" />
 		<attributes />
 	</entity>
-	<entity class="com.bcnet.portlet.biobank.model.impl.ContactImpl" name="Contact">
-		<table name="contact" />
-		<attributes />
-	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.JuristicPersonImpl" name="JuristicPerson">
 		<table name="juristicperson" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterImpl" name="SampleCollectionAttributeListsMaster">
+		<table name="samplecollectionattributelistsmaster" />
 		<attributes />
 	</entity>
 </entity-mappings>

@@ -3,7 +3,7 @@
 
 <display>
 	<category name="BCNet Biobank">
-		<portlet id="biobank-atrribute-lists-master"></portlet>
+		<portlet id="biobank-attribute-lists-master"></portlet>
 		<portlet id="juristic-person"></portlet>
 		<portlet id="contact"></portlet>
 		<portlet id="biobank"></portlet>
@@ -14,5 +14,8 @@
 		<portlet id="biobank-organization-creation"></portlet>
 		<portlet id="biobank-organization-lister"></portlet>
 		<portlet id="biobank-contact"></portlet>
+	</category>
+	<category name="BCNet Sample Collection">
+		<portlet id="sample-collection-attribute-lists-master"></portlet>
 	</category>
 </display>

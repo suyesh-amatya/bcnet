@@ -284,26 +284,26 @@ public class BiobankAttributeListsLocalServiceUtil {
 			attributeListValue);
 	}
 
-	public static java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAtrributeListsByBiobankDbId(
+	public static java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAttributeListsByBiobankDbId(
 		long biobankDbId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getBiobankAtrributeListsByBiobankDbId(biobankDbId);
+		return getService().getBiobankAttributeListsByBiobankDbId(biobankDbId);
 	}
 
-	public static java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAtrributeListsByBiobankDbId_AttributeListName(
+	public static java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAttributeListsByBiobankDbId_AttributeListName(
 		long biobankDbId, java.lang.String attributeListName)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getBiobankAtrributeListsByBiobankDbId_AttributeListName(biobankDbId,
+				   .getBiobankAttributeListsByBiobankDbId_AttributeListName(biobankDbId,
 			attributeListName);
 	}
 
-	public static com.bcnet.portlet.biobank.model.BiobankAttributeLists getBiobankAtrributeListsByBiobankDbId_AttributeListName_AttributeListValue(
+	public static com.bcnet.portlet.biobank.model.BiobankAttributeLists getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue(
 		long biobankDbId, java.lang.String attributeListName,
 		java.lang.String attributeListValue)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getBiobankAtrributeListsByBiobankDbId_AttributeListName_AttributeListValue(biobankDbId,
+				   .getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue(biobankDbId,
 			attributeListName, attributeListValue);
 	}
 

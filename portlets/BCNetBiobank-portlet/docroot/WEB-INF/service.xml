@@ -4,7 +4,7 @@
 	<author>suyama</author>
 	<namespace>bcnetbiobank</namespace>
 
-	<entity name="BiobankAtrributeListsMaster" local-service="true" remote-service="true" table="biobankattributelistsmaster">
+	<entity name="BiobankAttributeListsMaster" local-service="true" remote-service="true" table="biobankattributelistsmaster">
 		<column name="biobankAttributeListsMasterId" type="long" primary="true" />
 		<column name="attributeListName" type="String" />
 		<column name="attributeListValue" type="String" />
@@ -20,7 +20,7 @@
         <column name="address" type="String"></column>
    </entity>
    
-   <entity name="Contact" local-service="true" remote-service="true" table="contact">
+  <!--  <entity name="Contact" local-service="true" remote-service="true" table="contact">
     	<column name="contactId" type="long" primary="true" />
     	<column name="firstName" type="String" />
         <column name="lastName" type="String"></column>
@@ -33,7 +33,7 @@
         <column name="juristicPersonId" type="long"></column>
         <column name="department" type="String"></column>
         <column name="orcId" type="String"></column>
-    </entity>
+    </entity> -->
     
     <!-- <entity name="Country" local-service="true" remote-service="true" table="bcnetcountry">
         <column name="countryCode" type="String" primary="true"></column>
@@ -88,9 +88,14 @@
 		</finder>
 	</entity>
 	
-	<entity name="BiobankContact" local-service="true" remote-service="true" table="biobankcontact">
+	<!-- <entity name="BiobankContact" local-service="true" remote-service="true" table="biobankcontact">
 		<column name="biobankDbId" type="long" primary="true" />
 		<column name="contactId" type="long" primary="true" />
-	</entity>
+	</entity> -->
 	
+	<entity name="SampleCollectionAttributeListsMaster" local-service="true" remote-service="true" table="samplecollectionattributelistsmaster">
+		<column name="samplecollectionAttributeListsMasterId" type="long" primary="true" />
+		<column name="attributeListName" type="String" />
+		<column name="attributeListValue" type="String" />
+	</entity>
 </service-builder>

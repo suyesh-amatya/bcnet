@@ -54,7 +54,7 @@ public class BiobankAttributeListsPortlet extends MVCPortlet {
 		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
         String[] availabledm = ParamUtil.getParameterValues(request, "availabledm");
         String[] selecteddm = ParamUtil.getParameterValues(request, "selecteddm");
-        
+
         editBiobankAttributeLists(biobankDbId, availabledm, selecteddm);
          
 	}
@@ -200,7 +200,7 @@ public class BiobankAttributeListsPortlet extends MVCPortlet {
         	
         	BiobankAttributeLists biobankAttributeLists = null;
         	biobankAttributeLists = BiobankAttributeListsLocalServiceUtil.
-        			getBiobankAtrributeListsByBiobankDbId_AttributeListName_AttributeListValue(biobankDbId, attributeListName, attributeListValue);
+        			getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue(biobankDbId, attributeListName, attributeListValue);
         	
         	if(biobankAttributeLists != null){
         		BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeLists(biobankDbId, attributeListName, attributeListValue);
@@ -214,7 +214,7 @@ public class BiobankAttributeListsPortlet extends MVCPortlet {
         	
         	BiobankAttributeLists biobankAttributeLists = null;
         	biobankAttributeLists = BiobankAttributeListsLocalServiceUtil.
-        			getBiobankAtrributeListsByBiobankDbId_AttributeListName_AttributeListValue(biobankDbId, attributeListName, attributeListValue);
+        			getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue(biobankDbId, attributeListName, attributeListValue);
         	
         	if(biobankAttributeLists != null){
         		continue;

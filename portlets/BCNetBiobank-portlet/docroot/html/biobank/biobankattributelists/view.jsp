@@ -34,6 +34,7 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 
 <portlet:actionURL name="deleteBiobankAttributeLists" var="deleteBiobankAttributesURL">
 	<portlet:param name="biobankDbId" value="<%= String.valueOf(organizationId) %>" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:actionURL>
 
 <div class="list-group">
@@ -59,6 +60,7 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 			
 			
 	List<BiobankAttributeLists> biobankAttributeLists = biobankGeneralInformation.getBiobankAttributeLists();
+	System.out.println(biobankAttributeLists);
 	if(biobankAttributeLists.size() != 0){
 		String attributeListName = "";
 		String attributeListValue = "";
@@ -77,6 +79,9 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 				result += "<b>"+ attributeListName+ ":</b> ";
 				attributeListValue = biobankAttribute.getAttributeListValue();
 				result += attributeListValue; 
+				
+				counterPreviousValue = counter;
+				counter++;
 			 
 			}
 			else{
@@ -86,8 +91,9 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 				result += ", "+attributeListValue;
 			}
 		}
-		
+		result += "</span>";
 		out.println(result);
+		System.out.println(result);
 		
 	}
 	else{

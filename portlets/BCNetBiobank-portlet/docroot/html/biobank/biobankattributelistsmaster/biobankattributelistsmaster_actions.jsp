@@ -3,10 +3,10 @@
 <%
 	ResultRow row = (ResultRow) request
 			.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-	BiobankAtrributeListsMaster biobankAtrributeListsMaster = (BiobankAtrributeListsMaster) row.getObject();
+	BiobankAttributeListsMaster biobankAttributeListsMaster = (BiobankAttributeListsMaster) row.getObject();
 
-	String name = BiobankAtrributeListsMaster.class.getName();
-	long biobankAtrributeListsMasterId = biobankAtrributeListsMaster.getBiobankAttributeListsMasterId();
+	String name = BiobankAttributeListsMaster.class.getName();
+	long biobankAttributeListsMasterId = biobankAttributeListsMaster.getBiobankAttributeListsMasterId();
 
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 	
@@ -20,8 +20,8 @@
 
 <liferay-ui:icon-menu>
 	<portlet:renderURL var="editURL">
-		<portlet:param name="mvcPath" value="/html/biobankatrributelistsmaster/edit_biobankatrributelistsmaster.jsp" />
-		<portlet:param name="biobankAtrributeListsMasterId" value="<%= String.valueOf(biobankAtrributeListsMasterId) %>" />
+		<portlet:param name="mvcPath" value="/html/biobank/biobankattributelistsmaster/edit_biobankattributelistsmaster.jsp" />
+		<portlet:param name="biobankAttributeListsMasterId" value="<%= String.valueOf(biobankAttributeListsMasterId) %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 	<c:choose>		
@@ -30,8 +30,8 @@
 		</c:when>
 	</c:choose>
 	
-	<portlet:actionURL name="deleteBiobankAtrributeListsMaster" var="deleteURL">
-		<portlet:param name="biobankAtrributeListsMasterId" value="<%= String.valueOf(biobankAtrributeListsMasterId) %>" />
+	<portlet:actionURL name="deleteBiobankAttributeListsMaster" var="deleteURL">
+		<portlet:param name="biobankAttributeListsMasterId" value="<%= String.valueOf(biobankAttributeListsMasterId) %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:actionURL>
 	<c:choose>		

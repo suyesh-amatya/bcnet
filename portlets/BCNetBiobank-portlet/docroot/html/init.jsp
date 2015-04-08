@@ -58,18 +58,20 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="javax.portlet.PortletRequest"%>
 
-<%@ page import="com.bcnet.portlet.biobank.model.BiobankAtrributeListsMaster" %>
+<%@ page import="com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster" %>
 <%@ page import="com.bcnet.portlet.biobank.model.BiobankAttributeLists" %>
 <%@ page import="com.bcnet.portlet.biobank.model.JuristicPerson" %>
 <%@ page import="com.bcnet.portlet.biobank.model.Contact" %>
 <%@ page import="com.bcnet.portlet.biobank.model.Biobank" %>
 <%@ page import="com.bcnet.portlet.biobank.model.BiobankGeneralInformation" %>
-<%@ page import="com.bcnet.portlet.biobank.service.BiobankAtrributeListsMasterLocalServiceUtil"%>
+<%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster" %>
+<%@ page import="com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.JuristicPersonLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.ContactLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil"%>
+<%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil"%>
 
 
 

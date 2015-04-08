@@ -255,17 +255,17 @@ public interface BiobankAttributeListsLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAtrributeListsByBiobankDbId(
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAttributeListsByBiobankDbId(
 		long biobankDbId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAtrributeListsByBiobankDbId_AttributeListName(
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankAttributeLists> getBiobankAttributeListsByBiobankDbId_AttributeListName(
 		long biobankDbId, java.lang.String attributeListName)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.bcnet.portlet.biobank.model.BiobankAttributeLists getBiobankAtrributeListsByBiobankDbId_AttributeListName_AttributeListValue(
+	public com.bcnet.portlet.biobank.model.BiobankAttributeLists getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue(
 		long biobankDbId, java.lang.String attributeListName,
 		java.lang.String attributeListValue)
 		throws com.liferay.portal.kernel.exception.SystemException;

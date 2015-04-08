@@ -60,7 +60,7 @@ public class BiobankGeneralInformationImpl
 	public List<BiobankAttributeLists> getBiobankAttributeLists(){
 		
 		try {
-			return BiobankAttributeListsLocalServiceUtil.getBiobankAtrributeListsByBiobankDbId(this.getBiobankDbId());
+			return BiobankAttributeListsLocalServiceUtil.getBiobankAttributeListsByBiobankDbId(this.getBiobankDbId());
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
