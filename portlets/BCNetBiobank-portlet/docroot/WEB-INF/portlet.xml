@@ -410,6 +410,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Sample Collection Attribute Lists Master</title>
 			<short-title>

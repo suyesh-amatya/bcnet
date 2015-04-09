@@ -37,7 +37,17 @@ public class BiobankAttributeListsMasterPortlet extends MVCPortlet {
 
 		long biobankAttributeListsMasterId = ParamUtil.getLong(request, "biobankAttributeListsMasterId");
 		String attributeListName = ParamUtil.getString(request, "attributeListName");
-		String attributeListValue = ParamUtil.getString(request, "attributeListValue");
+		//String attributeListValue = ParamUtil.getString(request, "attributeListValue");
+		
+		/* 
+		 * ParamUtil.getParameterValues in BiobankAttributeListsPortlet has a bug for String[] type values with comma.
+		 * As a result a whole string block consisting of comma gets split into different string parts at comma.
+		 * For e.g. "Detection (Mass Spectometry, NMR)" becomes "Detection (Mass Spectometry" and  "NMR)"
+		 * So replacing all the commas with semicolon while inserting into the database to circumvent this bug. 
+		 * 
+		 * */
+		String attributeListValue = ParamUtil.getString(request, "attributeListValue").replaceAll(",", ";");
+		
 
 		BiobankAttributeListsMaster biobankAttributeListsMaster = null;
 

@@ -1,9 +1,11 @@
 package com.bcnet.portlet.biobank;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+
 import com.bcnet.portlet.biobank.model.BiobankAttributeLists;
 import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -54,7 +56,7 @@ public class BiobankAttributeListsPortlet extends MVCPortlet {
 		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
         String[] availabledm = ParamUtil.getParameterValues(request, "availabledm");
         String[] selecteddm = ParamUtil.getParameterValues(request, "selecteddm");
-
+        
         editBiobankAttributeLists(biobankDbId, availabledm, selecteddm);
          
 	}

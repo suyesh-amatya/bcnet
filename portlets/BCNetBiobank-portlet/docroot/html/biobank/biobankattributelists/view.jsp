@@ -60,7 +60,7 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 			
 			
 	List<BiobankAttributeLists> biobankAttributeLists = biobankGeneralInformation.getBiobankAttributeLists();
-	System.out.println(biobankAttributeLists);
+	
 	if(biobankAttributeLists.size() != 0){
 		String attributeListName = "";
 		String attributeListValue = "";
@@ -93,7 +93,6 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 		}
 		result += "</span>";
 		out.println(result);
-		System.out.println(result);
 		
 	}
 	else{
