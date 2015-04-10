@@ -55,9 +55,26 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleCollectionModelImpl">
+		<attributes>
+			<id name="sampleCollectionDbId" />
+			<basic name="sampleCollectionId" />
+			<basic name="acronym" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="consentTemplate" />
+			<basic name="reuseOfSamples" />
+			<basic name="materialTransferAgreement" />
+			<basic name="accreditation" />
+			<basic name="qualityControl" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterModelImpl">
 		<attributes>
-			<id name="samplecollectionAttributeListsMasterId" />
+			<id name="sampleCollectionAttributeListsMasterId" />
 			<basic name="attributeListName" />
 			<basic name="attributeListValue" />
 			<transient name="modelAttributes" />
@@ -79,6 +96,10 @@
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.JuristicPersonImpl" name="JuristicPerson">
 		<table name="juristicperson" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionImpl" name="SampleCollection">
+		<table name="samplecollection" />
 		<attributes />
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterImpl" name="SampleCollectionAttributeListsMaster">

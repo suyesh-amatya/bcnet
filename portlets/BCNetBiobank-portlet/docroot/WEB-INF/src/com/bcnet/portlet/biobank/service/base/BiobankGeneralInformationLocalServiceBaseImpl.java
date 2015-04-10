@@ -22,6 +22,7 @@ import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFi
 import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationPersistence;
 import com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsMasterPersistence;
+import com.bcnet.portlet.biobank.service.persistence.SampleCollectionPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -537,6 +538,63 @@ public abstract class BiobankGeneralInformationLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the sample collection local service.
+	 *
+	 * @return the sample collection local service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleCollectionLocalService getSampleCollectionLocalService() {
+		return sampleCollectionLocalService;
+	}
+
+	/**
+	 * Sets the sample collection local service.
+	 *
+	 * @param sampleCollectionLocalService the sample collection local service
+	 */
+	public void setSampleCollectionLocalService(
+		com.bcnet.portlet.biobank.service.SampleCollectionLocalService sampleCollectionLocalService) {
+		this.sampleCollectionLocalService = sampleCollectionLocalService;
+	}
+
+	/**
+	 * Returns the sample collection remote service.
+	 *
+	 * @return the sample collection remote service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleCollectionService getSampleCollectionService() {
+		return sampleCollectionService;
+	}
+
+	/**
+	 * Sets the sample collection remote service.
+	 *
+	 * @param sampleCollectionService the sample collection remote service
+	 */
+	public void setSampleCollectionService(
+		com.bcnet.portlet.biobank.service.SampleCollectionService sampleCollectionService) {
+		this.sampleCollectionService = sampleCollectionService;
+	}
+
+	/**
+	 * Returns the sample collection persistence.
+	 *
+	 * @return the sample collection persistence
+	 */
+	public SampleCollectionPersistence getSampleCollectionPersistence() {
+		return sampleCollectionPersistence;
+	}
+
+	/**
+	 * Sets the sample collection persistence.
+	 *
+	 * @param sampleCollectionPersistence the sample collection persistence
+	 */
+	public void setSampleCollectionPersistence(
+		SampleCollectionPersistence sampleCollectionPersistence) {
+		this.sampleCollectionPersistence = sampleCollectionPersistence;
+	}
+
+	/**
 	 * Returns the sample collection attribute lists master local service.
 	 *
 	 * @return the sample collection attribute lists master local service
@@ -795,6 +853,12 @@ public abstract class BiobankGeneralInformationLocalServiceBaseImpl
 	protected com.bcnet.portlet.biobank.service.JuristicPersonService juristicPersonService;
 	@BeanReference(type = JuristicPersonPersistence.class)
 	protected JuristicPersonPersistence juristicPersonPersistence;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionLocalService.class)
+	protected com.bcnet.portlet.biobank.service.SampleCollectionLocalService sampleCollectionLocalService;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionService.class)
+	protected com.bcnet.portlet.biobank.service.SampleCollectionService sampleCollectionService;
+	@BeanReference(type = SampleCollectionPersistence.class)
+	protected SampleCollectionPersistence sampleCollectionPersistence;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService.class)
 	protected com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService sampleCollectionAttributeListsMasterLocalService;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterService.class)

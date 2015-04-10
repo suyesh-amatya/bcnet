@@ -94,8 +94,22 @@
 	</entity> -->
 	
 	<entity name="SampleCollectionAttributeListsMaster" local-service="true" remote-service="true" table="samplecollectionattributelistsmaster">
-		<column name="samplecollectionAttributeListsMasterId" type="long" primary="true" />
+		<column name="sampleCollectionAttributeListsMasterId" type="long" primary="true" />
 		<column name="attributeListName" type="String" />
 		<column name="attributeListValue" type="String" />
+	</entity>
+	
+	
+	<entity name="SampleCollection" local-service="true" remote-service="true" table="samplecollection">
+		<column name="sampleCollectionDbId" type="long" primary="true" />
+		<column name="sampleCollectionId" type="String"/>
+		<column name="acronym" type="String" />
+		<column name="name" type="String" />
+		<column name="description" type="String"/>
+		<column name="consentTemplate" type="boolean"/>
+		<column name="reuseOfSamples" type="boolean"/>
+		<column name="materialTransferAgreement" type="boolean"/>
+		<column name="accreditation" type="boolean"/>
+		<column name="qualityControl" type="boolean"/>
 	</entity>
 </service-builder>

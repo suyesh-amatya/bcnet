@@ -61,8 +61,21 @@ create table juristicperson (
 	address VARCHAR(75) null
 );
 
+create table samplecollection (
+	sampleCollectionDbId LONG not null primary key,
+	sampleCollectionId VARCHAR(75) null,
+	acronym VARCHAR(75) null,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	consentTemplate BOOLEAN,
+	reuseOfSamples BOOLEAN,
+	materialTransferAgreement BOOLEAN,
+	accreditation BOOLEAN,
+	qualityControl BOOLEAN
+);
+
 create table samplecollectionattributelistsmaster (
-	samplecollectionAttributeListsMasterId LONG not null primary key,
+	sampleCollectionAttributeListsMasterId LONG not null primary key,
 	attributeListName VARCHAR(75) null,
 	attributeListValue VARCHAR(75) null
 );

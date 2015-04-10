@@ -74,7 +74,7 @@
 		}
 		if(!selected){
 			leftDataManagementList.add(new KeyValuePair(
-						attributeMaster.getAttributeListName()+"_"+attributeMaster.getAttributeListValue(), attributeMaster.getAttributeListValue()));
+					attributeMaster.getAttributeListName()+"_"+attributeMaster.getAttributeListValue(), attributeMaster.getAttributeListValue()));
 			
 		}
 		
@@ -470,7 +470,7 @@
 			rightBoxName="selectedpp"
 			rightTitle="Proteomics Platform Selected"
 			rightList="<%= rightProteomicsPlatformList%>"     
-		/>
+		/> 
 		
 		<liferay-ui:input-move-boxes
 			leftBoxName="availablemp"
@@ -524,7 +524,7 @@
 			rightBoxName="selectedad"
 			rightTitle="Available Documents Selected"
 			rightList="<%= rightAvailableDocumentsList%>"     
-		/>
+		/> 
 		
 	</aui:fieldset>
 <% 

@@ -29,8 +29,20 @@
 		<field name="url" type="String" />
 		<field name="address" type="String" />
 	</model>
+	<model name="com.bcnet.portlet.biobank.model.SampleCollection">
+		<field name="sampleCollectionDbId" type="long" />
+		<field name="sampleCollectionId" type="String" />
+		<field name="acronym" type="String" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="consentTemplate" type="boolean" />
+		<field name="reuseOfSamples" type="boolean" />
+		<field name="materialTransferAgreement" type="boolean" />
+		<field name="accreditation" type="boolean" />
+		<field name="qualityControl" type="boolean" />
+	</model>
 	<model name="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster">
-		<field name="samplecollectionAttributeListsMasterId" type="long" />
+		<field name="sampleCollectionAttributeListsMasterId" type="long" />
 		<field name="attributeListName" type="String" />
 		<field name="attributeListValue" type="String" />
 	</model>

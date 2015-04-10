@@ -54,10 +54,10 @@ public class BiobankAttributeListsPortlet extends MVCPortlet {
 			ActionResponse response) throws SystemException{
 		
 		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
-        String[] availabledm = ParamUtil.getParameterValues(request, "availabledm");
-        String[] selecteddm = ParamUtil.getParameterValues(request, "selecteddm");
+		String[] availabledm = ParamUtil.getParameterValues(request, "availabledm");
+		String[] selecteddm = ParamUtil.getParameterValues(request, "selecteddm");
         
-        editBiobankAttributeLists(biobankDbId, availabledm, selecteddm);
+		editBiobankAttributeLists(biobankDbId, availabledm, selecteddm);
          
 	}
 	
