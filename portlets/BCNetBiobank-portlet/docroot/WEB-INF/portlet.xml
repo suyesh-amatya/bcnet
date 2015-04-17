@@ -431,4 +431,88 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>
+			sample-collection-general-information
+		</portlet-name>
+		<display-name>
+			Sample Collection General Information
+		</display-name>
+		<portlet-class>
+			com.bcnet.portlet.samplecollection.SampleCollectionGeneralInformationPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/samplecollection/samplecollectiongeneralinformation/view.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Sample Collection General Information</title>
+			<short-title>
+				Sample Collection General Information
+			</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>sample-collection-creation</portlet-name>
+		<display-name>Sample Collection Creation</display-name>
+		<portlet-class>
+			com.bcnet.portlet.samplecollection.SampleCollectionCreationPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/samplecollection/samplecollectioncreation/create_samplecollection.jsp
+			</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/samplecollection/samplecollectioncreation/config.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<resource-bundle>content/Language</resource-bundle>
+		<portlet-info>
+			<title>Sample Collection Creation</title>
+			<short-title>Sample Collection Creation</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

@@ -17,5 +17,7 @@
 	</category>
 	<category name="BCNet Sample Collection">
 		<portlet id="sample-collection-attribute-lists-master"></portlet>
+		<portlet id="sample-collection-general-information"></portlet>
+		<portlet id="sample-collection-creation"></portlet>
 	</category>
 </display>

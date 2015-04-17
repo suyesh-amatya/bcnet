@@ -8,12 +8,12 @@
 
 	String redirect = ParamUtil.getString(request, "redirect");
 	
+	
 %>
 
 
 <portlet:renderURL var="viewBiobankGeneralInfomrationURL" />
 <portlet:actionURL name='createBiobankOrganization' var="createBiobankOrganizationURL" windowState="normal" />
-
 
 
 <aui:form action="<%= createBiobankOrganizationURL %>" method="POST" name="fm" onSubmit="event.preventDefault();">
@@ -148,6 +148,7 @@
 		</aui:column>
 	</aui:button-row>
 </aui:form>
+
 
 <%-- <aui:script use="aui-base,aui-form-validator">
 	AUI().use('aui-base',' aui-form-validator',function(A){
