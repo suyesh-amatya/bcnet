@@ -15,7 +15,7 @@
 			<li ${nav_item_attr_selected} class="${nav_item_css_class}" id="layout_${nav_item.getLayoutId()}" role="presentation">
 				<a aria-labelledby="layout_${nav_item.getLayoutId()}" ${nav_item_attr_has_popup} href="${nav_item.getURL()}" ${nav_item.getTarget()} role="menuitem"><span>${nav_item.icon()} ${nav_item.getName()}</span></a>
 
-				<#if nav_item.hasChildren()>
+				<#--<#if nav_item.hasChildren()>
 					<ul class="child-menu" role="menu">
 						<#list nav_item.getChildren() as nav_child>
 							<#assign nav_child_attr_selected = "" />
@@ -31,7 +31,7 @@
 							</li>
 						</#list>
 					</ul>
-				</#if>
+				</#if>-->
 			</li>
 		</#list>
 	</ul>
