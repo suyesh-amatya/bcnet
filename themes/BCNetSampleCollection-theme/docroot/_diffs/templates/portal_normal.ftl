@@ -115,26 +115,33 @@ ${theme.include(body_top_include)}
 	
 				<div id="main">
 					<nav id="breadcrumbs"><@liferay.breadcrumbs /></nav>
-						
-						<div id="submenu-position">
-							<#if has_navigation || is_signed_in>
-								<#include "${full_templates_path}/sampleCollectionSubNavigation.ftl" />
-								<div id="submenu-position-content">
-									<div id="content">
-										<#if selectable>
-											${theme.include(content_include)}
-										<#else>
-											${portletDisplay.recycle()}
-											
-											${portletDisplay.setTitle(the_title)}
-											
-											${theme.wrapPortlet("portlet.ftl", content_include)}
-										</#if>
+						<#if request.getParameter("scdbid")?has_content>
+							<#assign scdbid = request.getParameter("scdbid")/>
+							<div id="submenu-position">
+								<#if has_navigation || is_signed_in>
+									<#include "${full_templates_path}/sampleCollectionSubNavigation.ftl" />
+									<div id="submenu-position-content">
+										<div id="content">
+											<#if selectable>
+												${theme.include(content_include)}
+											<#else>
+												${portletDisplay.recycle()}
+												
+												${portletDisplay.setTitle(the_title)}
+												
+												${theme.wrapPortlet("portlet.ftl", content_include)}
+											</#if>
+										</div>
 									</div>
-								</div>
-							</#if>
-						</div>
-						
+								</#if>
+							</div>
+						<#else>
+							<meta http-equiv="refresh" content="0; url=${themeDisplay.getURLPortal()}/sample-collections/" />
+							<#--<script type="text/javascript">
+	                   			window.location = '${themeDisplay.getURLPortal()}/sample-collections/';
+	             			</script>
+							-->
+						</#if>
 						
 				</div>
 				
