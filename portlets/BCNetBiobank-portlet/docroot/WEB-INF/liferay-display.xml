@@ -19,5 +19,6 @@
 		<portlet id="sample-collection-attribute-lists-master"></portlet>
 		<portlet id="sample-collection-general-information"></portlet>
 		<portlet id="sample-collection-creation"></portlet>
+		<portlet id="sample-collection-breadcrumbs"></portlet>
 	</category>
 </display>
