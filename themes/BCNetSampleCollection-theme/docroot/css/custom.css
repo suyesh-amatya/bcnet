@@ -135,6 +135,10 @@ div .yui3-resize-handles-wrapper{
 div#topmenu-position .portlet-borderless-bar{
 	display:none;
 }
+
+div#samplecollectionbreadcrumbs .portlet-borderless-bar{
+	display:none;
+}
 /***Portlet End***/
 
 

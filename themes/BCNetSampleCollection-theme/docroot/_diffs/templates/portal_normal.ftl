@@ -114,34 +114,56 @@ ${theme.include(body_top_include)}
 				<div class="break"></div>
 	
 				<div id="main">
-					<nav id="breadcrumbs"><@liferay.breadcrumbs /></nav>
-						<#if request.getParameter("scdbid")?has_content>
-							<#assign scdbid = request.getParameter("scdbid")/>
-							<div id="submenu-position">
-								<#if has_navigation || is_signed_in>
-									<#include "${full_templates_path}/sampleCollectionSubNavigation.ftl" />
-									<div id="submenu-position-content">
-										<div id="content">
-											<#if selectable>
-												${theme.include(content_include)}
-											<#else>
-												${portletDisplay.recycle()}
-												
-												${portletDisplay.setTitle(the_title)}
-												
-												${theme.wrapPortlet("portlet.ftl", content_include)}
-											</#if>
-										</div>
+					<#-- Not using the default liferay breadcrumbs. Need to implement custom breadcrumbs because of the Site Pages strucuture. -->
+					<#--<nav id="breadcrumbs"><@liferay.breadcrumbs /></nav>-->
+					
+					<#if request.getParameter("scdbid")?has_content>
+						
+						<div id="samplecollectionbreadcrumbs">
+							<#-- Dynamically injecting sample collection breadcrumbs portlet-->
+								
+							<#assign locPortletId = "samplecollectionbreadcrumbs_WAR_BCNetBiobankportlet" />
+							 
+							<#assign PortletPreferencesFactoryUtil = staticUtil["com.liferay.portlet.PortletPreferencesFactoryUtil"] />
+							<#assign portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, locPortletId) />
+							   
+							<#if portletSetup.getValue("portletSetupShowBorders", "") != "false" >
+								<#assign temp = portletSetup.setValue("portletSetupShowBorders", "false") />
+								<#assign temp = portletSetup.store() />
+							</#if>
+							      
+							${theme.runtime(locPortletId, "", "")}
+						</div>
+					
+						<#assign scdbid = request.getParameter("scdbid")/>
+						
+						<div id="submenu-position">
+							<#if has_navigation || is_signed_in>
+								<#include "${full_templates_path}/sampleCollectionSubNavigation.ftl" />
+								<div id="submenu-position-content">
+									<div id="content">
+										<#if selectable>
+											${theme.include(content_include)}
+										<#else>
+											${portletDisplay.recycle()}
+											
+											${portletDisplay.setTitle(the_title)}
+											
+											${theme.wrapPortlet("portlet.ftl", content_include)}
+										</#if>
 									</div>
-								</#if>
-							</div>
-						<#else>
-							<meta http-equiv="refresh" content="0; url=${themeDisplay.getURLPortal()}/sample-collections/" />
-							<#--<script type="text/javascript">
-	                   			window.location = '${themeDisplay.getURLPortal()}/sample-collections/';
-	             			</script>
-							-->
-						</#if>
+								</div>
+							</#if>
+						</div>
+						
+					<#else>
+					
+						<meta http-equiv="refresh" content="0; url=${themeDisplay.getURLPortal()}/sample-collections/" />
+						<#--<script type="text/javascript">
+                   			window.location = '${themeDisplay.getURLPortal()}/sample-collections/';
+             			</script>-->
+						
+					</#if>
 						
 				</div>
 				

@@ -9,14 +9,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.LayoutSetPrototype;
-import com.liferay.portal.model.Organization;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -30,33 +23,16 @@ public class SampleCollectionCreationPortlet extends MVCPortlet {
 		long sampleCollectionDbId = sampleCollection.getSampleCollectionDbId();
 		
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		//response.setRenderParameter("mvcPath",
-	    //          "/html/samplecollection/samplecollectiongeneralinformation/view.jsp?scdbid="+sampleCollectionDbId);
-		response.sendRedirect(themeDisplay.getURLPortal()+"/sample-collections/"+"general-information?scdbid="+sampleCollectionDbId);
-		//sendRedirect(request, response);
-		//response.sendRedirect(themeDisplay.getURLPortal()+"/web"+themeDisplay.getSiteGroup().getFriendlyURL());
+		response.sendRedirect(themeDisplay.getURLPortal()+"/sample-collections/general-information?scdbid="+sampleCollectionDbId);
 	}
 	
 	
 	private SampleCollection _createSampleCollection(ActionRequest request) throws SystemException{
 		
-		/*long pageTemplate = ParamUtil.getLong(request, "pagetemplate");
-		boolean site = true;
-		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		Group siteGroup = themeDisplay.getSiteGroup();
-		if(site){
-			try {
-				createPages(siteGroup, pageTemplate);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}*/
-		
 		SampleCollection sampleCollection;
 		
 		String name = ParamUtil.getString(request, "name");
-		String sampleCollectionId = ParamUtil.getString(request, "SampleCollectionId");
+		String sampleCollectionId = ParamUtil.getString(request, "sampleCollectionId");
 		String acronym = ParamUtil.getString(request, "acronym");
 		String description = ParamUtil.getString(request, "description");
 		boolean consentTemplate = ParamUtil.getBoolean(request, "consentTemplate");
@@ -80,25 +56,5 @@ public class SampleCollectionCreationPortlet extends MVCPortlet {
 		SampleCollectionLocalServiceUtil.updateSampleCollection(sampleCollection);
 		
 		return sampleCollection;
-	}
-
-
-	private void createPages(Group siteGroup, long publicLayoutSetPrototypeId) throws Exception {
-		try {
-			boolean isPrivateLayout = false;			
-			long groupId = siteGroup.getGroupId();
-		    LayoutSetPrototype prototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(publicLayoutSetPrototypeId);
-		    boolean layoutSetPrototypeLinkEnabled = true;
-		    LayoutSetLocalServiceUtil.updateLayoutSetPrototypeLinkEnabled(groupId, isPrivateLayout,
-		            layoutSetPrototypeLinkEnabled, prototype.getUuid());
-		    
-		    LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, isPrivateLayout);
-		    SitesUtil.mergeLayoutSetPrototypeLayouts(siteGroup, layoutSet);
-		} catch (Exception e) {
-			System.out.println("------------------------------------------------------");
-			System.out.println("Exception in creating sample collection pages!");
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
 	}
 }

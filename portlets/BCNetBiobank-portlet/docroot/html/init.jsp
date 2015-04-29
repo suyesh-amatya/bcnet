@@ -65,6 +65,9 @@
 <%@ page import="com.bcnet.portlet.biobank.model.Biobank" %>
 <%@ page import="com.bcnet.portlet.biobank.model.BiobankGeneralInformation" %>
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster" %>
+<%@ page import="com.bcnet.portlet.biobank.model.SampleCollection" %>
+
+
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.JuristicPersonLocalServiceUtil"%>
@@ -72,6 +75,7 @@
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil"%>
+<%@page import="com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil"%>
 
 
 
