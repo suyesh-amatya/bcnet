@@ -114,27 +114,19 @@
 				<aui:input type="textarea" name="description" label="Description"/>
 			</aui:column>
 			
-			<% 
-				String backup = null;
-				
-			%>
 			<aui:column columnWidth="30">
 				<aui:select name="backup" label="Backup"  >
 					<aui:option>Select</aui:option>
-					<aui:option value="true" selected="<%=\"yes\".equals(backup) %>">yes</aui:option>
-					<aui:option value="false" selected="<%=\"no\".equals(backup) %>">no</aui:option>
+					<aui:option value="true">yes</aui:option>
+					<aui:option value="false">no</aui:option>
 				</aui:select>
 			</aui:column>
 			
-			<% 
-				String trainingCourses = null;
-				
-			%>
 			<aui:column columnWidth="30">
 				<aui:select name="trainingCourses" label="Training Courses"  >
 					<aui:option>Select</aui:option>
-					<aui:option value="true" selected="<%=\"yes\".equals(trainingCourses) %>">yes</aui:option>
-					<aui:option value="false" selected="<%=\"yes\".equals(trainingCourses) %>">no</aui:option>
+					<aui:option value="true">yes</aui:option>
+					<aui:option value="false">no</aui:option>
 				</aui:select>
 			</aui:column>
 		</aui:row>

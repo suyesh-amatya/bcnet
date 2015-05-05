@@ -129,32 +129,6 @@
 	</portlet>
 	<portlet>
 		<portlet-name>
-			sample-collection-attribute-lists-master
-		</portlet-name>
-		<icon>/icon.png</icon>
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>
-			/js/main.js
-		</footer-portlet-javascript>
-		<css-class-wrapper>
-			sample-collection-attribute-lists-master-portlet
-		</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>
-			sample-collection-attribute-lists-master
-		</portlet-name>
-		<icon>/icon.png</icon>
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>
-			/js/main.js
-		</footer-portlet-javascript>
-		<css-class-wrapper>
-			sample-collection-attribute-lists-master-portlet
-		</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>
 			sample-collection-general-information
 		</portlet-name>
 		<icon>/icon.png</icon>
@@ -169,7 +143,6 @@
 	<portlet>
 		<portlet-name>sample-collection-creation</portlet-name>
 		<icon>/icon.png</icon>
-		<configuration-action-class>com.bcnet.portlet.samplecollection.SampleCollectionCreationConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
@@ -187,6 +160,17 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>
 			sample-collection-breadcrumbs-portlet
+		</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>sample-collection-lister</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			sample-collection-lister-portlet
 		</css-class-wrapper>
 	</portlet>
 	<role-mapper>

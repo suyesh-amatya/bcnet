@@ -2,10 +2,7 @@
 
 <%
 	
-	long optionsPageTemplate_option = GetterUtil.getLong(portletPreferences.getValue("optionsPageTemplate", "0"));
-
 	String redirect = ParamUtil.getString(request, "redirect");
-	
 	
 %>
 
@@ -17,8 +14,6 @@
 <aui:form action="<%= createSampleCollectionURL %>" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-		<!-- hidden elements direct from config -->
-		<aui:input name="pagetemplate" type="hidden" value ="<%= optionsPageTemplate_option %>" />
 		
 		<aui:row>
 			<aui:column columnWidth="30">
@@ -39,10 +34,6 @@
 				<aui:input type="textarea" name="description" label='Description' rows="6"/>
 			</aui:column>
 			
-			<% 
-				String backup = null;
-				
-			%>
 			<aui:column columnWidth="60">
 				<label>Check the ones which apply:</label>
 				<aui:input name="consentTemplate" type="checkbox" label="Consent Template"></aui:input>

@@ -3,7 +3,11 @@
 	HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
 	httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
 	
-	long sampleCollectionDbId = Long.parseLong(httpRequest.getParameter("scdbid"));
+	long sampleCollectionDbId = 0;
+	
+	if (httpRequest.getParameter("scdbid") != null){
+		sampleCollectionDbId = Long.parseLong(httpRequest.getParameter("scdbid"));
+	}
 	
 	String currentURL = themeDisplay.getURLPortal()+themeDisplay.getURLCurrent();
 

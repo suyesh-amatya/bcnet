@@ -114,11 +114,11 @@ ${theme.include(body_top_include)}
 				<div class="break"></div>
 	
 				<div id="main">
-					<#-- Not using the default liferay breadcrumbs. Need to implement custom breadcrumbs because of the Site Pages strucuture. -->
+					<#-- Not using the default liferay breadcrumbs. Need to implement custom breadcrumbs because of the Site Pages structure. -->
 					<#--<nav id="breadcrumbs"><@liferay.breadcrumbs /></nav>-->
 					
-					<#if request.getParameter("scdbid")?has_content>
-						
+					<#--<#if request.getParameter("scdbid")?has_content || request.getParameter("_samplecollectiongeneralinformation_WAR_BCNetBiobankportlet_scdbid")?has_content>-->
+					<#if request.getParameter("scdbid")?has_content >
 						<div id="samplecollectionbreadcrumbs">
 							<#-- Dynamically injecting sample collection breadcrumbs portlet-->
 								
@@ -136,6 +136,10 @@ ${theme.include(body_top_include)}
 						</div>
 					
 						<#assign scdbid = request.getParameter("scdbid")/>
+						
+						<#--<#if request.getParameter("_samplecollectiongeneralinformation_WAR_BCNetBiobankportlet_scdbid")?has_content>
+						<#assign scdbid = request.getParameter("_samplecollectiongeneralinformation_WAR_BCNetBiobankportlet_scdbid")/>
+						</#if>-->
 						
 						<div id="submenu-position">
 							<#if has_navigation || is_signed_in>

@@ -50,7 +50,7 @@
 					childcount++;
 					//for(Layout childsetup : mainlayout.getChildren()) {
 					
-					if(childsetup.getNameCurrentValue().equals("Add Biobank")){
+					if(childsetup.getNameCurrentValue().equals("Add Biobank") || childsetup.getNameCurrentValue().equals("Add Sample Collection")){
 						if(UserLocalServiceUtil.hasRoleUser(administratorRole.getRoleId(), themeDisplay.getUserId()) 
 								|| UserLocalServiceUtil.hasRoleUser(curatorRole.getRoleId(), themeDisplay.getUserId())){
 							menuepoint += "<li id=\"layout_" + childsetup.getLayoutId() + "\"  " +childli + "  role=\"presentation\">";

@@ -484,17 +484,10 @@
 				/html/samplecollection/samplecollectioncreation/create_samplecollection.jsp
 			</value>
 		</init-param>
-		<init-param>
-			<name>config-template</name>
-			<value>
-				/html/samplecollection/samplecollectioncreation/config.jsp
-			</value>
-		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
-			<portlet-mode>config</portlet-mode>
 		</supports>
 		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
@@ -535,6 +528,41 @@
 		<portlet-info>
 			<title>Sample Collection Breadcrumbs</title>
 			<short-title>Sample Collection Breadcrumbs</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>sample-collection-lister</portlet-name>
+		<display-name>Sample Collection Lister</display-name>
+		<portlet-class>
+			com.bcnet.portlet.samplecollection.SampleCollectionListerPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>
+				/html/samplecollection/samplecollectionlister/view.jsp
+			</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>Sample Collection Lister</title>
+			<short-title>Sample Collection Lister</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

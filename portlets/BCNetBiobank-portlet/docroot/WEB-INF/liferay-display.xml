@@ -20,5 +20,6 @@
 		<portlet id="sample-collection-general-information"></portlet>
 		<portlet id="sample-collection-creation"></portlet>
 		<portlet id="sample-collection-breadcrumbs"></portlet>
+		<portlet id="sample-collection-lister"></portlet>
 	</category>
 </display>
