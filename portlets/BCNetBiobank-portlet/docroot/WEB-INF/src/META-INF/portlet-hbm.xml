@@ -7,6 +7,7 @@
 	<import class="com.bcnet.portlet.biobank.model.BiobankGeneralInformation" />
 	<import class="com.bcnet.portlet.biobank.model.JuristicPerson" />
 	<import class="com.bcnet.portlet.biobank.model.SampleCollection" />
+	<import class="com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists" />
 	<import class="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster" />
 	<class name="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl" table="biobankattributelists">
 		<cache usage="read-write" />
@@ -62,6 +63,15 @@
 		<property name="materialTransferAgreement" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="accreditation" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="qualityControl" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsImpl" table="samplecollectionattributelists">
+		<cache usage="read-write" />
+		<id name="sampleCollectionAttributeListsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="sampleCollectionDbId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="attributeListName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="attributeListValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterImpl" table="samplecollectionattributelistsmaster">
 		<cache usage="read-write" />

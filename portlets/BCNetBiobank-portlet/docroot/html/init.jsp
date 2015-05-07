@@ -66,6 +66,7 @@
 <%@ page import="com.bcnet.portlet.biobank.model.BiobankGeneralInformation" %>
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster" %>
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollection" %>
+<%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists" %>
 
 
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalServiceUtil"%>

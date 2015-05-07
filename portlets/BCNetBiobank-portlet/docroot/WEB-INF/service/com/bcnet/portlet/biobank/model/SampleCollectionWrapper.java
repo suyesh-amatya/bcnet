@@ -504,6 +504,11 @@ public class SampleCollectionWrapper implements SampleCollection,
 	}
 
 	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists> getSampleCollectionAttributeLists() {
+		return _sampleCollection.getSampleCollectionAttributeLists();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

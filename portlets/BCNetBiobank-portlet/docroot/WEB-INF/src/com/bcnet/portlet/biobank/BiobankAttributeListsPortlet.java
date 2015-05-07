@@ -1,8 +1,6 @@
 package com.bcnet.portlet.biobank;
 
 import java.io.IOException;
-import java.util.Arrays;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 

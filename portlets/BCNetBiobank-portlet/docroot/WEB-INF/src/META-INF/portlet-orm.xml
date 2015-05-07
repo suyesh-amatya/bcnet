@@ -72,6 +72,17 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsModelImpl">
+		<attributes>
+			<id name="sampleCollectionAttributeListsId" />
+			<basic name="sampleCollectionDbId" />
+			<basic name="attributeListName" />
+			<basic name="attributeListValue" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterModelImpl">
 		<attributes>
 			<id name="sampleCollectionAttributeListsMasterId" />
@@ -100,6 +111,10 @@
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionImpl" name="SampleCollection">
 		<table name="samplecollection" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsImpl" name="SampleCollectionAttributeLists">
+		<table name="samplecollectionattributelists" />
 		<attributes />
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterImpl" name="SampleCollectionAttributeListsMaster">

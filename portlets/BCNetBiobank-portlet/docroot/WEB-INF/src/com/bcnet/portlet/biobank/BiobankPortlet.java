@@ -1,13 +1,9 @@
 package com.bcnet.portlet.biobank;
 
-import java.io.IOException;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import com.bcnet.portlet.biobank.model.Biobank;
-import com.bcnet.portlet.biobank.model.BiobankAttributeLists;
-import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;

@@ -22,6 +22,7 @@ import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFi
 import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationPersistence;
 import com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsMasterPersistence;
+import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -360,6 +361,63 @@ public abstract class SampleCollectionAttributeListsMasterServiceBaseImpl
 	}
 
 	/**
+	 * Returns the sample collection attribute lists local service.
+	 *
+	 * @return the sample collection attribute lists local service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalService getSampleCollectionAttributeListsLocalService() {
+		return sampleCollectionAttributeListsLocalService;
+	}
+
+	/**
+	 * Sets the sample collection attribute lists local service.
+	 *
+	 * @param sampleCollectionAttributeListsLocalService the sample collection attribute lists local service
+	 */
+	public void setSampleCollectionAttributeListsLocalService(
+		com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalService sampleCollectionAttributeListsLocalService) {
+		this.sampleCollectionAttributeListsLocalService = sampleCollectionAttributeListsLocalService;
+	}
+
+	/**
+	 * Returns the sample collection attribute lists remote service.
+	 *
+	 * @return the sample collection attribute lists remote service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsService getSampleCollectionAttributeListsService() {
+		return sampleCollectionAttributeListsService;
+	}
+
+	/**
+	 * Sets the sample collection attribute lists remote service.
+	 *
+	 * @param sampleCollectionAttributeListsService the sample collection attribute lists remote service
+	 */
+	public void setSampleCollectionAttributeListsService(
+		com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsService sampleCollectionAttributeListsService) {
+		this.sampleCollectionAttributeListsService = sampleCollectionAttributeListsService;
+	}
+
+	/**
+	 * Returns the sample collection attribute lists persistence.
+	 *
+	 * @return the sample collection attribute lists persistence
+	 */
+	public SampleCollectionAttributeListsPersistence getSampleCollectionAttributeListsPersistence() {
+		return sampleCollectionAttributeListsPersistence;
+	}
+
+	/**
+	 * Sets the sample collection attribute lists persistence.
+	 *
+	 * @param sampleCollectionAttributeListsPersistence the sample collection attribute lists persistence
+	 */
+	public void setSampleCollectionAttributeListsPersistence(
+		SampleCollectionAttributeListsPersistence sampleCollectionAttributeListsPersistence) {
+		this.sampleCollectionAttributeListsPersistence = sampleCollectionAttributeListsPersistence;
+	}
+
+	/**
 	 * Returns the sample collection attribute lists master local service.
 	 *
 	 * @return the sample collection attribute lists master local service
@@ -619,6 +677,12 @@ public abstract class SampleCollectionAttributeListsMasterServiceBaseImpl
 	protected com.bcnet.portlet.biobank.service.SampleCollectionService sampleCollectionService;
 	@BeanReference(type = SampleCollectionPersistence.class)
 	protected SampleCollectionPersistence sampleCollectionPersistence;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalService.class)
+	protected com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalService sampleCollectionAttributeListsLocalService;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsService.class)
+	protected com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsService sampleCollectionAttributeListsService;
+	@BeanReference(type = SampleCollectionAttributeListsPersistence.class)
+	protected SampleCollectionAttributeListsPersistence sampleCollectionAttributeListsPersistence;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService.class)
 	protected com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService sampleCollectionAttributeListsMasterLocalService;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterService.class)

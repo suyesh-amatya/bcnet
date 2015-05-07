@@ -415,6 +415,26 @@ public class SampleCollectionClp extends BaseModelImpl<SampleCollection>
 		}
 	}
 
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists> getSampleCollectionAttributeLists() {
+		try {
+			String methodName = "getSampleCollectionAttributeLists";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists> returnObj =
+				(java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists>)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getSampleCollectionRemoteModel() {
 		return _sampleCollectionRemoteModel;
 	}

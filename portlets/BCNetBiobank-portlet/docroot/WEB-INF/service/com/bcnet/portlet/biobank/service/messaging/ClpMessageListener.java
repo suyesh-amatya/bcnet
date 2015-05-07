@@ -23,8 +23,10 @@ import com.bcnet.portlet.biobank.service.BiobankGeneralInformationServiceUtil;
 import com.bcnet.portlet.biobank.service.ClpSerializer;
 import com.bcnet.portlet.biobank.service.JuristicPersonLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.JuristicPersonServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionServiceUtil;
 
@@ -61,6 +63,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			SampleCollectionLocalServiceUtil.clearService();
 
 			SampleCollectionServiceUtil.clearService();
+			SampleCollectionAttributeListsLocalServiceUtil.clearService();
+
+			SampleCollectionAttributeListsServiceUtil.clearService();
 			SampleCollectionAttributeListsMasterLocalServiceUtil.clearService();
 
 			SampleCollectionAttributeListsMasterServiceUtil.clearService();

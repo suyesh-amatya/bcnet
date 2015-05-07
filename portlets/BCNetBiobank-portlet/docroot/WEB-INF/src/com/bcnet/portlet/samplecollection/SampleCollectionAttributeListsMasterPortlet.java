@@ -4,7 +4,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster;
-import com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;

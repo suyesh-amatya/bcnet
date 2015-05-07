@@ -41,6 +41,12 @@
 		<field name="accreditation" type="boolean" />
 		<field name="qualityControl" type="boolean" />
 	</model>
+	<model name="com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists">
+		<field name="sampleCollectionAttributeListsId" type="long" />
+		<field name="sampleCollectionDbId" type="long" />
+		<field name="attributeListName" type="String" />
+		<field name="attributeListValue" type="String" />
+	</model>
 	<model name="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster">
 		<field name="sampleCollectionAttributeListsMasterId" type="long" />
 		<field name="attributeListName" type="String" />

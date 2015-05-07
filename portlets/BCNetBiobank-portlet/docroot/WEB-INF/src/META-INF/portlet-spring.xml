@@ -17,6 +17,9 @@
 	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionLocalService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionLocalServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.persistence.SampleCollectionPersistence" class="com.bcnet.portlet.biobank.service.persistence.SampleCollectionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionAttributeListsLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionAttributeListsServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsPersistence" class="com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsPersistenceImpl" parent="basePersistence" />
 	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionAttributeListsMasterLocalServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionAttributeListsMasterServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsMasterPersistence" class="com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsMasterPersistenceImpl" parent="basePersistence" />

@@ -14,6 +14,12 @@
 
 package com.bcnet.portlet.biobank.model.impl;
 
+import java.util.List;
+
+import com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists;
+import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+
 /**
  * The extended model implementation for the SampleCollection service. Represents a row in the &quot;samplecollection&quot; database table, with each column mapped to a property of this class.
  *
@@ -30,5 +36,17 @@ public class SampleCollectionImpl extends SampleCollectionBaseImpl {
 	 * Never reference this class directly. All methods that expect a sample collection model instance should use the {@link com.bcnet.portlet.biobank.model.SampleCollection} interface instead.
 	 */
 	public SampleCollectionImpl() {
+	}
+	
+	
+	public List<SampleCollectionAttributeLists> getSampleCollectionAttributeLists(){
+		
+		try {
+			return SampleCollectionAttributeListsLocalServiceUtil.getSampleCollectionAttributeListsBySampleCollectionDbId(this.getSampleCollectionDbId());
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

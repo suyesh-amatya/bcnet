@@ -2,6 +2,7 @@
 
 
 <%
+	/* Accessing the url parameter "scdbid". */
 	HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
 	httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
 	long sampleCollectionDbId = Long.parseLong(httpRequest.getParameter("scdbid"));

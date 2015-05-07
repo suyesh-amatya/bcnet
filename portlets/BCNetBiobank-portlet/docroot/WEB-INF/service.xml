@@ -112,4 +112,28 @@
 		<column name="accreditation" type="boolean"/>
 		<column name="qualityControl" type="boolean"/>
 	</entity>
+	
+	
+	<entity name="SampleCollectionAttributeLists" local-service="true" remote-service="true" table="samplecollectionattributelists">
+		<column name="sampleCollectionAttributeListsId" type="long" primary="true" />
+		<column name="sampleCollectionDbId" type="long" />
+		<column name="attributeListName" type="String" />
+		<column name="attributeListValue" type="String" />
+		<order>
+			<order-column name="sampleCollectionDbId"></order-column>
+			<order-column name="attributeListName"></order-column>
+		</order>
+		<finder name="sampleCollectionDbId" return-type="Collection">
+			<finder-column name="sampleCollectionDbId" />
+		</finder>
+		<finder name="sampleCollectionDbId_attributeListName" return-type="Collection">
+			<finder-column name="sampleCollectionDbId" />
+			<finder-column name="attributeListName" />
+		</finder>
+		<finder name="sampleCollectionDbId_attributeListName_attributeListValue" return-type="SampleCollectionAttributeLists">
+			<finder-column name="sampleCollectionDbId" />
+			<finder-column name="attributeListName" />
+			<finder-column name="attributeListValue" />
+		</finder>
+	</entity>
 </service-builder>

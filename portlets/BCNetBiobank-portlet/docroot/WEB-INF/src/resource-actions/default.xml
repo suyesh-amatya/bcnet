@@ -8,4 +8,6 @@
 	<resource file="resource-actions/juristicperson.xml" />
 	<resource file="resource-actions/samplecollectionattributelistsmaster.xml" />
 	<resource file="resource-actions/samplecollectiongeneralinformation.xml" />
+	<resource file="resource-actions/samplecollectionlister.xml" />
+	<resource file="resource-actions/samplecollectionattributelists.xml" />
 </resource-action-mapping>

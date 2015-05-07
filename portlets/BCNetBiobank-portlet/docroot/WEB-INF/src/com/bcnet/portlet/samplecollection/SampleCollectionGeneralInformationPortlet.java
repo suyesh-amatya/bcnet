@@ -46,4 +46,12 @@ public class SampleCollectionGeneralInformationPortlet extends MVCPortlet {
 		
 		sendRedirect(request, response);
 	}
+	
+	public void deleteSampleCollection(ActionRequest request, ActionResponse response) throws PortalException, SystemException{
+		
+		long sampleCollectionDbId = ParamUtil.getLong(request, "scdbid");
+		
+		SampleCollectionLocalServiceUtil.deleteSampleCollection(sampleCollectionDbId);
+		
+	}
 }

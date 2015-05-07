@@ -74,6 +74,13 @@ create table samplecollection (
 	qualityControl BOOLEAN
 );
 
+create table samplecollectionattributelists (
+	sampleCollectionAttributeListsId LONG not null primary key,
+	sampleCollectionDbId LONG,
+	attributeListName VARCHAR(75) null,
+	attributeListValue VARCHAR(75) null
+);
+
 create table samplecollectionattributelistsmaster (
 	sampleCollectionAttributeListsMasterId LONG not null primary key,
 	attributeListName VARCHAR(75) null,

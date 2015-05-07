@@ -96,7 +96,7 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 		
 	}
 	else{
-		 out.println("<span class=\"list-group-item\">No Services and Facilities Available For This Biobank</span>");
+		 out.println("<span class=\"list-group-item\">No Services and Facilities Available For This Biobank.</span>");
 	}
 %>
 </div>

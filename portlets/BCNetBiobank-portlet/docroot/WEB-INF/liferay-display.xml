@@ -21,5 +21,6 @@
 		<portlet id="sample-collection-creation"></portlet>
 		<portlet id="sample-collection-breadcrumbs"></portlet>
 		<portlet id="sample-collection-lister"></portlet>
+		<portlet id="sample-collection-attribute-lists"></portlet>
 	</category>
 </display>
