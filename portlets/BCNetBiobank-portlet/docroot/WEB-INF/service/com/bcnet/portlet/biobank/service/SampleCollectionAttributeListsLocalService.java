@@ -254,6 +254,17 @@ public interface SampleCollectionAttributeListsLocalService
 		long sampleCollectionDbId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists> getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName(
+		long sampleCollectionDbId, java.lang.String attributeListName)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue(
+		long sampleCollectionDbId, java.lang.String attributeListName,
+		java.lang.String attributeListValue)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists deleteSampleCollectionAttributeListsBySampleCollectionDbId(
 		long sampleCollectionDbId);
 }

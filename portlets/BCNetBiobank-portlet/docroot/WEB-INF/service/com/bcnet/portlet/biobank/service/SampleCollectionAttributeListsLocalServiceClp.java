@@ -120,9 +120,19 @@ public class SampleCollectionAttributeListsLocalServiceClp
 
 		_methodParameterTypes19 = new String[] { "long" };
 
-		_methodName20 = "deleteSampleCollectionAttributeListsBySampleCollectionDbId";
+		_methodName20 = "getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName";
 
-		_methodParameterTypes20 = new String[] { "long" };
+		_methodParameterTypes20 = new String[] { "long", "java.lang.String" };
+
+		_methodName21 = "getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue";
+
+		_methodParameterTypes21 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName22 = "deleteSampleCollectionAttributeListsBySampleCollectionDbId";
+
+		_methodParameterTypes22 = new String[] { "long" };
 	}
 
 	@Override
@@ -719,13 +729,84 @@ public class SampleCollectionAttributeListsLocalServiceClp
 	}
 
 	@Override
-	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists deleteSampleCollectionAttributeListsBySampleCollectionDbId(
-		long sampleCollectionDbId) {
+	public java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists> getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName(
+		long sampleCollectionDbId, java.lang.String attributeListName)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
+					new Object[] {
+						sampleCollectionDbId,
+						
+					ClpSerializer.translateInput(attributeListName)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue(
+		long sampleCollectionDbId, java.lang.String attributeListName,
+		java.lang.String attributeListValue)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
+					new Object[] {
+						sampleCollectionDbId,
+						
+					ClpSerializer.translateInput(attributeListName),
+						
+					ClpSerializer.translateInput(attributeListValue)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists deleteSampleCollectionAttributeListsBySampleCollectionDbId(
+		long sampleCollectionDbId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
 					new Object[] { sampleCollectionDbId });
 		}
 		catch (Throwable t) {
@@ -784,4 +865,8 @@ public class SampleCollectionAttributeListsLocalServiceClp
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

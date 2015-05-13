@@ -298,6 +298,23 @@ public class SampleCollectionAttributeListsLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists> getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName(
+		long sampleCollectionDbId, java.lang.String attributeListName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _sampleCollectionAttributeListsLocalService.getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName(sampleCollectionDbId,
+			attributeListName);
+	}
+
+	@Override
+	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue(
+		long sampleCollectionDbId, java.lang.String attributeListName,
+		java.lang.String attributeListValue)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _sampleCollectionAttributeListsLocalService.getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue(sampleCollectionDbId,
+			attributeListName, attributeListValue);
+	}
+
+	@Override
 	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists deleteSampleCollectionAttributeListsBySampleCollectionDbId(
 		long sampleCollectionDbId) {
 		return _sampleCollectionAttributeListsLocalService.deleteSampleCollectionAttributeListsBySampleCollectionDbId(sampleCollectionDbId);

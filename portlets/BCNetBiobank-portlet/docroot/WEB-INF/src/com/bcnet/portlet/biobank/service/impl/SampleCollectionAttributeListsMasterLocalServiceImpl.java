@@ -14,7 +14,11 @@
 
 package com.bcnet.portlet.biobank.service.impl;
 
+import java.util.List;
+
+import com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster;
 import com.bcnet.portlet.biobank.service.base.SampleCollectionAttributeListsMasterLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the sample collection attribute lists master local service.
@@ -37,4 +41,10 @@ public class SampleCollectionAttributeListsMasterLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil} to access the sample collection attribute lists master local service.
 	 */
+	
+	public List<SampleCollectionAttributeListsMaster> getSampleCollectionAttributeListsMasterByAttributeListName(String attributeListName)
+			throws SystemException{
+		
+		return sampleCollectionAttributeListsMasterPersistence.findByattributeListName(attributeListName);
+	}
 }

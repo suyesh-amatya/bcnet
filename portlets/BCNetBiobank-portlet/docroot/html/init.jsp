@@ -77,6 +77,7 @@
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil"%>
 <%@page import="com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil"%>
+<%@page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil"%>
 
 
 

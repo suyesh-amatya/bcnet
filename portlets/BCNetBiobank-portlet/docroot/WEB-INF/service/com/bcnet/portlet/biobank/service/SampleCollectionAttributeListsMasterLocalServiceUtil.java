@@ -282,6 +282,13 @@ public class SampleCollectionAttributeListsMasterLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster> getSampleCollectionAttributeListsMasterByAttributeListName(
+		java.lang.String attributeListName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getSampleCollectionAttributeListsMasterByAttributeListName(attributeListName);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

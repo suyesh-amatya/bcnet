@@ -35,8 +35,13 @@ if (selContact != null) {
 
 List<JuristicPerson> juristicPersons = JuristicPersonLocalServiceUtil.getAllJuristicPersons();
 
-Long result= (Long)selUser.getExpandoBridge().getAttribute("juristicPersonId");
-long juristicPersonId = result.longValue();
+
+long juristicPersonId = 0;
+if(selUser != null){
+	Long result= (Long)selUser.getExpandoBridge().getAttribute("juristicPersonId");
+	juristicPersonId = result.longValue();
+}
+
 %>
 
 <liferay-ui:error-marker key="errorSection" value="details" />

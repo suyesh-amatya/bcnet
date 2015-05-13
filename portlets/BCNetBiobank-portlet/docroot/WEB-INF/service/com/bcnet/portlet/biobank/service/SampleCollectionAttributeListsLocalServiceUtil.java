@@ -289,6 +289,23 @@ public class SampleCollectionAttributeListsLocalServiceUtil {
 				   .getSampleCollectionAttributeListsBySampleCollectionDbId(sampleCollectionDbId);
 	}
 
+	public static java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists> getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName(
+		long sampleCollectionDbId, java.lang.String attributeListName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName(sampleCollectionDbId,
+			attributeListName);
+	}
+
+	public static com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue(
+		long sampleCollectionDbId, java.lang.String attributeListName,
+		java.lang.String attributeListValue)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue(sampleCollectionDbId,
+			attributeListName, attributeListValue);
+	}
+
 	public static com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists deleteSampleCollectionAttributeListsBySampleCollectionDbId(
 		long sampleCollectionDbId) {
 		return getService()

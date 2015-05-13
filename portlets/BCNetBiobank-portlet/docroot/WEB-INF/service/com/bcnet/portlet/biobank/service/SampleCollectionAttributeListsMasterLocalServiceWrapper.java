@@ -290,6 +290,13 @@ public class SampleCollectionAttributeListsMasterLocalServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster> getSampleCollectionAttributeListsMasterByAttributeListName(
+		java.lang.String attributeListName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _sampleCollectionAttributeListsMasterLocalService.getSampleCollectionAttributeListsMasterByAttributeListName(attributeListName);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

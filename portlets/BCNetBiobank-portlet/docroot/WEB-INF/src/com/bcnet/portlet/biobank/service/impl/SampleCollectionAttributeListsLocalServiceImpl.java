@@ -16,6 +16,7 @@ package com.bcnet.portlet.biobank.service.impl;
 
 import java.util.List;
 
+import com.bcnet.portlet.biobank.NoSuchSampleCollectionAttributeListsException;
 import com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists;
 import com.bcnet.portlet.biobank.service.base.SampleCollectionAttributeListsLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -47,6 +48,29 @@ public class SampleCollectionAttributeListsLocalServiceImpl
 			throws SystemException{
 		
 			return sampleCollectionAttributeListsPersistence.findBysampleCollectionDbId(sampleCollectionDbId);
+	}
+	
+	
+	public List<SampleCollectionAttributeLists> getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName(long sampleCollectionDbId, String attributeListName)
+		throws SystemException{
+	
+		return sampleCollectionAttributeListsPersistence.findBysampleCollectionDbId_attributeListName(sampleCollectionDbId, attributeListName);
+	}
+	
+	
+	public SampleCollectionAttributeLists getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue
+		(long sampleCollectionDbId, String attributeListName, String attributeListValue) throws SystemException{
+
+		try {
+			return sampleCollectionAttributeListsPersistence.
+					findBysampleCollectionDbId_attributeListName_attributeListValue(sampleCollectionDbId, attributeListName, attributeListValue);
+		} catch (NoSuchSampleCollectionAttributeListsException e) {
+			// TODO Auto-generated catch block
+			System.out.println("No such SampleCollectionAttributeLists exists!");
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	

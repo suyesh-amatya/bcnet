@@ -80,7 +80,11 @@ public class SampleCollectionAttributeListsMasterModelImpl extends BaseModelImpl
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster"),
+			true);
+	public static long ATTRIBUTELISTNAME_COLUMN_BITMASK = 1L;
+	public static long SAMPLECOLLECTIONATTRIBUTELISTSMASTERID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -219,7 +223,17 @@ public class SampleCollectionAttributeListsMasterModelImpl extends BaseModelImpl
 
 	@Override
 	public void setAttributeListName(String attributeListName) {
+		_columnBitmask |= ATTRIBUTELISTNAME_COLUMN_BITMASK;
+
+		if (_originalAttributeListName == null) {
+			_originalAttributeListName = _attributeListName;
+		}
+
 		_attributeListName = attributeListName;
+	}
+
+	public String getOriginalAttributeListName() {
+		return GetterUtil.getString(_originalAttributeListName);
 	}
 
 	@JSON
@@ -236,6 +250,10 @@ public class SampleCollectionAttributeListsMasterModelImpl extends BaseModelImpl
 	@Override
 	public void setAttributeListValue(String attributeListValue) {
 		_attributeListValue = attributeListValue;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -322,6 +340,12 @@ public class SampleCollectionAttributeListsMasterModelImpl extends BaseModelImpl
 
 	@Override
 	public void resetOriginalValues() {
+		SampleCollectionAttributeListsMasterModelImpl sampleCollectionAttributeListsMasterModelImpl =
+			this;
+
+		sampleCollectionAttributeListsMasterModelImpl._originalAttributeListName = sampleCollectionAttributeListsMasterModelImpl._attributeListName;
+
+		sampleCollectionAttributeListsMasterModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -398,6 +422,8 @@ public class SampleCollectionAttributeListsMasterModelImpl extends BaseModelImpl
 		};
 	private long _sampleCollectionAttributeListsMasterId;
 	private String _attributeListName;
+	private String _originalAttributeListName;
 	private String _attributeListValue;
+	private long _columnBitmask;
 	private SampleCollectionAttributeListsMaster _escapedModel;
 }

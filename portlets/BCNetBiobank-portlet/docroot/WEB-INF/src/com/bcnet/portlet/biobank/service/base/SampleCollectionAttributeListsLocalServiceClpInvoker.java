@@ -118,9 +118,19 @@ public class SampleCollectionAttributeListsLocalServiceClpInvoker {
 
 		_methodParameterTypes78 = new String[] { "long" };
 
-		_methodName79 = "deleteSampleCollectionAttributeListsBySampleCollectionDbId";
+		_methodName79 = "getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName";
 
-		_methodParameterTypes79 = new String[] { "long" };
+		_methodParameterTypes79 = new String[] { "long", "java.lang.String" };
+
+		_methodName80 = "getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue";
+
+		_methodParameterTypes80 = new String[] {
+				"long", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName81 = "deleteSampleCollectionAttributeListsBySampleCollectionDbId";
+
+		_methodParameterTypes81 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -231,6 +241,18 @@ public class SampleCollectionAttributeListsLocalServiceClpInvoker {
 
 		if (_methodName79.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			return SampleCollectionAttributeListsLocalServiceUtil.getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+			return SampleCollectionAttributeListsLocalServiceUtil.getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+		}
+
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
 			return SampleCollectionAttributeListsLocalServiceUtil.deleteSampleCollectionAttributeListsBySampleCollectionDbId(((Long)arguments[0]).longValue());
 		}
 
@@ -277,4 +299,8 @@ public class SampleCollectionAttributeListsLocalServiceClpInvoker {
 	private String[] _methodParameterTypes78;
 	private String _methodName79;
 	private String[] _methodParameterTypes79;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
 }

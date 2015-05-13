@@ -6,6 +6,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import com.bcnet.portlet.biobank.model.SampleCollection;
+import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -52,6 +53,7 @@ public class SampleCollectionGeneralInformationPortlet extends MVCPortlet {
 		long sampleCollectionDbId = ParamUtil.getLong(request, "scdbid");
 		
 		SampleCollectionLocalServiceUtil.deleteSampleCollection(sampleCollectionDbId);
+		SampleCollectionAttributeListsLocalServiceUtil.deleteSampleCollectionAttributeListsBySampleCollectionDbId(sampleCollectionDbId);
 		
 	}
 }

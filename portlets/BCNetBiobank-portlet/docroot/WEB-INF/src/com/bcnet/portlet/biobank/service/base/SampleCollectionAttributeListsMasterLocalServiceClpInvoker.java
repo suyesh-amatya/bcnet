@@ -113,6 +113,10 @@ public class SampleCollectionAttributeListsMasterLocalServiceClpInvoker {
 		_methodName73 = "setBeanIdentifier";
 
 		_methodParameterTypes73 = new String[] { "java.lang.String" };
+
+		_methodName78 = "getSampleCollectionAttributeListsMasterByAttributeListName";
+
+		_methodParameterTypes78 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +220,11 @@ public class SampleCollectionAttributeListsMasterLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+			return SampleCollectionAttributeListsMasterLocalServiceUtil.getSampleCollectionAttributeListsMasterByAttributeListName((java.lang.String)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +264,6 @@ public class SampleCollectionAttributeListsMasterLocalServiceClpInvoker {
 	private String[] _methodParameterTypes72;
 	private String _methodName73;
 	private String[] _methodParameterTypes73;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
 }

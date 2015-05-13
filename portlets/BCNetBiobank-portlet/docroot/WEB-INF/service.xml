@@ -97,6 +97,9 @@
 		<column name="sampleCollectionAttributeListsMasterId" type="long" primary="true" />
 		<column name="attributeListName" type="String" />
 		<column name="attributeListValue" type="String" />
+		<finder name="attributeListName" return-type="Collection">
+			<finder-column name="attributeListName" />
+		</finder>
 	</entity>
 	
 	
