@@ -10,7 +10,7 @@ String actionId_delete_biobank_attribute_lists = "DELETE_BIOBANK_ATTRIBUTE_LISTS
 %>
 
 
-<%
+<%  
 	Organization organization = null;
 	long organizationId = 0;
 	BiobankGeneralInformation biobankGeneralInformation = null;

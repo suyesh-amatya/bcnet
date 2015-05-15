@@ -184,6 +184,17 @@
 			sample-collection-attribute-lists-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>sample-collection-contact</portlet-name>
+		<icon>/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			sample-collection-contact-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

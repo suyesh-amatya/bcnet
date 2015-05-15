@@ -86,3 +86,12 @@ create table samplecollectionattributelistsmaster (
 	attributeListName VARCHAR(75) null,
 	attributeListValue VARCHAR(75) null
 );
+
+create table samplecollectioncontact (
+	sampleCollectionDbId LONG not null,
+	userId LONG not null,
+	mainContact BOOLEAN,
+	sampleCollectionOwner BOOLEAN,
+	sampleCollectionEditor BOOLEAN,
+	primary key (sampleCollectionDbId, userId)
+);

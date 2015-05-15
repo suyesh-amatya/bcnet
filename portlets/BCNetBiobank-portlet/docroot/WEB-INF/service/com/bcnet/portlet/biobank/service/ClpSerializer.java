@@ -21,6 +21,7 @@ import com.bcnet.portlet.biobank.model.JuristicPersonClp;
 import com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsClp;
 import com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMasterClp;
 import com.bcnet.portlet.biobank.model.SampleCollectionClp;
+import com.bcnet.portlet.biobank.model.SampleCollectionContactClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -140,6 +141,10 @@ public class ClpSerializer {
 			return translateInputSampleCollectionAttributeListsMaster(oldModel);
 		}
 
+		if (oldModelClassName.equals(SampleCollectionContactClp.class.getName())) {
+			return translateInputSampleCollectionContact(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -230,6 +235,17 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputSampleCollectionContact(
+		BaseModel<?> oldModel) {
+		SampleCollectionContactClp oldClpModel = (SampleCollectionContactClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getSampleCollectionContactRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInput(Object obj) {
 		if (obj instanceof BaseModel<?>) {
 			return translateInput((BaseModel<?>)obj);
@@ -280,6 +296,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterImpl")) {
 			return translateOutputSampleCollectionAttributeListsMaster(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"com.bcnet.portlet.biobank.model.impl.SampleCollectionContactImpl")) {
+			return translateOutputSampleCollectionContact(oldModel);
 		}
 
 		return oldModel;
@@ -397,6 +418,11 @@ public class ClpSerializer {
 			return new com.bcnet.portlet.biobank.NoSuchSampleCollectionAttributeListsMasterException();
 		}
 
+		if (className.equals(
+					"com.bcnet.portlet.biobank.NoSuchSampleCollectionContactException")) {
+			return new com.bcnet.portlet.biobank.NoSuchSampleCollectionContactException();
+		}
+
 		return throwable;
 	}
 
@@ -471,6 +497,17 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setSampleCollectionAttributeListsMasterRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputSampleCollectionContact(
+		BaseModel<?> oldModel) {
+		SampleCollectionContactClp newModel = new SampleCollectionContactClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setSampleCollectionContactRemoteModel(oldModel);
 
 		return newModel;
 	}

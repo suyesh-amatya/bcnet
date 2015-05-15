@@ -52,4 +52,11 @@
 		<field name="attributeListName" type="String" />
 		<field name="attributeListValue" type="String" />
 	</model>
+	<model name="com.bcnet.portlet.biobank.model.SampleCollectionContact">
+		<field name="sampleCollectionDbId" type="long" />
+		<field name="userId" type="long" />
+		<field name="mainContact" type="boolean" />
+		<field name="sampleCollectionOwner" type="boolean" />
+		<field name="sampleCollectionEditor" type="boolean" />
+	</model>
 </model-hints>

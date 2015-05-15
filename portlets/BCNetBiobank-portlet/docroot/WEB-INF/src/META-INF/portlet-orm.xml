@@ -93,6 +93,20 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleCollectionContactModelImpl">
+		<id-class class="com.bcnet.portlet.biobank.service.persistence.SampleCollectionContactPK" />
+		<attributes>
+			<id name="sampleCollectionDbId" />
+			<id name="userId" />
+			<basic name="mainContact" />
+			<basic name="sampleCollectionOwner" />
+			<basic name="sampleCollectionEditor" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl" name="BiobankAttributeLists">
 		<table name="biobankattributelists" />
 		<attributes />
@@ -119,6 +133,10 @@
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionAttributeListsMasterImpl" name="SampleCollectionAttributeListsMaster">
 		<table name="samplecollectionattributelistsmaster" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionContactImpl" name="SampleCollectionContact">
+		<table name="samplecollectioncontact" />
 		<attributes />
 	</entity>
 </entity-mappings>

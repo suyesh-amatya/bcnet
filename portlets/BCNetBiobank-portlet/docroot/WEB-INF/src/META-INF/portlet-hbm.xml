@@ -9,6 +9,7 @@
 	<import class="com.bcnet.portlet.biobank.model.SampleCollection" />
 	<import class="com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists" />
 	<import class="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster" />
+	<import class="com.bcnet.portlet.biobank.model.SampleCollectionContact" />
 	<class name="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl" table="biobankattributelists">
 		<cache usage="read-write" />
 		<id name="biobankAttributeListsId" type="long">
@@ -80,5 +81,15 @@
 		</id>
 		<property name="attributeListName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="attributeListValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.SampleCollectionContactImpl" table="samplecollectioncontact">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.bcnet.portlet.biobank.service.persistence.SampleCollectionContactPK">
+			<key-property name="sampleCollectionDbId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+		<property name="mainContact" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="sampleCollectionOwner" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="sampleCollectionEditor" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 </hibernate-mapping>

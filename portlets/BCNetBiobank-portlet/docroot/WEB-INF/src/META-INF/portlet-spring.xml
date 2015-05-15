@@ -23,4 +23,7 @@
 	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionAttributeListsMasterLocalServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionAttributeListsMasterServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsMasterPersistence" class="com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsMasterPersistenceImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionContactLocalService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionContactLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionContactService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionContactServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.SampleCollectionContactPersistence" class="com.bcnet.portlet.biobank.service.persistence.SampleCollectionContactPersistenceImpl" parent="basePersistence" />
 </beans>

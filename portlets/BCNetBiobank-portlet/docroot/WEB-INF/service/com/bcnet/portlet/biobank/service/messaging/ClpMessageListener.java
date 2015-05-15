@@ -27,6 +27,8 @@ import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServ
 import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleCollectionContactServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionServiceUtil;
 
@@ -69,6 +71,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			SampleCollectionAttributeListsMasterLocalServiceUtil.clearService();
 
 			SampleCollectionAttributeListsMasterServiceUtil.clearService();
+			SampleCollectionContactLocalServiceUtil.clearService();
+
+			SampleCollectionContactServiceUtil.clearService();
 		}
 	}
 }

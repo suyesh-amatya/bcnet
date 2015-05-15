@@ -67,6 +67,7 @@
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster" %>
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollection" %>
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists" %>
+<%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionContact" %>
 
 
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalServiceUtil"%>
@@ -78,6 +79,7 @@
 <%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil"%>
 <%@page import="com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil"%>
 <%@page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil"%>
+<%@page import="com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil"%>
 
 
 

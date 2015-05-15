@@ -106,31 +106,31 @@ public class SampleCollectionAttributeListsLocalServiceClpInvoker {
 				"com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists"
 			};
 
-		_methodName72 = "getBeanIdentifier";
+		_methodName78 = "getBeanIdentifier";
 
-		_methodParameterTypes72 = new String[] {  };
+		_methodParameterTypes78 = new String[] {  };
 
-		_methodName73 = "setBeanIdentifier";
+		_methodName79 = "setBeanIdentifier";
 
-		_methodParameterTypes73 = new String[] { "java.lang.String" };
+		_methodParameterTypes79 = new String[] { "java.lang.String" };
 
-		_methodName78 = "getSampleCollectionAttributeListsBySampleCollectionDbId";
+		_methodName84 = "getSampleCollectionAttributeListsBySampleCollectionDbId";
 
-		_methodParameterTypes78 = new String[] { "long" };
+		_methodParameterTypes84 = new String[] { "long" };
 
-		_methodName79 = "getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName";
+		_methodName85 = "getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName";
 
-		_methodParameterTypes79 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes85 = new String[] { "long", "java.lang.String" };
 
-		_methodName80 = "getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue";
+		_methodName86 = "getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue";
 
-		_methodParameterTypes80 = new String[] {
+		_methodParameterTypes86 = new String[] {
 				"long", "java.lang.String", "java.lang.String"
 			};
 
-		_methodName81 = "deleteSampleCollectionAttributeListsBySampleCollectionDbId";
+		_methodName87 = "deleteSampleCollectionAttributeListsBySampleCollectionDbId";
 
-		_methodParameterTypes81 = new String[] { "long" };
+		_methodParameterTypes87 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -222,37 +222,37 @@ public class SampleCollectionAttributeListsLocalServiceClpInvoker {
 			return SampleCollectionAttributeListsLocalServiceUtil.updateSampleCollectionAttributeLists((com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists)arguments[0]);
 		}
 
-		if (_methodName72.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			return SampleCollectionAttributeListsLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName73.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			SampleCollectionAttributeListsLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName84.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
 			return SampleCollectionAttributeListsLocalServiceUtil.getSampleCollectionAttributeListsBySampleCollectionDbId(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName79.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+		if (_methodName85.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
 			return SampleCollectionAttributeListsLocalServiceUtil.getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName80.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+		if (_methodName86.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
 			return SampleCollectionAttributeListsLocalServiceUtil.getSampleCollectionAttributeListsBySampleCollectionDbId_AttributeListName_AttributeListValue(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 		}
 
-		if (_methodName81.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+		if (_methodName87.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
 			return SampleCollectionAttributeListsLocalServiceUtil.deleteSampleCollectionAttributeListsBySampleCollectionDbId(((Long)arguments[0]).longValue());
 		}
 
@@ -291,16 +291,16 @@ public class SampleCollectionAttributeListsLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName72;
-	private String[] _methodParameterTypes72;
-	private String _methodName73;
-	private String[] _methodParameterTypes73;
 	private String _methodName78;
 	private String[] _methodParameterTypes78;
 	private String _methodName79;
 	private String[] _methodParameterTypes79;
-	private String _methodName80;
-	private String[] _methodParameterTypes80;
-	private String _methodName81;
-	private String[] _methodParameterTypes81;
+	private String _methodName84;
+	private String[] _methodParameterTypes84;
+	private String _methodName85;
+	private String[] _methodParameterTypes85;
+	private String _methodName86;
+	private String[] _methodParameterTypes86;
+	private String _methodName87;
+	private String[] _methodParameterTypes87;
 }

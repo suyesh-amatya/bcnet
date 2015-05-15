@@ -139,4 +139,13 @@
 			<finder-column name="attributeListValue" />
 		</finder>
 	</entity>
+	
+	
+	<entity name="SampleCollectionContact" local-service="true" remote-service="true" table="samplecollectioncontact">
+		<column name="sampleCollectionDbId" type="long" primary="true" />
+		<column name="userId" type="long" primary="true" />
+		<column name="mainContact" type="boolean"/>
+		<column name="sampleCollectionOwner" type="boolean"/>
+		<column name="sampleCollectionEditor" type="boolean"/>
+	</entity>
 </service-builder>

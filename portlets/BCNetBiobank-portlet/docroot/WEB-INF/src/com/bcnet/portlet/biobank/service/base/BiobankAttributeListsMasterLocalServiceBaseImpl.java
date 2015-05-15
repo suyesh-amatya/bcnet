@@ -23,6 +23,7 @@ import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationPe
 import com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsMasterPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsPersistence;
+import com.bcnet.portlet.biobank.service.persistence.SampleCollectionContactPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -712,6 +713,63 @@ public abstract class BiobankAttributeListsMasterLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the sample collection contact local service.
+	 *
+	 * @return the sample collection contact local service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleCollectionContactLocalService getSampleCollectionContactLocalService() {
+		return sampleCollectionContactLocalService;
+	}
+
+	/**
+	 * Sets the sample collection contact local service.
+	 *
+	 * @param sampleCollectionContactLocalService the sample collection contact local service
+	 */
+	public void setSampleCollectionContactLocalService(
+		com.bcnet.portlet.biobank.service.SampleCollectionContactLocalService sampleCollectionContactLocalService) {
+		this.sampleCollectionContactLocalService = sampleCollectionContactLocalService;
+	}
+
+	/**
+	 * Returns the sample collection contact remote service.
+	 *
+	 * @return the sample collection contact remote service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleCollectionContactService getSampleCollectionContactService() {
+		return sampleCollectionContactService;
+	}
+
+	/**
+	 * Sets the sample collection contact remote service.
+	 *
+	 * @param sampleCollectionContactService the sample collection contact remote service
+	 */
+	public void setSampleCollectionContactService(
+		com.bcnet.portlet.biobank.service.SampleCollectionContactService sampleCollectionContactService) {
+		this.sampleCollectionContactService = sampleCollectionContactService;
+	}
+
+	/**
+	 * Returns the sample collection contact persistence.
+	 *
+	 * @return the sample collection contact persistence
+	 */
+	public SampleCollectionContactPersistence getSampleCollectionContactPersistence() {
+		return sampleCollectionContactPersistence;
+	}
+
+	/**
+	 * Sets the sample collection contact persistence.
+	 *
+	 * @param sampleCollectionContactPersistence the sample collection contact persistence
+	 */
+	public void setSampleCollectionContactPersistence(
+		SampleCollectionContactPersistence sampleCollectionContactPersistence) {
+		this.sampleCollectionContactPersistence = sampleCollectionContactPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -931,6 +989,12 @@ public abstract class BiobankAttributeListsMasterLocalServiceBaseImpl
 	protected com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterService sampleCollectionAttributeListsMasterService;
 	@BeanReference(type = SampleCollectionAttributeListsMasterPersistence.class)
 	protected SampleCollectionAttributeListsMasterPersistence sampleCollectionAttributeListsMasterPersistence;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionContactLocalService.class)
+	protected com.bcnet.portlet.biobank.service.SampleCollectionContactLocalService sampleCollectionContactLocalService;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionContactService.class)
+	protected com.bcnet.portlet.biobank.service.SampleCollectionContactService sampleCollectionContactService;
+	@BeanReference(type = SampleCollectionContactPersistence.class)
+	protected SampleCollectionContactPersistence sampleCollectionContactPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)
