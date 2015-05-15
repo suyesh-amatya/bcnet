@@ -187,6 +187,7 @@
 	<portlet>
 		<portlet-name>sample-collection-contact</portlet-name>
 		<icon>/icon.png</icon>
+		<configuration-action-class>com.bcnet.portlet.samplecollection.SampleCollectionContactConfig</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js

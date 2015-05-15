@@ -13,3 +13,6 @@ create index IX_F2DE3B79 on samplecollectionattributelists (sampleCollectionDbId
 create index IX_4EA2BE4 on samplecollectionattributelists (sampleCollectionDbId, attributeListName, attributeListValue);
 
 create index IX_CBAFEBEC on samplecollectionattributelistsmaster (attributeListName);
+
+create index IX_C8AC1C93 on samplecollectioncontact (sampleCollectionDbId);
+create index IX_BED040E4 on samplecollectioncontact (sampleCollectionDbId, mainContact);

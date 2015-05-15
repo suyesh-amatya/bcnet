@@ -625,10 +625,17 @@
 				/html/samplecollection/samplecollectioncontact/view.jsp
 			</value>
 		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>
+				/html/samplecollection/samplecollectioncontact/config.jsp
+			</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
 		</supports>
 		<portlet-info>
 			<title>Sample Collection Contact</title>

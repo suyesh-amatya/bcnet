@@ -147,5 +147,12 @@
 		<column name="mainContact" type="boolean"/>
 		<column name="sampleCollectionOwner" type="boolean"/>
 		<column name="sampleCollectionEditor" type="boolean"/>
+		<finder name="sampleCollectionDbId" return-type="Collection">
+			<finder-column name="sampleCollectionDbId" />
+		</finder>
+		<finder name="sampleCollectionDbId_mainContact" return-type="SampleCollectionContact">
+			<finder-column name="sampleCollectionDbId" />
+			<finder-column name="mainContact" />
+		</finder>
 	</entity>
 </service-builder>
