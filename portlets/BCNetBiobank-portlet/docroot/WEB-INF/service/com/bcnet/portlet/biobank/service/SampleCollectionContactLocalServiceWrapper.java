@@ -313,6 +313,14 @@ public class SampleCollectionContactLocalServiceWrapper
 		return _sampleCollectionContactLocalService.getSampleCollectionContactsBySampleCollectionDbId(sampleCollectionDbId);
 	}
 
+	@Override
+	public void editSampleCollectionMainContact(long sampleCollectionDbId,
+		long sampleCollectionMainContactUserId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_sampleCollectionContactLocalService.editSampleCollectionMainContact(sampleCollectionDbId,
+			sampleCollectionMainContactUserId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

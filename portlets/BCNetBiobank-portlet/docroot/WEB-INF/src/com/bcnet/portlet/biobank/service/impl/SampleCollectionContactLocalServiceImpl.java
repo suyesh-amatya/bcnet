@@ -18,6 +18,7 @@ import java.util.List;
 
 import com.bcnet.portlet.biobank.NoSuchSampleCollectionContactException;
 import com.bcnet.portlet.biobank.model.SampleCollectionContact;
+import com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.base.SampleCollectionContactLocalServiceBaseImpl;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionContactPK;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -65,5 +66,29 @@ public class SampleCollectionContactLocalServiceImpl
 	public List<SampleCollectionContact> getSampleCollectionContactsBySampleCollectionDbId (long sampleCollectionDbId) throws SystemException{
 		
 		return sampleCollectionContactPersistence.findBysampleCollectionDbId(sampleCollectionDbId);
+	}
+	
+	
+	public void editSampleCollectionMainContact(long sampleCollectionDbId, long sampleCollectionMainContactUserId) throws SystemException{
+		SampleCollectionContact sampleCollectionMainContact, sampleCollectionNewMainContact;
+		try {
+			sampleCollectionMainContact = SampleCollectionContactLocalServiceUtil.getSampleCollectionMainContact(sampleCollectionDbId);
+			sampleCollectionMainContact.setMainContact(sampleCollectionMainContactUserId == sampleCollectionMainContact.getUserId() ? true : false);
+			SampleCollectionContactLocalServiceUtil.updateSampleCollectionContact(sampleCollectionMainContact);
+			if(sampleCollectionMainContactUserId != sampleCollectionMainContact.getUserId()){
+				sampleCollectionNewMainContact = SampleCollectionContactLocalServiceUtil.getSampleCollectionContact(sampleCollectionDbId, sampleCollectionMainContactUserId);
+				sampleCollectionNewMainContact.setMainContact(true);
+				SampleCollectionContactLocalServiceUtil.updateSampleCollectionContact(sampleCollectionNewMainContact);
+			}
+		} catch (NoSuchSampleCollectionContactException e) {
+			// TODO Auto-generated catch block
+			if(sampleCollectionMainContactUserId > 0){
+				sampleCollectionNewMainContact = SampleCollectionContactLocalServiceUtil.getSampleCollectionContact(sampleCollectionDbId, sampleCollectionMainContactUserId);
+				sampleCollectionNewMainContact.setMainContact(true);
+				SampleCollectionContactLocalServiceUtil.updateSampleCollectionContact(sampleCollectionNewMainContact);
+			}
+			
+		}
+		
 	}
 }

@@ -133,6 +133,10 @@ public class SampleCollectionContactLocalServiceClpInvoker {
 		_methodName86 = "getSampleCollectionContactsBySampleCollectionDbId";
 
 		_methodParameterTypes86 = new String[] { "long" };
+
+		_methodName87 = "editSampleCollectionMainContact";
+
+		_methodParameterTypes87 = new String[] { "long", "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -252,6 +256,14 @@ public class SampleCollectionContactLocalServiceClpInvoker {
 			return SampleCollectionContactLocalServiceUtil.getSampleCollectionContactsBySampleCollectionDbId(((Long)arguments[0]).longValue());
 		}
 
+		if (_methodName87.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
+			SampleCollectionContactLocalServiceUtil.editSampleCollectionMainContact(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -297,4 +309,6 @@ public class SampleCollectionContactLocalServiceClpInvoker {
 	private String[] _methodParameterTypes85;
 	private String _methodName86;
 	private String[] _methodParameterTypes86;
+	private String _methodName87;
+	private String[] _methodParameterTypes87;
 }

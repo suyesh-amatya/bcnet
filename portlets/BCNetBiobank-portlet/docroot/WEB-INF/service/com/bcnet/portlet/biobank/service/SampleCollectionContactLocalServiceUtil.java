@@ -301,6 +301,14 @@ public class SampleCollectionContactLocalServiceUtil {
 				   .getSampleCollectionContactsBySampleCollectionDbId(sampleCollectionDbId);
 	}
 
+	public static void editSampleCollectionMainContact(
+		long sampleCollectionDbId, long sampleCollectionMainContactUserId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.editSampleCollectionMainContact(sampleCollectionDbId,
+			sampleCollectionMainContactUserId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

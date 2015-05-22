@@ -264,4 +264,8 @@ public interface SampleCollectionContactLocalService extends BaseLocalService,
 	public java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionContact> getSampleCollectionContactsBySampleCollectionDbId(
 		long sampleCollectionDbId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void editSampleCollectionMainContact(long sampleCollectionDbId,
+		long sampleCollectionMainContactUserId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }
