@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS `BCNet`.`samplecollectioncontact` (
+  `sampleCollectionDbId` BIGINT(20) NOT NULL,
+  `userId` BIGINT(20) NOT NULL,
+  `mainContact` TINYINT(1) NULL DEFAULT NULL,
+  `sampleCollectionOwner` TINYINT(1) NULL DEFAULT NULL,
+  `sampleCollectionEditor` TINYINT(1) NULL DEFAULT NULL,
+  PRIMARY KEY (`sampleCollectionDbId`, `userId`),
+  INDEX `fk_samplecollectioncontact_user_1_idx` (`userId` ASC),
+  INDEX `fk_samplecollectioncontact_samplecollection1_idx` (`sampleCollectionDbId` ASC),
+  CONSTRAINT `fk_samplecollectioncontact_samplecollectionDbId`
+    FOREIGN KEY (`sampleCollectionDbId`)
+    REFERENCES `BCNet`.`samplecollection` (`sampleCollectionDbId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_samplecollectioncontact_userId`
+    FOREIGN KEY (`userId`)
+    REFERENCES `BCNet`.`user_` (`userId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB DEFAULT CHARSET=utf8;
