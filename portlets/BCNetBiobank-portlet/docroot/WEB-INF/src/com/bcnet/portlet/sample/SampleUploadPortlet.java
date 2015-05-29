@@ -32,7 +32,8 @@ public class SampleUploadPortlet extends MVCPortlet {
 	public void uploadSample(ActionRequest request, ActionResponse response) throws Exception {
 		final int ONE_GB = 1073741824;
 		
-		final String baseDir = "/Users/suyeshamatya/CodeHome/plugins/liferay-plugins-sdk-6.2/uploaded/";
+		//final String baseDir = "/Users/suyeshamatya/CodeHome/plugins/liferay-plugins-sdk-6.2/uploaded/";
+		final String baseDir = "C:/CodeHome/plugins/liferay-plugins-sdk-6.2/uploaded/";
 		
 		final String fileInputName = "fileupload";
 		

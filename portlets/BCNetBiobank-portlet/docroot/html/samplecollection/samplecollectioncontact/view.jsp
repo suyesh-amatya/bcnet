@@ -129,7 +129,6 @@ if(optionsDisplayMaincontact_option) {
 			}
 			%>
 			</span>
-			
 			<br />
 			<% 
 			if(viewSampleCollectionDetailedContact || (themeDisplay.getUserId() == sampleCollectionMainContactUserId)){ 
@@ -142,6 +141,7 @@ if(optionsDisplayMaincontact_option) {
 		}
 		%>
 	</div>
+	<br />
 	<br />
 	<hr />
 	
