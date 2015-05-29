@@ -14,6 +14,9 @@
 	<bean id="com.bcnet.portlet.biobank.service.JuristicPersonLocalService" class="com.bcnet.portlet.biobank.service.impl.JuristicPersonLocalServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.JuristicPersonService" class="com.bcnet.portlet.biobank.service.impl.JuristicPersonServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistence" class="com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistenceImpl" parent="basePersistence" />
+	<bean id="com.bcnet.portlet.biobank.service.SampleLocalService" class="com.bcnet.portlet.biobank.service.impl.SampleLocalServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.SampleService" class="com.bcnet.portlet.biobank.service.impl.SampleServiceImpl" />
+	<bean id="com.bcnet.portlet.biobank.service.persistence.SamplePersistence" class="com.bcnet.portlet.biobank.service.persistence.SamplePersistenceImpl" parent="basePersistence" />
 	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionLocalService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionLocalServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.SampleCollectionService" class="com.bcnet.portlet.biobank.service.impl.SampleCollectionServiceImpl" />
 	<bean id="com.bcnet.portlet.biobank.service.persistence.SampleCollectionPersistence" class="com.bcnet.portlet.biobank.service.persistence.SampleCollectionPersistenceImpl" parent="basePersistence" />

@@ -25,6 +25,7 @@ import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeLi
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionContactPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionPersistence;
+import com.bcnet.portlet.biobank.service.persistence.SamplePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -301,6 +302,62 @@ public abstract class JuristicPersonServiceBaseImpl extends BaseServiceImpl
 	public void setJuristicPersonPersistence(
 		JuristicPersonPersistence juristicPersonPersistence) {
 		this.juristicPersonPersistence = juristicPersonPersistence;
+	}
+
+	/**
+	 * Returns the sample local service.
+	 *
+	 * @return the sample local service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleLocalService getSampleLocalService() {
+		return sampleLocalService;
+	}
+
+	/**
+	 * Sets the sample local service.
+	 *
+	 * @param sampleLocalService the sample local service
+	 */
+	public void setSampleLocalService(
+		com.bcnet.portlet.biobank.service.SampleLocalService sampleLocalService) {
+		this.sampleLocalService = sampleLocalService;
+	}
+
+	/**
+	 * Returns the sample remote service.
+	 *
+	 * @return the sample remote service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleService getSampleService() {
+		return sampleService;
+	}
+
+	/**
+	 * Sets the sample remote service.
+	 *
+	 * @param sampleService the sample remote service
+	 */
+	public void setSampleService(
+		com.bcnet.portlet.biobank.service.SampleService sampleService) {
+		this.sampleService = sampleService;
+	}
+
+	/**
+	 * Returns the sample persistence.
+	 *
+	 * @return the sample persistence
+	 */
+	public SamplePersistence getSamplePersistence() {
+		return samplePersistence;
+	}
+
+	/**
+	 * Sets the sample persistence.
+	 *
+	 * @param samplePersistence the sample persistence
+	 */
+	public void setSamplePersistence(SamplePersistence samplePersistence) {
+		this.samplePersistence = samplePersistence;
 	}
 
 	/**
@@ -728,6 +785,12 @@ public abstract class JuristicPersonServiceBaseImpl extends BaseServiceImpl
 	protected com.bcnet.portlet.biobank.service.JuristicPersonService juristicPersonService;
 	@BeanReference(type = JuristicPersonPersistence.class)
 	protected JuristicPersonPersistence juristicPersonPersistence;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleLocalService.class)
+	protected com.bcnet.portlet.biobank.service.SampleLocalService sampleLocalService;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleService.class)
+	protected com.bcnet.portlet.biobank.service.SampleService sampleService;
+	@BeanReference(type = SamplePersistence.class)
+	protected SamplePersistence samplePersistence;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionLocalService.class)
 	protected com.bcnet.portlet.biobank.service.SampleCollectionLocalService sampleCollectionLocalService;
 	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleCollectionService.class)

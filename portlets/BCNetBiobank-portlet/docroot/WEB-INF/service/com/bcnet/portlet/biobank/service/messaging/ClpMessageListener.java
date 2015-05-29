@@ -31,6 +31,8 @@ import com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil
 import com.bcnet.portlet.biobank.service.SampleCollectionContactServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -62,6 +64,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			JuristicPersonLocalServiceUtil.clearService();
 
 			JuristicPersonServiceUtil.clearService();
+			SampleLocalServiceUtil.clearService();
+
+			SampleServiceUtil.clearService();
 			SampleCollectionLocalServiceUtil.clearService();
 
 			SampleCollectionServiceUtil.clearService();

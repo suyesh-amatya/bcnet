@@ -317,6 +317,10 @@ public class JuristicPersonClp extends BaseModelImpl<JuristicPerson>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -374,4 +378,5 @@ public class JuristicPersonClp extends BaseModelImpl<JuristicPerson>
 	private String _url;
 	private String _address;
 	private BaseModel<?> _juristicPersonRemoteModel;
+	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

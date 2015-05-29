@@ -24,24 +24,24 @@ import java.util.Arrays;
  */
 public class BiobankGeneralInformationServiceClpInvoker {
 	public BiobankGeneralInformationServiceClpInvoker() {
-		_methodName62 = "getBeanIdentifier";
+		_methodName68 = "getBeanIdentifier";
 
-		_methodParameterTypes62 = new String[] {  };
+		_methodParameterTypes68 = new String[] {  };
 
-		_methodName63 = "setBeanIdentifier";
+		_methodName69 = "setBeanIdentifier";
 
-		_methodParameterTypes63 = new String[] { "java.lang.String" };
+		_methodParameterTypes69 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName62.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return BiobankGeneralInformationServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName63.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
 			BiobankGeneralInformationServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -50,8 +50,8 @@ public class BiobankGeneralInformationServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName62;
-	private String[] _methodParameterTypes62;
-	private String _methodName63;
-	private String[] _methodParameterTypes63;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
 }

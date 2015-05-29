@@ -55,6 +55,35 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleModelImpl">
+		<attributes>
+			<id name="sampleId" />
+			<basic name="sampleCollectionDbId" />
+			<basic name="biobankDbId" />
+			<basic name="hashedSampleId" />
+			<basic name="materialType" />
+			<basic name="container" />
+			<basic name="storageTemperature" />
+			<basic name="sampledTime" />
+			<basic name="anatomicalPartOntology" />
+			<basic name="anatomicalPartOntologyVersion" />
+			<basic name="anatomicalPartOntologyCode" />
+			<basic name="anatomicalPartDescription" />
+			<basic name="anatomicalPartFreeText" />
+			<basic name="sex" />
+			<basic name="ageHigh" />
+			<basic name="ageLow" />
+			<basic name="ageUnit" />
+			<basic name="diseaseOntology" />
+			<basic name="diseaseOntologyVersion" />
+			<basic name="diseaseOntologyCode" />
+			<basic name="diseaseDescription" />
+			<basic name="diseaseFreeText" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleCollectionModelImpl">
 		<attributes>
 			<id name="sampleCollectionDbId" />
@@ -121,6 +150,10 @@
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.JuristicPersonImpl" name="JuristicPerson">
 		<table name="juristicperson" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.SampleImpl" name="Sample">
+		<table name="sample" />
 		<attributes />
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionImpl" name="SampleCollection">

@@ -24,4 +24,7 @@
 		<portlet id="sample-collection-attribute-lists"></portlet>
 		<portlet id="sample-collection-contact"></portlet>
 	</category>
+	<category name="BCNet Sample">
+		<portlet id="sample-upload"></portlet>
+	</category>
 </display>

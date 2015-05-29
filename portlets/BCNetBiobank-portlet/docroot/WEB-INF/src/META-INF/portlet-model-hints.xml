@@ -29,6 +29,30 @@
 		<field name="url" type="String" />
 		<field name="address" type="String" />
 	</model>
+	<model name="com.bcnet.portlet.biobank.model.Sample">
+		<field name="sampleId" type="long" />
+		<field name="sampleCollectionDbId" type="long" />
+		<field name="biobankDbId" type="long" />
+		<field name="hashedSampleId" type="String" />
+		<field name="materialType" type="String" />
+		<field name="container" type="String" />
+		<field name="storageTemperature" type="String" />
+		<field name="sampledTime" type="String" />
+		<field name="anatomicalPartOntology" type="String" />
+		<field name="anatomicalPartOntologyVersion" type="String" />
+		<field name="anatomicalPartOntologyCode" type="String" />
+		<field name="anatomicalPartDescription" type="String" />
+		<field name="anatomicalPartFreeText" type="String" />
+		<field name="sex" type="String" />
+		<field name="ageHigh" type="long" />
+		<field name="ageLow" type="long" />
+		<field name="ageUnit" type="String" />
+		<field name="diseaseOntology" type="String" />
+		<field name="diseaseOntologyVersion" type="String" />
+		<field name="diseaseOntologyCode" type="String" />
+		<field name="diseaseDescription" type="String" />
+		<field name="diseaseFreeText" type="String" />
+	</model>
 	<model name="com.bcnet.portlet.biobank.model.SampleCollection">
 		<field name="sampleCollectionDbId" type="long" />
 		<field name="sampleCollectionId" type="String" />

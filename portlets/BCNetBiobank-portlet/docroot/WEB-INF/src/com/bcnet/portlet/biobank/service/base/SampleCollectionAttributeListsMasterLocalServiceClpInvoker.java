@@ -106,17 +106,17 @@ public class SampleCollectionAttributeListsMasterLocalServiceClpInvoker {
 				"com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster"
 			};
 
-		_methodName78 = "getBeanIdentifier";
+		_methodName84 = "getBeanIdentifier";
 
-		_methodParameterTypes78 = new String[] {  };
+		_methodParameterTypes84 = new String[] {  };
 
-		_methodName79 = "setBeanIdentifier";
+		_methodName85 = "setBeanIdentifier";
 
-		_methodParameterTypes79 = new String[] { "java.lang.String" };
+		_methodParameterTypes85 = new String[] { "java.lang.String" };
 
-		_methodName84 = "getSampleCollectionAttributeListsMasterByAttributeListName";
+		_methodName90 = "getSampleCollectionAttributeListsMasterByAttributeListName";
 
-		_methodParameterTypes84 = new String[] { "java.lang.String" };
+		_methodParameterTypes90 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -208,20 +208,20 @@ public class SampleCollectionAttributeListsMasterLocalServiceClpInvoker {
 			return SampleCollectionAttributeListsMasterLocalServiceUtil.updateSampleCollectionAttributeListsMaster((com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster)arguments[0]);
 		}
 
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName84.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
 			return SampleCollectionAttributeListsMasterLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName79.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+		if (_methodName85.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
 			SampleCollectionAttributeListsMasterLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName84.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
+		if (_methodName90.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
 			return SampleCollectionAttributeListsMasterLocalServiceUtil.getSampleCollectionAttributeListsMasterByAttributeListName((java.lang.String)arguments[0]);
 		}
 
@@ -260,10 +260,10 @@ public class SampleCollectionAttributeListsMasterLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName78;
-	private String[] _methodParameterTypes78;
-	private String _methodName79;
-	private String[] _methodParameterTypes79;
 	private String _methodName84;
 	private String[] _methodParameterTypes84;
+	private String _methodName85;
+	private String[] _methodParameterTypes85;
+	private String _methodName90;
+	private String[] _methodParameterTypes90;
 }

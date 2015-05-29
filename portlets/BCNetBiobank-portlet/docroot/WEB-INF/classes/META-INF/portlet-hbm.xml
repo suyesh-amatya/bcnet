@@ -6,6 +6,7 @@
 	<import class="com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster" />
 	<import class="com.bcnet.portlet.biobank.model.BiobankGeneralInformation" />
 	<import class="com.bcnet.portlet.biobank.model.JuristicPerson" />
+	<import class="com.bcnet.portlet.biobank.model.Sample" />
 	<import class="com.bcnet.portlet.biobank.model.SampleCollection" />
 	<import class="com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists" />
 	<import class="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster" />
@@ -49,6 +50,33 @@
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="address" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.SampleImpl" table="sample">
+		<cache usage="read-write" />
+		<id name="sampleId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="sampleCollectionDbId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="biobankDbId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="hashedSampleId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="materialType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="container" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="storageTemperature" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sampledTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="anatomicalPartOntology" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="anatomicalPartOntologyVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="anatomicalPartOntologyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="anatomicalPartDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="anatomicalPartFreeText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sex" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ageHigh" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ageLow" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ageUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseaseOntology" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseaseOntologyVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseaseOntologyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseaseDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseaseFreeText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.bcnet.portlet.biobank.model.impl.SampleCollectionImpl" table="samplecollection">
 		<cache usage="read-write" />

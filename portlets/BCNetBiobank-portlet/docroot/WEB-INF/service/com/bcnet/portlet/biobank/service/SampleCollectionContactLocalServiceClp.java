@@ -139,6 +139,10 @@ public class SampleCollectionContactLocalServiceClp
 		_methodName22 = "editSampleCollectionMainContact";
 
 		_methodParameterTypes22 = new String[] { "long", "long" };
+
+		_methodName23 = "deleteSampleCollectionContactsBySampleCollectionDbId";
+
+		_methodParameterTypes23 = new String[] { "long" };
 	}
 
 	@Override
@@ -742,8 +746,7 @@ public class SampleCollectionContactLocalServiceClp
 	@Override
 	public com.bcnet.portlet.biobank.model.SampleCollectionContact getSampleCollectionMainContact(
 		long sampleCollectionDbId)
-		throws com.bcnet.portlet.biobank.NoSuchSampleCollectionContactException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
@@ -753,10 +756,6 @@ public class SampleCollectionContactLocalServiceClp
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.bcnet.portlet.biobank.NoSuchSampleCollectionContactException) {
-				throw (com.bcnet.portlet.biobank.NoSuchSampleCollectionContactException)t;
-			}
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;
@@ -834,6 +833,31 @@ public class SampleCollectionContactLocalServiceClp
 		}
 	}
 
+	@Override
+	public void deleteSampleCollectionContactsBySampleCollectionDbId(
+		long sampleCollectionDbId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName23,
+				_methodParameterTypes23, new Object[] { sampleCollectionDbId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -879,4 +903,6 @@ public class SampleCollectionContactLocalServiceClp
 	private String[] _methodParameterTypes21;
 	private String _methodName22;
 	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
 }

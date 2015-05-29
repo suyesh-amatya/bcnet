@@ -58,8 +58,14 @@ public class SampleCollectionContactLocalServiceImpl
 	}
 	
 	
-	public SampleCollectionContact getSampleCollectionMainContact (long sampleCollectionDbId) throws NoSuchSampleCollectionContactException, SystemException{
-		return sampleCollectionContactPersistence.findBysampleCollectionDbId_mainContact(sampleCollectionDbId, true);
+	public SampleCollectionContact getSampleCollectionMainContact (long sampleCollectionDbId) throws SystemException{
+		try {
+			return sampleCollectionContactPersistence.findBysampleCollectionDbId_mainContact(sampleCollectionDbId, true);
+		} catch (NoSuchSampleCollectionContactException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	
@@ -80,7 +86,7 @@ public class SampleCollectionContactLocalServiceImpl
 				sampleCollectionNewMainContact.setMainContact(true);
 				SampleCollectionContactLocalServiceUtil.updateSampleCollectionContact(sampleCollectionNewMainContact);
 			}
-		} catch (NoSuchSampleCollectionContactException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			if(sampleCollectionMainContactUserId > 0){
 				sampleCollectionNewMainContact = SampleCollectionContactLocalServiceUtil.getSampleCollectionContact(sampleCollectionDbId, sampleCollectionMainContactUserId);
@@ -90,5 +96,11 @@ public class SampleCollectionContactLocalServiceImpl
 			
 		}
 		
+	}
+	
+	
+	public void deleteSampleCollectionContactsBySampleCollectionDbId(long sampleCollectionDbId) throws SystemException{
+		sampleCollectionContactPersistence.removeBysampleCollectionDbId(sampleCollectionDbId);
+		return;
 	}
 }

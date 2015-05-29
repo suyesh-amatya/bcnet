@@ -140,19 +140,19 @@ public interface BiobankAttributeListsMasterModel extends BaseModel<BiobankAttri
 
 	@Override
 	public int compareTo(
-		BiobankAttributeListsMaster biobankAttributeListsMaster);
+		com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster biobankAttributeListsMaster);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<BiobankAttributeListsMaster> toCacheModel();
+	public CacheModel<com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster> toCacheModel();
 
 	@Override
-	public BiobankAttributeListsMaster toEscapedModel();
+	public com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster toEscapedModel();
 
 	@Override
-	public BiobankAttributeListsMaster toUnescapedModel();
+	public com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster toUnescapedModel();
 
 	@Override
 	public String toString();

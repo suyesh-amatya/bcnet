@@ -16,6 +16,7 @@ package com.bcnet.portlet.biobank.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface SampleCollectionContactLocalService extends BaseLocalService,
 	* @return the sample collection contact that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.SampleCollectionContact addSampleCollectionContact(
 		com.bcnet.portlet.biobank.model.SampleCollectionContact sampleCollectionContact)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface SampleCollectionContactLocalService extends BaseLocalService,
 	* @throws PortalException if a sample collection contact with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.SampleCollectionContact deleteSampleCollectionContact(
 		com.bcnet.portlet.biobank.service.persistence.SampleCollectionContactPK sampleCollectionContactPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface SampleCollectionContactLocalService extends BaseLocalService,
 	* @return the sample collection contact that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.SampleCollectionContact deleteSampleCollectionContact(
 		com.bcnet.portlet.biobank.model.SampleCollectionContact sampleCollectionContact)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -226,6 +230,7 @@ public interface SampleCollectionContactLocalService extends BaseLocalService,
 	* @return the sample collection contact that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.SampleCollectionContact updateSampleCollectionContact(
 		com.bcnet.portlet.biobank.model.SampleCollectionContact sampleCollectionContact)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -257,8 +262,7 @@ public interface SampleCollectionContactLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.bcnet.portlet.biobank.model.SampleCollectionContact getSampleCollectionMainContact(
 		long sampleCollectionDbId)
-		throws com.bcnet.portlet.biobank.NoSuchSampleCollectionContactException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.bcnet.portlet.biobank.model.SampleCollectionContact> getSampleCollectionContactsBySampleCollectionDbId(
@@ -267,5 +271,9 @@ public interface SampleCollectionContactLocalService extends BaseLocalService,
 
 	public void editSampleCollectionMainContact(long sampleCollectionDbId,
 		long sampleCollectionMainContactUserId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteSampleCollectionContactsBySampleCollectionDbId(
+		long sampleCollectionDbId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

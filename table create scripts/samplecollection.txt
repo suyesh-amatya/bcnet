@@ -8,6 +8,6 @@ CREATE TABLE IF NOT EXISTS `BCNet`.`samplecollection` (
   `reuseOfSamples` TINYINT(1) NULL DEFAULT NULL,
   `materialTransferAgreement` TINYINT(1) NULL DEFAULT NULL,
   `accreditation` TINYINT(1) NULL DEFAULT NULL,
-  `qualtiyControl` TINYINT(1) NULL DEFAULT NULL,
+  `qualityControl` TINYINT(1) NULL DEFAULT NULL,
   PRIMARY KEY (`sampleCollectionDbId`))
 ENGINE = InnoDB DEFAULT CHARSET=utf8;

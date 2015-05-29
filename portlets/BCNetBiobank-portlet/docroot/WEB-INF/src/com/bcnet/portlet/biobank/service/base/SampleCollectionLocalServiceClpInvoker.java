@@ -106,13 +106,13 @@ public class SampleCollectionLocalServiceClpInvoker {
 				"com.bcnet.portlet.biobank.model.SampleCollection"
 			};
 
-		_methodName78 = "getBeanIdentifier";
+		_methodName84 = "getBeanIdentifier";
 
-		_methodParameterTypes78 = new String[] {  };
+		_methodParameterTypes84 = new String[] {  };
 
-		_methodName79 = "setBeanIdentifier";
+		_methodName85 = "setBeanIdentifier";
 
-		_methodParameterTypes79 = new String[] { "java.lang.String" };
+		_methodParameterTypes85 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -204,13 +204,13 @@ public class SampleCollectionLocalServiceClpInvoker {
 			return SampleCollectionLocalServiceUtil.updateSampleCollection((com.bcnet.portlet.biobank.model.SampleCollection)arguments[0]);
 		}
 
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName84.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
 			return SampleCollectionLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName79.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+		if (_methodName85.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
 			SampleCollectionLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -251,8 +251,8 @@ public class SampleCollectionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName78;
-	private String[] _methodParameterTypes78;
-	private String _methodName79;
-	private String[] _methodParameterTypes79;
+	private String _methodName84;
+	private String[] _methodParameterTypes84;
+	private String _methodName85;
+	private String[] _methodParameterTypes85;
 }

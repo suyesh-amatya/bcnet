@@ -301,8 +301,7 @@ public class SampleCollectionContactLocalServiceWrapper
 	@Override
 	public com.bcnet.portlet.biobank.model.SampleCollectionContact getSampleCollectionMainContact(
 		long sampleCollectionDbId)
-		throws com.bcnet.portlet.biobank.NoSuchSampleCollectionContactException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _sampleCollectionContactLocalService.getSampleCollectionMainContact(sampleCollectionDbId);
 	}
 
@@ -319,6 +318,13 @@ public class SampleCollectionContactLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_sampleCollectionContactLocalService.editSampleCollectionMainContact(sampleCollectionDbId,
 			sampleCollectionMainContactUserId);
+	}
+
+	@Override
+	public void deleteSampleCollectionContactsBySampleCollectionDbId(
+		long sampleCollectionDbId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_sampleCollectionContactLocalService.deleteSampleCollectionContactsBySampleCollectionDbId(sampleCollectionDbId);
 	}
 
 	/**

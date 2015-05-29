@@ -106,48 +106,48 @@ public class JuristicPersonLocalServiceClpInvoker {
 				"com.bcnet.portlet.biobank.model.JuristicPerson"
 			};
 
-		_methodName78 = "getBeanIdentifier";
+		_methodName84 = "getBeanIdentifier";
 
-		_methodParameterTypes78 = new String[] {  };
+		_methodParameterTypes84 = new String[] {  };
 
-		_methodName79 = "setBeanIdentifier";
+		_methodName85 = "setBeanIdentifier";
 
-		_methodParameterTypes79 = new String[] { "java.lang.String" };
+		_methodParameterTypes85 = new String[] { "java.lang.String" };
 
-		_methodName84 = "addJusristicPerson";
+		_methodName90 = "addJusristicPerson";
 
-		_methodParameterTypes84 = new String[] {
+		_methodParameterTypes90 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String"
 			};
 
-		_methodName85 = "updateJuristicPerson";
+		_methodName91 = "updateJuristicPerson";
 
-		_methodParameterTypes85 = new String[] {
+		_methodParameterTypes91 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName86 = "deleteJuristicPerson";
+		_methodName92 = "deleteJuristicPerson";
 
-		_methodParameterTypes86 = new String[] {
+		_methodParameterTypes92 = new String[] {
 				"com.bcnet.portlet.biobank.model.JuristicPerson"
 			};
 
-		_methodName87 = "deleteJuristicPerson";
+		_methodName93 = "deleteJuristicPerson";
 
-		_methodParameterTypes87 = new String[] { "long" };
+		_methodParameterTypes93 = new String[] { "long" };
 
-		_methodName88 = "getJuristicPerson";
+		_methodName94 = "getJuristicPerson";
 
-		_methodParameterTypes88 = new String[] { "long" };
+		_methodParameterTypes94 = new String[] { "long" };
 
-		_methodName89 = "getAllJuristicPersons";
+		_methodName95 = "getAllJuristicPersons";
 
-		_methodParameterTypes89 = new String[] {  };
+		_methodParameterTypes95 = new String[] {  };
 
-		_methodName90 = "getAllJuristicPersons";
+		_methodName96 = "getAllJuristicPersons";
 
-		_methodParameterTypes90 = new String[] { "int", "int" };
+		_methodParameterTypes96 = new String[] { "int", "int" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -239,53 +239,53 @@ public class JuristicPersonLocalServiceClpInvoker {
 			return JuristicPersonLocalServiceUtil.updateJuristicPerson((com.bcnet.portlet.biobank.model.JuristicPerson)arguments[0]);
 		}
 
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName84.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
 			return JuristicPersonLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName79.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+		if (_methodName85.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
 			JuristicPersonLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName84.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
+		if (_methodName90.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
 			return JuristicPersonLocalServiceUtil.addJusristicPerson((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 		}
 
-		if (_methodName85.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
+		if (_methodName91.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
 			return JuristicPersonLocalServiceUtil.updateJuristicPerson(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3]);
 		}
 
-		if (_methodName86.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
 			return JuristicPersonLocalServiceUtil.deleteJuristicPerson((com.bcnet.portlet.biobank.model.JuristicPerson)arguments[0]);
 		}
 
-		if (_methodName87.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
 			return JuristicPersonLocalServiceUtil.deleteJuristicPerson(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName88.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
+		if (_methodName94.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
 			return JuristicPersonLocalServiceUtil.getJuristicPerson(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName89.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
+		if (_methodName95.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
 			return JuristicPersonLocalServiceUtil.getAllJuristicPersons();
 		}
 
-		if (_methodName90.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+		if (_methodName96.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
 			return JuristicPersonLocalServiceUtil.getAllJuristicPersons(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
@@ -325,22 +325,22 @@ public class JuristicPersonLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName78;
-	private String[] _methodParameterTypes78;
-	private String _methodName79;
-	private String[] _methodParameterTypes79;
 	private String _methodName84;
 	private String[] _methodParameterTypes84;
 	private String _methodName85;
 	private String[] _methodParameterTypes85;
-	private String _methodName86;
-	private String[] _methodParameterTypes86;
-	private String _methodName87;
-	private String[] _methodParameterTypes87;
-	private String _methodName88;
-	private String[] _methodParameterTypes88;
-	private String _methodName89;
-	private String[] _methodParameterTypes89;
 	private String _methodName90;
 	private String[] _methodParameterTypes90;
+	private String _methodName91;
+	private String[] _methodParameterTypes91;
+	private String _methodName92;
+	private String[] _methodParameterTypes92;
+	private String _methodName93;
+	private String[] _methodParameterTypes93;
+	private String _methodName94;
+	private String[] _methodParameterTypes94;
+	private String _methodName95;
+	private String[] _methodParameterTypes95;
+	private String _methodName96;
+	private String[] _methodParameterTypes96;
 }
