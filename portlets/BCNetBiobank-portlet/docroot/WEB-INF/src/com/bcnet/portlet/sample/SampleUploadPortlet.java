@@ -11,6 +11,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -125,12 +126,33 @@ public class SampleUploadPortlet extends MVCPortlet {
 		int counter = 0;
 		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
-			
-			/*Iterator<Cell> cellIterator = row.cellIterator();
+			if(row.getRowNum() == 0){
+				continue;
+			}
+			Iterator<Cell> cellIterator = row.cellIterator();
 			while (cellIterator.hasNext()) {
 				Cell cell = cellIterator.next();
-				System.out.println(cell);
-				SampleImpl sample = new SampleImpl();
+				switch (cell.getCellType()) {
+                case Cell.CELL_TYPE_STRING:
+                    System.out.println("String "+cell.getRichStringCellValue().getString());
+                    break;
+                case Cell.CELL_TYPE_NUMERIC:
+                    if (DateUtil.isCellDateFormatted(cell)) {
+                        System.out.println("Date Numeric "+cell.getDateCellValue());
+                    } else {
+                        System.out.println("Numeric "+cell.getNumericCellValue());
+                    }
+                    break;
+                case Cell.CELL_TYPE_BOOLEAN:
+                    System.out.println("Boolean "+cell.getBooleanCellValue());
+                    break;
+                case Cell.CELL_TYPE_FORMULA:
+                    System.out.println("Formula "+cell.getCellFormula());
+                    break;
+                default:
+                    System.out.println();
+				}
+				/*SampleImpl sample = new SampleImpl();
 				sample.setSampleId(Long.valueOf(cell.toString()));
 				sample.setSampleCollectionDbId(Long.valueOf(cell.toString()));
 				sample.setBiobankDbId(Long.valueOf(cell.toString()));
@@ -154,8 +176,8 @@ public class SampleUploadPortlet extends MVCPortlet {
 				sample.setDiseaseDescription(cell.toString());
 				sample.setDiseaseFreeText(cell.toString());
 				
-				SampleLocalServiceUtil.addSample(sample);
-			}*/
+				SampleLocalServiceUtil.addSample(sample);*/
+			}
 			counter++;
 			System.out.println(counter);
 		}
