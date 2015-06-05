@@ -188,5 +188,26 @@ public class SampleUploadPortlet extends MVCPortlet {
 		// TODO Auto-generated method stub
 		System.out.println("readXLSFile");
 	}
+	
+	
+	private String stringFromCell(Cell cell) {
+		if(cell == null) {
+			return "";
+		}
+		String returnvalue = "";
+		switch (cell.getCellType()) {
+			case Cell.CELL_TYPE_NUMERIC:
+				returnvalue = String.valueOf((long) cell.getNumericCellValue()).trim();
+				break;
+			case Cell.CELL_TYPE_STRING:
+				returnvalue = cell.getStringCellValue().trim();
+				break;
+			default:
+				returnvalue = cell.getStringCellValue().trim();
+				break;
+		}
+		
+		return returnvalue;
+	}
 
 }
