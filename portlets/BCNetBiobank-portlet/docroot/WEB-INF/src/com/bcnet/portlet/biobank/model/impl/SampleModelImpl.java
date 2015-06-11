@@ -36,6 +36,7 @@ import java.io.Serializable;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +71,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			{ "materialType", Types.VARCHAR },
 			{ "container", Types.VARCHAR },
 			{ "storageTemperature", Types.VARCHAR },
-			{ "sampledTime", Types.VARCHAR },
+			{ "sampledTime", Types.TIMESTAMP },
 			{ "anatomicalPartOntology", Types.VARCHAR },
 			{ "anatomicalPartOntologyVersion", Types.VARCHAR },
 			{ "anatomicalPartOntologyCode", Types.VARCHAR },
@@ -86,7 +87,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			{ "diseaseDescription", Types.VARCHAR },
 			{ "diseaseFreeText", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sample (sampleId LONG not null primary key,sampleCollectionDbId LONG,biobankDbId LONG,hashedSampleId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime VARCHAR(75) null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageHigh LONG,ageLow LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sample (sampleId LONG not null primary key,sampleCollectionDbId LONG,biobankDbId LONG,hashedSampleId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime DATE null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageHigh LONG,ageLow LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sample";
 	public static final String ORDER_BY_JPQL = " ORDER BY sample.sampleId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sample.sampleId ASC";
@@ -273,7 +274,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			setStorageTemperature(storageTemperature);
 		}
 
-		String sampledTime = (String)attributes.get("sampledTime");
+		Date sampledTime = (Date)attributes.get("sampledTime");
 
 		if (sampledTime != null) {
 			setSampledTime(sampledTime);
@@ -470,17 +471,12 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@JSON
 	@Override
-	public String getSampledTime() {
-		if (_sampledTime == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sampledTime;
-		}
+	public Date getSampledTime() {
+		return _sampledTime;
 	}
 
 	@Override
-	public void setSampledTime(String sampledTime) {
+	public void setSampledTime(Date sampledTime) {
 		_sampledTime = sampledTime;
 	}
 
@@ -842,12 +838,13 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			sampleCacheModel.storageTemperature = null;
 		}
 
-		sampleCacheModel.sampledTime = getSampledTime();
+		Date sampledTime = getSampledTime();
 
-		String sampledTime = sampleCacheModel.sampledTime;
-
-		if ((sampledTime != null) && (sampledTime.length() == 0)) {
-			sampleCacheModel.sampledTime = null;
+		if (sampledTime != null) {
+			sampleCacheModel.sampledTime = sampledTime.getTime();
+		}
+		else {
+			sampleCacheModel.sampledTime = Long.MIN_VALUE;
 		}
 
 		sampleCacheModel.anatomicalPartOntology = getAnatomicalPartOntology();
@@ -1124,7 +1121,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	private String _materialType;
 	private String _container;
 	private String _storageTemperature;
-	private String _sampledTime;
+	private Date _sampledTime;
 	private String _anatomicalPartOntology;
 	private String _anatomicalPartOntologyVersion;
 	private String _anatomicalPartOntologyCode;

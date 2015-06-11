@@ -28,6 +28,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -145,7 +146,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 			setStorageTemperature(storageTemperature);
 		}
 
-		String sampledTime = (String)attributes.get("sampledTime");
+		Date sampledTime = (Date)attributes.get("sampledTime");
 
 		if (sampledTime != null) {
 			setSampledTime(sampledTime);
@@ -408,19 +409,19 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	}
 
 	@Override
-	public String getSampledTime() {
+	public Date getSampledTime() {
 		return _sampledTime;
 	}
 
 	@Override
-	public void setSampledTime(String sampledTime) {
+	public void setSampledTime(Date sampledTime) {
 		_sampledTime = sampledTime;
 
 		if (_sampleRemoteModel != null) {
 			try {
 				Class<?> clazz = _sampleRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSampledTime", String.class);
+				Method method = clazz.getMethod("setSampledTime", Date.class);
 
 				method.invoke(_sampleRemoteModel, sampledTime);
 			}
@@ -895,10 +896,6 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		}
 	}
 
-	public Class<?> getClpSerializerClass() {
-		return _clpSerializerClass;
-	}
-
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -1066,7 +1063,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _materialType;
 	private String _container;
 	private String _storageTemperature;
-	private String _sampledTime;
+	private Date _sampledTime;
 	private String _anatomicalPartOntology;
 	private String _anatomicalPartOntologyVersion;
 	private String _anatomicalPartOntologyCode;
@@ -1082,5 +1079,4 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _diseaseDescription;
 	private String _diseaseFreeText;
 	private BaseModel<?> _sampleRemoteModel;
-	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

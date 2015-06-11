@@ -37,7 +37,7 @@
 		<field name="materialType" type="String" />
 		<field name="container" type="String" />
 		<field name="storageTemperature" type="String" />
-		<field name="sampledTime" type="String" />
+		<field name="sampledTime" type="Date" />
 		<field name="anatomicalPartOntology" type="String" />
 		<field name="anatomicalPartOntologyVersion" type="String" />
 		<field name="anatomicalPartOntologyCode" type="String" />

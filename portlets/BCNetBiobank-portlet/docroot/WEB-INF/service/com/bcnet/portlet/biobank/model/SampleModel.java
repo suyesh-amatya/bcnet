@@ -23,6 +23,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The base model interface for the Sample service. Represents a row in the &quot;sample&quot; database table, with each column mapped to a property of this class.
  *
@@ -164,15 +166,14 @@ public interface SampleModel extends BaseModel<Sample> {
 	 *
 	 * @return the sampled time of this sample
 	 */
-	@AutoEscape
-	public String getSampledTime();
+	public Date getSampledTime();
 
 	/**
 	 * Sets the sampled time of this sample.
 	 *
 	 * @param sampledTime the sampled time of this sample
 	 */
-	public void setSampledTime(String sampledTime);
+	public void setSampledTime(Date sampledTime);
 
 	/**
 	 * Returns the anatomical part ontology of this sample.
@@ -420,19 +421,19 @@ public interface SampleModel extends BaseModel<Sample> {
 	public Object clone();
 
 	@Override
-	public int compareTo(com.bcnet.portlet.biobank.model.Sample sample);
+	public int compareTo(Sample sample);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<com.bcnet.portlet.biobank.model.Sample> toCacheModel();
+	public CacheModel<Sample> toCacheModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.Sample toEscapedModel();
+	public Sample toEscapedModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.Sample toUnescapedModel();
+	public Sample toUnescapedModel();
 
 	@Override
 	public String toString();

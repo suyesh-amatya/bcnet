@@ -64,7 +64,9 @@
 			<basic name="materialType" />
 			<basic name="container" />
 			<basic name="storageTemperature" />
-			<basic name="sampledTime" />
+			<basic name="sampledTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="anatomicalPartOntology" />
 			<basic name="anatomicalPartOntologyVersion" />
 			<basic name="anatomicalPartOntologyCode" />

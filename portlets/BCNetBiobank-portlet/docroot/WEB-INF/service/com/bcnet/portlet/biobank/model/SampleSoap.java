@@ -17,6 +17,7 @@ package com.bcnet.portlet.biobank.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -160,11 +161,11 @@ public class SampleSoap implements Serializable {
 		_storageTemperature = storageTemperature;
 	}
 
-	public String getSampledTime() {
+	public Date getSampledTime() {
 		return _sampledTime;
 	}
 
-	public void setSampledTime(String sampledTime) {
+	public void setSampledTime(Date sampledTime) {
 		_sampledTime = sampledTime;
 	}
 
@@ -288,7 +289,7 @@ public class SampleSoap implements Serializable {
 	private String _materialType;
 	private String _container;
 	private String _storageTemperature;
-	private String _sampledTime;
+	private Date _sampledTime;
 	private String _anatomicalPartOntology;
 	private String _anatomicalPartOntologyVersion;
 	private String _anatomicalPartOntologyCode;

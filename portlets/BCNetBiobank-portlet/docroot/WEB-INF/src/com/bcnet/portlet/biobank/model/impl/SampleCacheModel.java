@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing Sample in entity cache.
  *
@@ -122,11 +124,11 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 			sampleImpl.setStorageTemperature(storageTemperature);
 		}
 
-		if (sampledTime == null) {
-			sampleImpl.setSampledTime(StringPool.BLANK);
+		if (sampledTime == Long.MIN_VALUE) {
+			sampleImpl.setSampledTime(null);
 		}
 		else {
-			sampleImpl.setSampledTime(sampledTime);
+			sampleImpl.setSampledTime(new Date(sampledTime));
 		}
 
 		if (anatomicalPartOntology == null) {
@@ -230,7 +232,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		materialType = objectInput.readUTF();
 		container = objectInput.readUTF();
 		storageTemperature = objectInput.readUTF();
-		sampledTime = objectInput.readUTF();
+		sampledTime = objectInput.readLong();
 		anatomicalPartOntology = objectInput.readUTF();
 		anatomicalPartOntologyVersion = objectInput.readUTF();
 		anatomicalPartOntologyCode = objectInput.readUTF();
@@ -282,12 +284,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 			objectOutput.writeUTF(storageTemperature);
 		}
 
-		if (sampledTime == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(sampledTime);
-		}
+		objectOutput.writeLong(sampledTime);
 
 		if (anatomicalPartOntology == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -384,7 +381,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	public String materialType;
 	public String container;
 	public String storageTemperature;
-	public String sampledTime;
+	public long sampledTime;
 	public String anatomicalPartOntology;
 	public String anatomicalPartOntologyVersion;
 	public String anatomicalPartOntologyCode;

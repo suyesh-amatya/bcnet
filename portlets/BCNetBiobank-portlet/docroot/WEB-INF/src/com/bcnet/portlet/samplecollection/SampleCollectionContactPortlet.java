@@ -80,17 +80,17 @@ public class SampleCollectionContactPortlet extends MVCPortlet {
 			resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
 		} catch (IOException e) {
 			System.out.println("-----------------------------------------");
-			System.out.println("BiBBox Exception in People::serveResource");
+			System.out.println("Exception in SampleCollectionContactPortlet::serveResource");
 			System.out.println("IOException");
 			e.printStackTrace();
 		} catch (PortalException e) {
 			System.out.println("-----------------------------------------");
-			System.out.println("BiBBox Exception in People::serveResource");
+			System.out.println("Exception in SampleCollectionContactPortlet::serveResource");
 			System.out.println("PortalException");
 			e.printStackTrace();
 		} catch (SystemException e) {
 			System.out.println("-----------------------------------------");
-			System.out.println("BiBBox Exception in People::serveResource");
+			System.out.println("Exception in SampleCollectionContactPortlet::serveResource");
 			System.out.println("SystemException");
 			e.printStackTrace();
 		}

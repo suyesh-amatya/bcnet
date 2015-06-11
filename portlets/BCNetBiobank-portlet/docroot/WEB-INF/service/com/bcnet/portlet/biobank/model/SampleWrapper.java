@@ -17,6 +17,7 @@ package com.bcnet.portlet.biobank.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -121,7 +122,7 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 			setStorageTemperature(storageTemperature);
 		}
 
-		String sampledTime = (String)attributes.get("sampledTime");
+		Date sampledTime = (Date)attributes.get("sampledTime");
 
 		if (sampledTime != null) {
 			setSampledTime(sampledTime);
@@ -385,7 +386,7 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	* @return the sampled time of this sample
 	*/
 	@Override
-	public java.lang.String getSampledTime() {
+	public java.util.Date getSampledTime() {
 		return _sample.getSampledTime();
 	}
 
@@ -395,7 +396,7 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	* @param sampledTime the sampled time of this sample
 	*/
 	@Override
-	public void setSampledTime(java.lang.String sampledTime) {
+	public void setSampledTime(java.util.Date sampledTime) {
 		_sample.setSampledTime(sampledTime);
 	}
 

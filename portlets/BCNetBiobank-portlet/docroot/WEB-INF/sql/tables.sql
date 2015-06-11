@@ -69,7 +69,7 @@ create table sample (
 	materialType VARCHAR(75) null,
 	container VARCHAR(75) null,
 	storageTemperature VARCHAR(75) null,
-	sampledTime VARCHAR(75) null,
+	sampledTime DATE null,
 	anatomicalPartOntology VARCHAR(75) null,
 	anatomicalPartOntologyVersion VARCHAR(75) null,
 	anatomicalPartOntologyCode VARCHAR(75) null,

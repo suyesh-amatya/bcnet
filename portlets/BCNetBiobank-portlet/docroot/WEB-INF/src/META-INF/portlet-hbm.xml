@@ -62,7 +62,7 @@
 		<property name="materialType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="container" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="storageTemperature" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="sampledTime" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sampledTime" type="org.hibernate.type.TimestampType" />
 		<property name="anatomicalPartOntology" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="anatomicalPartOntologyVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="anatomicalPartOntologyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
