@@ -131,25 +131,25 @@ public class SampleUtil {
 	/**
 	* Creates a new sample with the primary key. Does not add the sample to the database.
 	*
-	* @param sampleId the primary key for the new sample
+	* @param sampleDbId the primary key for the new sample
 	* @return the new sample
 	*/
-	public static com.bcnet.portlet.biobank.model.Sample create(long sampleId) {
-		return getPersistence().create(sampleId);
+	public static com.bcnet.portlet.biobank.model.Sample create(long sampleDbId) {
+		return getPersistence().create(sampleDbId);
 	}
 
 	/**
 	* Removes the sample with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param sampleId the primary key of the sample
+	* @param sampleDbId the primary key of the sample
 	* @return the sample that was removed
 	* @throws com.bcnet.portlet.biobank.NoSuchSampleException if a sample with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.bcnet.portlet.biobank.model.Sample remove(long sampleId)
+	public static com.bcnet.portlet.biobank.model.Sample remove(long sampleDbId)
 		throws com.bcnet.portlet.biobank.NoSuchSampleException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().remove(sampleId);
+		return getPersistence().remove(sampleDbId);
 	}
 
 	public static com.bcnet.portlet.biobank.model.Sample updateImpl(
@@ -161,29 +161,29 @@ public class SampleUtil {
 	/**
 	* Returns the sample with the primary key or throws a {@link com.bcnet.portlet.biobank.NoSuchSampleException} if it could not be found.
 	*
-	* @param sampleId the primary key of the sample
+	* @param sampleDbId the primary key of the sample
 	* @return the sample
 	* @throws com.bcnet.portlet.biobank.NoSuchSampleException if a sample with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.bcnet.portlet.biobank.model.Sample findByPrimaryKey(
-		long sampleId)
+		long sampleDbId)
 		throws com.bcnet.portlet.biobank.NoSuchSampleException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByPrimaryKey(sampleId);
+		return getPersistence().findByPrimaryKey(sampleDbId);
 	}
 
 	/**
 	* Returns the sample with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param sampleId the primary key of the sample
+	* @param sampleDbId the primary key of the sample
 	* @return the sample, or <code>null</code> if a sample with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.bcnet.portlet.biobank.model.Sample fetchByPrimaryKey(
-		long sampleId)
+		long sampleDbId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByPrimaryKey(sampleId);
+		return getPersistence().fetchByPrimaryKey(sampleDbId);
 	}
 
 	/**

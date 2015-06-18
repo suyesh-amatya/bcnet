@@ -158,9 +158,9 @@
 	
 	
 	<entity name="Sample" local-service="true" remote-service="true" table="sample">
-		<column name="sampleId" type="long" primary="true" />
-		<column name="sampleCollectionDbId" type="long" />
-		<column name="biobankDbId" type="long" />
+		<column name="sampleDbId" type="long" primary="true" />
+		<column name="sampleCollectionId" type="String" />
+		<column name="biobankId" type="String" />
 		<column name="hashedSampleId" type="String" />
 		<column name="materialType" type="String" />
 		<column name="container" type="String" />
@@ -169,7 +169,7 @@
 		<column name="anatomicalPartOntology" type="String" />
 		<column name="anatomicalPartOntologyVersion" type="String" />
 		<column name="anatomicalPartOntologyCode" type="String" />
-		<column name="anatomicalPartDescription" type="String" />
+		<column name="anatomicalPartOntologyDescription" type="String" />
 		<column name="anatomicalPartFreeText" type="String" />
 		<column name="sex" type="String" />
 		<column name="ageHigh" type="long" />
@@ -178,7 +178,7 @@
 		<column name="diseaseOntology" type="String" />
 		<column name="diseaseOntologyVersion" type="String" />
 		<column name="diseaseOntologyCode" type="String" />
-		<column name="diseaseDescription" type="String" />
+		<column name="diseaseOntologyDescription" type="String" />
 		<column name="diseaseFreeText" type="String" />
 	</entity>
 	

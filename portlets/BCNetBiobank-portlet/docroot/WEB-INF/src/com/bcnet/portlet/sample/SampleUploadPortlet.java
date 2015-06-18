@@ -5,28 +5,54 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFPalette;
+import org.apache.poi.hssf.usermodel.HSSFPicture;
+import org.apache.poi.hssf.usermodel.HSSFPictureData;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFShape;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.format.CellDateFormatter;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.xmlbeans.impl.util.Base64;
 
 import com.bcnet.portlet.biobank.model.impl.SampleImpl;
 import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -38,14 +64,15 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class SampleUploadPortlet
  */
 public class SampleUploadPortlet extends MVCPortlet {
-
+    
 	/**
 	 * Error Format for date
 	 */
 	private static final String date_format_apache_error_pattern = "EEE MMM dd HH:mm:ss yyyy";
 	private static final SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
 	private static final DataFormatter fmt = new DataFormatter();
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+	
 	
 	public void uploadSample(ActionRequest request, ActionResponse response) throws Exception {
 		final int ONE_GB = 1073741824;
@@ -146,9 +173,8 @@ public class SampleUploadPortlet extends MVCPortlet {
 		int rowcount = 1;
 		String rowerrors = "";
 		
-		int sampleId_column = -1;
-		int sampleCollectionDbId_column = -1;
-		int biobankDbId_column = -1;
+		int sampleCollectionId_column = -1;
+		int biobankId_column = -1;
 		int hashedSampleId_column = -1;
 		int materialType_column = -1;
 		int container_column = -1;
@@ -184,14 +210,11 @@ public class SampleUploadPortlet extends MVCPortlet {
 					XSSFCell cell = (XSSFCell)cellIterator.next();
 					
 					switch(cell.getStringCellValue().trim()){
-						case "sampleId":
-							sampleId_column = cellcounter;
+						case "sampleCollectionId":
+							sampleCollectionId_column = cellcounter;
 							break;
-						case "sampleCollectionDbId":
-							sampleCollectionDbId_column = cellcounter;
-							break;
-						case "biobankDbId":
-							biobankDbId_column = cellcounter;
+						case "biobankId":
+							biobankId_column = cellcounter;
 							break;
 						case "hashedSampleId":
 							hashedSampleId_column = cellcounter;
@@ -217,7 +240,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 						case "anatomicalPartOntologyCode":
 							anatomicalPartOntologyCode_column = cellcounter;
 							break;
-						case "anatomicalPartDescription":
+						case "anatomicalPartOntologyDescription":
 							anatomicalPartDescription_column = cellcounter;
 							break;
 						case "anatomicalPartFreeText":
@@ -244,7 +267,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 						case "diseaseOntologyCode":
 							diseaseOntologyCode_column = cellcounter;
 							break;
-						case "diseaseDescription":
+						case "diseaseOntologyDescription":
 							diseaseDescription_column = cellcounter;
 							break;
 						case "diseaseFreeText":
@@ -262,59 +285,6 @@ public class SampleUploadPortlet extends MVCPortlet {
 					System.out.println("Header: " + cellcounter + ":" + cell.getStringCellValue());
 					cellcounter++;
 					
-					/*switch (cell.getCellType()) {
-		                //case Cell.CELL_TYPE_STRING:
-						case XSSFCell.CELL_TYPE_STRING:
-		                    System.out.println("String "+cell.getRichStringCellValue().getString());
-		                    break;
-		                //case Cell.CELL_TYPE_NUMERIC:
-						case XSSFCell.CELL_TYPE_NUMERIC:
-		                    if (DateUtil.isCellDateFormatted(cell)) {
-		                        System.out.println("Date Numeric "+cell.getDateCellValue());
-		                        System.out.println(new CellDateFormatter(cell.getCellStyle().getDataFormatString()).format(cell.getDateCellValue()));
-		                    } else {
-		                        System.out.println("Numeric "+cell.getNumericCellValue());
-		                        cell.setCellType(Cell.CELL_TYPE_STRING);
-		                    }
-		                    break;
-		                //case Cell.CELL_TYPE_BOOLEAN:
-						case XSSFCell.CELL_TYPE_BOOLEAN:
-		                    System.out.println("Boolean "+cell.getBooleanCellValue());
-		                    break;
-		                //case Cell.CELL_TYPE_FORMULA:
-						case XSSFCell.CELL_TYPE_FORMULA:
-		                    System.out.println("Formula "+cell.getCellFormula());
-		                    break;
-		                default:
-		                    System.out.println();
-					}*/
-					/*SampleImpl sample = new SampleImpl();
-					sample.setSampleId(Long.valueOf(cell.toString()));
-					//sample.setSampleId(Long.valueOf(stringFromCell(cell)));
-					sample.setSampleCollectionDbId(Long.valueOf(cell.toString()));
-					sample.setBiobankDbId(Long.valueOf(cell.toString()));
-					sample.setHashedSampleId(cell.toString());
-					sample.setMaterialType(cell.toString());
-					sample.setContainer(cell.toString());
-					sample.setStorageTemperature(cell.toString());
-					sample.setSampledTime(cell.toString());
-					sample.setAnatomicalPartOntology(cell.toString());
-					sample.setAnatomicalPartOntologyVersion(cell.toString());
-					sample.setAnatomicalPartOntologyCode(cell.toString());
-					sample.setAnatomicalPartDescription(cell.toString());
-					sample.setAnatomicalPartFreeText(cell.toString());
-					sample.setSex(cell.toString());
-					sample.setAgeHigh(Long.valueOf(cell.toString()));
-					sample.setAgeLow(Long.valueOf(cell.toString()));
-					sample.setAgeUnit(cell.toString());
-					sample.setDiseaseOntology(cell.toString());
-					sample.setDiseaseOntologyVersion(cell.toString());
-					sample.setDiseaseOntologyCode(cell.toString());
-					sample.setDiseaseDescription(cell.toString());
-					sample.setDiseaseFreeText(cell.toString());
-					
-					SampleLocalServiceUtil.addSample(sample);*/
-					//System.out.println(cell);
 				}
 				
 				request.setAttribute("xls-header-not-defined-column_missing", column_missing);
@@ -326,18 +296,26 @@ public class SampleUploadPortlet extends MVCPortlet {
 				rowcount ++;
 				try{
 					SampleImpl sample = new SampleImpl();
-					sample.setSampleId(Long.valueOf(fmt.formatCellValue(row.getCell(sampleId_column))));
-					sample.setSampleCollectionDbId(Long.valueOf(fmt.formatCellValue(row.getCell(sampleCollectionDbId_column))));
-					sample.setBiobankDbId(Long.valueOf(fmt.formatCellValue(row.getCell(biobankDbId_column))));
+					long sampleDbId = CounterLocalServiceUtil.increment();
+					sample.setSampleDbId(sampleDbId);
+					try{
+						sample.setSampleCollectionId(fmt.formatCellValue(row.getCell(sampleCollectionId_column)));
+					}
+					catch(Exception e){
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+		        				+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample::readXLSXFile] "
+								+ " Problem adding row " + rowcount + " to the database. Make sure the header of the column is \"sampleCollectionId\"");
+					}
+					sample.setBiobankId(fmt.formatCellValue(row.getCell(biobankId_column)));
 					sample.setHashedSampleId(row.getCell(hashedSampleId_column).toString());
 					sample.setMaterialType(row.getCell(materialType_column).toString());
 					sample.setContainer(row.getCell(container_column).toString());
 					sample.setStorageTemperature(row.getCell(storageTemperature_column).toString());
-					//sample.setSampledTime(sdf.parse(row.getCell(sampledTime_column).toString()));
+					sample.setSampledTime(sdf.parse(row.getCell(sampledTime_column).toString()));
 					sample.setAnatomicalPartOntology(row.getCell(anatomicalPartOntology_column).toString());
 					sample.setAnatomicalPartOntologyVersion(row.getCell(anatomicalPartOntologyVersion_column).toString());
 					sample.setAnatomicalPartOntologyCode(row.getCell(anatomicalPartOntologyCode_column).toString());
-					sample.setAnatomicalPartDescription(row.getCell(anatomicalPartDescription_column).toString());
+					sample.setAnatomicalPartOntologyDescription(row.getCell(anatomicalPartDescription_column).toString());
 					sample.setAnatomicalPartFreeText(row.getCell(anatomicalPartFreeText_column).toString());
 					sample.setSex(row.getCell(sex_column).toString());
 					sample.setAgeHigh(Long.valueOf(fmt.formatCellValue(row.getCell(ageHigh_column))));
@@ -346,31 +324,8 @@ public class SampleUploadPortlet extends MVCPortlet {
 					sample.setDiseaseOntology(row.getCell(diseaseOntology_column).toString());
 					sample.setDiseaseOntologyVersion(row.getCell(diseaseOntologyVersion_column).toString());
 					sample.setDiseaseOntologyCode(row.getCell(diseaseOntologyCode_column).toString());
-					sample.setDiseaseDescription(row.getCell(diseaseDescription_column).toString());
+					sample.setDiseaseOntologyDescription(row.getCell(diseaseDescription_column).toString());
 					sample.setDiseaseFreeText(row.getCell(diseaseFreeText_column).toString());
-					
-					//sample.setSampledTime(row.getCell(sampledTime_column).toString());
-					/*sample.setSampleCollectionDbId(Long.valueOf(cell.toString()));
-					sample.setBiobankDbId(Long.valueOf(cell.toString()));
-					
-					sample.setMaterialType(cell.toString());
-					sample.setContainer(cell.toString());
-					sample.setStorageTemperature(cell.toString());
-					sample.setSampledTime(cell.toString());
-					sample.setAnatomicalPartOntology(cell.toString());
-					sample.setAnatomicalPartOntologyVersion(cell.toString());
-					sample.setAnatomicalPartOntologyCode(cell.toString());
-					sample.setAnatomicalPartDescription(cell.toString());
-					sample.setAnatomicalPartFreeText(cell.toString());
-					sample.setSex(cell.toString());
-					sample.setAgeHigh(Long.valueOf(cell.toString()));
-					sample.setAgeLow(Long.valueOf(cell.toString()));
-					sample.setAgeUnit(cell.toString());
-					sample.setDiseaseOntology(cell.toString());
-					sample.setDiseaseOntologyVersion(cell.toString());
-					sample.setDiseaseOntologyCode(cell.toString());
-					sample.setDiseaseDescription(cell.toString());
-					sample.setDiseaseFreeText(cell.toString());*/
 					
 					SampleLocalServiceUtil.addSample(sample);
 				}

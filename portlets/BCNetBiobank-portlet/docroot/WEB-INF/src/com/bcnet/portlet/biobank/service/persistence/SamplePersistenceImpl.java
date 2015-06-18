@@ -167,15 +167,15 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 	/**
 	 * Creates a new sample with the primary key. Does not add the sample to the database.
 	 *
-	 * @param sampleId the primary key for the new sample
+	 * @param sampleDbId the primary key for the new sample
 	 * @return the new sample
 	 */
 	@Override
-	public Sample create(long sampleId) {
+	public Sample create(long sampleDbId) {
 		Sample sample = new SampleImpl();
 
 		sample.setNew(true);
-		sample.setPrimaryKey(sampleId);
+		sample.setPrimaryKey(sampleDbId);
 
 		return sample;
 	}
@@ -183,15 +183,15 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 	/**
 	 * Removes the sample with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param sampleId the primary key of the sample
+	 * @param sampleDbId the primary key of the sample
 	 * @return the sample that was removed
 	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a sample with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Sample remove(long sampleId)
+	public Sample remove(long sampleDbId)
 		throws NoSuchSampleException, SystemException {
-		return remove((Serializable)sampleId);
+		return remove((Serializable)sampleDbId);
 	}
 
 	/**
@@ -316,9 +316,9 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 		sampleImpl.setNew(sample.isNew());
 		sampleImpl.setPrimaryKey(sample.getPrimaryKey());
 
-		sampleImpl.setSampleId(sample.getSampleId());
-		sampleImpl.setSampleCollectionDbId(sample.getSampleCollectionDbId());
-		sampleImpl.setBiobankDbId(sample.getBiobankDbId());
+		sampleImpl.setSampleDbId(sample.getSampleDbId());
+		sampleImpl.setSampleCollectionId(sample.getSampleCollectionId());
+		sampleImpl.setBiobankId(sample.getBiobankId());
 		sampleImpl.setHashedSampleId(sample.getHashedSampleId());
 		sampleImpl.setMaterialType(sample.getMaterialType());
 		sampleImpl.setContainer(sample.getContainer());
@@ -327,7 +327,7 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 		sampleImpl.setAnatomicalPartOntology(sample.getAnatomicalPartOntology());
 		sampleImpl.setAnatomicalPartOntologyVersion(sample.getAnatomicalPartOntologyVersion());
 		sampleImpl.setAnatomicalPartOntologyCode(sample.getAnatomicalPartOntologyCode());
-		sampleImpl.setAnatomicalPartDescription(sample.getAnatomicalPartDescription());
+		sampleImpl.setAnatomicalPartOntologyDescription(sample.getAnatomicalPartOntologyDescription());
 		sampleImpl.setAnatomicalPartFreeText(sample.getAnatomicalPartFreeText());
 		sampleImpl.setSex(sample.getSex());
 		sampleImpl.setAgeHigh(sample.getAgeHigh());
@@ -336,7 +336,7 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 		sampleImpl.setDiseaseOntology(sample.getDiseaseOntology());
 		sampleImpl.setDiseaseOntologyVersion(sample.getDiseaseOntologyVersion());
 		sampleImpl.setDiseaseOntologyCode(sample.getDiseaseOntologyCode());
-		sampleImpl.setDiseaseDescription(sample.getDiseaseDescription());
+		sampleImpl.setDiseaseOntologyDescription(sample.getDiseaseOntologyDescription());
 		sampleImpl.setDiseaseFreeText(sample.getDiseaseFreeText());
 
 		return sampleImpl;
@@ -370,15 +370,15 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 	/**
 	 * Returns the sample with the primary key or throws a {@link com.bcnet.portlet.biobank.NoSuchSampleException} if it could not be found.
 	 *
-	 * @param sampleId the primary key of the sample
+	 * @param sampleDbId the primary key of the sample
 	 * @return the sample
 	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a sample with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Sample findByPrimaryKey(long sampleId)
+	public Sample findByPrimaryKey(long sampleDbId)
 		throws NoSuchSampleException, SystemException {
-		return findByPrimaryKey((Serializable)sampleId);
+		return findByPrimaryKey((Serializable)sampleDbId);
 	}
 
 	/**
@@ -431,13 +431,13 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 	/**
 	 * Returns the sample with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param sampleId the primary key of the sample
+	 * @param sampleDbId the primary key of the sample
 	 * @return the sample, or <code>null</code> if a sample with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Sample fetchByPrimaryKey(long sampleId) throws SystemException {
-		return fetchByPrimaryKey((Serializable)sampleId);
+	public Sample fetchByPrimaryKey(long sampleDbId) throws SystemException {
+		return fetchByPrimaryKey((Serializable)sampleDbId);
 	}
 
 	/**

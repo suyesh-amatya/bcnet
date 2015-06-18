@@ -62,9 +62,9 @@ create table juristicperson (
 );
 
 create table sample (
-	sampleId LONG not null primary key,
-	sampleCollectionDbId LONG,
-	biobankDbId LONG,
+	sampleDbId LONG not null primary key,
+	sampleCollectionId VARCHAR(75) null,
+	biobankId VARCHAR(75) null,
 	hashedSampleId VARCHAR(75) null,
 	materialType VARCHAR(75) null,
 	container VARCHAR(75) null,
@@ -73,7 +73,7 @@ create table sample (
 	anatomicalPartOntology VARCHAR(75) null,
 	anatomicalPartOntologyVersion VARCHAR(75) null,
 	anatomicalPartOntologyCode VARCHAR(75) null,
-	anatomicalPartDescription VARCHAR(75) null,
+	anatomicalPartOntologyDescription VARCHAR(75) null,
 	anatomicalPartFreeText VARCHAR(75) null,
 	sex VARCHAR(75) null,
 	ageHigh LONG,
@@ -82,7 +82,7 @@ create table sample (
 	diseaseOntology VARCHAR(75) null,
 	diseaseOntologyVersion VARCHAR(75) null,
 	diseaseOntologyCode VARCHAR(75) null,
-	diseaseDescription VARCHAR(75) null,
+	diseaseOntologyDescription VARCHAR(75) null,
 	diseaseFreeText VARCHAR(75) null
 );
 

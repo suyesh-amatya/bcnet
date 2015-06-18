@@ -39,12 +39,12 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(45);
 
-		sb.append("{sampleId=");
-		sb.append(sampleId);
-		sb.append(", sampleCollectionDbId=");
-		sb.append(sampleCollectionDbId);
-		sb.append(", biobankDbId=");
-		sb.append(biobankDbId);
+		sb.append("{sampleDbId=");
+		sb.append(sampleDbId);
+		sb.append(", sampleCollectionId=");
+		sb.append(sampleCollectionId);
+		sb.append(", biobankId=");
+		sb.append(biobankId);
 		sb.append(", hashedSampleId=");
 		sb.append(hashedSampleId);
 		sb.append(", materialType=");
@@ -61,8 +61,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		sb.append(anatomicalPartOntologyVersion);
 		sb.append(", anatomicalPartOntologyCode=");
 		sb.append(anatomicalPartOntologyCode);
-		sb.append(", anatomicalPartDescription=");
-		sb.append(anatomicalPartDescription);
+		sb.append(", anatomicalPartOntologyDescription=");
+		sb.append(anatomicalPartOntologyDescription);
 		sb.append(", anatomicalPartFreeText=");
 		sb.append(anatomicalPartFreeText);
 		sb.append(", sex=");
@@ -79,8 +79,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		sb.append(diseaseOntologyVersion);
 		sb.append(", diseaseOntologyCode=");
 		sb.append(diseaseOntologyCode);
-		sb.append(", diseaseDescription=");
-		sb.append(diseaseDescription);
+		sb.append(", diseaseOntologyDescription=");
+		sb.append(diseaseOntologyDescription);
 		sb.append(", diseaseFreeText=");
 		sb.append(diseaseFreeText);
 		sb.append("}");
@@ -92,9 +92,21 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	public Sample toEntityModel() {
 		SampleImpl sampleImpl = new SampleImpl();
 
-		sampleImpl.setSampleId(sampleId);
-		sampleImpl.setSampleCollectionDbId(sampleCollectionDbId);
-		sampleImpl.setBiobankDbId(biobankDbId);
+		sampleImpl.setSampleDbId(sampleDbId);
+
+		if (sampleCollectionId == null) {
+			sampleImpl.setSampleCollectionId(StringPool.BLANK);
+		}
+		else {
+			sampleImpl.setSampleCollectionId(sampleCollectionId);
+		}
+
+		if (biobankId == null) {
+			sampleImpl.setBiobankId(StringPool.BLANK);
+		}
+		else {
+			sampleImpl.setBiobankId(biobankId);
+		}
 
 		if (hashedSampleId == null) {
 			sampleImpl.setHashedSampleId(StringPool.BLANK);
@@ -152,11 +164,11 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 			sampleImpl.setAnatomicalPartOntologyCode(anatomicalPartOntologyCode);
 		}
 
-		if (anatomicalPartDescription == null) {
-			sampleImpl.setAnatomicalPartDescription(StringPool.BLANK);
+		if (anatomicalPartOntologyDescription == null) {
+			sampleImpl.setAnatomicalPartOntologyDescription(StringPool.BLANK);
 		}
 		else {
-			sampleImpl.setAnatomicalPartDescription(anatomicalPartDescription);
+			sampleImpl.setAnatomicalPartOntologyDescription(anatomicalPartOntologyDescription);
 		}
 
 		if (anatomicalPartFreeText == null) {
@@ -204,11 +216,11 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 			sampleImpl.setDiseaseOntologyCode(diseaseOntologyCode);
 		}
 
-		if (diseaseDescription == null) {
-			sampleImpl.setDiseaseDescription(StringPool.BLANK);
+		if (diseaseOntologyDescription == null) {
+			sampleImpl.setDiseaseOntologyDescription(StringPool.BLANK);
 		}
 		else {
-			sampleImpl.setDiseaseDescription(diseaseDescription);
+			sampleImpl.setDiseaseOntologyDescription(diseaseOntologyDescription);
 		}
 
 		if (diseaseFreeText == null) {
@@ -225,9 +237,9 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		sampleId = objectInput.readLong();
-		sampleCollectionDbId = objectInput.readLong();
-		biobankDbId = objectInput.readLong();
+		sampleDbId = objectInput.readLong();
+		sampleCollectionId = objectInput.readUTF();
+		biobankId = objectInput.readUTF();
 		hashedSampleId = objectInput.readUTF();
 		materialType = objectInput.readUTF();
 		container = objectInput.readUTF();
@@ -236,7 +248,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		anatomicalPartOntology = objectInput.readUTF();
 		anatomicalPartOntologyVersion = objectInput.readUTF();
 		anatomicalPartOntologyCode = objectInput.readUTF();
-		anatomicalPartDescription = objectInput.readUTF();
+		anatomicalPartOntologyDescription = objectInput.readUTF();
 		anatomicalPartFreeText = objectInput.readUTF();
 		sex = objectInput.readUTF();
 		ageHigh = objectInput.readLong();
@@ -245,16 +257,28 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		diseaseOntology = objectInput.readUTF();
 		diseaseOntologyVersion = objectInput.readUTF();
 		diseaseOntologyCode = objectInput.readUTF();
-		diseaseDescription = objectInput.readUTF();
+		diseaseOntologyDescription = objectInput.readUTF();
 		diseaseFreeText = objectInput.readUTF();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
-		objectOutput.writeLong(sampleId);
-		objectOutput.writeLong(sampleCollectionDbId);
-		objectOutput.writeLong(biobankDbId);
+		objectOutput.writeLong(sampleDbId);
+
+		if (sampleCollectionId == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sampleCollectionId);
+		}
+
+		if (biobankId == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(biobankId);
+		}
 
 		if (hashedSampleId == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -307,11 +331,11 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 			objectOutput.writeUTF(anatomicalPartOntologyCode);
 		}
 
-		if (anatomicalPartDescription == null) {
+		if (anatomicalPartOntologyDescription == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(anatomicalPartDescription);
+			objectOutput.writeUTF(anatomicalPartOntologyDescription);
 		}
 
 		if (anatomicalPartFreeText == null) {
@@ -359,11 +383,11 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 			objectOutput.writeUTF(diseaseOntologyCode);
 		}
 
-		if (diseaseDescription == null) {
+		if (diseaseOntologyDescription == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(diseaseDescription);
+			objectOutput.writeUTF(diseaseOntologyDescription);
 		}
 
 		if (diseaseFreeText == null) {
@@ -374,9 +398,9 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		}
 	}
 
-	public long sampleId;
-	public long sampleCollectionDbId;
-	public long biobankDbId;
+	public long sampleDbId;
+	public String sampleCollectionId;
+	public String biobankId;
 	public String hashedSampleId;
 	public String materialType;
 	public String container;
@@ -385,7 +409,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	public String anatomicalPartOntology;
 	public String anatomicalPartOntologyVersion;
 	public String anatomicalPartOntologyCode;
-	public String anatomicalPartDescription;
+	public String anatomicalPartOntologyDescription;
 	public String anatomicalPartFreeText;
 	public String sex;
 	public long ageHigh;
@@ -394,6 +418,6 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	public String diseaseOntology;
 	public String diseaseOntologyVersion;
 	public String diseaseOntologyCode;
-	public String diseaseDescription;
+	public String diseaseOntologyDescription;
 	public String diseaseFreeText;
 }

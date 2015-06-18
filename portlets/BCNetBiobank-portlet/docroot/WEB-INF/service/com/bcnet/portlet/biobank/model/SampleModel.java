@@ -60,46 +60,48 @@ public interface SampleModel extends BaseModel<Sample> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Returns the sample ID of this sample.
+	 * Returns the sample db ID of this sample.
 	 *
-	 * @return the sample ID of this sample
+	 * @return the sample db ID of this sample
 	 */
-	public long getSampleId();
+	public long getSampleDbId();
 
 	/**
-	 * Sets the sample ID of this sample.
+	 * Sets the sample db ID of this sample.
 	 *
-	 * @param sampleId the sample ID of this sample
+	 * @param sampleDbId the sample db ID of this sample
 	 */
-	public void setSampleId(long sampleId);
+	public void setSampleDbId(long sampleDbId);
 
 	/**
-	 * Returns the sample collection db ID of this sample.
+	 * Returns the sample collection ID of this sample.
 	 *
-	 * @return the sample collection db ID of this sample
+	 * @return the sample collection ID of this sample
 	 */
-	public long getSampleCollectionDbId();
+	@AutoEscape
+	public String getSampleCollectionId();
 
 	/**
-	 * Sets the sample collection db ID of this sample.
+	 * Sets the sample collection ID of this sample.
 	 *
-	 * @param sampleCollectionDbId the sample collection db ID of this sample
+	 * @param sampleCollectionId the sample collection ID of this sample
 	 */
-	public void setSampleCollectionDbId(long sampleCollectionDbId);
+	public void setSampleCollectionId(String sampleCollectionId);
 
 	/**
-	 * Returns the biobank db ID of this sample.
+	 * Returns the biobank ID of this sample.
 	 *
-	 * @return the biobank db ID of this sample
+	 * @return the biobank ID of this sample
 	 */
-	public long getBiobankDbId();
+	@AutoEscape
+	public String getBiobankId();
 
 	/**
-	 * Sets the biobank db ID of this sample.
+	 * Sets the biobank ID of this sample.
 	 *
-	 * @param biobankDbId the biobank db ID of this sample
+	 * @param biobankId the biobank ID of this sample
 	 */
-	public void setBiobankDbId(long biobankDbId);
+	public void setBiobankId(String biobankId);
 
 	/**
 	 * Returns the hashed sample ID of this sample.
@@ -222,19 +224,20 @@ public interface SampleModel extends BaseModel<Sample> {
 	public void setAnatomicalPartOntologyCode(String anatomicalPartOntologyCode);
 
 	/**
-	 * Returns the anatomical part description of this sample.
+	 * Returns the anatomical part ontology description of this sample.
 	 *
-	 * @return the anatomical part description of this sample
+	 * @return the anatomical part ontology description of this sample
 	 */
 	@AutoEscape
-	public String getAnatomicalPartDescription();
+	public String getAnatomicalPartOntologyDescription();
 
 	/**
-	 * Sets the anatomical part description of this sample.
+	 * Sets the anatomical part ontology description of this sample.
 	 *
-	 * @param anatomicalPartDescription the anatomical part description of this sample
+	 * @param anatomicalPartOntologyDescription the anatomical part ontology description of this sample
 	 */
-	public void setAnatomicalPartDescription(String anatomicalPartDescription);
+	public void setAnatomicalPartOntologyDescription(
+		String anatomicalPartOntologyDescription);
 
 	/**
 	 * Returns the anatomical part free text of this sample.
@@ -355,19 +358,19 @@ public interface SampleModel extends BaseModel<Sample> {
 	public void setDiseaseOntologyCode(String diseaseOntologyCode);
 
 	/**
-	 * Returns the disease description of this sample.
+	 * Returns the disease ontology description of this sample.
 	 *
-	 * @return the disease description of this sample
+	 * @return the disease ontology description of this sample
 	 */
 	@AutoEscape
-	public String getDiseaseDescription();
+	public String getDiseaseOntologyDescription();
 
 	/**
-	 * Sets the disease description of this sample.
+	 * Sets the disease ontology description of this sample.
 	 *
-	 * @param diseaseDescription the disease description of this sample
+	 * @param diseaseOntologyDescription the disease ontology description of this sample
 	 */
-	public void setDiseaseDescription(String diseaseDescription);
+	public void setDiseaseOntologyDescription(String diseaseOntologyDescription);
 
 	/**
 	 * Returns the disease free text of this sample.

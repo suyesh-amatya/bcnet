@@ -1,37 +1,25 @@
 ﻿CREATE TABLE IF NOT EXISTS `bcnet`.`sample` (
-  `sampleId` BIGINT(20) NOT NULL AUTO_INCREMENT,
-  `sampleCollectionDbId` BIGINT(20) NOT NULL,
-  `biobankDbId` BIGINT(20) NOT NULL,
-  `hashedSampleId` VARCHAR(255) NOT NULL,
-  `materialType` VARCHAR(255) NOT NULL,
-  `container` VARCHAR(45) NULL,
-  `storageTemperature` VARCHAR(45) NULL COMMENT 'Text string of letters with the temperature for the long-term storage of the biospecimens in the sample collection. Can be one or several of the following values:  Room temperature, +4 °C, -18 °C to -35 °C, -60 °C to -85 °C, Liquid nitrogen, Other. T' /* comment truncated */ /*he intervals are chosen according to SPREC.*/,
-  `sampledTime` DATE NULL,
-  `anatomicalPartOntology` VARCHAR(255) NULL COMMENT '(from lookup table)',
-  `anatomicalPartOntologyVersion` VARCHAR(255) NULL,
-  `anatomicalPartOntologyCode` VARCHAR(255) NULL,
-  `anatomicalPartDescription` VARCHAR(255) NULL COMMENT 'for the specified anatomicalPartOntology',
-  `anatomicalPartFreeText` VARCHAR(255) NULL,
-  `sex` VARCHAR(45) NULL,
-  `ageHigh` INT NULL,
-  `ageLow` INT NULL,
-  `ageUnit` VARCHAR(45) NULL,
-  `diseaseOntology` VARCHAR(255) NULL COMMENT '(from lookup table)',
-  `diseaseOntologyVersion` VARCHAR(255) NULL,
-  `diseaseOntologyCode` VARCHAR(255) NULL,
-  `diseaseDescription` VARCHAR(255) NULL COMMENT 'for the specified diseaseOntology',
-  `diseaseFreeText` VARCHAR(255) NULL,
-  INDEX `fk_sample_samplecollection1_idx` (`sampleCollectionDbId` ASC),
-  PRIMARY KEY (`sampleId`),
-  INDEX `fk_sample_biobank1_idx` (`biobankDbId` ASC),
-  CONSTRAINT `fk_sample_sampleCollectionDbId`
-    FOREIGN KEY (`sampleCollectionDbId`)
-    REFERENCES `bcnet`.`samplecollection` (`sampleCollectionDbId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_sample_biobankDbId`
-    FOREIGN KEY (`biobankDbId`)
-    REFERENCES `bcnet`.`biobank` (`biobankDbId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+ 
+  `sampleDbId` bigint(20) NOT NULL AUTO_INCREMENT,
+   `sampleCollectionId` varchar(255) DEFAULT NULL,
+  `biobankId` varchar(255) NOT NULL,
+  `hashedSampleId` varchar(255) NOT NULL,
+  `materialType` varchar(255) NOT NULL,
+  `container` varchar(45) DEFAULT NULL,
+  `storageTemperature` varchar(45) DEFAULT NULL COMMENT 'Text string of letters with the temperature for the long-term storage of the biospecimens in the sample collection. Can be one or several of the following values:  Room temperature, +4 °C, -18 °C to -35 °C, -60 °C to -85 °C, Liquid nitrogen, Other. T',
+  `sampledTime` date DEFAULT NULL,
+  `anatomicalPartOntology` varchar(255) DEFAULT NULL COMMENT '(from lookup table)',
+  `anatomicalPartOntologyVersion` varchar(255) DEFAULT NULL,
+  `anatomicalPartOntologyCode` varchar(255) DEFAULT NULL,
+  `anatomicalPartOntologyDescription` varchar(255) DEFAULT NULL COMMENT 'for the specified anatomicalPartOntology',
+  `anatomicalPartFreeText` varchar(255) DEFAULT NULL,
+  `sex` varchar(45) DEFAULT NULL,
+  `ageHigh` int(11) DEFAULT NULL,
+  `ageLow` int(11) DEFAULT NULL,
+  `ageUnit` varchar(45) DEFAULT NULL,
+  `diseaseOntology` varchar(255) DEFAULT NULL COMMENT '(from lookup table)',
+  `diseaseOntologyVersion` varchar(255) DEFAULT NULL,
+  `diseaseOntologyCode` varchar(255) DEFAULT NULL,
+  `diseaseOntologyDescription` varchar(255) DEFAULT NULL COMMENT 'for the specified diseaseOntology',
+  `diseaseFreeText` varchar(255) DEFAULT NULL,PRIMARY KEY (`sampleDbId`))
 ENGINE = InnoDB DEFAULT CHARSET=utf8;

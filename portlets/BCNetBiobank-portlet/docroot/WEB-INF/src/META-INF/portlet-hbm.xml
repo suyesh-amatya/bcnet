@@ -53,11 +53,11 @@
 	</class>
 	<class name="com.bcnet.portlet.biobank.model.impl.SampleImpl" table="sample">
 		<cache usage="read-write" />
-		<id name="sampleId" type="long">
+		<id name="sampleDbId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="sampleCollectionDbId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="biobankDbId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sampleCollectionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="biobankId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="hashedSampleId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="materialType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="container" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -66,7 +66,7 @@
 		<property name="anatomicalPartOntology" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="anatomicalPartOntologyVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="anatomicalPartOntologyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="anatomicalPartDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="anatomicalPartOntologyDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="anatomicalPartFreeText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sex" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ageHigh" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -75,7 +75,7 @@
 		<property name="diseaseOntology" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseaseOntologyVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseaseOntologyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="diseaseDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="diseaseOntologyDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseaseFreeText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.bcnet.portlet.biobank.model.impl.SampleCollectionImpl" table="samplecollection">

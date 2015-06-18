@@ -88,27 +88,27 @@ public abstract class SampleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * Creates a new sample with the primary key. Does not add the sample to the database.
 	 *
-	 * @param sampleId the primary key for the new sample
+	 * @param sampleDbId the primary key for the new sample
 	 * @return the new sample
 	 */
 	@Override
-	public Sample createSample(long sampleId) {
-		return samplePersistence.create(sampleId);
+	public Sample createSample(long sampleDbId) {
+		return samplePersistence.create(sampleDbId);
 	}
 
 	/**
 	 * Deletes the sample with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param sampleId the primary key of the sample
+	 * @param sampleDbId the primary key of the sample
 	 * @return the sample that was removed
 	 * @throws PortalException if a sample with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Sample deleteSample(long sampleId)
+	public Sample deleteSample(long sampleDbId)
 		throws PortalException, SystemException {
-		return samplePersistence.remove(sampleId);
+		return samplePersistence.remove(sampleDbId);
 	}
 
 	/**
@@ -216,22 +216,22 @@ public abstract class SampleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public Sample fetchSample(long sampleId) throws SystemException {
-		return samplePersistence.fetchByPrimaryKey(sampleId);
+	public Sample fetchSample(long sampleDbId) throws SystemException {
+		return samplePersistence.fetchByPrimaryKey(sampleDbId);
 	}
 
 	/**
 	 * Returns the sample with the primary key.
 	 *
-	 * @param sampleId the primary key of the sample
+	 * @param sampleDbId the primary key of the sample
 	 * @return the sample
 	 * @throws PortalException if a sample with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Sample getSample(long sampleId)
+	public Sample getSample(long sampleDbId)
 		throws PortalException, SystemException {
-		return samplePersistence.findByPrimaryKey(sampleId);
+		return samplePersistence.findByPrimaryKey(sampleDbId);
 	}
 
 	@Override

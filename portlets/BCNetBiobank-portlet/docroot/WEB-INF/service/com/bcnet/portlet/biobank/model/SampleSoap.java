@@ -31,9 +31,9 @@ public class SampleSoap implements Serializable {
 	public static SampleSoap toSoapModel(Sample model) {
 		SampleSoap soapModel = new SampleSoap();
 
-		soapModel.setSampleId(model.getSampleId());
-		soapModel.setSampleCollectionDbId(model.getSampleCollectionDbId());
-		soapModel.setBiobankDbId(model.getBiobankDbId());
+		soapModel.setSampleDbId(model.getSampleDbId());
+		soapModel.setSampleCollectionId(model.getSampleCollectionId());
+		soapModel.setBiobankId(model.getBiobankId());
 		soapModel.setHashedSampleId(model.getHashedSampleId());
 		soapModel.setMaterialType(model.getMaterialType());
 		soapModel.setContainer(model.getContainer());
@@ -42,7 +42,7 @@ public class SampleSoap implements Serializable {
 		soapModel.setAnatomicalPartOntology(model.getAnatomicalPartOntology());
 		soapModel.setAnatomicalPartOntologyVersion(model.getAnatomicalPartOntologyVersion());
 		soapModel.setAnatomicalPartOntologyCode(model.getAnatomicalPartOntologyCode());
-		soapModel.setAnatomicalPartDescription(model.getAnatomicalPartDescription());
+		soapModel.setAnatomicalPartOntologyDescription(model.getAnatomicalPartOntologyDescription());
 		soapModel.setAnatomicalPartFreeText(model.getAnatomicalPartFreeText());
 		soapModel.setSex(model.getSex());
 		soapModel.setAgeHigh(model.getAgeHigh());
@@ -51,7 +51,7 @@ public class SampleSoap implements Serializable {
 		soapModel.setDiseaseOntology(model.getDiseaseOntology());
 		soapModel.setDiseaseOntologyVersion(model.getDiseaseOntologyVersion());
 		soapModel.setDiseaseOntologyCode(model.getDiseaseOntologyCode());
-		soapModel.setDiseaseDescription(model.getDiseaseDescription());
+		soapModel.setDiseaseOntologyDescription(model.getDiseaseOntologyDescription());
 		soapModel.setDiseaseFreeText(model.getDiseaseFreeText());
 
 		return soapModel;
@@ -98,35 +98,35 @@ public class SampleSoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _sampleId;
+		return _sampleDbId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setSampleId(pk);
+		setSampleDbId(pk);
 	}
 
-	public long getSampleId() {
-		return _sampleId;
+	public long getSampleDbId() {
+		return _sampleDbId;
 	}
 
-	public void setSampleId(long sampleId) {
-		_sampleId = sampleId;
+	public void setSampleDbId(long sampleDbId) {
+		_sampleDbId = sampleDbId;
 	}
 
-	public long getSampleCollectionDbId() {
-		return _sampleCollectionDbId;
+	public String getSampleCollectionId() {
+		return _sampleCollectionId;
 	}
 
-	public void setSampleCollectionDbId(long sampleCollectionDbId) {
-		_sampleCollectionDbId = sampleCollectionDbId;
+	public void setSampleCollectionId(String sampleCollectionId) {
+		_sampleCollectionId = sampleCollectionId;
 	}
 
-	public long getBiobankDbId() {
-		return _biobankDbId;
+	public String getBiobankId() {
+		return _biobankId;
 	}
 
-	public void setBiobankDbId(long biobankDbId) {
-		_biobankDbId = biobankDbId;
+	public void setBiobankId(String biobankId) {
+		_biobankId = biobankId;
 	}
 
 	public String getHashedSampleId() {
@@ -194,12 +194,13 @@ public class SampleSoap implements Serializable {
 		_anatomicalPartOntologyCode = anatomicalPartOntologyCode;
 	}
 
-	public String getAnatomicalPartDescription() {
-		return _anatomicalPartDescription;
+	public String getAnatomicalPartOntologyDescription() {
+		return _anatomicalPartOntologyDescription;
 	}
 
-	public void setAnatomicalPartDescription(String anatomicalPartDescription) {
-		_anatomicalPartDescription = anatomicalPartDescription;
+	public void setAnatomicalPartOntologyDescription(
+		String anatomicalPartOntologyDescription) {
+		_anatomicalPartOntologyDescription = anatomicalPartOntologyDescription;
 	}
 
 	public String getAnatomicalPartFreeText() {
@@ -266,12 +267,12 @@ public class SampleSoap implements Serializable {
 		_diseaseOntologyCode = diseaseOntologyCode;
 	}
 
-	public String getDiseaseDescription() {
-		return _diseaseDescription;
+	public String getDiseaseOntologyDescription() {
+		return _diseaseOntologyDescription;
 	}
 
-	public void setDiseaseDescription(String diseaseDescription) {
-		_diseaseDescription = diseaseDescription;
+	public void setDiseaseOntologyDescription(String diseaseOntologyDescription) {
+		_diseaseOntologyDescription = diseaseOntologyDescription;
 	}
 
 	public String getDiseaseFreeText() {
@@ -282,9 +283,9 @@ public class SampleSoap implements Serializable {
 		_diseaseFreeText = diseaseFreeText;
 	}
 
-	private long _sampleId;
-	private long _sampleCollectionDbId;
-	private long _biobankDbId;
+	private long _sampleDbId;
+	private String _sampleCollectionId;
+	private String _biobankId;
 	private String _hashedSampleId;
 	private String _materialType;
 	private String _container;
@@ -293,7 +294,7 @@ public class SampleSoap implements Serializable {
 	private String _anatomicalPartOntology;
 	private String _anatomicalPartOntologyVersion;
 	private String _anatomicalPartOntologyCode;
-	private String _anatomicalPartDescription;
+	private String _anatomicalPartOntologyDescription;
 	private String _anatomicalPartFreeText;
 	private String _sex;
 	private long _ageHigh;
@@ -302,6 +303,6 @@ public class SampleSoap implements Serializable {
 	private String _diseaseOntology;
 	private String _diseaseOntologyVersion;
 	private String _diseaseOntologyCode;
-	private String _diseaseDescription;
+	private String _diseaseOntologyDescription;
 	private String _diseaseFreeText;
 }

@@ -51,17 +51,17 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 	@Override
 	public long getPrimaryKey() {
-		return _sampleId;
+		return _sampleDbId;
 	}
 
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		setSampleId(primaryKey);
+		setSampleDbId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _sampleId;
+		return _sampleDbId;
 	}
 
 	@Override
@@ -73,9 +73,9 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("sampleId", getSampleId());
-		attributes.put("sampleCollectionDbId", getSampleCollectionDbId());
-		attributes.put("biobankDbId", getBiobankDbId());
+		attributes.put("sampleDbId", getSampleDbId());
+		attributes.put("sampleCollectionId", getSampleCollectionId());
+		attributes.put("biobankId", getBiobankId());
 		attributes.put("hashedSampleId", getHashedSampleId());
 		attributes.put("materialType", getMaterialType());
 		attributes.put("container", getContainer());
@@ -86,8 +86,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 			getAnatomicalPartOntologyVersion());
 		attributes.put("anatomicalPartOntologyCode",
 			getAnatomicalPartOntologyCode());
-		attributes.put("anatomicalPartDescription",
-			getAnatomicalPartDescription());
+		attributes.put("anatomicalPartOntologyDescription",
+			getAnatomicalPartOntologyDescription());
 		attributes.put("anatomicalPartFreeText", getAnatomicalPartFreeText());
 		attributes.put("sex", getSex());
 		attributes.put("ageHigh", getAgeHigh());
@@ -96,7 +96,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		attributes.put("diseaseOntology", getDiseaseOntology());
 		attributes.put("diseaseOntologyVersion", getDiseaseOntologyVersion());
 		attributes.put("diseaseOntologyCode", getDiseaseOntologyCode());
-		attributes.put("diseaseDescription", getDiseaseDescription());
+		attributes.put("diseaseOntologyDescription",
+			getDiseaseOntologyDescription());
 		attributes.put("diseaseFreeText", getDiseaseFreeText());
 
 		return attributes;
@@ -104,22 +105,22 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Long sampleId = (Long)attributes.get("sampleId");
+		Long sampleDbId = (Long)attributes.get("sampleDbId");
 
-		if (sampleId != null) {
-			setSampleId(sampleId);
+		if (sampleDbId != null) {
+			setSampleDbId(sampleDbId);
 		}
 
-		Long sampleCollectionDbId = (Long)attributes.get("sampleCollectionDbId");
+		String sampleCollectionId = (String)attributes.get("sampleCollectionId");
 
-		if (sampleCollectionDbId != null) {
-			setSampleCollectionDbId(sampleCollectionDbId);
+		if (sampleCollectionId != null) {
+			setSampleCollectionId(sampleCollectionId);
 		}
 
-		Long biobankDbId = (Long)attributes.get("biobankDbId");
+		String biobankId = (String)attributes.get("biobankId");
 
-		if (biobankDbId != null) {
-			setBiobankDbId(biobankDbId);
+		if (biobankId != null) {
+			setBiobankId(biobankId);
 		}
 
 		String hashedSampleId = (String)attributes.get("hashedSampleId");
@@ -173,11 +174,11 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 			setAnatomicalPartOntologyCode(anatomicalPartOntologyCode);
 		}
 
-		String anatomicalPartDescription = (String)attributes.get(
-				"anatomicalPartDescription");
+		String anatomicalPartOntologyDescription = (String)attributes.get(
+				"anatomicalPartOntologyDescription");
 
-		if (anatomicalPartDescription != null) {
-			setAnatomicalPartDescription(anatomicalPartDescription);
+		if (anatomicalPartOntologyDescription != null) {
+			setAnatomicalPartOntologyDescription(anatomicalPartOntologyDescription);
 		}
 
 		String anatomicalPartFreeText = (String)attributes.get(
@@ -231,10 +232,11 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 			setDiseaseOntologyCode(diseaseOntologyCode);
 		}
 
-		String diseaseDescription = (String)attributes.get("diseaseDescription");
+		String diseaseOntologyDescription = (String)attributes.get(
+				"diseaseOntologyDescription");
 
-		if (diseaseDescription != null) {
-			setDiseaseDescription(diseaseDescription);
+		if (diseaseOntologyDescription != null) {
+			setDiseaseOntologyDescription(diseaseOntologyDescription);
 		}
 
 		String diseaseFreeText = (String)attributes.get("diseaseFreeText");
@@ -245,21 +247,21 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	}
 
 	@Override
-	public long getSampleId() {
-		return _sampleId;
+	public long getSampleDbId() {
+		return _sampleDbId;
 	}
 
 	@Override
-	public void setSampleId(long sampleId) {
-		_sampleId = sampleId;
+	public void setSampleDbId(long sampleDbId) {
+		_sampleDbId = sampleDbId;
 
 		if (_sampleRemoteModel != null) {
 			try {
 				Class<?> clazz = _sampleRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSampleId", long.class);
+				Method method = clazz.getMethod("setSampleDbId", long.class);
 
-				method.invoke(_sampleRemoteModel, sampleId);
+				method.invoke(_sampleRemoteModel, sampleDbId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -268,22 +270,22 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	}
 
 	@Override
-	public long getSampleCollectionDbId() {
-		return _sampleCollectionDbId;
+	public String getSampleCollectionId() {
+		return _sampleCollectionId;
 	}
 
 	@Override
-	public void setSampleCollectionDbId(long sampleCollectionDbId) {
-		_sampleCollectionDbId = sampleCollectionDbId;
+	public void setSampleCollectionId(String sampleCollectionId) {
+		_sampleCollectionId = sampleCollectionId;
 
 		if (_sampleRemoteModel != null) {
 			try {
 				Class<?> clazz = _sampleRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSampleCollectionDbId",
-						long.class);
+				Method method = clazz.getMethod("setSampleCollectionId",
+						String.class);
 
-				method.invoke(_sampleRemoteModel, sampleCollectionDbId);
+				method.invoke(_sampleRemoteModel, sampleCollectionId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -292,21 +294,21 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	}
 
 	@Override
-	public long getBiobankDbId() {
-		return _biobankDbId;
+	public String getBiobankId() {
+		return _biobankId;
 	}
 
 	@Override
-	public void setBiobankDbId(long biobankDbId) {
-		_biobankDbId = biobankDbId;
+	public void setBiobankId(String biobankId) {
+		_biobankId = biobankId;
 
 		if (_sampleRemoteModel != null) {
 			try {
 				Class<?> clazz = _sampleRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setBiobankDbId", long.class);
+				Method method = clazz.getMethod("setBiobankId", String.class);
 
-				method.invoke(_sampleRemoteModel, biobankDbId);
+				method.invoke(_sampleRemoteModel, biobankId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -505,22 +507,24 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	}
 
 	@Override
-	public String getAnatomicalPartDescription() {
-		return _anatomicalPartDescription;
+	public String getAnatomicalPartOntologyDescription() {
+		return _anatomicalPartOntologyDescription;
 	}
 
 	@Override
-	public void setAnatomicalPartDescription(String anatomicalPartDescription) {
-		_anatomicalPartDescription = anatomicalPartDescription;
+	public void setAnatomicalPartOntologyDescription(
+		String anatomicalPartOntologyDescription) {
+		_anatomicalPartOntologyDescription = anatomicalPartOntologyDescription;
 
 		if (_sampleRemoteModel != null) {
 			try {
 				Class<?> clazz = _sampleRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setAnatomicalPartDescription",
+				Method method = clazz.getMethod("setAnatomicalPartOntologyDescription",
 						String.class);
 
-				method.invoke(_sampleRemoteModel, anatomicalPartDescription);
+				method.invoke(_sampleRemoteModel,
+					anatomicalPartOntologyDescription);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -717,22 +721,22 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	}
 
 	@Override
-	public String getDiseaseDescription() {
-		return _diseaseDescription;
+	public String getDiseaseOntologyDescription() {
+		return _diseaseOntologyDescription;
 	}
 
 	@Override
-	public void setDiseaseDescription(String diseaseDescription) {
-		_diseaseDescription = diseaseDescription;
+	public void setDiseaseOntologyDescription(String diseaseOntologyDescription) {
+		_diseaseOntologyDescription = diseaseOntologyDescription;
 
 		if (_sampleRemoteModel != null) {
 			try {
 				Class<?> clazz = _sampleRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setDiseaseDescription",
+				Method method = clazz.getMethod("setDiseaseOntologyDescription",
 						String.class);
 
-				method.invoke(_sampleRemoteModel, diseaseDescription);
+				method.invoke(_sampleRemoteModel, diseaseOntologyDescription);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -833,9 +837,9 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	public Object clone() {
 		SampleClp clone = new SampleClp();
 
-		clone.setSampleId(getSampleId());
-		clone.setSampleCollectionDbId(getSampleCollectionDbId());
-		clone.setBiobankDbId(getBiobankDbId());
+		clone.setSampleDbId(getSampleDbId());
+		clone.setSampleCollectionId(getSampleCollectionId());
+		clone.setBiobankId(getBiobankId());
 		clone.setHashedSampleId(getHashedSampleId());
 		clone.setMaterialType(getMaterialType());
 		clone.setContainer(getContainer());
@@ -844,7 +848,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		clone.setAnatomicalPartOntology(getAnatomicalPartOntology());
 		clone.setAnatomicalPartOntologyVersion(getAnatomicalPartOntologyVersion());
 		clone.setAnatomicalPartOntologyCode(getAnatomicalPartOntologyCode());
-		clone.setAnatomicalPartDescription(getAnatomicalPartDescription());
+		clone.setAnatomicalPartOntologyDescription(getAnatomicalPartOntologyDescription());
 		clone.setAnatomicalPartFreeText(getAnatomicalPartFreeText());
 		clone.setSex(getSex());
 		clone.setAgeHigh(getAgeHigh());
@@ -853,7 +857,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		clone.setDiseaseOntology(getDiseaseOntology());
 		clone.setDiseaseOntologyVersion(getDiseaseOntologyVersion());
 		clone.setDiseaseOntologyCode(getDiseaseOntologyCode());
-		clone.setDiseaseDescription(getDiseaseDescription());
+		clone.setDiseaseOntologyDescription(getDiseaseOntologyDescription());
 		clone.setDiseaseFreeText(getDiseaseFreeText());
 
 		return clone;
@@ -905,12 +909,12 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	public String toString() {
 		StringBundler sb = new StringBundler(45);
 
-		sb.append("{sampleId=");
-		sb.append(getSampleId());
-		sb.append(", sampleCollectionDbId=");
-		sb.append(getSampleCollectionDbId());
-		sb.append(", biobankDbId=");
-		sb.append(getBiobankDbId());
+		sb.append("{sampleDbId=");
+		sb.append(getSampleDbId());
+		sb.append(", sampleCollectionId=");
+		sb.append(getSampleCollectionId());
+		sb.append(", biobankId=");
+		sb.append(getBiobankId());
 		sb.append(", hashedSampleId=");
 		sb.append(getHashedSampleId());
 		sb.append(", materialType=");
@@ -927,8 +931,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getAnatomicalPartOntologyVersion());
 		sb.append(", anatomicalPartOntologyCode=");
 		sb.append(getAnatomicalPartOntologyCode());
-		sb.append(", anatomicalPartDescription=");
-		sb.append(getAnatomicalPartDescription());
+		sb.append(", anatomicalPartOntologyDescription=");
+		sb.append(getAnatomicalPartOntologyDescription());
 		sb.append(", anatomicalPartFreeText=");
 		sb.append(getAnatomicalPartFreeText());
 		sb.append(", sex=");
@@ -945,8 +949,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getDiseaseOntologyVersion());
 		sb.append(", diseaseOntologyCode=");
 		sb.append(getDiseaseOntologyCode());
-		sb.append(", diseaseDescription=");
-		sb.append(getDiseaseDescription());
+		sb.append(", diseaseOntologyDescription=");
+		sb.append(getDiseaseOntologyDescription());
 		sb.append(", diseaseFreeText=");
 		sb.append(getDiseaseFreeText());
 		sb.append("}");
@@ -963,16 +967,16 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>sampleId</column-name><column-value><![CDATA[");
-		sb.append(getSampleId());
+			"<column><column-name>sampleDbId</column-name><column-value><![CDATA[");
+		sb.append(getSampleDbId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sampleCollectionDbId</column-name><column-value><![CDATA[");
-		sb.append(getSampleCollectionDbId());
+			"<column><column-name>sampleCollectionId</column-name><column-value><![CDATA[");
+		sb.append(getSampleCollectionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>biobankDbId</column-name><column-value><![CDATA[");
-		sb.append(getBiobankDbId());
+			"<column><column-name>biobankId</column-name><column-value><![CDATA[");
+		sb.append(getBiobankId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>hashedSampleId</column-name><column-value><![CDATA[");
@@ -1007,8 +1011,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getAnatomicalPartOntologyCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>anatomicalPartDescription</column-name><column-value><![CDATA[");
-		sb.append(getAnatomicalPartDescription());
+			"<column><column-name>anatomicalPartOntologyDescription</column-name><column-value><![CDATA[");
+		sb.append(getAnatomicalPartOntologyDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>anatomicalPartFreeText</column-name><column-value><![CDATA[");
@@ -1043,8 +1047,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getDiseaseOntologyCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>diseaseDescription</column-name><column-value><![CDATA[");
-		sb.append(getDiseaseDescription());
+			"<column><column-name>diseaseOntologyDescription</column-name><column-value><![CDATA[");
+		sb.append(getDiseaseOntologyDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>diseaseFreeText</column-name><column-value><![CDATA[");
@@ -1056,9 +1060,9 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		return sb.toString();
 	}
 
-	private long _sampleId;
-	private long _sampleCollectionDbId;
-	private long _biobankDbId;
+	private long _sampleDbId;
+	private String _sampleCollectionId;
+	private String _biobankId;
 	private String _hashedSampleId;
 	private String _materialType;
 	private String _container;
@@ -1067,7 +1071,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _anatomicalPartOntology;
 	private String _anatomicalPartOntologyVersion;
 	private String _anatomicalPartOntologyCode;
-	private String _anatomicalPartDescription;
+	private String _anatomicalPartOntologyDescription;
 	private String _anatomicalPartFreeText;
 	private String _sex;
 	private long _ageHigh;
@@ -1076,7 +1080,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _diseaseOntology;
 	private String _diseaseOntologyVersion;
 	private String _diseaseOntologyCode;
-	private String _diseaseDescription;
+	private String _diseaseOntologyDescription;
 	private String _diseaseFreeText;
 	private BaseModel<?> _sampleRemoteModel;
 }

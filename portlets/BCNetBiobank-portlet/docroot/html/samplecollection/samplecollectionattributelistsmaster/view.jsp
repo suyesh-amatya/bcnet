@@ -49,6 +49,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 			name="attributeListValue"
 			property="attributeListValue"
 		/>
+		
 		<c:choose>		
 			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_sample_collection_attribute_lists_master) ||  
 									permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_sample_collection_attribute_lists_master) %>">

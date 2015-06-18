@@ -57,9 +57,9 @@
 	</mapped-superclass>
 	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleModelImpl">
 		<attributes>
-			<id name="sampleId" />
-			<basic name="sampleCollectionDbId" />
-			<basic name="biobankDbId" />
+			<id name="sampleDbId" />
+			<basic name="sampleCollectionId" />
+			<basic name="biobankId" />
 			<basic name="hashedSampleId" />
 			<basic name="materialType" />
 			<basic name="container" />
@@ -70,7 +70,7 @@
 			<basic name="anatomicalPartOntology" />
 			<basic name="anatomicalPartOntologyVersion" />
 			<basic name="anatomicalPartOntologyCode" />
-			<basic name="anatomicalPartDescription" />
+			<basic name="anatomicalPartOntologyDescription" />
 			<basic name="anatomicalPartFreeText" />
 			<basic name="sex" />
 			<basic name="ageHigh" />
@@ -79,7 +79,7 @@
 			<basic name="diseaseOntology" />
 			<basic name="diseaseOntologyVersion" />
 			<basic name="diseaseOntologyCode" />
-			<basic name="diseaseDescription" />
+			<basic name="diseaseOntologyDescription" />
 			<basic name="diseaseFreeText" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

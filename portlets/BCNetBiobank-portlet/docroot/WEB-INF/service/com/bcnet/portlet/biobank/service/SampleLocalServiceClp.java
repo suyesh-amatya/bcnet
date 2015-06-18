@@ -146,12 +146,12 @@ public class SampleLocalServiceClp implements SampleLocalService {
 	}
 
 	@Override
-	public com.bcnet.portlet.biobank.model.Sample createSample(long sampleId) {
+	public com.bcnet.portlet.biobank.model.Sample createSample(long sampleDbId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName1,
-					_methodParameterTypes1, new Object[] { sampleId });
+					_methodParameterTypes1, new Object[] { sampleDbId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -169,14 +169,14 @@ public class SampleLocalServiceClp implements SampleLocalService {
 	}
 
 	@Override
-	public com.bcnet.portlet.biobank.model.Sample deleteSample(long sampleId)
+	public com.bcnet.portlet.biobank.model.Sample deleteSample(long sampleDbId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName2,
-					_methodParameterTypes2, new Object[] { sampleId });
+					_methodParameterTypes2, new Object[] { sampleDbId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -429,13 +429,13 @@ public class SampleLocalServiceClp implements SampleLocalService {
 	}
 
 	@Override
-	public com.bcnet.portlet.biobank.model.Sample fetchSample(long sampleId)
+	public com.bcnet.portlet.biobank.model.Sample fetchSample(long sampleDbId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName10,
-					_methodParameterTypes10, new Object[] { sampleId });
+					_methodParameterTypes10, new Object[] { sampleDbId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -457,14 +457,14 @@ public class SampleLocalServiceClp implements SampleLocalService {
 	}
 
 	@Override
-	public com.bcnet.portlet.biobank.model.Sample getSample(long sampleId)
+	public com.bcnet.portlet.biobank.model.Sample getSample(long sampleDbId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName11,
-					_methodParameterTypes11, new Object[] { sampleId });
+					_methodParameterTypes11, new Object[] { sampleDbId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

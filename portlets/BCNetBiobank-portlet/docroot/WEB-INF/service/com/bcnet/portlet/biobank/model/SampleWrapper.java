@@ -49,9 +49,9 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("sampleId", getSampleId());
-		attributes.put("sampleCollectionDbId", getSampleCollectionDbId());
-		attributes.put("biobankDbId", getBiobankDbId());
+		attributes.put("sampleDbId", getSampleDbId());
+		attributes.put("sampleCollectionId", getSampleCollectionId());
+		attributes.put("biobankId", getBiobankId());
 		attributes.put("hashedSampleId", getHashedSampleId());
 		attributes.put("materialType", getMaterialType());
 		attributes.put("container", getContainer());
@@ -62,8 +62,8 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 			getAnatomicalPartOntologyVersion());
 		attributes.put("anatomicalPartOntologyCode",
 			getAnatomicalPartOntologyCode());
-		attributes.put("anatomicalPartDescription",
-			getAnatomicalPartDescription());
+		attributes.put("anatomicalPartOntologyDescription",
+			getAnatomicalPartOntologyDescription());
 		attributes.put("anatomicalPartFreeText", getAnatomicalPartFreeText());
 		attributes.put("sex", getSex());
 		attributes.put("ageHigh", getAgeHigh());
@@ -72,7 +72,8 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 		attributes.put("diseaseOntology", getDiseaseOntology());
 		attributes.put("diseaseOntologyVersion", getDiseaseOntologyVersion());
 		attributes.put("diseaseOntologyCode", getDiseaseOntologyCode());
-		attributes.put("diseaseDescription", getDiseaseDescription());
+		attributes.put("diseaseOntologyDescription",
+			getDiseaseOntologyDescription());
 		attributes.put("diseaseFreeText", getDiseaseFreeText());
 
 		return attributes;
@@ -80,22 +81,22 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		Long sampleId = (Long)attributes.get("sampleId");
+		Long sampleDbId = (Long)attributes.get("sampleDbId");
 
-		if (sampleId != null) {
-			setSampleId(sampleId);
+		if (sampleDbId != null) {
+			setSampleDbId(sampleDbId);
 		}
 
-		Long sampleCollectionDbId = (Long)attributes.get("sampleCollectionDbId");
+		String sampleCollectionId = (String)attributes.get("sampleCollectionId");
 
-		if (sampleCollectionDbId != null) {
-			setSampleCollectionDbId(sampleCollectionDbId);
+		if (sampleCollectionId != null) {
+			setSampleCollectionId(sampleCollectionId);
 		}
 
-		Long biobankDbId = (Long)attributes.get("biobankDbId");
+		String biobankId = (String)attributes.get("biobankId");
 
-		if (biobankDbId != null) {
-			setBiobankDbId(biobankDbId);
+		if (biobankId != null) {
+			setBiobankId(biobankId);
 		}
 
 		String hashedSampleId = (String)attributes.get("hashedSampleId");
@@ -149,11 +150,11 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 			setAnatomicalPartOntologyCode(anatomicalPartOntologyCode);
 		}
 
-		String anatomicalPartDescription = (String)attributes.get(
-				"anatomicalPartDescription");
+		String anatomicalPartOntologyDescription = (String)attributes.get(
+				"anatomicalPartOntologyDescription");
 
-		if (anatomicalPartDescription != null) {
-			setAnatomicalPartDescription(anatomicalPartDescription);
+		if (anatomicalPartOntologyDescription != null) {
+			setAnatomicalPartOntologyDescription(anatomicalPartOntologyDescription);
 		}
 
 		String anatomicalPartFreeText = (String)attributes.get(
@@ -207,10 +208,11 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 			setDiseaseOntologyCode(diseaseOntologyCode);
 		}
 
-		String diseaseDescription = (String)attributes.get("diseaseDescription");
+		String diseaseOntologyDescription = (String)attributes.get(
+				"diseaseOntologyDescription");
 
-		if (diseaseDescription != null) {
-			setDiseaseDescription(diseaseDescription);
+		if (diseaseOntologyDescription != null) {
+			setDiseaseOntologyDescription(diseaseOntologyDescription);
 		}
 
 		String diseaseFreeText = (String)attributes.get("diseaseFreeText");
@@ -241,63 +243,63 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	}
 
 	/**
-	* Returns the sample ID of this sample.
+	* Returns the sample db ID of this sample.
 	*
-	* @return the sample ID of this sample
+	* @return the sample db ID of this sample
 	*/
 	@Override
-	public long getSampleId() {
-		return _sample.getSampleId();
+	public long getSampleDbId() {
+		return _sample.getSampleDbId();
 	}
 
 	/**
-	* Sets the sample ID of this sample.
+	* Sets the sample db ID of this sample.
 	*
-	* @param sampleId the sample ID of this sample
+	* @param sampleDbId the sample db ID of this sample
 	*/
 	@Override
-	public void setSampleId(long sampleId) {
-		_sample.setSampleId(sampleId);
+	public void setSampleDbId(long sampleDbId) {
+		_sample.setSampleDbId(sampleDbId);
 	}
 
 	/**
-	* Returns the sample collection db ID of this sample.
+	* Returns the sample collection ID of this sample.
 	*
-	* @return the sample collection db ID of this sample
+	* @return the sample collection ID of this sample
 	*/
 	@Override
-	public long getSampleCollectionDbId() {
-		return _sample.getSampleCollectionDbId();
+	public java.lang.String getSampleCollectionId() {
+		return _sample.getSampleCollectionId();
 	}
 
 	/**
-	* Sets the sample collection db ID of this sample.
+	* Sets the sample collection ID of this sample.
 	*
-	* @param sampleCollectionDbId the sample collection db ID of this sample
+	* @param sampleCollectionId the sample collection ID of this sample
 	*/
 	@Override
-	public void setSampleCollectionDbId(long sampleCollectionDbId) {
-		_sample.setSampleCollectionDbId(sampleCollectionDbId);
+	public void setSampleCollectionId(java.lang.String sampleCollectionId) {
+		_sample.setSampleCollectionId(sampleCollectionId);
 	}
 
 	/**
-	* Returns the biobank db ID of this sample.
+	* Returns the biobank ID of this sample.
 	*
-	* @return the biobank db ID of this sample
+	* @return the biobank ID of this sample
 	*/
 	@Override
-	public long getBiobankDbId() {
-		return _sample.getBiobankDbId();
+	public java.lang.String getBiobankId() {
+		return _sample.getBiobankId();
 	}
 
 	/**
-	* Sets the biobank db ID of this sample.
+	* Sets the biobank ID of this sample.
 	*
-	* @param biobankDbId the biobank db ID of this sample
+	* @param biobankId the biobank ID of this sample
 	*/
 	@Override
-	public void setBiobankDbId(long biobankDbId) {
-		_sample.setBiobankDbId(biobankDbId);
+	public void setBiobankId(java.lang.String biobankId) {
+		_sample.setBiobankId(biobankId);
 	}
 
 	/**
@@ -464,24 +466,24 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	}
 
 	/**
-	* Returns the anatomical part description of this sample.
+	* Returns the anatomical part ontology description of this sample.
 	*
-	* @return the anatomical part description of this sample
+	* @return the anatomical part ontology description of this sample
 	*/
 	@Override
-	public java.lang.String getAnatomicalPartDescription() {
-		return _sample.getAnatomicalPartDescription();
+	public java.lang.String getAnatomicalPartOntologyDescription() {
+		return _sample.getAnatomicalPartOntologyDescription();
 	}
 
 	/**
-	* Sets the anatomical part description of this sample.
+	* Sets the anatomical part ontology description of this sample.
 	*
-	* @param anatomicalPartDescription the anatomical part description of this sample
+	* @param anatomicalPartOntologyDescription the anatomical part ontology description of this sample
 	*/
 	@Override
-	public void setAnatomicalPartDescription(
-		java.lang.String anatomicalPartDescription) {
-		_sample.setAnatomicalPartDescription(anatomicalPartDescription);
+	public void setAnatomicalPartOntologyDescription(
+		java.lang.String anatomicalPartOntologyDescription) {
+		_sample.setAnatomicalPartOntologyDescription(anatomicalPartOntologyDescription);
 	}
 
 	/**
@@ -647,23 +649,24 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	}
 
 	/**
-	* Returns the disease description of this sample.
+	* Returns the disease ontology description of this sample.
 	*
-	* @return the disease description of this sample
+	* @return the disease ontology description of this sample
 	*/
 	@Override
-	public java.lang.String getDiseaseDescription() {
-		return _sample.getDiseaseDescription();
+	public java.lang.String getDiseaseOntologyDescription() {
+		return _sample.getDiseaseOntologyDescription();
 	}
 
 	/**
-	* Sets the disease description of this sample.
+	* Sets the disease ontology description of this sample.
 	*
-	* @param diseaseDescription the disease description of this sample
+	* @param diseaseOntologyDescription the disease ontology description of this sample
 	*/
 	@Override
-	public void setDiseaseDescription(java.lang.String diseaseDescription) {
-		_sample.setDiseaseDescription(diseaseDescription);
+	public void setDiseaseOntologyDescription(
+		java.lang.String diseaseOntologyDescription) {
+		_sample.setDiseaseOntologyDescription(diseaseOntologyDescription);
 	}
 
 	/**

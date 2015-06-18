@@ -59,20 +59,20 @@ public interface SampleLocalService extends BaseLocalService,
 	/**
 	* Creates a new sample with the primary key. Does not add the sample to the database.
 	*
-	* @param sampleId the primary key for the new sample
+	* @param sampleDbId the primary key for the new sample
 	* @return the new sample
 	*/
-	public com.bcnet.portlet.biobank.model.Sample createSample(long sampleId);
+	public com.bcnet.portlet.biobank.model.Sample createSample(long sampleDbId);
 
 	/**
 	* Deletes the sample with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param sampleId the primary key of the sample
+	* @param sampleDbId the primary key of the sample
 	* @return the sample that was removed
 	* @throws PortalException if a sample with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.bcnet.portlet.biobank.model.Sample deleteSample(long sampleId)
+	public com.bcnet.portlet.biobank.model.Sample deleteSample(long sampleDbId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -165,19 +165,19 @@ public interface SampleLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.bcnet.portlet.biobank.model.Sample fetchSample(long sampleId)
+	public com.bcnet.portlet.biobank.model.Sample fetchSample(long sampleDbId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns the sample with the primary key.
 	*
-	* @param sampleId the primary key of the sample
+	* @param sampleDbId the primary key of the sample
 	* @return the sample
 	* @throws PortalException if a sample with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.bcnet.portlet.biobank.model.Sample getSample(long sampleId)
+	public com.bcnet.portlet.biobank.model.Sample getSample(long sampleDbId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

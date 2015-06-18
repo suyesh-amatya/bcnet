@@ -32,6 +32,6 @@ public abstract class SampleActionableDynamicQuery
 
 		setClassLoader(com.bcnet.portlet.biobank.service.ClpSerializer.class.getClassLoader());
 
-		setPrimaryKeyPropertyName("sampleId");
+		setPrimaryKeyPropertyName("sampleDbId");
 	}
 }
