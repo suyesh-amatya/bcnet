@@ -16,3 +16,5 @@ create index IX_CBAFEBEC on samplecollectionattributelistsmaster (attributeListN
 
 create index IX_C8AC1C93 on samplecollectioncontact (sampleCollectionDbId);
 create index IX_BED040E4 on samplecollectioncontact (sampleCollectionDbId, mainContact);
+
+create index IX_145487B9 on sampleimportlog (uuid_);

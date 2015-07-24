@@ -11,6 +11,7 @@
 	<import class="com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists" />
 	<import class="com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMaster" />
 	<import class="com.bcnet.portlet.biobank.model.SampleCollectionContact" />
+	<import class="com.bcnet.portlet.biobank.model.SampleImportLog" />
 	<class name="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl" table="biobankattributelists">
 		<cache usage="read-write" />
 		<id name="biobankAttributeListsId" type="long">
@@ -119,5 +120,15 @@
 		<property name="mainContact" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="sampleCollectionOwner" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="sampleCollectionEditor" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="com.bcnet.portlet.biobank.model.impl.SampleImportLogImpl" table="sampleimportlog">
+		<cache usage="read-write" />
+		<id name="importId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="fileName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="dateOfImport" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

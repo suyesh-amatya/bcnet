@@ -138,6 +138,23 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleImportLogModelImpl">
+		<attributes>
+			<id name="importId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="fileName" />
+			<basic name="userId" />
+			<basic name="dateOfImport">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl" name="BiobankAttributeLists">
 		<table name="biobankattributelists" />
 		<attributes />
@@ -172,6 +189,10 @@
 	</entity>
 	<entity class="com.bcnet.portlet.biobank.model.impl.SampleCollectionContactImpl" name="SampleCollectionContact">
 		<table name="samplecollectioncontact" />
+		<attributes />
+	</entity>
+	<entity class="com.bcnet.portlet.biobank.model.impl.SampleImportLogImpl" name="SampleImportLog">
+		<table name="sampleimportlog" />
 		<attributes />
 	</entity>
 </entity-mappings>

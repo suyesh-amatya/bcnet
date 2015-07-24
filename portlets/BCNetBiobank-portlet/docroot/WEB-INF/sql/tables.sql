@@ -120,3 +120,11 @@ create table samplecollectioncontact (
 	sampleCollectionEditor BOOLEAN,
 	primary key (sampleCollectionDbId, userId)
 );
+
+create table sampleimportlog (
+	uuid_ VARCHAR(75) null,
+	importId LONG not null primary key,
+	fileName VARCHAR(75) null,
+	userId LONG,
+	dateOfImport DATE null
+);

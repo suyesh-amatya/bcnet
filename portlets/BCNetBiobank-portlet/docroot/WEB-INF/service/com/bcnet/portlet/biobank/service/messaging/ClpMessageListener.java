@@ -31,6 +31,8 @@ import com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil
 import com.bcnet.portlet.biobank.service.SampleCollectionContactServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleImportLogServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleServiceUtil;
 
@@ -79,6 +81,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			SampleCollectionContactLocalServiceUtil.clearService();
 
 			SampleCollectionContactServiceUtil.clearService();
+			SampleImportLogLocalServiceUtil.clearService();
+
+			SampleImportLogServiceUtil.clearService();
 		}
 	}
 }

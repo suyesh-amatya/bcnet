@@ -23,6 +23,7 @@ import com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsClp;
 import com.bcnet.portlet.biobank.model.SampleCollectionAttributeListsMasterClp;
 import com.bcnet.portlet.biobank.model.SampleCollectionClp;
 import com.bcnet.portlet.biobank.model.SampleCollectionContactClp;
+import com.bcnet.portlet.biobank.model.SampleImportLogClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -150,6 +151,10 @@ public class ClpSerializer {
 			return translateInputSampleCollectionContact(oldModel);
 		}
 
+		if (oldModelClassName.equals(SampleImportLogClp.class.getName())) {
+			return translateInputSampleImportLog(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -261,6 +266,16 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputSampleImportLog(BaseModel<?> oldModel) {
+		SampleImportLogClp oldClpModel = (SampleImportLogClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getSampleImportLogRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInput(Object obj) {
 		if (obj instanceof BaseModel<?>) {
 			return translateInput((BaseModel<?>)obj);
@@ -321,6 +336,11 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.bcnet.portlet.biobank.model.impl.SampleCollectionContactImpl")) {
 			return translateOutputSampleCollectionContact(oldModel);
+		}
+
+		if (oldModelClassName.equals(
+					"com.bcnet.portlet.biobank.model.impl.SampleImportLogImpl")) {
+			return translateOutputSampleImportLog(oldModel);
 		}
 
 		return oldModel;
@@ -447,6 +467,11 @@ public class ClpSerializer {
 			return new com.bcnet.portlet.biobank.NoSuchSampleCollectionContactException();
 		}
 
+		if (className.equals(
+					"com.bcnet.portlet.biobank.NoSuchSampleImportLogException")) {
+			return new com.bcnet.portlet.biobank.NoSuchSampleImportLogException();
+		}
+
 		return throwable;
 	}
 
@@ -542,6 +567,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setSampleCollectionContactRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputSampleImportLog(BaseModel<?> oldModel) {
+		SampleImportLogClp newModel = new SampleImportLogClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setSampleImportLogRemoteModel(oldModel);
 
 		return newModel;
 	}

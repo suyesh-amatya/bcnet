@@ -83,4 +83,11 @@
 		<field name="sampleCollectionOwner" type="boolean" />
 		<field name="sampleCollectionEditor" type="boolean" />
 	</model>
+	<model name="com.bcnet.portlet.biobank.model.SampleImportLog">
+		<field name="uuid" type="String" />
+		<field name="importId" type="long" />
+		<field name="fileName" type="String" />
+		<field name="userId" type="long" />
+		<field name="dateOfImport" type="Date" />
+	</model>
 </model-hints>

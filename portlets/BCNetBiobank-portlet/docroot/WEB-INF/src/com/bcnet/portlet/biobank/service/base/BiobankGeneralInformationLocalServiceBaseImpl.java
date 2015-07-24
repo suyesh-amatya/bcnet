@@ -25,6 +25,7 @@ import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeLi
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionAttributeListsPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionContactPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SampleCollectionPersistence;
+import com.bcnet.portlet.biobank.service.persistence.SampleImportLogPersistence;
 import com.bcnet.portlet.biobank.service.persistence.SamplePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -825,6 +826,63 @@ public abstract class BiobankGeneralInformationLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the sample import log local service.
+	 *
+	 * @return the sample import log local service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleImportLogLocalService getSampleImportLogLocalService() {
+		return sampleImportLogLocalService;
+	}
+
+	/**
+	 * Sets the sample import log local service.
+	 *
+	 * @param sampleImportLogLocalService the sample import log local service
+	 */
+	public void setSampleImportLogLocalService(
+		com.bcnet.portlet.biobank.service.SampleImportLogLocalService sampleImportLogLocalService) {
+		this.sampleImportLogLocalService = sampleImportLogLocalService;
+	}
+
+	/**
+	 * Returns the sample import log remote service.
+	 *
+	 * @return the sample import log remote service
+	 */
+	public com.bcnet.portlet.biobank.service.SampleImportLogService getSampleImportLogService() {
+		return sampleImportLogService;
+	}
+
+	/**
+	 * Sets the sample import log remote service.
+	 *
+	 * @param sampleImportLogService the sample import log remote service
+	 */
+	public void setSampleImportLogService(
+		com.bcnet.portlet.biobank.service.SampleImportLogService sampleImportLogService) {
+		this.sampleImportLogService = sampleImportLogService;
+	}
+
+	/**
+	 * Returns the sample import log persistence.
+	 *
+	 * @return the sample import log persistence
+	 */
+	public SampleImportLogPersistence getSampleImportLogPersistence() {
+		return sampleImportLogPersistence;
+	}
+
+	/**
+	 * Sets the sample import log persistence.
+	 *
+	 * @param sampleImportLogPersistence the sample import log persistence
+	 */
+	public void setSampleImportLogPersistence(
+		SampleImportLogPersistence sampleImportLogPersistence) {
+		this.sampleImportLogPersistence = sampleImportLogPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -1056,6 +1114,12 @@ public abstract class BiobankGeneralInformationLocalServiceBaseImpl
 	protected com.bcnet.portlet.biobank.service.SampleCollectionContactService sampleCollectionContactService;
 	@BeanReference(type = SampleCollectionContactPersistence.class)
 	protected SampleCollectionContactPersistence sampleCollectionContactPersistence;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleImportLogLocalService.class)
+	protected com.bcnet.portlet.biobank.service.SampleImportLogLocalService sampleImportLogLocalService;
+	@BeanReference(type = com.bcnet.portlet.biobank.service.SampleImportLogService.class)
+	protected com.bcnet.portlet.biobank.service.SampleImportLogService sampleImportLogService;
+	@BeanReference(type = SampleImportLogPersistence.class)
+	protected SampleImportLogPersistence sampleImportLogPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

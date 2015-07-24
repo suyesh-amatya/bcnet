@@ -1,6 +1,6 @@
 ﻿CREATE TABLE IF NOT EXISTS `bcnet`.`sample` (
  
-  `sampleDbId` bigint(20) NOT NULL AUTO_INCREMENT,
+ `uuid_` VARCHAR(75) NOT NULL, `sampleDbId` bigint(20) NOT NULL AUTO_INCREMENT,
    `sampleCollectionId` varchar(255) DEFAULT NULL,
   `biobankId` varchar(255) NOT NULL,
   `hashedSampleId` varchar(255) NOT NULL,

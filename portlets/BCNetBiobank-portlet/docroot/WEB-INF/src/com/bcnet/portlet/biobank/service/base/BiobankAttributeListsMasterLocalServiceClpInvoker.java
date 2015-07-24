@@ -106,49 +106,49 @@ public class BiobankAttributeListsMasterLocalServiceClpInvoker {
 				"com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster"
 			};
 
-		_methodName84 = "getBeanIdentifier";
+		_methodName90 = "getBeanIdentifier";
 
-		_methodParameterTypes84 = new String[] {  };
+		_methodParameterTypes90 = new String[] {  };
 
-		_methodName85 = "setBeanIdentifier";
+		_methodName91 = "setBeanIdentifier";
 
-		_methodParameterTypes85 = new String[] { "java.lang.String" };
+		_methodParameterTypes91 = new String[] { "java.lang.String" };
 
-		_methodName90 = "addBiobankAttributeListsMaster";
+		_methodName96 = "addBiobankAttributeListsMaster";
 
-		_methodParameterTypes90 = new String[] {
+		_methodParameterTypes96 = new String[] {
 				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName91 = "deleteBiobankAttributeListsMaster";
+		_methodName97 = "deleteBiobankAttributeListsMaster";
 
-		_methodParameterTypes91 = new String[] {
+		_methodParameterTypes97 = new String[] {
 				"com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster"
 			};
 
-		_methodName92 = "deleteBiobankAttributeListsMaster";
+		_methodName98 = "deleteBiobankAttributeListsMaster";
 
-		_methodParameterTypes92 = new String[] { "long" };
+		_methodParameterTypes98 = new String[] { "long" };
 
-		_methodName93 = "getBiobankAttributeListsMaster";
+		_methodName99 = "getBiobankAttributeListsMaster";
 
-		_methodParameterTypes93 = new String[] { "long" };
+		_methodParameterTypes99 = new String[] { "long" };
 
-		_methodName94 = "getAllBiobankAttributeListsMasters";
+		_methodName100 = "getAllBiobankAttributeListsMasters";
 
-		_methodParameterTypes94 = new String[] {  };
+		_methodParameterTypes100 = new String[] {  };
 
-		_methodName95 = "getAllBiobankAttributeListsMasters";
+		_methodName101 = "getAllBiobankAttributeListsMasters";
 
-		_methodParameterTypes95 = new String[] { "int", "int" };
+		_methodParameterTypes101 = new String[] { "int", "int" };
 
-		_methodName96 = "getBiobankAttributeListsMasterByAttributeListName";
+		_methodName102 = "getBiobankAttributeListsMasterByAttributeListName";
 
-		_methodParameterTypes96 = new String[] { "java.lang.String" };
+		_methodParameterTypes102 = new String[] { "java.lang.String" };
 
-		_methodName97 = "updateBiobankAttributeListsMaster";
+		_methodName103 = "updateBiobankAttributeListsMaster";
 
-		_methodParameterTypes97 = new String[] {
+		_methodParameterTypes103 = new String[] {
 				"long", "java.lang.String", "java.lang.String"
 			};
 	}
@@ -242,57 +242,57 @@ public class BiobankAttributeListsMasterLocalServiceClpInvoker {
 			return BiobankAttributeListsMasterLocalServiceUtil.updateBiobankAttributeListsMaster((com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster)arguments[0]);
 		}
 
-		if (_methodName84.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
+		if (_methodName90.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
 			return BiobankAttributeListsMasterLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName85.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
+		if (_methodName91.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
 			BiobankAttributeListsMasterLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName90.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
+		if (_methodName96.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
 			return BiobankAttributeListsMasterLocalServiceUtil.addBiobankAttributeListsMaster((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1]);
 		}
 
-		if (_methodName91.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
+		if (_methodName97.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
 			return BiobankAttributeListsMasterLocalServiceUtil.deleteBiobankAttributeListsMaster((com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster)arguments[0]);
 		}
 
-		if (_methodName92.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
+		if (_methodName98.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
 			return BiobankAttributeListsMasterLocalServiceUtil.deleteBiobankAttributeListsMaster(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName93.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
+		if (_methodName99.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
 			return BiobankAttributeListsMasterLocalServiceUtil.getBiobankAttributeListsMaster(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName94.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
+		if (_methodName100.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
 			return BiobankAttributeListsMasterLocalServiceUtil.getAllBiobankAttributeListsMasters();
 		}
 
-		if (_methodName95.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
+		if (_methodName101.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
 			return BiobankAttributeListsMasterLocalServiceUtil.getAllBiobankAttributeListsMasters(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
-		if (_methodName96.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+		if (_methodName102.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
 			return BiobankAttributeListsMasterLocalServiceUtil.getBiobankAttributeListsMasterByAttributeListName((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName97.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+		if (_methodName103.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
 			return BiobankAttributeListsMasterLocalServiceUtil.updateBiobankAttributeListsMaster(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
 		}
@@ -332,24 +332,24 @@ public class BiobankAttributeListsMasterLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName84;
-	private String[] _methodParameterTypes84;
-	private String _methodName85;
-	private String[] _methodParameterTypes85;
 	private String _methodName90;
 	private String[] _methodParameterTypes90;
 	private String _methodName91;
 	private String[] _methodParameterTypes91;
-	private String _methodName92;
-	private String[] _methodParameterTypes92;
-	private String _methodName93;
-	private String[] _methodParameterTypes93;
-	private String _methodName94;
-	private String[] _methodParameterTypes94;
-	private String _methodName95;
-	private String[] _methodParameterTypes95;
 	private String _methodName96;
 	private String[] _methodParameterTypes96;
 	private String _methodName97;
 	private String[] _methodParameterTypes97;
+	private String _methodName98;
+	private String[] _methodParameterTypes98;
+	private String _methodName99;
+	private String[] _methodParameterTypes99;
+	private String _methodName100;
+	private String[] _methodParameterTypes100;
+	private String _methodName101;
+	private String[] _methodParameterTypes101;
+	private String _methodName102;
+	private String[] _methodParameterTypes102;
+	private String _methodName103;
+	private String[] _methodParameterTypes103;
 }
