@@ -64,6 +64,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	 */
 	public static final String TABLE_NAME = "sample";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "sampleDbId", Types.BIGINT },
 			{ "sampleCollectionId", Types.VARCHAR },
 			{ "biobankId", Types.VARCHAR },
@@ -87,7 +88,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			{ "diseaseOntologyDescription", Types.VARCHAR },
 			{ "diseaseFreeText", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sample (sampleDbId LONG not null primary key,sampleCollectionId VARCHAR(75) null,biobankId VARCHAR(75) null,hashedSampleId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime DATE null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartOntologyDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageHigh LONG,ageLow LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseOntologyDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sample (uuid_ VARCHAR(75) null,sampleDbId LONG not null primary key,sampleCollectionId VARCHAR(75) null,biobankId VARCHAR(75) null,hashedSampleId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime DATE null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartOntologyDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageHigh LONG,ageLow LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseOntologyDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sample";
 	public static final String ORDER_BY_JPQL = " ORDER BY sample.sampleDbId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sample.sampleDbId ASC";
@@ -115,6 +116,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 		Sample model = new SampleImpl();
 
+		model.setUuid_(soapModel.getUuid_());
 		model.setSampleDbId(soapModel.getSampleDbId());
 		model.setSampleCollectionId(soapModel.getSampleCollectionId());
 		model.setBiobankId(soapModel.getBiobankId());
@@ -201,6 +203,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid_", getUuid_());
 		attributes.put("sampleDbId", getSampleDbId());
 		attributes.put("sampleCollectionId", getSampleCollectionId());
 		attributes.put("biobankId", getBiobankId());
@@ -233,6 +236,12 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid_ = (String)attributes.get("uuid_");
+
+		if (uuid_ != null) {
+			setUuid_(uuid_);
+		}
+
 		Long sampleDbId = (Long)attributes.get("sampleDbId");
 
 		if (sampleDbId != null) {
@@ -372,6 +381,22 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		if (diseaseFreeText != null) {
 			setDiseaseFreeText(diseaseFreeText);
 		}
+	}
+
+	@JSON
+	@Override
+	public String getUuid_() {
+		if (_uuid_ == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid_;
+		}
+	}
+
+	@Override
+	public void setUuid_(String uuid_) {
+		_uuid_ = uuid_;
 	}
 
 	@JSON
@@ -735,6 +760,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	public Object clone() {
 		SampleImpl sampleImpl = new SampleImpl();
 
+		sampleImpl.setUuid_(getUuid_());
 		sampleImpl.setSampleDbId(getSampleDbId());
 		sampleImpl.setSampleCollectionId(getSampleCollectionId());
 		sampleImpl.setBiobankId(getBiobankId());
@@ -812,6 +838,14 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	@Override
 	public CacheModel<Sample> toCacheModel() {
 		SampleCacheModel sampleCacheModel = new SampleCacheModel();
+
+		sampleCacheModel.uuid_ = getUuid_();
+
+		String uuid_ = sampleCacheModel.uuid_;
+
+		if ((uuid_ != null) && (uuid_.length() == 0)) {
+			sampleCacheModel.uuid_ = null;
+		}
 
 		sampleCacheModel.sampleDbId = getSampleDbId();
 
@@ -985,9 +1019,11 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(47);
 
-		sb.append("{sampleDbId=");
+		sb.append("{uuid_=");
+		sb.append(getUuid_());
+		sb.append(", sampleDbId=");
 		sb.append(getSampleDbId());
 		sb.append(", sampleCollectionId=");
 		sb.append(getSampleCollectionId());
@@ -1038,12 +1074,16 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.bcnet.portlet.biobank.model.Sample");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid_</column-name><column-value><![CDATA[");
+		sb.append(getUuid_());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sampleDbId</column-name><column-value><![CDATA[");
 		sb.append(getSampleDbId());
@@ -1140,6 +1180,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	private static ClassLoader _classLoader = Sample.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Sample.class };
+	private String _uuid_;
 	private long _sampleDbId;
 	private String _sampleCollectionId;
 	private String _biobankId;

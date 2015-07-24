@@ -73,6 +73,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid_", getUuid_());
 		attributes.put("sampleDbId", getSampleDbId());
 		attributes.put("sampleCollectionId", getSampleCollectionId());
 		attributes.put("biobankId", getBiobankId());
@@ -105,6 +106,12 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid_ = (String)attributes.get("uuid_");
+
+		if (uuid_ != null) {
+			setUuid_(uuid_);
+		}
+
 		Long sampleDbId = (Long)attributes.get("sampleDbId");
 
 		if (sampleDbId != null) {
@@ -243,6 +250,29 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 		if (diseaseFreeText != null) {
 			setDiseaseFreeText(diseaseFreeText);
+		}
+	}
+
+	@Override
+	public String getUuid_() {
+		return _uuid_;
+	}
+
+	@Override
+	public void setUuid_(String uuid_) {
+		_uuid_ = uuid_;
+
+		if (_sampleRemoteModel != null) {
+			try {
+				Class<?> clazz = _sampleRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUuid_", String.class);
+
+				method.invoke(_sampleRemoteModel, uuid_);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
 		}
 	}
 
@@ -837,6 +867,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	public Object clone() {
 		SampleClp clone = new SampleClp();
 
+		clone.setUuid_(getUuid_());
 		clone.setSampleDbId(getSampleDbId());
 		clone.setSampleCollectionId(getSampleCollectionId());
 		clone.setBiobankId(getBiobankId());
@@ -907,9 +938,11 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(47);
 
-		sb.append("{sampleDbId=");
+		sb.append("{uuid_=");
+		sb.append(getUuid_());
+		sb.append(", sampleDbId=");
 		sb.append(getSampleDbId());
 		sb.append(", sampleCollectionId=");
 		sb.append(getSampleCollectionId());
@@ -960,12 +993,16 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.bcnet.portlet.biobank.model.Sample");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid_</column-name><column-value><![CDATA[");
+		sb.append(getUuid_());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sampleDbId</column-name><column-value><![CDATA[");
 		sb.append(getSampleDbId());
@@ -1060,6 +1097,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		return sb.toString();
 	}
 
+	private String _uuid_;
 	private long _sampleDbId;
 	private String _sampleCollectionId;
 	private String _biobankId;

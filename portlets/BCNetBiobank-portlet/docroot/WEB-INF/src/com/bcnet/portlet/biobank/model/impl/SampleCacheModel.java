@@ -37,9 +37,11 @@ import java.util.Date;
 public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(47);
 
-		sb.append("{sampleDbId=");
+		sb.append("{uuid_=");
+		sb.append(uuid_);
+		sb.append(", sampleDbId=");
 		sb.append(sampleDbId);
 		sb.append(", sampleCollectionId=");
 		sb.append(sampleCollectionId);
@@ -91,6 +93,13 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	@Override
 	public Sample toEntityModel() {
 		SampleImpl sampleImpl = new SampleImpl();
+
+		if (uuid_ == null) {
+			sampleImpl.setUuid_(StringPool.BLANK);
+		}
+		else {
+			sampleImpl.setUuid_(uuid_);
+		}
 
 		sampleImpl.setSampleDbId(sampleDbId);
 
@@ -237,6 +246,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		uuid_ = objectInput.readUTF();
 		sampleDbId = objectInput.readLong();
 		sampleCollectionId = objectInput.readUTF();
 		biobankId = objectInput.readUTF();
@@ -264,6 +274,13 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		if (uuid_ == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(uuid_);
+		}
+
 		objectOutput.writeLong(sampleDbId);
 
 		if (sampleCollectionId == null) {
@@ -398,6 +415,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		}
 	}
 
+	public String uuid_;
 	public long sampleDbId;
 	public String sampleCollectionId;
 	public String biobankId;

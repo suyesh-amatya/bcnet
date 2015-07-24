@@ -298,7 +298,8 @@ public class SampleImportLogWrapper implements SampleImportLog,
 	}
 
 	@Override
-	public int compareTo(SampleImportLog sampleImportLog) {
+	public int compareTo(
+		com.bcnet.portlet.biobank.model.SampleImportLog sampleImportLog) {
 		return _sampleImportLog.compareTo(sampleImportLog);
 	}
 
@@ -308,17 +309,17 @@ public class SampleImportLogWrapper implements SampleImportLog,
 	}
 
 	@Override
-	public com.liferay.portal.model.CacheModel<SampleImportLog> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.bcnet.portlet.biobank.model.SampleImportLog> toCacheModel() {
 		return _sampleImportLog.toCacheModel();
 	}
 
 	@Override
-	public SampleImportLog toEscapedModel() {
+	public com.bcnet.portlet.biobank.model.SampleImportLog toEscapedModel() {
 		return new SampleImportLogWrapper(_sampleImportLog.toEscapedModel());
 	}
 
 	@Override
-	public SampleImportLog toUnescapedModel() {
+	public com.bcnet.portlet.biobank.model.SampleImportLog toUnescapedModel() {
 		return new SampleImportLogWrapper(_sampleImportLog.toUnescapedModel());
 	}
 

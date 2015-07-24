@@ -60,6 +60,21 @@ public interface SampleModel extends BaseModel<Sample> {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the uuid_ of this sample.
+	 *
+	 * @return the uuid_ of this sample
+	 */
+	@AutoEscape
+	public String getUuid_();
+
+	/**
+	 * Sets the uuid_ of this sample.
+	 *
+	 * @param uuid_ the uuid_ of this sample
+	 */
+	public void setUuid_(String uuid_);
+
+	/**
 	 * Returns the sample db ID of this sample.
 	 *
 	 * @return the sample db ID of this sample

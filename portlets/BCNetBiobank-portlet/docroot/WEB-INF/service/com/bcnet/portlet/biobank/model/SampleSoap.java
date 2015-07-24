@@ -31,6 +31,7 @@ public class SampleSoap implements Serializable {
 	public static SampleSoap toSoapModel(Sample model) {
 		SampleSoap soapModel = new SampleSoap();
 
+		soapModel.setUuid_(model.getUuid_());
 		soapModel.setSampleDbId(model.getSampleDbId());
 		soapModel.setSampleCollectionId(model.getSampleCollectionId());
 		soapModel.setBiobankId(model.getBiobankId());
@@ -103,6 +104,14 @@ public class SampleSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setSampleDbId(pk);
+	}
+
+	public String getUuid_() {
+		return _uuid_;
+	}
+
+	public void setUuid_(String uuid_) {
+		_uuid_ = uuid_;
 	}
 
 	public long getSampleDbId() {
@@ -283,6 +292,7 @@ public class SampleSoap implements Serializable {
 		_diseaseFreeText = diseaseFreeText;
 	}
 
+	private String _uuid_;
 	private long _sampleDbId;
 	private String _sampleCollectionId;
 	private String _biobankId;

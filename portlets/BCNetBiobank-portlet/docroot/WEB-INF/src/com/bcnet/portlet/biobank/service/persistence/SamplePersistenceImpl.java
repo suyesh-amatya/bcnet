@@ -316,6 +316,7 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 		sampleImpl.setNew(sample.isNew());
 		sampleImpl.setPrimaryKey(sample.getPrimaryKey());
 
+		sampleImpl.setUuid_(sample.getUuid_());
 		sampleImpl.setSampleDbId(sample.getSampleDbId());
 		sampleImpl.setSampleCollectionId(sample.getSampleCollectionId());
 		sampleImpl.setBiobankId(sample.getBiobankId());

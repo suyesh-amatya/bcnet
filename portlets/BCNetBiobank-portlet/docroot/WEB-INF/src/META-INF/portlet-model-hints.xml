@@ -30,6 +30,7 @@
 		<field name="address" type="String" />
 	</model>
 	<model name="com.bcnet.portlet.biobank.model.Sample">
+		<field name="uuid_" type="String" />
 		<field name="sampleDbId" type="long" />
 		<field name="sampleCollectionId" type="String" />
 		<field name="biobankId" type="String" />

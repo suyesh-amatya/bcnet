@@ -58,6 +58,7 @@
 	<mapped-superclass class="com.bcnet.portlet.biobank.model.impl.SampleModelImpl">
 		<attributes>
 			<id name="sampleDbId" />
+			<basic name="uuid_" />
 			<basic name="sampleCollectionId" />
 			<basic name="biobankId" />
 			<basic name="hashedSampleId" />

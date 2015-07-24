@@ -57,6 +57,7 @@
 		<id name="sampleDbId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sampleCollectionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biobankId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="hashedSampleId" type="com.liferay.portal.dao.orm.hibernate.StringType" />

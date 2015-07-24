@@ -49,6 +49,7 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("uuid_", getUuid_());
 		attributes.put("sampleDbId", getSampleDbId());
 		attributes.put("sampleCollectionId", getSampleCollectionId());
 		attributes.put("biobankId", getBiobankId());
@@ -81,6 +82,12 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String uuid_ = (String)attributes.get("uuid_");
+
+		if (uuid_ != null) {
+			setUuid_(uuid_);
+		}
+
 		Long sampleDbId = (Long)attributes.get("sampleDbId");
 
 		if (sampleDbId != null) {
@@ -240,6 +247,26 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_sample.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the uuid_ of this sample.
+	*
+	* @return the uuid_ of this sample
+	*/
+	@Override
+	public java.lang.String getUuid_() {
+		return _sample.getUuid_();
+	}
+
+	/**
+	* Sets the uuid_ of this sample.
+	*
+	* @param uuid_ the uuid_ of this sample
+	*/
+	@Override
+	public void setUuid_(java.lang.String uuid_) {
+		_sample.setUuid_(uuid_);
 	}
 
 	/**

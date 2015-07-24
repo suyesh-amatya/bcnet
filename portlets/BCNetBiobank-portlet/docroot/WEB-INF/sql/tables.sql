@@ -62,6 +62,7 @@ create table juristicperson (
 );
 
 create table sample (
+	uuid_ VARCHAR(75) null,
 	sampleDbId LONG not null primary key,
 	sampleCollectionId VARCHAR(75) null,
 	biobankId VARCHAR(75) null,
