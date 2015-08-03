@@ -5,6 +5,7 @@ import javax.portlet.ActionResponse;
 
 import com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster;
 import com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalServiceUtil;
+import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;

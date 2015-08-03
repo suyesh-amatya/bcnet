@@ -670,6 +670,7 @@
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
 		</supports>
+		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Sample Upload</title>
 			<short-title>Sample Upload</short-title>

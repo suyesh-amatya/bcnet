@@ -29,24 +29,24 @@
 
 <%@ page import="com.liferay.portal.model.Layout" %>
 <%@ page import="com.liferay.portal.model.Organization" %>
-<%@page import="com.liferay.portal.model.Group"%>
-<%@page import="com.liferay.portal.model.Country"%>
-<%@page import="com.liferay.portal.model.User"%>
-<%@page import="com.liferay.portal.model.Company"%>
-<%@page import="com.liferay.portal.model.GroupConstants"%>
+<%@ page import="com.liferay.portal.model.Group"%>
+<%@ page import="com.liferay.portal.model.Country"%>
+<%@ page import="com.liferay.portal.model.User"%>
+<%@ page import="com.liferay.portal.model.Company"%>
+<%@ page import="com.liferay.portal.model.GroupConstants"%>
 <%@ page import="com.liferay.portal.model.UserGroupRole" %>
 <%@ page import="com.liferay.portal.model.Role" %>
 
 
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
 
-<%@page import="com.liferay.portal.service.UserLocalServiceUtil"%>
-<%@page import="com.liferay.portal.service.OrganizationLocalServiceUtil"%>
-<%@page import="com.liferay.portal.service.CompanyLocalServiceUtil"%>
+<%@ page import="com.liferay.portal.service.UserLocalServiceUtil"%>
+<%@ page import="com.liferay.portal.service.OrganizationLocalServiceUtil"%>
+<%@ page import="com.liferay.portal.service.CompanyLocalServiceUtil"%>
 <%@ page import="com.liferay.portal.service.LayoutLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.service.CountryServiceUtil" %>
 <%@ page import="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" %>
-<%@page import="com.liferay.portal.service.RoleLocalServiceUtil"%>
+<%@ page import="com.liferay.portal.service.RoleLocalServiceUtil"%>
 
 <!-- Includes for searching the Site Templates -->
 <%@ page import="com.liferay.portal.service.LayoutSetPrototypeServiceUtil" %>
@@ -68,6 +68,7 @@
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollection" %>
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists" %>
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionContact" %>
+<%@ page import="com.bcnet.portlet.biobank.model.Sample" %>
 
 
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalServiceUtil"%>
@@ -77,11 +78,12 @@
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsMasterLocalServiceUtil"%>
-<%@page import="com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil"%>
-<%@page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil"%>
-<%@page import="com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil"%>
+<%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil"%>
+<%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil"%>
+<%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil"%>
 
 
+<%@ page import="com.liferay.portal.kernel.uuid.PortalUUIDUtil" %>
 
 <liferay-theme:defineObjects />
 
