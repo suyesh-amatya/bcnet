@@ -19,39 +19,7 @@
         <column name="url" type="String"></column>
         <column name="address" type="String"></column>
    </entity>
-   
-  <!--  <entity name="Contact" local-service="true" remote-service="true" table="contact">
-    	<column name="contactId" type="long" primary="true" />
-    	<column name="firstName" type="String" />
-        <column name="lastName" type="String"></column>
-        <column name="phone" type="String"></column>
-        <column name="email" type="String"></column>
-        <column name="address" type="String"></column>
-        <column name="zip" type="String"></column>
-        <column name="city" type="String"></column>
-        <column name="countryCode" type="String"></column>
-        <column name="juristicPersonId" type="long"></column>
-        <column name="department" type="String"></column>
-        <column name="orcId" type="String"></column>
-    </entity> -->
     
-    <!-- <entity name="Country" local-service="true" remote-service="true" table="bcnetcountry">
-        <column name="countryCode" type="String" primary="true"></column>
-        <column name="name" type="String"></column>
-    </entity> -->
-    
-   <!--  <entity name="Biobank" local-service="true" remote-service="true" table="biobank">
-		<column name="biobankDbId" type="long" primary="true" />
-		<column name="biobankId" type="String"/>
-		<column name="acronym" type="String" />
-		<column name="name" type="String" />
-		<column name="url" type="String" />
-		<column name="juristicPersonId" type="long" />
-        <column name="countryCode" type="String"></column>
-        <column name="description" type="String"></column>
-        <column name="backup" type="boolean"></column>
-        <column name="trainingCourses" type="boolean"></column>
-	</entity> -->
 	
 	<entity name="BiobankGeneralInformation" local-service="true" remote-service="true" table="biobank">
 		<column name="biobankDbId" type="long" primary="true" />
@@ -88,10 +56,6 @@
 		</finder>
 	</entity>
 	
-	<!-- <entity name="BiobankContact" local-service="true" remote-service="true" table="biobankcontact">
-		<column name="biobankDbId" type="long" primary="true" />
-		<column name="contactId" type="long" primary="true" />
-	</entity> -->
 	
 	<entity name="SampleCollectionAttributeListsMaster" local-service="true" remote-service="true" table="samplecollectionattributelistsmaster">
 		<column name="sampleCollectionAttributeListsMasterId" type="long" primary="true" />

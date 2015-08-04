@@ -1,5 +1,7 @@
 package com.bcnet.portlet.samplecollection;
 
+import java.io.IOException;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
@@ -16,13 +18,15 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  */
 public class SampleCollectionListerPortlet extends MVCPortlet {
  
-	public void deleteSampleCollection(ActionRequest request, ActionResponse response) throws PortalException, SystemException{
+	public void deleteSampleCollection(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException{
 		
 		long sampleCollectionDbId = ParamUtil.getLong(request, "scdbid");
 		
 		SampleCollectionContactLocalServiceUtil.deleteSampleCollectionContactsBySampleCollectionDbId(sampleCollectionDbId);
 		SampleCollectionAttributeListsLocalServiceUtil.deleteSampleCollectionAttributeListsBySampleCollectionDbId(sampleCollectionDbId);
 		SampleCollectionLocalServiceUtil.deleteSampleCollection(sampleCollectionDbId);
+		
+		sendRedirect(request, response);
 	}
 	
 	

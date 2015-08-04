@@ -23,24 +23,6 @@
 		<css-class-wrapper>juristic-person-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>contact</portlet-name>
-		<icon>/icon.png</icon>
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>
-			/js/main.js
-		</footer-portlet-javascript>
-		<css-class-wrapper>contact-portlet</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>biobank</portlet-name>
-		<icon>/icon.png</icon>
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>
-			/js/main.js
-		</footer-portlet-javascript>
-		<css-class-wrapper>biobank-portlet</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>biobank-attribute-lists</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
@@ -104,15 +86,6 @@
 		<css-class-wrapper>
 			biobank-organization-lister-portlet
 		</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>biobank-contact</portlet-name>
-		<icon>/icon.png</icon>
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>
-			/js/main.js
-		</footer-portlet-javascript>
-		<css-class-wrapper>biobank-contact-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>

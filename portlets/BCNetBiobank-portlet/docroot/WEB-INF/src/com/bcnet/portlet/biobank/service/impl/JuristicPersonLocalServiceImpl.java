@@ -16,9 +16,12 @@ package com.bcnet.portlet.biobank.service.impl;
 
 import java.util.List;
 
+import com.bcnet.portlet.biobank.JuristicPersonPortlet;
 import com.bcnet.portlet.biobank.NoSuchJuristicPersonException;
 import com.bcnet.portlet.biobank.model.JuristicPerson;
+import com.bcnet.portlet.biobank.service.JuristicPersonLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.base.JuristicPersonLocalServiceBaseImpl;
+import com.bcnet.portlet.biobank.service.persistence.JuristicPersonPersistence;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 

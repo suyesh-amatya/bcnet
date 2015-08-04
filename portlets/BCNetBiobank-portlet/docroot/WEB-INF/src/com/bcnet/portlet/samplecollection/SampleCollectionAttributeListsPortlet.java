@@ -22,7 +22,7 @@ public class SampleCollectionAttributeListsPortlet extends MVCPortlet {
 		
 		long sampleCollectionDbId = ParamUtil.getLong(request, "scdbid");
 		SampleCollectionAttributeListsLocalServiceUtil.deleteSampleCollectionAttributeListsBySampleCollectionDbId(sampleCollectionDbId);
-
+		sendRedirect(request, response);
 	}
 	
 	
