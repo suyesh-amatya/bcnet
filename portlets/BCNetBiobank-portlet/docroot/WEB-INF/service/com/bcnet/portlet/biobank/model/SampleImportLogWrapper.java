@@ -340,6 +340,11 @@ public class SampleImportLogWrapper implements SampleImportLog,
 	}
 
 	@Override
+	public java.lang.String getFullNameImporter() {
+		return _sampleImportLog.getFullNameImporter();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

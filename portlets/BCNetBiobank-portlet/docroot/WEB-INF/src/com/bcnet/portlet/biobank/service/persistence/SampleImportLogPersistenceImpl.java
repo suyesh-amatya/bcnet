@@ -103,7 +103,8 @@ public class SampleImportLogPersistenceImpl extends BasePersistenceImpl<SampleIm
 			SampleImportLogImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid",
 			new String[] { String.class.getName() },
-			SampleImportLogModelImpl.UUID_COLUMN_BITMASK);
+			SampleImportLogModelImpl.UUID_COLUMN_BITMASK |
+			SampleImportLogModelImpl.DATEOFIMPORT_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(SampleImportLogModelImpl.ENTITY_CACHE_ENABLED,
 			SampleImportLogModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",

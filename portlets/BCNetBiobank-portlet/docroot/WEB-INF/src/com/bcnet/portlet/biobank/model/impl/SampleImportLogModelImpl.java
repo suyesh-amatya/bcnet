@@ -21,6 +21,7 @@ import com.bcnet.portlet.biobank.model.SampleImportLogSoap;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSON;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -74,8 +75,8 @@ public class SampleImportLogModelImpl extends BaseModelImpl<SampleImportLog>
 		};
 	public static final String TABLE_SQL_CREATE = "create table sampleimportlog (uuid_ VARCHAR(75) null,importId LONG not null primary key,fileName VARCHAR(75) null,userId LONG,dateOfImport DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table sampleimportlog";
-	public static final String ORDER_BY_JPQL = " ORDER BY sampleImportLog.importId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY sampleimportlog.importId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY sampleImportLog.dateOfImport DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY sampleimportlog.dateOfImport DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -89,7 +90,7 @@ public class SampleImportLogModelImpl extends BaseModelImpl<SampleImportLog>
 				"value.object.column.bitmask.enabled.com.bcnet.portlet.biobank.model.SampleImportLog"),
 			true);
 	public static long UUID_COLUMN_BITMASK = 1L;
-	public static long IMPORTID_COLUMN_BITMASK = 2L;
+	public static long DATEOFIMPORT_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -296,6 +297,8 @@ public class SampleImportLogModelImpl extends BaseModelImpl<SampleImportLog>
 
 	@Override
 	public void setDateOfImport(Date dateOfImport) {
+		_columnBitmask = -1L;
+
 		_dateOfImport = dateOfImport;
 	}
 
@@ -343,17 +346,18 @@ public class SampleImportLogModelImpl extends BaseModelImpl<SampleImportLog>
 
 	@Override
 	public int compareTo(SampleImportLog sampleImportLog) {
-		long primaryKey = sampleImportLog.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = DateUtil.compareTo(getDateOfImport(),
+				sampleImportLog.getDateOfImport());
+
+		value = value * -1;
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override

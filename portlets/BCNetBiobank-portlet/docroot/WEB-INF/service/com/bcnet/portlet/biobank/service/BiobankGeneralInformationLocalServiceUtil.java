@@ -317,6 +317,11 @@ public class BiobankGeneralInformationLocalServiceUtil {
 		return getService().findAllBiobankOrganizationsCount();
 	}
 
+	public static java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> getAllBiobankGeneralInformations()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAllBiobankGeneralInformations();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

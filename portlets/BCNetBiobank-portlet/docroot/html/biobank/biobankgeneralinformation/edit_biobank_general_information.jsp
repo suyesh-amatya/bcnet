@@ -26,6 +26,7 @@
 
 <aui:model-context bean="<%= biobankGeneralInformation %>" model="<%= BiobankGeneralInformation.class %>" />
 <portlet:renderURL var="viewBiobankGeneralInfomrationURL" />
+<%-- <liferay-portlet:renderURL var="viewBiobankGeneralInfomrationURL"></liferay-portlet:renderURL> --%>
 <portlet:actionURL name='updateBiobankGeneralInfomration' var="editBiobankGeneralInfomrationURL" windowState="normal" />
 
 

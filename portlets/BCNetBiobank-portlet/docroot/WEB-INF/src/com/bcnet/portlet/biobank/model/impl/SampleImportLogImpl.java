@@ -14,6 +14,10 @@
 
 package com.bcnet.portlet.biobank.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.UserLocalServiceUtil;
+
 /**
  * The extended model implementation for the SampleImportLog service. Represents a row in the &quot;sampleimportlog&quot; database table, with each column mapped to a property of this class.
  *
@@ -29,6 +33,26 @@ public class SampleImportLogImpl extends SampleImportLogBaseImpl {
 	 *
 	 * Never reference this class directly. All methods that expect a sample import log model instance should use the {@link com.bcnet.portlet.biobank.model.SampleImportLog} interface instead.
 	 */
+	
+	private String fullNameImporter;
+	
 	public SampleImportLogImpl() {
+	}
+	
+	
+	public String getFullNameImporter(){
+		
+		try {
+			fullNameImporter = UserLocalServiceUtil.getUser(this.getUserId()).getFullName();
+			return fullNameImporter;
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return null;
 	}
 }

@@ -148,11 +148,14 @@
 	</entity>
 	
 	
-	<entity name="SampleImportLog" uuid="true" local-service="true" remote-service="true" table="sampleimportlog" >
+	<entity name="SampleImportLog" uuid="true" local-service="true" remote-service="true" table="sampleimportlog">
 		<column name="importId" type="long" primary="true"></column>
 		<column name="fileName" type="String"></column>
 		<column name="userId" type="long"></column>
 		<column name="dateOfImport" type="Date"></column>
+		<order>
+			<order-column name="dateOfImport" order-by="desc"></order-column>
+		</order>
 	</entity>
 	
 </service-builder>

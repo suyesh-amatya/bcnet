@@ -1,45 +1,39 @@
 <%@ include file="/html/init.jsp" %>
 
 <%
-//out.println(PortalUUIDUtil.generate());
-System.out.println(PortalUUIDUtil.generate());
 
-Sample sample = (Sample) renderRequest.getAttribute("sample");
-if (sample != null)
-out.println(sample.getSampleDbId());
+	List<BiobankGeneralInformation> biobanks = BiobankGeneralInformationLocalServiceUtil.getAllBiobankGeneralInformations();
 
+	if(renderRequest.getAttribute("xls-header-not-defined-columns-missing") != null) {
+		%>
+		<div class="alert alert-error">
+			<liferay-ui:message key='xls-header-not-defined-columns-missing' arguments='<%= renderRequest.getAttribute("xls-header-not-defined-columns-missing") %>'/>
+		</div>
+		<%
+	}
 
+	if(renderRequest.getAttribute("xls-header-not-defined-extra-columns") != null) {
+		%>
+		<div class="alert alert-error">
+			<liferay-ui:message key='xls-header-not-defined-extra-columns' arguments='<%= renderRequest.getAttribute("xls-header-not-defined-extra-columns") %>'/>
+		</div>
+		<%
+	}
+	
+	if(renderRequest.getAttribute("xls-row-import-errors") != null) {
+		%>
+		<div style="margin:10px; padding: 10px; background-color: #0066FF;opacity: 0.4;filter: alpha(opacity=40);color: #ffffff;" >
+			<liferay-ui:message key='xls-row-import-errors' arguments='<%= renderRequest.getAttribute("xls-row-import-errors") %>'/>
+		</div>
+		<%
+	}
+	
 %>
 
+<liferay-ui:error key="file-upload-wrong-type" message="file-upload-wrong-type"></liferay-ui:error>	
 
 
-<%
-if(renderRequest.getAttribute("xls-header-not-defined-columns-missing") != null) {
-	%>
-	<div class="alert alert-error">
-		<i class="fa fa-exclamation-circle"></i>&nbsp&nbsp<liferay-ui:message key='xls-header-not-defined-columns-missing' arguments='<%= renderRequest.getAttribute("xls-header-not-defined-columns-missing") %>'/>
-	</div>
-	<%
-}
 
-if(renderRequest.getAttribute("xls-row-import-errors") != null) {
-	%>
-	<div style="margin:10px; padding: 10px; background-color: #0066FF;opacity: 0.4;filter: alpha(opacity=40);color: #ffffff;" >
-		<i class="fa fa-exclamation-circle"></i>&nbsp&nbsp<liferay-ui:message key='xls-row-import-errors' arguments='<%= renderRequest.getAttribute("xls-row-import-errors") %>'/>
-	</div>
-	<%
-}
-%>
-<liferay-ui:error key="file-upload-wrong-type" message="file-upload-wrong-type"></liferay-ui:error>
-
-
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/additional-methods.min.js"></script>	
-
-<script src="<%=request.getContextPath()%>/js/jquery.steps.min.js" type="text/javascript"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery.steps.css">
 
 <portlet:actionURL name='uploadSample' var="uploadSampleURL" />
 
@@ -49,86 +43,48 @@ if(renderRequest.getAttribute("xls-row-import-errors") != null) {
 
 
 <aui:form action="<%=uploadSampleURL%>" enctype="multipart/form-data" method="post" name="fm">
-	<%-- <aui:input type="file" name="fileupload" label='File Upload <i class="icon-asterisk"></i>' required="true" showRequiredLabel="false">
+	<aui:select name="biobankId" label='Biobank <i class="icon-asterisk"></i>' showRequiredLabel="false">
+		<aui:option>Select the Biobank to import the sample for:</aui:option>
+		<%
+			for (BiobankGeneralInformation biobank : biobanks) {
+			
+		%>
+				<aui:option value="<%= biobank.getBiobankId() %>">
+					<%=biobank.getBiobankName() %>
+				</aui:option>
+		<% 
+			}
+		%>
+		
+	</aui:select>
+	<aui:input type="file" name="fileupload" label='File Upload <i class="icon-asterisk"></i>' required="true" showRequiredLabel="false">
 		<aui:validator name="acceptFiles" errorMessage="Please submit the file with valid extension (xls, xlsx).">'xls,xlsx'</aui:validator>
-	</aui:input> --%>
-	<aui:input type="file" name="fileupload" label='File Upload <i class="icon-asterisk"></i>' showRequiredLabel="false">
 	</aui:input>
 	<aui:button type="submit" />
 	<aui:button onClick="<%= viewSampleUploadURL %>"  type="cancel" />
 </aui:form>
 
-<%-- <aui:form action="<%=uploadSampleURL%>" enctype="multipart/form-data" method="post" name="fm">
-	<div>
-		<h3>Upload File</h3>
-		<section>
-			<aui:input type="file" name="fileupload" label="File Upload *"/>
-			<p>(*) Mandatory</p>
-		</section>
-		<h3>Profile</h3>
-		<section>
-		    <label for="name">First name *</label>
-		    <input id="name" name="name" type="text" class="required">
-		    <label for="surname">Last name *</label>
-		    <input id="surname" name="surname" type="text" class="required">
-		    <label for="email">Email *</label>
-		    <input id="email" name="email" type="text" class="required email">
-		    <label for="address">Address</label>
-		    <input id="address" name="address" type="text">
-		    <p>(*) Mandatory</p>
-		</section>
-		<h3>Hints</h3>
-		<section>
-		    <ul>
-		        <li>Foo</li>
-		        <li>Bar</li>
-		        <li>Foobar</li>
-		    </ul>
-		</section>
-		<h3>Finish</h3>
-		<section>
-		    <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
-		</section>
-	</div>
-
-</aui:form> --%>
 
 
-<!-- <script type="text/javascript">
+<aui:script use="aui-base,aui-form-validator">
+	AUI().use('aui-base','aui-form-validator',function(A){
+		var rules = {
+      		<portlet:namespace/>biobankId: {
+        		required: true
+      		}
+      	};
 
-	var form = $("#<portlet:namespace/>fm");
-	form.validate({
-	    errorPlacement: function errorPlacement(error, element) { element.before(error); },
-	    rules: {
-	    	<portlet:namespace/>fileupload: {
-	        	required: true,
-	        	extension: "xls|xlsx"
-	        }
-	    }
+		var fieldStrings = {
+			<portlet:namespace/>biobankId: {
+		    	required: 'The Biobank must be selected.'
+		  	}
+		};
+		
+		new A.FormValidator({
+	        boundingBox: '#<portlet:namespace/>fm',
+	        fieldStrings: fieldStrings,
+	        rules: rules,
+	        showAllMessages:true
+      	});
 	});
-	form.children("div").steps({
-	    headerTag: "h3",
-	    bodyTag: "section",
-	    transitionEffect: "slideLeft",
-	    onStepChanging: function (event, currentIndex, newIndex)
-	    {	
-	        form.validate().settings.ignore = ":disabled,:hidden";
-	        return form.valid();
-	    },
-	    onFinishing: function (event, currentIndex)
-	    {
-	        form.validate().settings.ignore = ":disabled";
-	        return form.valid();
-	    },
-	    onStepChanged:	function (event, currentIndex, priorIndex)
-		{	
-	    	alert("test");
-	    },
-	    onFinished: function (event, currentIndex)
-	    {
-	        alert("Submitted!");
-	    }
-	});
-
-</script>
- -->
+</aui:script>

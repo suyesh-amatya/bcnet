@@ -16,8 +16,8 @@
 
 
 <portlet:renderURL var="searchBiobankURL">
-		<portlet:param name="mvcPath" value="/html/biobank/biobanksearch/biobanksearch.jsp" />
-		<portlet:param name="redirect" value="<%= redirect %>" />
+	<portlet:param name="mvcPath" value="/html/biobank/biobanksearch/biobanksearch.jsp" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:renderURL>
 
 <aui:form action="<%= searchBiobankURL %>" method="POST" name="fm">

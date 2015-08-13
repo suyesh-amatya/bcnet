@@ -268,4 +268,8 @@ public interface BiobankGeneralInformationLocalService extends BaseLocalService,
 		int begin, int end);
 
 	public int findAllBiobankOrganizationsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> getAllBiobankGeneralInformations()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

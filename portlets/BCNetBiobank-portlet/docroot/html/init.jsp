@@ -8,6 +8,9 @@
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 <%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
+<%@ page import="org.apache.commons.beanutils.BeanComparator"%>
+
+<%@ page import="com.liferay.portal.kernel.dao.orm.QueryUtil"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
@@ -16,8 +19,14 @@
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Constants" %>
+<%@ page import="com.liferay.portal.kernel.util.ListUtil"%>
 <%@ page import="com.liferay.portal.kernel.util.PropsKeys" %>
 <%@ page import="com.liferay.portal.kernel.util.PropsUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.Validator"%>
+<%@ page import="com.liferay.portal.kernel.uuid.PortalUUIDUtil" %>
+
+
+
 
 <%@ page import="com.liferay.portal.service.GroupLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
@@ -52,7 +61,7 @@
 <%@ page import="com.liferay.portal.service.LayoutSetPrototypeServiceUtil" %>
 <%@ page import="com.liferay.portal.model.LayoutSetPrototype" %>
 
-
+<%@page import="java.util.Collections"%>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.ArrayList" %>
@@ -69,6 +78,7 @@
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists" %>
 <%@ page import="com.bcnet.portlet.biobank.model.SampleCollectionContact" %>
 <%@ page import="com.bcnet.portlet.biobank.model.Sample" %>
+<%@ page import="com.bcnet.portlet.biobank.model.SampleImportLog" %>
 
 
 <%@ page import="com.bcnet.portlet.biobank.service.BiobankAttributeListsMasterLocalServiceUtil"%>
@@ -81,9 +91,10 @@
 <%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil"%>
+<%@ page import="com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil"%>
 
 
-<%@ page import="com.liferay.portal.kernel.uuid.PortalUUIDUtil" %>
+
 
 <liferay-theme:defineObjects />
 

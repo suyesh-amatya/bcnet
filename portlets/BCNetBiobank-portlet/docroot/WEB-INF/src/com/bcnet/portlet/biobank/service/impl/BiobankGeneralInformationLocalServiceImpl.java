@@ -19,6 +19,7 @@ import java.util.List;
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformation;
 import com.bcnet.portlet.biobank.service.base.BiobankGeneralInformationLocalServiceBaseImpl;
 import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinderUtil;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the biobank general information local service.
@@ -68,5 +69,9 @@ public class BiobankGeneralInformationLocalServiceImpl
 	
 	public int findAllBiobankOrganizationsCount(){
 		return BiobankGeneralInformationFinderUtil.findAllBiobankOrganizationsCount();
+	}
+	
+	public List<BiobankGeneralInformation> getAllBiobankGeneralInformations() throws SystemException{
+		return biobankGeneralInformationPersistence.findAll();
 	}
 }

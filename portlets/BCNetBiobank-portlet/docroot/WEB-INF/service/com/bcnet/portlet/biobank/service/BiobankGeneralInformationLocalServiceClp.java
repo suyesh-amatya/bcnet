@@ -149,6 +149,10 @@ public class BiobankGeneralInformationLocalServiceClp
 		_methodName24 = "findAllBiobankOrganizationsCount";
 
 		_methodParameterTypes24 = new String[] {  };
+
+		_methodName25 = "getAllBiobankGeneralInformations";
+
+		_methodParameterTypes25 = new String[] {  };
 	}
 
 	@Override
@@ -889,6 +893,34 @@ public class BiobankGeneralInformationLocalServiceClp
 		return ((Integer)returnObj).intValue();
 	}
 
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> getAllBiobankGeneralInformations()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -938,4 +970,6 @@ public class BiobankGeneralInformationLocalServiceClp
 	private String[] _methodParameterTypes23;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
 }

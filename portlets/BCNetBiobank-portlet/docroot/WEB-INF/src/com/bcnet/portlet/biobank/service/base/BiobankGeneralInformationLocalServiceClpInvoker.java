@@ -147,6 +147,10 @@ public class BiobankGeneralInformationLocalServiceClpInvoker {
 		_methodName101 = "findAllBiobankOrganizationsCount";
 
 		_methodParameterTypes101 = new String[] {  };
+
+		_methodName102 = "getAllBiobankGeneralInformations";
+
+		_methodParameterTypes102 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -291,6 +295,11 @@ public class BiobankGeneralInformationLocalServiceClpInvoker {
 			return BiobankGeneralInformationLocalServiceUtil.findAllBiobankOrganizationsCount();
 		}
 
+		if (_methodName102.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
+			return BiobankGeneralInformationLocalServiceUtil.getAllBiobankGeneralInformations();
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -342,4 +351,6 @@ public class BiobankGeneralInformationLocalServiceClpInvoker {
 	private String[] _methodParameterTypes100;
 	private String _methodName101;
 	private String[] _methodParameterTypes101;
+	private String _methodName102;
+	private String[] _methodParameterTypes102;
 }

@@ -19,6 +19,7 @@ import com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -242,6 +243,25 @@ public class SampleImportLogClp extends BaseModelImpl<SampleImportLog>
 		}
 	}
 
+	@Override
+	public java.lang.String getFullNameImporter() {
+		try {
+			String methodName = "getFullNameImporter";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getSampleImportLogRemoteModel() {
 		return _sampleImportLogRemoteModel;
 	}
@@ -324,17 +344,18 @@ public class SampleImportLogClp extends BaseModelImpl<SampleImportLog>
 
 	@Override
 	public int compareTo(SampleImportLog sampleImportLog) {
-		long primaryKey = sampleImportLog.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = DateUtil.compareTo(getDateOfImport(),
+				sampleImportLog.getDateOfImport());
+
+		value = value * -1;
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override

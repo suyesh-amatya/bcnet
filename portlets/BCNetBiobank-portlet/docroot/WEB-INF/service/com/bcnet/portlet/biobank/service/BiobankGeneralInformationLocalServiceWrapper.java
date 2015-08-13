@@ -333,6 +333,12 @@ public class BiobankGeneralInformationLocalServiceWrapper
 		return _biobankGeneralInformationLocalService.findAllBiobankOrganizationsCount();
 	}
 
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> getAllBiobankGeneralInformations()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _biobankGeneralInformationLocalService.getAllBiobankGeneralInformations();
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
