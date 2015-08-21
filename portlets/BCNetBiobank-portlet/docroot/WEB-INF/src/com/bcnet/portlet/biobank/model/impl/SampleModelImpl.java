@@ -101,7 +101,11 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.bcnet.portlet.biobank.model.Sample"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.bcnet.portlet.biobank.model.Sample"),
+			true);
+	public static long UUID__COLUMN_BITMASK = 1L;
+	public static long SAMPLEDBID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -396,7 +400,17 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@Override
 	public void setUuid_(String uuid_) {
+		_columnBitmask |= UUID__COLUMN_BITMASK;
+
+		if (_originalUuid_ == null) {
+			_originalUuid_ = _uuid_;
+		}
+
 		_uuid_ = uuid_;
+	}
+
+	public String getOriginalUuid_() {
+		return GetterUtil.getString(_originalUuid_);
 	}
 
 	@JSON
@@ -733,6 +747,10 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		_diseaseFreeText = diseaseFreeText;
 	}
 
+	public long getColumnBitmask() {
+		return _columnBitmask;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -833,6 +851,11 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@Override
 	public void resetOriginalValues() {
+		SampleModelImpl sampleModelImpl = this;
+
+		sampleModelImpl._originalUuid_ = sampleModelImpl._uuid_;
+
+		sampleModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -1181,6 +1204,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	private static ClassLoader _classLoader = Sample.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Sample.class };
 	private String _uuid_;
+	private String _originalUuid_;
 	private long _sampleDbId;
 	private String _sampleCollectionId;
 	private String _biobankId;
@@ -1203,5 +1227,6 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	private String _diseaseOntologyCode;
 	private String _diseaseOntologyDescription;
 	private String _diseaseFreeText;
+	private long _columnBitmask;
 	private Sample _escapedModel;
 }

@@ -145,6 +145,9 @@
 		<column name="diseaseOntologyCode" type="String" />
 		<column name="diseaseOntologyDescription" type="String" />
 		<column name="diseaseFreeText" type="String" />
+		<finder name="uuid" return-type="Collection">
+			<finder-column name="uuid_" />
+		</finder>
 	</entity>
 	
 	

@@ -1,4 +1,3 @@
-<%@page import="com.bcnet.portlet.biobank.model.impl.SampleImportLogImpl"%>
 <%@ include file="/html/init.jsp" %>
 
 
@@ -6,7 +5,7 @@
    com.liferay.portal.kernel.dao.search.SearchContainer<SampleImportLog> searchContainer = null; 
 %>
 
-<%
+<%  
 	//orderByCol is the column name passed in the request while sorting
 	String orderByCol = ParamUtil.getString(request, "orderByCol"); 
 	 
@@ -68,6 +67,11 @@
 				<portlet:param name="uuid" value="<%= sampleImportLog.getUuid() %>" />
 			</portlet:renderURL>
 			
+			<portlet:actionURL name="deleteSampleImport" var="deleteSampleImportURL">
+				<portlet:param name="importId" value="<%= String.valueOf(sampleImportLog.getImportId()) %>" />
+				<portlet:param name="uuid" value="<%= String.valueOf(sampleImportLog.getUuid()) %>" />
+			</portlet:actionURL>
+			
 			<liferay-ui:search-container-column-text
 				name="uuid"
 				property="uuid" 
@@ -81,6 +85,7 @@
 				property="fileName"
 				orderable="true"
 				orderableProperty="fileName"
+				href="<%= viewSampleImportDetailsURL %>"
 			/>
 	
 			<liferay-ui:search-container-column-text
@@ -88,6 +93,7 @@
 				property="fullNameImporter"
 				orderable="true"
 				orderableProperty="fullNameImporter"
+				href="<%= viewSampleImportDetailsURL %>"
 			/>
 			
 			<liferay-ui:search-container-column-text
@@ -95,16 +101,17 @@
 				property="dateOfImport"
 				orderable="true"
 				orderableProperty="dateOfImport"
+				href="<%= viewSampleImportDetailsURL %>"
 			/>
-			<%-- <c:choose>		
-				<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_juristic_person) ||  
-										permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_juristic_person) %>">
-					<liferay-ui:search-container-column-jsp
-						align="right"
-						path="/html/juristicperson/juristicperson_actions.jsp"
-					/>
-				</c:when>
-			</c:choose> --%>
+			
+			<liferay-ui:search-container-column-text>
+				<liferay-ui:icon-delete url="<%= deleteSampleImportURL.toString() %>" 
+					message="<%= \"Delete this import\" %>" 
+					confirmation="<%= \"Are you sure you want to delete this import? \" +
+							\"This will delete the import log as well as all the samples imported in this batch from the file \" 
+							+ sampleImportLog.getFileName()+\".\" %>"
+				/>
+			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />

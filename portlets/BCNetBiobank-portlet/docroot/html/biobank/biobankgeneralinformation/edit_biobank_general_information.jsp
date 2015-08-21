@@ -21,7 +21,14 @@
 
 	String redirect = ParamUtil.getString(request, "redirect");
 	String currentURL = PortalUtil.getCurrentURL(request);
-	
+
+	// Parameters for permission Checking
+	long groupId = scopeGroupId;
+	String name = portletDisplay.getRootPortletId();
+	String primKey = portletDisplay.getResourcePK();
+	String actionId_edit_biobank_general_information = "EDIT_BIOBANK_GENERAL_INFORMATION";
+	String actionId_delete_biobank = "DELETE_BIOBANK";
+	if(permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_general_information)){
 %>
 
 <aui:model-context bean="<%= biobankGeneralInformation %>" model="<%= BiobankGeneralInformation.class %>" />
@@ -167,6 +174,14 @@
 		</aui:column>
 	</aui:button-row>
 </aui:form>
+<%
+	}
+	else{
+%>		
+<div class="alert alert-error">You do not have permission to edit it!</div>
+<%		
+	}
+%>
 
 <%-- <aui:script use="aui-base,aui-form-validator">
 	AUI().use('aui-base',' aui-form-validator',function(A){

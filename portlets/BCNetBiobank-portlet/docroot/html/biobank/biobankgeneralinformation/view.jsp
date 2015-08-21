@@ -32,7 +32,6 @@ String actionId_delete_biobank = "DELETE_BIOBANK";
 	}
 	
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
-
 %>
 <liferay-ui:error key="duplicate-name" message="Biobank Name Already Taken!" />
 <portlet:renderURL var="addBiobankGeneralInformationURL">

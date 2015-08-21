@@ -280,6 +280,11 @@ public class SampleLocalServiceWrapper implements SampleLocalService,
 		return _sampleLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public void deleteSamplesByuuid(java.lang.String uuid) {
+		_sampleLocalService.deleteSamplesByuuid(uuid);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -15,6 +15,7 @@
 package com.bcnet.portlet.biobank.service.impl;
 
 import com.bcnet.portlet.biobank.service.base.SampleLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the sample local service.
@@ -36,4 +37,12 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.bcnet.portlet.biobank.service.SampleLocalServiceUtil} to access the sample local service.
 	 */
+	public void deleteSamplesByuuid(String uuid){
+		try {
+			samplePersistence.removeByuuid(uuid);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

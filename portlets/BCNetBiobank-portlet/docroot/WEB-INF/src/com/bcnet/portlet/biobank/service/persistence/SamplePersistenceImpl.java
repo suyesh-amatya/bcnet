@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -35,8 +36,10 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -80,6 +83,534 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
 			SampleModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID = new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
+			SampleModelImpl.FINDER_CACHE_ENABLED, SampleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByuuid",
+			new String[] {
+				String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID = new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
+			SampleModelImpl.FINDER_CACHE_ENABLED, SampleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByuuid",
+			new String[] { String.class.getName() },
+			SampleModelImpl.UUID__COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
+			SampleModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByuuid",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns all the samples where uuid_ = &#63;.
+	 *
+	 * @param uuid_ the uuid_
+	 * @return the matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Sample> findByuuid(String uuid_) throws SystemException {
+		return findByuuid(uuid_, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the samples where uuid_ = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid_ the uuid_
+	 * @param start the lower bound of the range of samples
+	 * @param end the upper bound of the range of samples (not inclusive)
+	 * @return the range of matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Sample> findByuuid(String uuid_, int start, int end)
+		throws SystemException {
+		return findByuuid(uuid_, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the samples where uuid_ = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param uuid_ the uuid_
+	 * @param start the lower bound of the range of samples
+	 * @param end the upper bound of the range of samples (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Sample> findByuuid(String uuid_, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID;
+			finderArgs = new Object[] { uuid_ };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_UUID;
+			finderArgs = new Object[] { uuid_, start, end, orderByComparator };
+		}
+
+		List<Sample> list = (List<Sample>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Sample sample : list) {
+				if (!Validator.equals(uuid_, sample.getUuid_())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SAMPLE_WHERE);
+
+			boolean bindUuid_ = false;
+
+			if (uuid_ == null) {
+				query.append(_FINDER_COLUMN_UUID_UUID__1);
+			}
+			else if (uuid_.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_UUID__3);
+			}
+			else {
+				bindUuid_ = true;
+
+				query.append(_FINDER_COLUMN_UUID_UUID__2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(SampleModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindUuid_) {
+					qPos.add(uuid_);
+				}
+
+				if (!pagination) {
+					list = (List<Sample>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Sample>(list);
+				}
+				else {
+					list = (List<Sample>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first sample in the ordered set where uuid_ = &#63;.
+	 *
+	 * @param uuid_ the uuid_
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching sample
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample findByuuid_First(String uuid_,
+		OrderByComparator orderByComparator)
+		throws NoSuchSampleException, SystemException {
+		Sample sample = fetchByuuid_First(uuid_, orderByComparator);
+
+		if (sample != null) {
+			return sample;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("uuid_=");
+		msg.append(uuid_);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSampleException(msg.toString());
+	}
+
+	/**
+	 * Returns the first sample in the ordered set where uuid_ = &#63;.
+	 *
+	 * @param uuid_ the uuid_
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching sample, or <code>null</code> if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample fetchByuuid_First(String uuid_,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Sample> list = findByuuid(uuid_, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last sample in the ordered set where uuid_ = &#63;.
+	 *
+	 * @param uuid_ the uuid_
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching sample
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample findByuuid_Last(String uuid_,
+		OrderByComparator orderByComparator)
+		throws NoSuchSampleException, SystemException {
+		Sample sample = fetchByuuid_Last(uuid_, orderByComparator);
+
+		if (sample != null) {
+			return sample;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("uuid_=");
+		msg.append(uuid_);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSampleException(msg.toString());
+	}
+
+	/**
+	 * Returns the last sample in the ordered set where uuid_ = &#63;.
+	 *
+	 * @param uuid_ the uuid_
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching sample, or <code>null</code> if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample fetchByuuid_Last(String uuid_,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByuuid(uuid_);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Sample> list = findByuuid(uuid_, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the samples before and after the current sample in the ordered set where uuid_ = &#63;.
+	 *
+	 * @param sampleDbId the primary key of the current sample
+	 * @param uuid_ the uuid_
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next sample
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a sample with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample[] findByuuid_PrevAndNext(long sampleDbId, String uuid_,
+		OrderByComparator orderByComparator)
+		throws NoSuchSampleException, SystemException {
+		Sample sample = findByPrimaryKey(sampleDbId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Sample[] array = new SampleImpl[3];
+
+			array[0] = getByuuid_PrevAndNext(session, sample, uuid_,
+					orderByComparator, true);
+
+			array[1] = sample;
+
+			array[2] = getByuuid_PrevAndNext(session, sample, uuid_,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Sample getByuuid_PrevAndNext(Session session, Sample sample,
+		String uuid_, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SAMPLE_WHERE);
+
+		boolean bindUuid_ = false;
+
+		if (uuid_ == null) {
+			query.append(_FINDER_COLUMN_UUID_UUID__1);
+		}
+		else if (uuid_.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_UUID_UUID__3);
+		}
+		else {
+			bindUuid_ = true;
+
+			query.append(_FINDER_COLUMN_UUID_UUID__2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(SampleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindUuid_) {
+			qPos.add(uuid_);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(sample);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Sample> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the samples where uuid_ = &#63; from the database.
+	 *
+	 * @param uuid_ the uuid_
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByuuid(String uuid_) throws SystemException {
+		for (Sample sample : findByuuid(uuid_, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(sample);
+		}
+	}
+
+	/**
+	 * Returns the number of samples where uuid_ = &#63;.
+	 *
+	 * @param uuid_ the uuid_
+	 * @return the number of matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByuuid(String uuid_) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_UUID;
+
+		Object[] finderArgs = new Object[] { uuid_ };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SAMPLE_WHERE);
+
+			boolean bindUuid_ = false;
+
+			if (uuid_ == null) {
+				query.append(_FINDER_COLUMN_UUID_UUID__1);
+			}
+			else if (uuid_.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_UUID_UUID__3);
+			}
+			else {
+				bindUuid_ = true;
+
+				query.append(_FINDER_COLUMN_UUID_UUID__2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindUuid_) {
+					qPos.add(uuid_);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_UUID_UUID__1 = "sample.uuid_ IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID__2 = "sample.uuid_ = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID__3 = "(sample.uuid_ IS NULL OR sample.uuid_ = '')";
 
 	public SamplePersistenceImpl() {
 		setModelClass(Sample.class);
@@ -273,6 +804,8 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 
 		boolean isNew = sample.isNew();
 
+		SampleModelImpl sampleModelImpl = (SampleModelImpl)sample;
+
 		Session session = null;
 
 		try {
@@ -296,8 +829,25 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !SampleModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+
+		else {
+			if ((sampleModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { sampleModelImpl.getOriginalUuid_() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
+					args);
+
+				args = new Object[] { sampleModelImpl.getUuid_() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(SampleModelImpl.ENTITY_CACHE_ENABLED,
@@ -646,9 +1196,12 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 	}
 
 	private static final String _SQL_SELECT_SAMPLE = "SELECT sample FROM Sample sample";
+	private static final String _SQL_SELECT_SAMPLE_WHERE = "SELECT sample FROM Sample sample WHERE ";
 	private static final String _SQL_COUNT_SAMPLE = "SELECT COUNT(sample) FROM Sample sample";
+	private static final String _SQL_COUNT_SAMPLE_WHERE = "SELECT COUNT(sample) FROM Sample sample WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "sample.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Sample exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Sample exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(SamplePersistenceImpl.class);

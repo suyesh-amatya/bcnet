@@ -275,6 +275,10 @@ public class SampleLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static void deleteSamplesByuuid(java.lang.String uuid) {
+		getService().deleteSamplesByuuid(uuid);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

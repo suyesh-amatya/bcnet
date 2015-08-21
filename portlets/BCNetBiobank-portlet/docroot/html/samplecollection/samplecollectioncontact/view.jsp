@@ -230,10 +230,11 @@ for(SampleCollectionContact sampleCollectionContact : sampleCollectionContacts) 
 					&nbsp;&nbsp;
 					<a id="deleteContactFromSampleCollection" class="icon-remove" style="color: red;" sampleCollectionDbId="<%= sampleCollectionDbId %>" 
 					userid="<%= sampleCollectionContactUserId %>" userfullname="<%= sampleCollectionContactUser.getFullName() %>"></a>
-					
-				<br>
 				<%
 				}
+				%>	
+				<br>
+				<%
 				if(viewSampleCollectionDetailedContact || (themeDisplay.getUserId() == sampleCollectionContactUserId)){ 
 				%> 
 					<aui:a href='<%= "mailto:" + sampleCollectionContactUser.getEmailAddress() %>' ><%= sampleCollectionContactUser.getEmailAddress() %></aui:a>

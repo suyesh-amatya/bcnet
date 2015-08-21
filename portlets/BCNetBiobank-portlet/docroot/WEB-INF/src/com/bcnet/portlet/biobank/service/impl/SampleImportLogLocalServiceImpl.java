@@ -37,6 +37,4 @@ public class SampleImportLogLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil} to access the sample import log local service.
 	 */
-	
-	
 }
