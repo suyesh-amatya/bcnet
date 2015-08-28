@@ -2,3 +2,25 @@
 	margin-left: 0px;
 	margin: 3em 0;
 }
+
+div#sample-import-detail .lfr-search-container{
+	margin-top: 0px;
+}
+
+div#sample-import-detail .container-fluid{
+	padding-right: 0px;
+    padding-left: 0px;
+}
+
+div#sample-import-detail .well.sidebar-nav{
+	padding:0;
+}
+
+div#sample-import-detail .span10{
+	margin-left: 0.5em;
+}
+
+div#sample-import-detail .span12{
+	margin-left: 0;
+}
+

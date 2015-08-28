@@ -86,7 +86,11 @@ public class BiobankGeneralInformationModelImpl extends BaseModelImpl<BiobankGen
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.bcnet.portlet.biobank.model.BiobankGeneralInformation"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.bcnet.portlet.biobank.model.BiobankGeneralInformation"),
+			true);
+	public static long BIOBANKID_COLUMN_BITMASK = 1L;
+	public static long BIOBANKDBID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -270,7 +274,17 @@ public class BiobankGeneralInformationModelImpl extends BaseModelImpl<BiobankGen
 
 	@Override
 	public void setBiobankId(String biobankId) {
+		_columnBitmask |= BIOBANKID_COLUMN_BITMASK;
+
+		if (_originalBiobankId == null) {
+			_originalBiobankId = _biobankId;
+		}
+
 		_biobankId = biobankId;
+	}
+
+	public String getOriginalBiobankId() {
+		return GetterUtil.getString(_originalBiobankId);
 	}
 
 	@JSON
@@ -380,6 +394,10 @@ public class BiobankGeneralInformationModelImpl extends BaseModelImpl<BiobankGen
 		_trainingCourses = trainingCourses;
 	}
 
+	public long getColumnBitmask() {
+		return _columnBitmask;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -466,6 +484,11 @@ public class BiobankGeneralInformationModelImpl extends BaseModelImpl<BiobankGen
 
 	@Override
 	public void resetOriginalValues() {
+		BiobankGeneralInformationModelImpl biobankGeneralInformationModelImpl = this;
+
+		biobankGeneralInformationModelImpl._originalBiobankId = biobankGeneralInformationModelImpl._biobankId;
+
+		biobankGeneralInformationModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -606,6 +629,7 @@ public class BiobankGeneralInformationModelImpl extends BaseModelImpl<BiobankGen
 		};
 	private long _biobankDbId;
 	private String _biobankId;
+	private String _originalBiobankId;
 	private String _acronym;
 	private String _url;
 	private long _juristicPersonId;
@@ -613,5 +637,6 @@ public class BiobankGeneralInformationModelImpl extends BaseModelImpl<BiobankGen
 	private String _description;
 	private boolean _backup;
 	private boolean _trainingCourses;
+	private long _columnBitmask;
 	private BiobankGeneralInformation _escapedModel;
 }

@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -35,8 +36,10 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -84,6 +87,257 @@ public class BiobankGeneralInformationPersistenceImpl
 			BiobankGeneralInformationModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_BIOBANKID = new FinderPath(BiobankGeneralInformationModelImpl.ENTITY_CACHE_ENABLED,
+			BiobankGeneralInformationModelImpl.FINDER_CACHE_ENABLED,
+			BiobankGeneralInformationImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchBybiobankId", new String[] { String.class.getName() },
+			BiobankGeneralInformationModelImpl.BIOBANKID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_BIOBANKID = new FinderPath(BiobankGeneralInformationModelImpl.ENTITY_CACHE_ENABLED,
+			BiobankGeneralInformationModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countBybiobankId", new String[] { String.class.getName() });
+
+	/**
+	 * Returns the biobank general information where biobankId = &#63; or throws a {@link com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException} if it could not be found.
+	 *
+	 * @param biobankId the biobank ID
+	 * @return the matching biobank general information
+	 * @throws com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException if a matching biobank general information could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public BiobankGeneralInformation findBybiobankId(String biobankId)
+		throws NoSuchBiobankGeneralInformationException, SystemException {
+		BiobankGeneralInformation biobankGeneralInformation = fetchBybiobankId(biobankId);
+
+		if (biobankGeneralInformation == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("biobankId=");
+			msg.append(biobankId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchBiobankGeneralInformationException(msg.toString());
+		}
+
+		return biobankGeneralInformation;
+	}
+
+	/**
+	 * Returns the biobank general information where biobankId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param biobankId the biobank ID
+	 * @return the matching biobank general information, or <code>null</code> if a matching biobank general information could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public BiobankGeneralInformation fetchBybiobankId(String biobankId)
+		throws SystemException {
+		return fetchBybiobankId(biobankId, true);
+	}
+
+	/**
+	 * Returns the biobank general information where biobankId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param biobankId the biobank ID
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching biobank general information, or <code>null</code> if a matching biobank general information could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public BiobankGeneralInformation fetchBybiobankId(String biobankId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { biobankId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_BIOBANKID,
+					finderArgs, this);
+		}
+
+		if (result instanceof BiobankGeneralInformation) {
+			BiobankGeneralInformation biobankGeneralInformation = (BiobankGeneralInformation)result;
+
+			if (!Validator.equals(biobankId,
+						biobankGeneralInformation.getBiobankId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_BIOBANKGENERALINFORMATION_WHERE);
+
+			boolean bindBiobankId = false;
+
+			if (biobankId == null) {
+				query.append(_FINDER_COLUMN_BIOBANKID_BIOBANKID_1);
+			}
+			else if (biobankId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_BIOBANKID_BIOBANKID_3);
+			}
+			else {
+				bindBiobankId = true;
+
+				query.append(_FINDER_COLUMN_BIOBANKID_BIOBANKID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindBiobankId) {
+					qPos.add(biobankId);
+				}
+
+				List<BiobankGeneralInformation> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKID,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"BiobankGeneralInformationPersistenceImpl.fetchBybiobankId(String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					BiobankGeneralInformation biobankGeneralInformation = list.get(0);
+
+					result = biobankGeneralInformation;
+
+					cacheResult(biobankGeneralInformation);
+
+					if ((biobankGeneralInformation.getBiobankId() == null) ||
+							!biobankGeneralInformation.getBiobankId()
+														  .equals(biobankId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKID,
+							finderArgs, biobankGeneralInformation);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BIOBANKID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (BiobankGeneralInformation)result;
+		}
+	}
+
+	/**
+	 * Removes the biobank general information where biobankId = &#63; from the database.
+	 *
+	 * @param biobankId the biobank ID
+	 * @return the biobank general information that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public BiobankGeneralInformation removeBybiobankId(String biobankId)
+		throws NoSuchBiobankGeneralInformationException, SystemException {
+		BiobankGeneralInformation biobankGeneralInformation = findBybiobankId(biobankId);
+
+		return remove(biobankGeneralInformation);
+	}
+
+	/**
+	 * Returns the number of biobank general informations where biobankId = &#63;.
+	 *
+	 * @param biobankId the biobank ID
+	 * @return the number of matching biobank general informations
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countBybiobankId(String biobankId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_BIOBANKID;
+
+		Object[] finderArgs = new Object[] { biobankId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_BIOBANKGENERALINFORMATION_WHERE);
+
+			boolean bindBiobankId = false;
+
+			if (biobankId == null) {
+				query.append(_FINDER_COLUMN_BIOBANKID_BIOBANKID_1);
+			}
+			else if (biobankId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_BIOBANKID_BIOBANKID_3);
+			}
+			else {
+				bindBiobankId = true;
+
+				query.append(_FINDER_COLUMN_BIOBANKID_BIOBANKID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindBiobankId) {
+					qPos.add(biobankId);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_BIOBANKID_BIOBANKID_1 = "biobankGeneralInformation.biobankId IS NULL";
+	private static final String _FINDER_COLUMN_BIOBANKID_BIOBANKID_2 = "biobankGeneralInformation.biobankId = ?";
+	private static final String _FINDER_COLUMN_BIOBANKID_BIOBANKID_3 = "(biobankGeneralInformation.biobankId IS NULL OR biobankGeneralInformation.biobankId = '')";
 
 	public BiobankGeneralInformationPersistenceImpl() {
 		setModelClass(BiobankGeneralInformation.class);
@@ -99,6 +353,10 @@ public class BiobankGeneralInformationPersistenceImpl
 		EntityCacheUtil.putResult(BiobankGeneralInformationModelImpl.ENTITY_CACHE_ENABLED,
 			BiobankGeneralInformationImpl.class,
 			biobankGeneralInformation.getPrimaryKey(), biobankGeneralInformation);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKID,
+			new Object[] { biobankGeneralInformation.getBiobankId() },
+			biobankGeneralInformation);
 
 		biobankGeneralInformation.resetOriginalValues();
 	}
@@ -159,6 +417,8 @@ public class BiobankGeneralInformationPersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(biobankGeneralInformation);
 	}
 
 	@Override
@@ -171,6 +431,58 @@ public class BiobankGeneralInformationPersistenceImpl
 			EntityCacheUtil.removeResult(BiobankGeneralInformationModelImpl.ENTITY_CACHE_ENABLED,
 				BiobankGeneralInformationImpl.class,
 				biobankGeneralInformation.getPrimaryKey());
+
+			clearUniqueFindersCache(biobankGeneralInformation);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		BiobankGeneralInformation biobankGeneralInformation) {
+		if (biobankGeneralInformation.isNew()) {
+			Object[] args = new Object[] {
+					biobankGeneralInformation.getBiobankId()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BIOBANKID, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKID, args,
+				biobankGeneralInformation);
+		}
+		else {
+			BiobankGeneralInformationModelImpl biobankGeneralInformationModelImpl =
+				(BiobankGeneralInformationModelImpl)biobankGeneralInformation;
+
+			if ((biobankGeneralInformationModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_BIOBANKID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						biobankGeneralInformation.getBiobankId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BIOBANKID, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BIOBANKID, args,
+					biobankGeneralInformation);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		BiobankGeneralInformation biobankGeneralInformation) {
+		BiobankGeneralInformationModelImpl biobankGeneralInformationModelImpl = (BiobankGeneralInformationModelImpl)biobankGeneralInformation;
+
+		Object[] args = new Object[] { biobankGeneralInformation.getBiobankId() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BIOBANKID, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BIOBANKID, args);
+
+		if ((biobankGeneralInformationModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_BIOBANKID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					biobankGeneralInformationModelImpl.getOriginalBiobankId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BIOBANKID, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BIOBANKID, args);
 		}
 	}
 
@@ -310,13 +622,17 @@ public class BiobankGeneralInformationPersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew ||
+				!BiobankGeneralInformationModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		EntityCacheUtil.putResult(BiobankGeneralInformationModelImpl.ENTITY_CACHE_ENABLED,
 			BiobankGeneralInformationImpl.class,
 			biobankGeneralInformation.getPrimaryKey(), biobankGeneralInformation);
+
+		clearUniqueFindersCache(biobankGeneralInformation);
+		cacheUniqueFindersCache(biobankGeneralInformation);
 
 		return biobankGeneralInformation;
 	}
@@ -652,9 +968,12 @@ public class BiobankGeneralInformationPersistenceImpl
 	}
 
 	private static final String _SQL_SELECT_BIOBANKGENERALINFORMATION = "SELECT biobankGeneralInformation FROM BiobankGeneralInformation biobankGeneralInformation";
+	private static final String _SQL_SELECT_BIOBANKGENERALINFORMATION_WHERE = "SELECT biobankGeneralInformation FROM BiobankGeneralInformation biobankGeneralInformation WHERE ";
 	private static final String _SQL_COUNT_BIOBANKGENERALINFORMATION = "SELECT COUNT(biobankGeneralInformation) FROM BiobankGeneralInformation biobankGeneralInformation";
+	private static final String _SQL_COUNT_BIOBANKGENERALINFORMATION_WHERE = "SELECT COUNT(biobankGeneralInformation) FROM BiobankGeneralInformation biobankGeneralInformation WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "biobankGeneralInformation.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No BiobankGeneralInformation exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No BiobankGeneralInformation exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(BiobankGeneralInformationPersistenceImpl.class);

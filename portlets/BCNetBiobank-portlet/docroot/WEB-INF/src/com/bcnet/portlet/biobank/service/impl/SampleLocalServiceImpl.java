@@ -14,6 +14,9 @@
 
 package com.bcnet.portlet.biobank.service.impl;
 
+import java.util.List;
+
+import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.service.base.SampleLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.SystemException;
 
@@ -44,5 +47,15 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Sample> getSamplesByuuid(String uuid){
+		try {
+			return samplePersistence.findByuuid(uuid);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

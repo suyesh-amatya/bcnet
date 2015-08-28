@@ -170,7 +170,8 @@
 	<aui:button-row>
 		<aui:column columnWidth="30">
 			<aui:button type="submit" />
-			<aui:button onClick="<%= viewBiobankGeneralInfomrationURL %>"  type="cancel" />
+			<%-- <aui:button onClick="<%= viewBiobankGeneralInfomrationURL %>"  type="cancel" /> --%>
+			<aui:button onClick="<%= redirect.toString() %>"  type="cancel" />
 		</aui:column>
 	</aui:button-row>
 </aui:form>

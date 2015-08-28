@@ -23,7 +23,9 @@
 	    orderByType = "desc";
 	}
 	
+	
 %>
+
 
 <liferay-ui:search-container emptyResultsMessage="sampleImportLog-empty-results-message"  orderByType="<%= orderByType %>">
 
@@ -37,11 +39,11 @@
 	if(Validator.isNotNull(orderByCol)){
 	    //Pass the column name to BeanComparator to get comparator object
 	    BeanComparator comparator = new BeanComparator(orderByCol);
-	    if(orderByType.equalsIgnoreCase("asc")){
-	        //It will sort in ascending order
+	    if(orderByType.equalsIgnoreCase("desc")){
+	        //It will sort in descending order
 	        Collections.sort(sortableSampleImportLogs, comparator);
 	    }else{
-	        //It will sort in descending order
+	        //It will sort in ascending order
 	        //Collections.reverse(sortableSampleImportLogs);
 	        Collections.sort(sortableSampleImportLogs, Collections.reverseOrder(comparator));
 	    }
@@ -65,6 +67,7 @@
 			<portlet:renderURL var="viewSampleImportDetailsURL">
 				<portlet:param name="mvcPath" value="/html/sample/sampleimportlog/sample_import_detail.jsp" />
 				<portlet:param name="uuid" value="<%= sampleImportLog.getUuid() %>" />
+				<portlet:param name="fileName" value="<%= sampleImportLog.getFileName() %>" />
 			</portlet:renderURL>
 			
 			<portlet:actionURL name="deleteSampleImport" var="deleteSampleImportURL">

@@ -279,6 +279,11 @@ public class SampleLocalServiceUtil {
 		getService().deleteSamplesByuuid(uuid);
 	}
 
+	public static java.util.List<com.bcnet.portlet.biobank.model.Sample> getSamplesByuuid(
+		java.lang.String uuid) {
+		return getService().getSamplesByuuid(uuid);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

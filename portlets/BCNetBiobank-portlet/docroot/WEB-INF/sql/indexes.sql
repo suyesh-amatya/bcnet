@@ -1,3 +1,5 @@
+create index IX_B003FF25 on biobank (biobankId);
+
 create index IX_A81162A on biobankattributelists (biobankDbId);
 create index IX_6DA6C50B on biobankattributelists (biobankDbId, attributeListName);
 create index IX_56503876 on biobankattributelists (biobankDbId, attributeListName, attributeListValue);

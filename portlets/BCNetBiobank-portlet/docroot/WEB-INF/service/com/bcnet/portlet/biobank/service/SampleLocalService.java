@@ -246,4 +246,8 @@ public interface SampleLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	public void deleteSamplesByuuid(java.lang.String uuid);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.bcnet.portlet.biobank.model.Sample> getSamplesByuuid(
+		java.lang.String uuid);
 }

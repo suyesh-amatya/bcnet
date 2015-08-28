@@ -16,6 +16,7 @@ package com.bcnet.portlet.biobank.service.impl;
 
 import java.util.List;
 
+import com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException;
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformation;
 import com.bcnet.portlet.biobank.service.base.BiobankGeneralInformationLocalServiceBaseImpl;
 import com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinderUtil;
@@ -73,5 +74,9 @@ public class BiobankGeneralInformationLocalServiceImpl
 	
 	public List<BiobankGeneralInformation> getAllBiobankGeneralInformations() throws SystemException{
 		return biobankGeneralInformationPersistence.findAll();
+	}
+	
+	public BiobankGeneralInformation getBiobankByBiobankId(String biobankId) throws NoSuchBiobankGeneralInformationException, SystemException{
+		return biobankGeneralInformationPersistence.findBybiobankId(biobankId);
 	}
 }

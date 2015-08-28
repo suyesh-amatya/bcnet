@@ -322,6 +322,13 @@ public class BiobankGeneralInformationLocalServiceUtil {
 		return getService().getAllBiobankGeneralInformations();
 	}
 
+	public static com.bcnet.portlet.biobank.model.BiobankGeneralInformation getBiobankByBiobankId(
+		java.lang.String biobankId)
+		throws com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getBiobankByBiobankId(biobankId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

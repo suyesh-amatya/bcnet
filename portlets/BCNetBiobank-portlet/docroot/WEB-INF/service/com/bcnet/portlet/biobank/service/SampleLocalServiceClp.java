@@ -117,6 +117,10 @@ public class SampleLocalServiceClp implements SampleLocalService {
 		_methodName19 = "deleteSamplesByuuid";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String" };
+
+		_methodName20 = "getSamplesByuuid";
+
+		_methodParameterTypes20 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -685,6 +689,31 @@ public class SampleLocalServiceClp implements SampleLocalService {
 		}
 	}
 
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.Sample> getSamplesByuuid(
+		java.lang.String uuid) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] { ClpSerializer.translateInput(uuid) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.bcnet.portlet.biobank.model.Sample>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -724,4 +753,6 @@ public class SampleLocalServiceClp implements SampleLocalService {
 	private String[] _methodParameterTypes17;
 	private String _methodName19;
 	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

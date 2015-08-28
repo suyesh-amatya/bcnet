@@ -272,4 +272,10 @@ public interface BiobankGeneralInformationLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> getAllBiobankGeneralInformations()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation getBiobankByBiobankId(
+		java.lang.String biobankId)
+		throws com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

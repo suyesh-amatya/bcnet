@@ -92,6 +92,7 @@
 <%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil"%>
 <%@ page import="com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil"%>
+<%@ page import="com.bcnet.portlet.biobank.service.SampleLocalServiceUtil"%>
 
 
 

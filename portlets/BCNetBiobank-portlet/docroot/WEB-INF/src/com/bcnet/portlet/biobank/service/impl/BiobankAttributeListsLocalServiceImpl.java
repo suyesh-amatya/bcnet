@@ -97,7 +97,8 @@ public class BiobankAttributeListsLocalServiceImpl
 		
 		BiobankAttributeLists biobankAttributeLists = 
 				getBiobankAttributeListsByBiobankDbId_AttributeListName_AttributeListValue(biobankDbId, attributeListName, attributeListValue);
-		
+		//can also be removed this way.
+		//return biobankAttributeListsPersistence.removeBybiobankDbId_attributeListName_attributeListValue(biobankDbId, attributeListName, attributeListValue);
 		return biobankAttributeListsPersistence.remove(biobankAttributeLists);
 	}
 	

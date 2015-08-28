@@ -339,6 +339,14 @@ public class BiobankGeneralInformationLocalServiceWrapper
 		return _biobankGeneralInformationLocalService.getAllBiobankGeneralInformations();
 	}
 
+	@Override
+	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation getBiobankByBiobankId(
+		java.lang.String biobankId)
+		throws com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _biobankGeneralInformationLocalService.getBiobankByBiobankId(biobankId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

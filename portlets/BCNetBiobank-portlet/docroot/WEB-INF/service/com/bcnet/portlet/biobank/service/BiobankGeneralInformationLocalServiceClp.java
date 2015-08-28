@@ -153,6 +153,10 @@ public class BiobankGeneralInformationLocalServiceClp
 		_methodName25 = "getAllBiobankGeneralInformations";
 
 		_methodParameterTypes25 = new String[] {  };
+
+		_methodName26 = "getBiobankByBiobankId";
+
+		_methodParameterTypes26 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -921,6 +925,41 @@ public class BiobankGeneralInformationLocalServiceClp
 		return (java.util.List<com.bcnet.portlet.biobank.model.BiobankGeneralInformation>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation getBiobankByBiobankId(
+		java.lang.String biobankId)
+		throws com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26,
+					new Object[] { ClpSerializer.translateInput(biobankId) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException) {
+				throw (com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.bcnet.portlet.biobank.model.BiobankGeneralInformation)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -972,4 +1011,6 @@ public class BiobankGeneralInformationLocalServiceClp
 	private String[] _methodParameterTypes24;
 	private String _methodName25;
 	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 }

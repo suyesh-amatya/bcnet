@@ -285,6 +285,12 @@ public class SampleLocalServiceWrapper implements SampleLocalService,
 		_sampleLocalService.deleteSamplesByuuid(uuid);
 	}
 
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.Sample> getSamplesByuuid(
+		java.lang.String uuid) {
+		return _sampleLocalService.getSamplesByuuid(uuid);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

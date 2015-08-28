@@ -38,6 +38,64 @@ public interface BiobankGeneralInformationPersistence extends BasePersistence<Bi
 	 */
 
 	/**
+	* Returns the biobank general information where biobankId = &#63; or throws a {@link com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException} if it could not be found.
+	*
+	* @param biobankId the biobank ID
+	* @return the matching biobank general information
+	* @throws com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException if a matching biobank general information could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation findBybiobankId(
+		java.lang.String biobankId)
+		throws com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the biobank general information where biobankId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param biobankId the biobank ID
+	* @return the matching biobank general information, or <code>null</code> if a matching biobank general information could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation fetchBybiobankId(
+		java.lang.String biobankId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the biobank general information where biobankId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param biobankId the biobank ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching biobank general information, or <code>null</code> if a matching biobank general information could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation fetchBybiobankId(
+		java.lang.String biobankId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the biobank general information where biobankId = &#63; from the database.
+	*
+	* @param biobankId the biobank ID
+	* @return the biobank general information that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation removeBybiobankId(
+		java.lang.String biobankId)
+		throws com.bcnet.portlet.biobank.NoSuchBiobankGeneralInformationException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of biobank general informations where biobankId = &#63;.
+	*
+	* @param biobankId the biobank ID
+	* @return the number of matching biobank general informations
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countBybiobankId(java.lang.String biobankId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the biobank general information in the entity cache if it is enabled.
 	*
 	* @param biobankGeneralInformation the biobank general information

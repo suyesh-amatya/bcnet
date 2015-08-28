@@ -117,6 +117,10 @@ public class SampleLocalServiceClpInvoker {
 		_methodName96 = "deleteSamplesByuuid";
 
 		_methodParameterTypes96 = new String[] { "java.lang.String" };
+
+		_methodName97 = "getSamplesByuuid";
+
+		_methodParameterTypes97 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -227,6 +231,11 @@ public class SampleLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName97.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+			return SampleLocalServiceUtil.getSamplesByuuid((java.lang.String)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -268,4 +277,6 @@ public class SampleLocalServiceClpInvoker {
 	private String[] _methodParameterTypes91;
 	private String _methodName96;
 	private String[] _methodParameterTypes96;
+	private String _methodName97;
+	private String[] _methodParameterTypes97;
 }

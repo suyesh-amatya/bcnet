@@ -82,6 +82,7 @@
 					addJuristicPersonURL.setDoAsGroupId(themeDisplay.getSiteGroupId());
 					addJuristicPersonURL.setParameter("jspPage", "/html/juristicperson/edit_juristicperson_popup.jsp");
 					addJuristicPersonURL.setWindowState(LiferayWindowState.POP_UP);
+					
 				%>
 		
 				<c:set var="portletURL" value="<%=addJuristicPersonURL%>" />

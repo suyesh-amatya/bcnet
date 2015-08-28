@@ -31,6 +31,9 @@
         <column name="description" type="String"></column>
         <column name="backup" type="boolean"></column>
         <column name="trainingCourses" type="boolean"></column>
+        <finder name="biobankId" return-type="BiobankGeneralInformation">
+			<finder-column name="biobankId" />
+		</finder>
 	</entity>
 	
 	<entity name="BiobankAttributeLists" local-service="true" remote-service="true" table="biobankattributelists">
