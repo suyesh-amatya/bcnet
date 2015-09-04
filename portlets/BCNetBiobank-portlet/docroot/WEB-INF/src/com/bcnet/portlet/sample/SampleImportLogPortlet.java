@@ -25,5 +25,16 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		
 		sendRedirect(request, response);
 	}
+	
+	public void filterColumns(ActionRequest request, ActionResponse response) throws IOException{
+		//System.out.println(ParamUtil.getString(request, "test"));
+		//System.out.println(request.getParameter("submit"));
+		System.out.println(request.getMethod());
+		//System.out.println(ParamUtil.getString(request, "container"));
+		
+		//response.sendRedirect(ParamUtil.getString(request, "redirect"));
+		//sendRedirect(request, response);
+		//response.setRenderParameter("container", ParamUtil.getString(request, "container"));
+	}
 
 }
