@@ -65,7 +65,7 @@
 			modelVar="sampleImportLog" escapedModel="<%= true %>"
 		>
 			<portlet:renderURL var="viewSampleImportDetailsURL">
-				<portlet:param name="mvcPath" value="/html/sample/sampleimportlog/sample_import_detail.jsp" />
+				<portlet:param name="mvcPath" value="/html/sample/sampleimportlog/sample_import_detail1.jsp" />
 				<portlet:param name="uuid" value="<%= sampleImportLog.getUuid() %>" />
 				<portlet:param name="fileName" value="<%= sampleImportLog.getFileName() %>" />
 			</portlet:renderURL>

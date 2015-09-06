@@ -24,3 +24,13 @@ div#sample-import-detail .span12{
 	margin-left: 0;
 }
 
+div#sample-import-detail select{
+	width:auto;
+	height : auto;
+	margin-bottom : 0;
+}
+
+div#sample-import-detail .clear{
+	clear:both;
+	margin-top: 10px;
+}
