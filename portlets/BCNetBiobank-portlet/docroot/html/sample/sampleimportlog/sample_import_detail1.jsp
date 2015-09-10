@@ -1,21 +1,4 @@
 <%@ include file="/html/init.jsp" %>
-<!-- jQuery -->
-<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-
-<!-- DataTables Buttons Extension-->
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-
-<!-- DataTables Columns Visibility Extension-->
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/buttons/1.0.3/js/buttons.colVis.min.js"></script>
-
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
-
-<!-- DataTables Buttons Extension CSS -->
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 
 <%
 	

@@ -317,3 +317,11 @@ address {
 	display: block;
 }
 /***Footer End***/
+
+
+
+/***DataTables Start***/
+div.dt-button-collection{
+	width: auto;
+}
+/***DataTables End***/
