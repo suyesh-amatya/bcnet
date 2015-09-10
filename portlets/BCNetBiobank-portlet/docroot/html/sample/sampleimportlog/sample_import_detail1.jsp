@@ -1,8 +1,15 @@
 <%@ include file="/html/init.jsp" %>
 
+<style>
+div.dt-button-collection{
+	width: auto;
+}
+</style>
+
 <%
 	
-	
+	String redirect = PortalUtil.getCurrentURL(renderRequest);
+
 	String uuid = ParamUtil.getString(request, "uuid");
 	String fileName = ParamUtil.getString(request, "fileName");
 
@@ -52,11 +59,13 @@ the varImpl parameter in iteratorURL in search container. -->
 <h6>Samples Imported in a batch from file <%=fileName%> for <%=biobankName %></h6>
 
 
+
 <div id="sample-import-detail">
 	<div class="container-fluid">
 		<table id="table_id" class="display">
 		    <thead>
 		        <tr>
+		        	<th></th>
 		            <th>sampleCollectionId</th>
 		            <th>hashedSampleId</th>
 		            <th>materialType</th>
@@ -83,7 +92,14 @@ the varImpl parameter in iteratorURL in search container. -->
 		    <%
 		    for(Sample sample: samplesByuuid){
 		    %>
+		    
+				<portlet:renderURL var="editSampleURL">
+					<portlet:param name="mvcPath" value="/html/sample/sampleimportlog/edit_sample.jsp" />
+					<portlet:param name="sampleDbId" value="<%= String.valueOf(sample.getSampleDbId()) %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
+				</portlet:renderURL>
 		        <tr>
+		        	<td><liferay-ui:icon image="edit" message="Edit Biobank" url="<%= editSampleURL.toString() %>"/></td>
 		            <td><%=sample.getSampleCollectionId() %></td>
 		            <td><%=sample.getHashedSampleId() %></td>
 		            <td><%=sample.getMaterialType() %></td>
@@ -119,15 +135,25 @@ the varImpl parameter in iteratorURL in search container. -->
 	    	"scrollX": true,
 	    	"pagingType": "full_numbers",
 	    	"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-	    	 dom: 'l<"clear">Bfrtip',
-	        buttons: [
-	            'colvis',
-	            {
-	                extend: 'colvisGroup',
-	                text: 'Show all',
-	                show: ':hidden'
-	            }
-	        ] 
+	    	dom: 'l<"clear">Bfrtip',
+	        buttons: {
+	        	buttons: [
+	      	            {
+	      	            	extend:'colvis',
+	      	            	text: 'Show/Hide Columns',
+	      	            	columns: ':not(:first-child)'
+	      	            },
+	    	            {
+	    	                extend: 'colvisGroup',
+	    	                text: 'Show all',
+	    	                show: ':hidden'
+	    	            }
+	    	    ]
+	        },
+	        "order": [],
+	        "columnDefs": [
+	         	{ "orderable": false, "targets": 0  } 
+	         ]
 	    });
 	});
 </script>

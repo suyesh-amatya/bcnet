@@ -28,6 +28,7 @@
 	
 	<!-- DataTables Buttons Extension CSS -->
 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+	
 </head>
 
 <body class="${css_class}">
