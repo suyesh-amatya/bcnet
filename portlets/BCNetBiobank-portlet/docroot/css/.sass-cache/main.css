@@ -27,3 +27,28 @@ div#sample-import-detail .clear {
   clear: both;
   margin-top: 10px; }
 
+div.sample-edit-form {
+  border-radius: 4px;
+  padding-left: 0;
+  margin-bottom: 20px;
+  width: auto; }
+
+.sample-edit-form-header {
+  z-index: 2;
+  color: #fff;
+  background-color: #428bca;
+  border-color: #428bca;
+  background-image: -webkit-linear-gradient(top, #428bca 0, #3278b3 100%);
+  background-image: linear-gradient(to bottom, #428bca 0%, #3278b3 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#428bca), to(#3278b3));
+  text-shadow: 0 -1px 0 #3071a9;
+  display: block;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 5px;
+  height: auto; }
+
+div.sample-edit-form-container {
+  border: 1px solid #ddd;
+  border-top: 0; }
+

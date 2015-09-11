@@ -14,7 +14,10 @@
 
 package com.bcnet.portlet.biobank.service.impl;
 
+import com.bcnet.portlet.biobank.NoSuchSampleCollectionException;
+import com.bcnet.portlet.biobank.model.SampleCollection;
 import com.bcnet.portlet.biobank.service.base.SampleCollectionLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the sample collection local service.
@@ -37,4 +40,8 @@ public class SampleCollectionLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil} to access the sample collection local service.
 	 */
+	
+	public SampleCollection getSampleCollectionBySampleCollectionId(String sampleCollectionId) throws NoSuchSampleCollectionException, SystemException{
+		return sampleCollectionPersistence.findBysampleCollectionId(sampleCollectionId);
+	}
 }

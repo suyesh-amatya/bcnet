@@ -1,5 +1,7 @@
 <%@ include file="/html/init.jsp" %>
 
+<!-- Trying to override the buttons.dataTables.min.css from the main.css in the plugin project or via theme did not work. So the overriding had to be done
+here itself in the file. -->
 <style>
 div.dt-button-collection{
 	width: auto;
@@ -13,51 +15,11 @@ div.dt-button-collection{
 	String uuid = ParamUtil.getString(request, "uuid");
 	String fileName = ParamUtil.getString(request, "fileName");
 
-	//orderByCol is the column name passed in the request while sorting
-	String orderByCol = ParamUtil.getString(request, "orderByCol"); 
-	 
-	//orderByType is passed in the request while sorting. It can be either asc or desc
-	String orderByType = ParamUtil.getString(request, "orderByType");
-	
-	//Logic for toggle asc and desc
-	if(orderByType.equals("desc")){
-	    orderByType = "asc";
-	}else{
-	    orderByType = "desc";
-	}
-	 
-	if(Validator.isNull(orderByType)){
-	    orderByType = "desc";
-	}
-
 	List<Sample> samplesByuuid = SampleLocalServiceUtil.getSamplesByuuid(uuid);
 	String biobankName = BiobankGeneralInformationLocalServiceUtil.getBiobankByBiobankId(samplesByuuid.get(0).getBiobankId()).getBiobankName();
 %>
 
-<%-- <portlet:renderURL var="viewSampleImportDetailsURL1">
-	<portlet:param name="mvcPath"
-		value="/html/sample/sampleimportlog/sample_import_detail.jsp" />
-	<portlet:param name="uuid" value="<%=uuid%>" />
-</portlet:renderURL> --%>
-
-<!-- Here we need to use liferay-portlet:renderURL instead of portlet:renderURL because we need to maintain the context of search container by setting 
-the varImpl parameter in iteratorURL in search container. -->
-<liferay-portlet:renderURL varImpl="iteratorURL">
-	<portlet:param name="mvcPath" value="/html/sample/sampleimportlog/sample_import_detail1.jsp" />
-	<portlet:param name="uuid" value="<%=uuid%>" />
-	<portlet:param name="fileName" value="<%=fileName%>" />
-	<%-- <portlet:param name="container" value="<%=String.valueOf(container)%>" /> --%>
-</liferay-portlet:renderURL>
-
-<portlet:renderURL var="searchBiobankURL">
-	<portlet:param name="mvcPath" value="/html/sample/sampleimportlog/sample_import_detail.jsp" />
-	<portlet:param name="uuid" value="<%=uuid%>" />
-	<portlet:param name="fileName" value="<%=fileName%>" />
-	<%-- <portlet:param name="container" value="<%=String.valueOf(containerrequest)%>" /> --%>
-</portlet:renderURL>
-
 <h6>Samples Imported in a batch from file <%=fileName%> for <%=biobankName %></h6>
-
 
 
 <div id="sample-import-detail">
@@ -65,7 +27,7 @@ the varImpl parameter in iteratorURL in search container. -->
 		<table id="table_id" class="display">
 		    <thead>
 		        <tr>
-		        	<th></th>
+		        	<th>Actions</th>
 		            <th>sampleCollectionId</th>
 		            <th>hashedSampleId</th>
 		            <th>materialType</th>
@@ -98,8 +60,20 @@ the varImpl parameter in iteratorURL in search container. -->
 					<portlet:param name="sampleDbId" value="<%= String.valueOf(sample.getSampleDbId()) %>" />
 					<portlet:param name="redirect" value="<%= redirect %>" />
 				</portlet:renderURL>
+				
+				<portlet:actionURL name="deleteSample" var="deleteSampleURL">
+					<portlet:param name="sampleDbId" value="<%= String.valueOf(sample.getSampleDbId()) %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
+				</portlet:actionURL>
+				
 		        <tr>
-		        	<td><liferay-ui:icon image="edit" message="Edit Biobank" url="<%= editSampleURL.toString() %>"/></td>
+		        	<td>
+		        		<liferay-ui:icon image="edit" message="Edit Sample" url="<%= editSampleURL.toString() %>"/>&nbsp;
+		        		<liferay-ui:icon-delete url="<%= deleteSampleURL.toString() %>" 
+							message="<%= \"Delete Sample\" %>" 
+							confirmation="<%= \"Are you sure you want to delete this sample? \" %>"
+						/>
+		        	</td>
 		            <td><%=sample.getSampleCollectionId() %></td>
 		            <td><%=sample.getHashedSampleId() %></td>
 		            <td><%=sample.getMaterialType() %></td>

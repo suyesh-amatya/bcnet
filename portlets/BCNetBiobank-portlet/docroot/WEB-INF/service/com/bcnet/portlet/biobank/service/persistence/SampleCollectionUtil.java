@@ -111,6 +111,77 @@ public class SampleCollectionUtil {
 	}
 
 	/**
+	* Returns the sample collection where sampleCollectionId = &#63; or throws a {@link com.bcnet.portlet.biobank.NoSuchSampleCollectionException} if it could not be found.
+	*
+	* @param sampleCollectionId the sample collection ID
+	* @return the matching sample collection
+	* @throws com.bcnet.portlet.biobank.NoSuchSampleCollectionException if a matching sample collection could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.SampleCollection findBysampleCollectionId(
+		java.lang.String sampleCollectionId)
+		throws com.bcnet.portlet.biobank.NoSuchSampleCollectionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findBysampleCollectionId(sampleCollectionId);
+	}
+
+	/**
+	* Returns the sample collection where sampleCollectionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param sampleCollectionId the sample collection ID
+	* @return the matching sample collection, or <code>null</code> if a matching sample collection could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.SampleCollection fetchBysampleCollectionId(
+		java.lang.String sampleCollectionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchBysampleCollectionId(sampleCollectionId);
+	}
+
+	/**
+	* Returns the sample collection where sampleCollectionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param sampleCollectionId the sample collection ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching sample collection, or <code>null</code> if a matching sample collection could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.SampleCollection fetchBysampleCollectionId(
+		java.lang.String sampleCollectionId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchBysampleCollectionId(sampleCollectionId,
+			retrieveFromCache);
+	}
+
+	/**
+	* Removes the sample collection where sampleCollectionId = &#63; from the database.
+	*
+	* @param sampleCollectionId the sample collection ID
+	* @return the sample collection that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.SampleCollection removeBysampleCollectionId(
+		java.lang.String sampleCollectionId)
+		throws com.bcnet.portlet.biobank.NoSuchSampleCollectionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().removeBysampleCollectionId(sampleCollectionId);
+	}
+
+	/**
+	* Returns the number of sample collections where sampleCollectionId = &#63;.
+	*
+	* @param sampleCollectionId the sample collection ID
+	* @return the number of matching sample collections
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countBysampleCollectionId(
+		java.lang.String sampleCollectionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countBysampleCollectionId(sampleCollectionId);
+	}
+
+	/**
 	* Caches the sample collection in the entity cache if it is enabled.
 	*
 	* @param sampleCollection the sample collection

@@ -81,6 +81,9 @@
 		<column name="materialTransferAgreement" type="boolean"/>
 		<column name="accreditation" type="boolean"/>
 		<column name="qualityControl" type="boolean"/>
+		<finder name="sampleCollectionId" return-type="SampleCollection">
+			<finder-column name="sampleCollectionId" />
+		</finder>
 	</entity>
 	
 	

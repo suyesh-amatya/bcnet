@@ -289,6 +289,14 @@ public class SampleCollectionLocalServiceWrapper
 			arguments);
 	}
 
+	@Override
+	public com.bcnet.portlet.biobank.model.SampleCollection getSampleCollectionBySampleCollectionId(
+		java.lang.String sampleCollectionId)
+		throws com.bcnet.portlet.biobank.NoSuchSampleCollectionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _sampleCollectionLocalService.getSampleCollectionBySampleCollectionId(sampleCollectionId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

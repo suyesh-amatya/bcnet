@@ -12,6 +12,8 @@ create index IX_8C07D432 on biobankattributelistsmaster (attributeName);
 
 create index IX_CE24C4C4 on sample (uuid_);
 
+create index IX_1F65AD65 on samplecollection (sampleCollectionId);
+
 create index IX_279BCA7C on samplecollectionattributelists (sampleCollectionDbId);
 create index IX_F2DE3B79 on samplecollectionattributelists (sampleCollectionDbId, attributeListName);
 create index IX_4EA2BE4 on samplecollectionattributelists (sampleCollectionDbId, attributeListName, attributeListValue);

@@ -275,6 +275,14 @@ public class SampleCollectionLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.bcnet.portlet.biobank.model.SampleCollection getSampleCollectionBySampleCollectionId(
+		java.lang.String sampleCollectionId)
+		throws com.bcnet.portlet.biobank.NoSuchSampleCollectionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getSampleCollectionBySampleCollectionId(sampleCollectionId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

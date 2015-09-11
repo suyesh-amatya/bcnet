@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -35,8 +36,10 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -82,6 +85,264 @@ public class SampleCollectionPersistenceImpl extends BasePersistenceImpl<SampleC
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(SampleCollectionModelImpl.ENTITY_CACHE_ENABLED,
 			SampleCollectionModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID = new FinderPath(SampleCollectionModelImpl.ENTITY_CACHE_ENABLED,
+			SampleCollectionModelImpl.FINDER_CACHE_ENABLED,
+			SampleCollectionImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchBysampleCollectionId",
+			new String[] { String.class.getName() },
+			SampleCollectionModelImpl.SAMPLECOLLECTIONID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONID = new FinderPath(SampleCollectionModelImpl.ENTITY_CACHE_ENABLED,
+			SampleCollectionModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countBysampleCollectionId", new String[] { String.class.getName() });
+
+	/**
+	 * Returns the sample collection where sampleCollectionId = &#63; or throws a {@link com.bcnet.portlet.biobank.NoSuchSampleCollectionException} if it could not be found.
+	 *
+	 * @param sampleCollectionId the sample collection ID
+	 * @return the matching sample collection
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleCollectionException if a matching sample collection could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SampleCollection findBysampleCollectionId(String sampleCollectionId)
+		throws NoSuchSampleCollectionException, SystemException {
+		SampleCollection sampleCollection = fetchBysampleCollectionId(sampleCollectionId);
+
+		if (sampleCollection == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("sampleCollectionId=");
+			msg.append(sampleCollectionId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchSampleCollectionException(msg.toString());
+		}
+
+		return sampleCollection;
+	}
+
+	/**
+	 * Returns the sample collection where sampleCollectionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param sampleCollectionId the sample collection ID
+	 * @return the matching sample collection, or <code>null</code> if a matching sample collection could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SampleCollection fetchBysampleCollectionId(String sampleCollectionId)
+		throws SystemException {
+		return fetchBysampleCollectionId(sampleCollectionId, true);
+	}
+
+	/**
+	 * Returns the sample collection where sampleCollectionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param sampleCollectionId the sample collection ID
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching sample collection, or <code>null</code> if a matching sample collection could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SampleCollection fetchBysampleCollectionId(
+		String sampleCollectionId, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { sampleCollectionId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID,
+					finderArgs, this);
+		}
+
+		if (result instanceof SampleCollection) {
+			SampleCollection sampleCollection = (SampleCollection)result;
+
+			if (!Validator.equals(sampleCollectionId,
+						sampleCollection.getSampleCollectionId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_SAMPLECOLLECTION_WHERE);
+
+			boolean bindSampleCollectionId = false;
+
+			if (sampleCollectionId == null) {
+				query.append(_FINDER_COLUMN_SAMPLECOLLECTIONID_SAMPLECOLLECTIONID_1);
+			}
+			else if (sampleCollectionId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_SAMPLECOLLECTIONID_SAMPLECOLLECTIONID_3);
+			}
+			else {
+				bindSampleCollectionId = true;
+
+				query.append(_FINDER_COLUMN_SAMPLECOLLECTIONID_SAMPLECOLLECTIONID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindSampleCollectionId) {
+					qPos.add(sampleCollectionId);
+				}
+
+				List<SampleCollection> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"SampleCollectionPersistenceImpl.fetchBysampleCollectionId(String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					SampleCollection sampleCollection = list.get(0);
+
+					result = sampleCollection;
+
+					cacheResult(sampleCollection);
+
+					if ((sampleCollection.getSampleCollectionId() == null) ||
+							!sampleCollection.getSampleCollectionId()
+												 .equals(sampleCollectionId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID,
+							finderArgs, sampleCollection);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (SampleCollection)result;
+		}
+	}
+
+	/**
+	 * Removes the sample collection where sampleCollectionId = &#63; from the database.
+	 *
+	 * @param sampleCollectionId the sample collection ID
+	 * @return the sample collection that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SampleCollection removeBysampleCollectionId(
+		String sampleCollectionId)
+		throws NoSuchSampleCollectionException, SystemException {
+		SampleCollection sampleCollection = findBysampleCollectionId(sampleCollectionId);
+
+		return remove(sampleCollection);
+	}
+
+	/**
+	 * Returns the number of sample collections where sampleCollectionId = &#63;.
+	 *
+	 * @param sampleCollectionId the sample collection ID
+	 * @return the number of matching sample collections
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countBysampleCollectionId(String sampleCollectionId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONID;
+
+		Object[] finderArgs = new Object[] { sampleCollectionId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SAMPLECOLLECTION_WHERE);
+
+			boolean bindSampleCollectionId = false;
+
+			if (sampleCollectionId == null) {
+				query.append(_FINDER_COLUMN_SAMPLECOLLECTIONID_SAMPLECOLLECTIONID_1);
+			}
+			else if (sampleCollectionId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_SAMPLECOLLECTIONID_SAMPLECOLLECTIONID_3);
+			}
+			else {
+				bindSampleCollectionId = true;
+
+				query.append(_FINDER_COLUMN_SAMPLECOLLECTIONID_SAMPLECOLLECTIONID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindSampleCollectionId) {
+					qPos.add(sampleCollectionId);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_SAMPLECOLLECTIONID_SAMPLECOLLECTIONID_1 =
+		"sampleCollection.sampleCollectionId IS NULL";
+	private static final String _FINDER_COLUMN_SAMPLECOLLECTIONID_SAMPLECOLLECTIONID_2 =
+		"sampleCollection.sampleCollectionId = ?";
+	private static final String _FINDER_COLUMN_SAMPLECOLLECTIONID_SAMPLECOLLECTIONID_3 =
+		"(sampleCollection.sampleCollectionId IS NULL OR sampleCollection.sampleCollectionId = '')";
 
 	public SampleCollectionPersistenceImpl() {
 		setModelClass(SampleCollection.class);
@@ -96,6 +357,10 @@ public class SampleCollectionPersistenceImpl extends BasePersistenceImpl<SampleC
 	public void cacheResult(SampleCollection sampleCollection) {
 		EntityCacheUtil.putResult(SampleCollectionModelImpl.ENTITY_CACHE_ENABLED,
 			SampleCollectionImpl.class, sampleCollection.getPrimaryKey(),
+			sampleCollection);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID,
+			new Object[] { sampleCollection.getSampleCollectionId() },
 			sampleCollection);
 
 		sampleCollection.resetOriginalValues();
@@ -155,6 +420,8 @@ public class SampleCollectionPersistenceImpl extends BasePersistenceImpl<SampleC
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(sampleCollection);
 	}
 
 	@Override
@@ -165,6 +432,59 @@ public class SampleCollectionPersistenceImpl extends BasePersistenceImpl<SampleC
 		for (SampleCollection sampleCollection : sampleCollections) {
 			EntityCacheUtil.removeResult(SampleCollectionModelImpl.ENTITY_CACHE_ENABLED,
 				SampleCollectionImpl.class, sampleCollection.getPrimaryKey());
+
+			clearUniqueFindersCache(sampleCollection);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(SampleCollection sampleCollection) {
+		if (sampleCollection.isNew()) {
+			Object[] args = new Object[] {
+					sampleCollection.getSampleCollectionId()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONID,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID,
+				args, sampleCollection);
+		}
+		else {
+			SampleCollectionModelImpl sampleCollectionModelImpl = (SampleCollectionModelImpl)sampleCollection;
+
+			if ((sampleCollectionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						sampleCollection.getSampleCollectionId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONID,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID,
+					args, sampleCollection);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(SampleCollection sampleCollection) {
+		SampleCollectionModelImpl sampleCollectionModelImpl = (SampleCollectionModelImpl)sampleCollection;
+
+		Object[] args = new Object[] { sampleCollection.getSampleCollectionId() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONID,
+			args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID,
+			args);
+
+		if ((sampleCollectionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					sampleCollectionModelImpl.getOriginalSampleCollectionId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONID,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SAMPLECOLLECTIONID,
+				args);
 		}
 	}
 
@@ -303,13 +623,16 @@ public class SampleCollectionPersistenceImpl extends BasePersistenceImpl<SampleC
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !SampleCollectionModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		EntityCacheUtil.putResult(SampleCollectionModelImpl.ENTITY_CACHE_ENABLED,
 			SampleCollectionImpl.class, sampleCollection.getPrimaryKey(),
 			sampleCollection);
+
+		clearUniqueFindersCache(sampleCollection);
+		cacheUniqueFindersCache(sampleCollection);
 
 		return sampleCollection;
 	}
@@ -646,9 +969,12 @@ public class SampleCollectionPersistenceImpl extends BasePersistenceImpl<SampleC
 	}
 
 	private static final String _SQL_SELECT_SAMPLECOLLECTION = "SELECT sampleCollection FROM SampleCollection sampleCollection";
+	private static final String _SQL_SELECT_SAMPLECOLLECTION_WHERE = "SELECT sampleCollection FROM SampleCollection sampleCollection WHERE ";
 	private static final String _SQL_COUNT_SAMPLECOLLECTION = "SELECT COUNT(sampleCollection) FROM SampleCollection sampleCollection";
+	private static final String _SQL_COUNT_SAMPLECOLLECTION_WHERE = "SELECT COUNT(sampleCollection) FROM SampleCollection sampleCollection WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "sampleCollection.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SampleCollection exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SampleCollection exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(SampleCollectionPersistenceImpl.class);

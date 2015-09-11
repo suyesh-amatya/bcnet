@@ -87,7 +87,11 @@ public class SampleCollectionModelImpl extends BaseModelImpl<SampleCollection>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.bcnet.portlet.biobank.model.SampleCollection"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.bcnet.portlet.biobank.model.SampleCollection"),
+			true);
+	public static long SAMPLECOLLECTIONID_COLUMN_BITMASK = 1L;
+	public static long SAMPLECOLLECTIONDBID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -280,7 +284,17 @@ public class SampleCollectionModelImpl extends BaseModelImpl<SampleCollection>
 
 	@Override
 	public void setSampleCollectionId(String sampleCollectionId) {
+		_columnBitmask |= SAMPLECOLLECTIONID_COLUMN_BITMASK;
+
+		if (_originalSampleCollectionId == null) {
+			_originalSampleCollectionId = _sampleCollectionId;
+		}
+
 		_sampleCollectionId = sampleCollectionId;
+	}
+
+	public String getOriginalSampleCollectionId() {
+		return GetterUtil.getString(_originalSampleCollectionId);
 	}
 
 	@JSON
@@ -411,6 +425,10 @@ public class SampleCollectionModelImpl extends BaseModelImpl<SampleCollection>
 		_qualityControl = qualityControl;
 	}
 
+	public long getColumnBitmask() {
+		return _columnBitmask;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -498,6 +516,11 @@ public class SampleCollectionModelImpl extends BaseModelImpl<SampleCollection>
 
 	@Override
 	public void resetOriginalValues() {
+		SampleCollectionModelImpl sampleCollectionModelImpl = this;
+
+		sampleCollectionModelImpl._originalSampleCollectionId = sampleCollectionModelImpl._sampleCollectionId;
+
+		sampleCollectionModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -640,6 +663,7 @@ public class SampleCollectionModelImpl extends BaseModelImpl<SampleCollection>
 		};
 	private long _sampleCollectionDbId;
 	private String _sampleCollectionId;
+	private String _originalSampleCollectionId;
 	private String _acronym;
 	private String _name;
 	private String _description;
@@ -648,5 +672,6 @@ public class SampleCollectionModelImpl extends BaseModelImpl<SampleCollection>
 	private boolean _materialTransferAgreement;
 	private boolean _accreditation;
 	private boolean _qualityControl;
+	private long _columnBitmask;
 	private SampleCollection _escapedModel;
 }

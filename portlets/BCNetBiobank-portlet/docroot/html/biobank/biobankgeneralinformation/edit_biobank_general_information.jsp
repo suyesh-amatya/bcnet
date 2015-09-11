@@ -32,13 +32,13 @@
 %>
 
 <aui:model-context bean="<%= biobankGeneralInformation %>" model="<%= BiobankGeneralInformation.class %>" />
-<portlet:renderURL var="viewBiobankGeneralInfomrationURL" />
-<%-- <liferay-portlet:renderURL var="viewBiobankGeneralInfomrationURL"></liferay-portlet:renderURL> --%>
-<portlet:actionURL name='updateBiobankGeneralInfomration' var="editBiobankGeneralInfomrationURL" windowState="normal" />
+<portlet:renderURL var="viewBiobankGeneralInformationURL" />
+<%-- <liferay-portlet:renderURL var="viewBiobankGeneralInformationURL"></liferay-portlet:renderURL> --%>
+<portlet:actionURL name='updateBiobankGeneralInformation' var="editBiobankGeneralInformationURL" windowState="normal" />
 
 
 
-<aui:form action="<%= editBiobankGeneralInfomrationURL %>" method="POST" name="fm" onSubmit="event.preventDefault();">
+<aui:form action="<%= editBiobankGeneralInformationURL %>" method="POST" name="fm" onSubmit="event.preventDefault();">
 	<aui:fieldset>
 		<%-- <aui:input name="redirect" type="hidden" value="<%= redirect %>" /> --%>
 		<aui:input name="biobankDbId" type="hidden" value='<%= biobankGeneralInformation == null ? "" : biobankGeneralInformation.getBiobankDbId() %>'/>
@@ -170,7 +170,7 @@
 	<aui:button-row>
 		<aui:column columnWidth="30">
 			<aui:button type="submit" />
-			<%-- <aui:button onClick="<%= viewBiobankGeneralInfomrationURL %>"  type="cancel" /> --%>
+			<%-- <aui:button onClick="<%= viewBiobankGeneralInformationURL %>"  type="cancel" /> --%>
 			<aui:button onClick="<%= redirect.toString() %>"  type="cancel" />
 		</aui:column>
 	</aui:button-row>

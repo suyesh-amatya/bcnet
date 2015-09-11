@@ -71,9 +71,9 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 	}
 	
 	
-	public void updateBiobankGeneralInfomration(ActionRequest request, ActionResponse response) throws Exception{
+	public void updateBiobankGeneralInformation(ActionRequest request, ActionResponse response) throws Exception{
 		
-		_updateBiobankGeneralInfomration(request);
+		_updateBiobankGeneralInformation(request);
 		
 		//sendRedirect(request, response);
 		
@@ -82,7 +82,7 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 		response.sendRedirect(themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL());
 	}
 
-	private BiobankGeneralInformation _updateBiobankGeneralInfomration(ActionRequest request) throws PortalException, SystemException {
+	private BiobankGeneralInformation _updateBiobankGeneralInformation(ActionRequest request) throws PortalException, SystemException {
 		// TODO Auto-generated method stub
 		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
 		String biobankId = ParamUtil.getString(request, "biobankId");
