@@ -62,3 +62,56 @@ div.sample-edit-form-container{
 	border: 1px solid #ddd;
 	border-top: 0;
 }
+
+.sample-edit-form-container label.control-label{
+	margin-top: 15px;	
+}
+
+.sample-edit-form-container ul{
+	margin: auto;
+}
+
+div#sample-year-month-day{
+	float:left;
+	margin-right: 5px;
+}
+
+div#sample-hour{
+	float:left;
+	margin-right: 5px;
+}
+
+div#sample-minute{
+	float:left;
+	margin-right: 5px;
+}
+
+.sample-edit-form-container select{
+	width: auto;
+}
+
+
+div#sample-age-low{
+	float:left;
+	margin-right: 5px;
+}
+
+div#sample-age-low input[type="text"]{
+	width: 100px;
+}
+
+div#sample-age-high{
+	float:left;
+	margin-right: 5px;
+}
+
+div#sample-age-high input[type="text"]{
+	width: 100px;
+}
+
+div#sample-age-unit{
+	float:left;
+	margin-right: 5px;
+}
+
+

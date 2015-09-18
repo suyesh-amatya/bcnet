@@ -47,7 +47,8 @@ public class SampleUploadPortlet extends MVCPortlet {
 	private static final SimpleDateFormat date_format_apache_error = new SimpleDateFormat(date_format_apache_error_pattern);
 	private static final DataFormatter fmt = new DataFormatter();
 	//private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	//private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	private static String sourceFileName;
 	private static String biobankId;
 	
@@ -440,7 +441,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 					sample.setSampledTime(sdf.parse(sdf.format(row.getCell(sampledTime_column).getDateCellValue())));
 				}
 				catch(Exception e){
-					sample.setSampledTime(new Date());
+					sample.setSampledTime(null);
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
 							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample::readXLSXFile] "
 							+ " Problem adding sampledTime from row " + rowcount + " to the database.");

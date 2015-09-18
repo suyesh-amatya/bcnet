@@ -40,8 +40,8 @@ div.dt-button-collection{
 		            <th>anatomicalPartOntologyDescription</th>
 		            <th>anatomicalPartFreeText</th>
 		            <th>sex</th>
-		            <th>ageHigh</th>
 		            <th>ageLow</th>
+		            <th>ageHigh</th>
 		            <th>ageUnit</th>
 		            <th>diseaseOntology</th>
 		            <th>diseaseOntologyVersion</th>
@@ -86,8 +86,8 @@ div.dt-button-collection{
 		            <td><%=sample.getAnatomicalPartOntologyDescription() %></td>
 		            <td><%=sample.getAnatomicalPartFreeText() %></td>
 		            <td><%=sample.getSex() %></td>
-		            <td><%=sample.getAgeHigh() %></td>
 		            <td><%=sample.getAgeLow() %></td>
+		            <td><%=sample.getAgeHigh() %></td>
 		            <td><%=sample.getAgeUnit() %></td>
 		            <td><%=sample.getDiseaseOntology() %></td>
 		            <td><%=sample.getDiseaseOntologyVersion() %></td>
