@@ -2,6 +2,7 @@ package com.bcnet.portlet.sample;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,6 +13,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.model.SampleCollection;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil;
@@ -31,6 +33,8 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  */
 public class SampleImportLogPortlet extends MVCPortlet {
 
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
 	public void deleteSampleImport(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException{
 		long importId = ParamUtil.getLong(request, "importId");//request.getParameter("importId")
 		String uuid = ParamUtil.getString(request, "uuid");
@@ -54,39 +58,60 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		String materialType = ParamUtil.getString(request, "materialType");
 		String container = ParamUtil.getString(request, "container");
 		String storageTemperature = ParamUtil.getString(request, "storageTemperature");
-		int year = ParamUtil.getInteger(request, "year");
-		int month = ParamUtil.getInteger(request, "month");
-		int day = ParamUtil.getInteger(request, "day");
-		int hour = ParamUtil.getInteger(request, "hour");
-		int minute = ParamUtil.getInteger(request, "minute");
-		System.out.println(year);
-		System.out.println(month);
-		System.out.println(day);
-		System.out.println(hour);
-		System.out.println(minute);
-		/*long sampleDbId = ParamUtil.getLong(request, "sampleDbId");
-		Date sampledTime = ParamUtil.getDate(request, "sampleddate", new SimpleDateFormat("yyyyMMdd"));
-		System.out.println(sampledTime);
-		System.out.println(sampleDbId);
-		int day = ParamUtil.getInteger(request, "day");
-		System.out.println(day);
-		int month = ParamUtil.getInteger(request, "month");
-		System.out.println(month);
-		int year = ParamUtil.getInteger(request, "year");
-		System.out.println(year);
-		int hour = ParamUtil.getInteger(request, "hour");
-		System.out.println(hour);
-		int minute = ParamUtil.getInteger(request, "minute");
-		System.out.println(minute);
-		int pm = ParamUtil.getInteger(request, "pm");
-		System.out.println(pm);
-		Calendar c = Calendar.getInstance();
-		c.set(year, month, day, hour, minute);
-		System.out.println(c);
-		System.out.println(c.get(Calendar.YEAR));
-		System.out.println(c.get(Calendar.MONTH));
-		System.out.println(c.get(Calendar.DAY_OF_MONTH));
-		System.out.println("Date"+c.getTime());*/
+		String yearmonthday = ParamUtil.getString(request, "yearmonthday");
+		String hour = ParamUtil.getString(request, "hour");
+		String minute = ParamUtil.getString(request, "minute");
+		Date sampledTime = null;
+		
+		String yearmonthdayhourminute = null;
+		if(!yearmonthday.isEmpty()){
+			yearmonthdayhourminute = yearmonthday+" "+hour+":"+minute;
+			try {
+				sampledTime = sdf.parse(yearmonthdayhourminute);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		String anatomicalPartOntology = ParamUtil.getString(request, "anatomicalPartOntology");
+		String anatomicalPartOntologyVersion = ParamUtil.getString(request, "anatomicalPartOntologyVersion");
+		String anatomicalPartOntologyCode = ParamUtil.getString(request, "anatomicalPartOntologyCode");
+		String anatomicalPartOntologyDescription = ParamUtil.getString(request, "anatomicalPartOntologyDescription");
+		String anatomicalPartFreeText = ParamUtil.getString(request, "anatomicalPartFreeText");
+		String sex = ParamUtil.getString(request, "sex");
+		long ageLow = ParamUtil.getLong(request, "ageLow");
+		long ageHigh = ParamUtil.getLong(request, "ageHigh");
+		String ageUnit = ParamUtil.getString(request, "ageUnit");
+		String diseaseOntology = ParamUtil.getString(request, "diseaseOntology");
+		String diseaseOntologyVersion = ParamUtil.getString(request, "diseaseOntologyVersion");
+		String diseaseOntologyCode = ParamUtil.getString(request, "diseaseOntologyCode");
+		String diseaseOntologyDescription = ParamUtil.getString(request, "diseaseOntologyDescription");
+		String diseaseFreeText = ParamUtil.getString(request, "diseaseFreeText");
+				
+		Sample sample = SampleLocalServiceUtil.getSample(sampleDbId);
+		
+		sample.setSampleCollectionId(sampleCollectionId);
+		sample.setHashedSampleId(hashedSampleId);
+		sample.setMaterialType(materialType);
+		sample.setContainer(container);
+		sample.setStorageTemperature(storageTemperature);
+		sample.setSampledTime(sampledTime);
+		sample.setAnatomicalPartOntology(anatomicalPartOntology);
+		sample.setAnatomicalPartOntologyVersion(anatomicalPartOntologyVersion);
+		sample.setAnatomicalPartOntologyCode(anatomicalPartOntologyCode);
+		sample.setAnatomicalPartOntologyDescription(anatomicalPartOntologyDescription);
+		sample.setAnatomicalPartFreeText(anatomicalPartFreeText);
+		sample.setSex(sex);
+		sample.setAgeLow(ageLow);
+		sample.setAgeHigh(ageHigh);
+		sample.setAgeUnit(ageUnit);
+		sample.setDiseaseOntology(diseaseOntology);
+		sample.setDiseaseOntologyVersion(diseaseOntologyVersion);
+		sample.setDiseaseOntologyCode(diseaseOntologyCode);
+		sample.setDiseaseOntologyDescription(diseaseOntologyDescription);
+		sample.setDiseaseFreeText(diseaseFreeText);
+		
+		SampleLocalServiceUtil.updateSample(sample);
 	}
 	
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException{
@@ -119,7 +144,7 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		}
 		
 		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("storageTemperature")){
-			String[] storageTemperature = {"RT", "2 °C to 10 °C", "-18 °C to -35 °C", "-60 °C to -85 °C", "LN", "Other"};
+			String[] storageTemperature = {"RT", "2 ï¿½C to 10 ï¿½C", "-18 ï¿½C to -35 ï¿½C", "-60 ï¿½C to -85 ï¿½C", "LN", "Other"};
 			JSONArray jsonArray =  JSONFactoryUtil.createJSONArray();
 			for(String str:storageTemperature){
 				jsonArray.put(str);

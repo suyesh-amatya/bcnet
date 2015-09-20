@@ -5,6 +5,8 @@
 	String redirect =  ParamUtil.getString(request, "redirect");
 	
 	Sample sample = SampleLocalServiceUtil.getSample(sampleDbId);
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 
 <portlet:actionURL name="editSample" var="editSampleURL">
@@ -45,45 +47,41 @@
 					<%
 					
 						Calendar c = Calendar.getInstance();
-						int year = 0 , month = -1, day = 0, hour = 0, minute = 0;
+						String yearmonthday = null; 
+						int hour = -1, minute = -1;
 						if(sample.getSampledTime() != null){
 							c.setTime(sample.getSampledTime());
-							year = c.get(Calendar.YEAR);
-							month = c.get(Calendar.MONTH);
-							day = c.get(Calendar.DAY_OF_MONTH);
 							hour = c.get(Calendar.HOUR_OF_DAY);
 							minute = c.get(Calendar.MINUTE);
+							yearmonthday = sdf.format(sample.getSampledTime());
 						}
-						
-						System.out.println(year);
-						System.out.println(month);
-						System.out.println(day);
-						System.out.println(hour);
-						System.out.println(minute);
-					
 					%>
 					<aui:column columnWidth="30">
 						<div id="sample-year-month-day">
+						<%-- <div id="sample-year-month-day">
 							<div class="control-group">
 								<label class="control-label">Sampled Date</label>
 								<liferay-ui:input-date yearParam="year"  monthParam="month"  dayParam="day" 
-														yearValue="<%=year %>" monthValue="<%=month %>" dayValue="<%=day %>" name="yearmonthday">
+														yearValue="<%=year %>" monthValue="<%=month %>" dayValue="<%=day %>" name="yearmonthday"
+														>
 								</liferay-ui:input-date>
 							</div>
+						</div> --%>
+							<aui:input name="yearmonthday" label="Sampled Date" value="<%=yearmonthday%>" placeholder="yyyy-mm-dd"></aui:input>
 						</div>
 						<div id="sample-hour">
 							<aui:select name="hour">
 								<aui:option>Select</aui:option>
-								<aui:option value="0" selected="<%=0==hour %>">00</aui:option>
-								<aui:option value="1" selected="<%=1==hour %>">01</aui:option>
-								<aui:option value="2" selected="<%=2==hour %>">02</aui:option>
-								<aui:option value="3" selected="<%=3==hour %>">03</aui:option>
-								<aui:option value="4" selected="<%=4==hour %>">04</aui:option>
-								<aui:option value="5" selected="<%=5==hour %>">05</aui:option>
-								<aui:option value="6" selected="<%=6==hour %>">06</aui:option>
-								<aui:option value="7" selected="<%=7==hour %>">07</aui:option>
-								<aui:option value="8" selected="<%=8==hour %>">08</aui:option>
-								<aui:option value="9" selected="<%=9==hour %>">09</aui:option>
+								<aui:option value="00" selected="<%=0==hour %>">00</aui:option>
+								<aui:option value="01" selected="<%=1==hour %>">01</aui:option>
+								<aui:option value="02" selected="<%=2==hour %>">02</aui:option>
+								<aui:option value="03" selected="<%=3==hour %>">03</aui:option>
+								<aui:option value="04" selected="<%=4==hour %>">04</aui:option>
+								<aui:option value="05" selected="<%=5==hour %>">05</aui:option>
+								<aui:option value="06" selected="<%=6==hour %>">06</aui:option>
+								<aui:option value="07" selected="<%=7==hour %>">07</aui:option>
+								<aui:option value="08" selected="<%=8==hour %>">08</aui:option>
+								<aui:option value="09" selected="<%=9==hour %>">09</aui:option>
 								<aui:option value="10" selected="<%=10==hour %>">10</aui:option>
 								<aui:option value="11" selected="<%=11==hour %>">11</aui:option>
 								<aui:option value="12" selected="<%=12==hour %>">12</aui:option>
@@ -104,16 +102,16 @@
 						<div id="sample-minute">
 							<aui:select name="minute">
 								<aui:option>Select</aui:option>
-								<aui:option value="0" selected="<%=0==minute %>">00</aui:option>
-								<aui:option value="1" selected="<%=1==minute %>">01</aui:option>
-								<aui:option value="2" selected="<%=2==minute %>">02</aui:option>
-								<aui:option value="3" selected="<%=3==minute %>">03</aui:option>
-								<aui:option value="4" selected="<%=4==minute %>">04</aui:option>
-								<aui:option value="5" selected="<%=5==minute %>">05</aui:option>
-								<aui:option value="6" selected="<%=6==minute %>">06</aui:option>
-								<aui:option value="7" selected="<%=7==minute %>">07</aui:option>
-								<aui:option value="8" selected="<%=8==minute %>">08</aui:option>
-								<aui:option value="9" selected="<%=9==minute %>">09</aui:option>
+								<aui:option value="00" selected="<%=0==minute %>">00</aui:option>
+								<aui:option value="01" selected="<%=1==minute %>">01</aui:option>
+								<aui:option value="02" selected="<%=2==minute %>">02</aui:option>
+								<aui:option value="03" selected="<%=3==minute %>">03</aui:option>
+								<aui:option value="04" selected="<%=4==minute %>">04</aui:option>
+								<aui:option value="05" selected="<%=5==minute %>">05</aui:option>
+								<aui:option value="06" selected="<%=6==minute %>">06</aui:option>
+								<aui:option value="07" selected="<%=7==minute %>">07</aui:option>
+								<aui:option value="08" selected="<%=8==minute %>">08</aui:option>
+								<aui:option value="09" selected="<%=9==minute %>">09</aui:option>
 								<aui:option value="10" selected="<%=10==minute %>">10</aui:option>
 								<aui:option value="11" selected="<%=11==minute %>">11</aui:option>
 								<aui:option value="12" selected="<%=12==minute %>">12</aui:option>
@@ -426,3 +424,12 @@ YUI().use('autocomplete', 'autocomplete-filters', 'autocomplete-highlighters', '
 });
 
 </aui:script>
+
+<script type="text/javascript">
+
+
+$( "#<portlet:namespace/>yearmonthday" ).datepicker({
+	dateFormat: "yy-mm-dd"
+});
+
+</script>

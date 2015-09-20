@@ -76,6 +76,10 @@ div#sample-year-month-day{
 	margin-right: 5px;
 }
 
+div#sample-year-month-day input[type="text"]{
+	width: 100px;
+}
+
 div#sample-hour{
 	float:left;
 	margin-right: 5px;
@@ -97,7 +101,7 @@ div#sample-age-low{
 }
 
 div#sample-age-low input[type="text"]{
-	width: 100px;
+	width: 50px;
 }
 
 div#sample-age-high{
@@ -106,7 +110,7 @@ div#sample-age-high{
 }
 
 div#sample-age-high input[type="text"]{
-	width: 100px;
+	width: 50px;
 }
 
 div#sample-age-unit{
@@ -114,4 +118,9 @@ div#sample-age-unit{
 	margin-right: 5px;
 }
 
+/* Overriding jQuery UI CSS because the datepicker gets hidden behind other divs. 
+So increasing z-index value to bring it to the front. */
+.ui-datepicker{
+	z-index: 9999 !important;
+}
 

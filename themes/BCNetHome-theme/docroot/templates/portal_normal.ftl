@@ -14,6 +14,12 @@
 	<!-- jQuery -->
 	<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	
+	<!-- jQuery UI-->
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+	
+	<!-- jQuery UI CSS-->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css">
+	
 	<!-- DataTables -->
 	<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
 	

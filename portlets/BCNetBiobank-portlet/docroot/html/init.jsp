@@ -61,6 +61,8 @@
 <%@ page import="com.liferay.portal.service.LayoutSetPrototypeServiceUtil" %>
 <%@ page import="com.liferay.portal.model.LayoutSetPrototype" %>
 
+
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Collections"%>
 <%@ page import="java.util.List" %>
