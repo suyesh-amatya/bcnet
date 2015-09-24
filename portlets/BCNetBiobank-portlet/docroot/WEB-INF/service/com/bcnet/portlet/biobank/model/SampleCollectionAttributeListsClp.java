@@ -341,6 +341,10 @@ public class SampleCollectionAttributeListsClp extends BaseModelImpl<SampleColle
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -399,4 +403,5 @@ public class SampleCollectionAttributeListsClp extends BaseModelImpl<SampleColle
 	private String _attributeListName;
 	private String _attributeListValue;
 	private BaseModel<?> _sampleCollectionAttributeListsRemoteModel;
+	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

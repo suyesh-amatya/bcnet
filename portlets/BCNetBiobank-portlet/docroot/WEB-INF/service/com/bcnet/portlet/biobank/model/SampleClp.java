@@ -931,6 +931,10 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -1121,4 +1125,5 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _diseaseOntologyDescription;
 	private String _diseaseFreeText;
 	private BaseModel<?> _sampleRemoteModel;
+	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

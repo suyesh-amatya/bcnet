@@ -59,6 +59,19 @@ public class BiobankGeneralInformationServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	@Override
+	public java.lang.String getAllBiobanks()
+		throws com.bcnet.portlet.biobank.NoSuchJuristicPersonException,
+			com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _biobankGeneralInformationService.getAllBiobanks();
+	}
+
+	@Override
+	public java.lang.String helloWorld(java.lang.String worldName) {
+		return _biobankGeneralInformationService.helloWorld(worldName);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

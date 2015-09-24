@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.rdconnect.org.idcardmolgenis.service.RDConnectIDCardMolgenisLocalService" class="com.rdconnect.org.idcardmolgenis.service.impl.RDConnectIDCardMolgenisLocalServiceImpl" />
+	<bean id="com.rdconnect.org.idcardmolgenis.service.RDConnectIDCardMolgenisService" class="com.rdconnect.org.idcardmolgenis.service.impl.RDConnectIDCardMolgenisServiceImpl" />
+	<bean id="com.rdconnect.org.idcardmolgenis.service.persistence.RDConnectIDCardMolgenisPersistence" class="com.rdconnect.org.idcardmolgenis.service.persistence.RDConnectIDCardMolgenisPersistenceImpl" parent="basePersistence" />
+</beans>

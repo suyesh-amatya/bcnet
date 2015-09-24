@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.rdconnect.org.idcardmolgenis.model.RDConnectIDCardMolgenis">
+		<field name="id" type="long" />
+	</model>
+</model-hints>

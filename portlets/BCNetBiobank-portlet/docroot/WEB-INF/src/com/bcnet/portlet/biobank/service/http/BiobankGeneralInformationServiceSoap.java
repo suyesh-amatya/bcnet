@@ -14,6 +14,13 @@
 
 package com.bcnet.portlet.biobank.service.http;
 
+import com.bcnet.portlet.biobank.service.BiobankGeneralInformationServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.bcnet.portlet.biobank.service.BiobankGeneralInformationServiceUtil} service utility. The
@@ -55,4 +62,32 @@ package com.bcnet.portlet.biobank.service.http;
  * @generated
  */
 public class BiobankGeneralInformationServiceSoap {
+	public static java.lang.String getAllBiobanks() throws RemoteException {
+		try {
+			java.lang.String returnValue = BiobankGeneralInformationServiceUtil.getAllBiobanks();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String helloWorld(java.lang.String worldName)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = BiobankGeneralInformationServiceUtil.helloWorld(worldName);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(BiobankGeneralInformationServiceSoap.class);
 }

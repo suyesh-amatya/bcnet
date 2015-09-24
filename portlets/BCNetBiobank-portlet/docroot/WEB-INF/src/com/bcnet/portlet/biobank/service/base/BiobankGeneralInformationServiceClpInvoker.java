@@ -31,6 +31,14 @@ public class BiobankGeneralInformationServiceClpInvoker {
 		_methodName75 = "setBeanIdentifier";
 
 		_methodParameterTypes75 = new String[] { "java.lang.String" };
+
+		_methodName80 = "getAllBiobanks";
+
+		_methodParameterTypes80 = new String[] {  };
+
+		_methodName81 = "helloWorld";
+
+		_methodParameterTypes81 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -47,6 +55,16 @@ public class BiobankGeneralInformationServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+			return BiobankGeneralInformationServiceUtil.getAllBiobanks();
+		}
+
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+			return BiobankGeneralInformationServiceUtil.helloWorld((java.lang.String)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -54,4 +72,8 @@ public class BiobankGeneralInformationServiceClpInvoker {
 	private String[] _methodParameterTypes74;
 	private String _methodName75;
 	private String[] _methodParameterTypes75;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
 }

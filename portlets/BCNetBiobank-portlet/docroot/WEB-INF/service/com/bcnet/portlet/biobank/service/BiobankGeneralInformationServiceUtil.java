@@ -63,6 +63,17 @@ public class BiobankGeneralInformationServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.lang.String getAllBiobanks()
+		throws com.bcnet.portlet.biobank.NoSuchJuristicPersonException,
+			com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAllBiobanks();
+	}
+
+	public static java.lang.String helloWorld(java.lang.String worldName) {
+		return getService().helloWorld(worldName);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
