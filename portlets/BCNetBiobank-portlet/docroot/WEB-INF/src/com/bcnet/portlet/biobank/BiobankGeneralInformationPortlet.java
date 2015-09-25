@@ -40,11 +40,14 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse){
 		String organizationName = ParamUtil.getString(resourceRequest, "name");
+		String biobankId = ParamUtil.getString(resourceRequest, "biobankId");
 		
 		long organizationId = ParamUtil.getLong(resourceRequest, "biobankDbId");
 		String prevOrganizationName = null;
+		String prevBiobankId = null;
 		try {
 			prevOrganizationName = OrganizationLocalServiceUtil.getOrganization(organizationId).getName();
+			prevBiobankId = BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(organizationId).getBiobankId();
 		} catch (PortalException | SystemException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -52,15 +55,17 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 		boolean organizationNameExists = false;
 		try {
 			JSONObject json = JSONFactoryUtil.createJSONObject();
-			
-			for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
-				
-				if(organization.getName().equalsIgnoreCase(organizationName) && !organization.getName().equalsIgnoreCase(prevOrganizationName)){
-					organizationNameExists = true;
-					json.put("organizationNameExists", organizationNameExists == true ? true : false);
-					resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
-					
-					break;
+			if(!organizationName.equalsIgnoreCase(prevOrganizationName)){
+				for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
+					//While updating check if the biobank name already exists! The biobank name is deemed to already exist if its name equals any other biobanks'
+					//name except the name of the current one being updated.
+					if(organization.getName().equalsIgnoreCase(organizationName) /*&& !organization.getName().equalsIgnoreCase(prevOrganizationName)*/){
+						organizationNameExists = true;
+						json.put("organizationNameExists", organizationNameExists == true ? true : false);
+						resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
+						
+						break;
+					}
 				}
 			}
 		} catch (SystemException | IOException e) {

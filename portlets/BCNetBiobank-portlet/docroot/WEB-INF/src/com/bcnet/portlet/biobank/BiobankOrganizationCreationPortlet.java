@@ -48,7 +48,8 @@ public class BiobankOrganizationCreationPortlet extends MVCPortlet {
 			JSONObject json = JSONFactoryUtil.createJSONObject();
 			
 			for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
-				
+				//While adding check if the biobank name already exists! The biobank name is deemed to already exist if its name equals any other biobanks'
+				//name.
 				if(organization.getName().equalsIgnoreCase(organizationName)){
 					organizationNameExists = true;
 					json.put("organizationNameExists", organizationNameExists == true ? true : false);

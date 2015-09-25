@@ -190,9 +190,9 @@
 						<aui:select name="sex">
 							<aui:option>Select</aui:option>
 							<aui:option value="Male" selected="<%=\"Male\".equalsIgnoreCase(sample.getSex()) %>">Male</aui:option>
-							<aui:option value="Female" selected="<%=\"Female\".equals(sample.getSex()) %>">Female</aui:option>
-							<aui:option value="Unknown" selected="<%=\"Unknown\".equals(sample.getSex()) %>">Unknown</aui:option>
-							<aui:option value="Undifferentiated" selected="<%=\"Undifferentiated\".equals(sample.getSex()) %>">Undifferentiated</aui:option>
+							<aui:option value="Female" selected="<%=\"Female\".equalsIgnoreCase(sample.getSex()) %>">Female</aui:option>
+							<aui:option value="Unknown" selected="<%=\"Unknown\".equalsIgnoreCase(sample.getSex()) %>">Unknown</aui:option>
+							<aui:option value="Undifferentiated" selected="<%=\"Undifferentiated\".equalsIgnoreCase(sample.getSex()) %>">Undifferentiated</aui:option>
 						</aui:select>
 					</aui:column>
 				</aui:row>
@@ -209,9 +209,9 @@
 							<aui:select name="ageUnit" label="Age Unit">
 								<aui:option>Select</aui:option>
 								<aui:option value="Years" selected="<%=\"Years\".equalsIgnoreCase(sample.getAgeUnit()) %>">Years</aui:option>
-								<aui:option value="Months" selected="<%=\"Months\".equals(sample.getAgeUnit()) %>">Months</aui:option>
-								<aui:option value="Weeks" selected="<%=\"Weeks\".equals(sample.getAgeUnit()) %>">Weeks</aui:option>
-								<aui:option value="Days" selected="<%=\"Days\".equals(sample.getAgeUnit()) %>">Days</aui:option>
+								<aui:option value="Months" selected="<%=\"Months\".equalsIgnoreCase(sample.getAgeUnit()) %>">Months</aui:option>
+								<aui:option value="Weeks" selected="<%=\"Weeks\".equalsIgnoreCase(sample.getAgeUnit()) %>">Weeks</aui:option>
+								<aui:option value="Days" selected="<%=\"Days\".equalsIgnoreCase(sample.getAgeUnit()) %>">Days</aui:option>
 							</aui:select>
 						</div>
 					</aui:column>

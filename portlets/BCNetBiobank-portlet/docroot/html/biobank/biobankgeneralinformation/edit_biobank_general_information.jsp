@@ -337,15 +337,47 @@
 	        rules: rules,
 	        showAllMessages:true
       	});
-      	
-      	
+		
 		var organizationNameExists = false;
 		var organizationId = A.one("#<portlet:namespace/>biobankDbId").get("value");
+		var biobankId = A.one("#<portlet:namespace/>biobankId").get("value");
 		var url = '<%=checkOrganizationNameURL.toString()%>';
 		
 		A.one("#<portlet:namespace/>name").on('blur',function(event){
-			A.one('#organizationNameError').hide();
+			//A.one('#organizationNameError').hide();
+			
+			
+			var organizationName = A.one("#<portlet:namespace/>name").get("value");
+			A.io.request(
+				url, 
+				{
+			        method: 'get',
+			        data: {
+			        	<portlet:namespace/>name :organizationName,
+			        	<portlet:namespace/>biobankDbId :organizationId,
+			        	<portlet:namespace/>biobankId :biobankId
+			        },
+			        dataType: 'json',
+	        		on:{
+			        	success: function(){
+			        		if(this.get('responseData')!=null && this.get('responseData').organizationNameExists){
+				        		A.one("#<portlet:namespace/>name").get('parentNode').removeClass('success').addClass('error');
+				        		A.one("#<portlet:namespace/>name").addClass('error-field lfr-input-text').removeClass('success-field');
+				        		A.one("#<portlet:namespace/>name").get('parentNode').append(A.one('#organizationNameError').show());
+				        		
+			        		}
+			        		else{
+			        			A.one('#organizationNameError').hide();
+			        			/* if(!validator.hasErrors()){
+				        			document.<portlet:namespace/>fm.submit();
+			        			} */
+			        		}
+			        	}
+		        	}
+       		});
+			
 		});
+		
 		
 		A.one("#<portlet:namespace/>fm").on('submit',function(event){
 			
