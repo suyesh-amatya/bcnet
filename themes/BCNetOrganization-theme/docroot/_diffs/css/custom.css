@@ -12,6 +12,15 @@ a.jp{
 	left: -60px;
 }
 
+div#juristic-person{
+	float: left;
+	margin-right: 5px;
+}
+
+div#juristic-person-add{
+	float: left;
+	margin-top: 30px;
+}
 
 div .list-group{
 	position: relative;

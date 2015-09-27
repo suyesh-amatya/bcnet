@@ -39,38 +39,71 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 public class BiobankGeneralInformationPortlet extends MVCPortlet {
 
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse){
-		String organizationName = ParamUtil.getString(resourceRequest, "name");
-		String biobankId = ParamUtil.getString(resourceRequest, "biobankId");
-		
 		long organizationId = ParamUtil.getLong(resourceRequest, "biobankDbId");
-		String prevOrganizationName = null;
-		String prevBiobankId = null;
-		try {
-			prevOrganizationName = OrganizationLocalServiceUtil.getOrganization(organizationId).getName();
-			prevBiobankId = BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(organizationId).getBiobankId();
-		} catch (PortalException | SystemException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		boolean organizationNameExists = false;
-		try {
-			JSONObject json = JSONFactoryUtil.createJSONObject();
-			if(!organizationName.equalsIgnoreCase(prevOrganizationName)){
-				for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
-					//While updating check if the biobank name already exists! The biobank name is deemed to already exist if its name equals any other biobanks'
-					//name except the name of the current one being updated.
-					if(organization.getName().equalsIgnoreCase(organizationName) /*&& !organization.getName().equalsIgnoreCase(prevOrganizationName)*/){
-						organizationNameExists = true;
-						json.put("organizationNameExists", organizationNameExists == true ? true : false);
-						resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
-						
-						break;
+		
+		/* Check for duplicate biobank name */
+		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("biobankName")
+				|| ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("biobankNamebiobankId")){
+			String organizationName = ParamUtil.getString(resourceRequest, "name");
+			
+			String prevOrganizationName = null;
+			try {
+				prevOrganizationName = OrganizationLocalServiceUtil.getOrganization(organizationId).getName();
+			} catch (PortalException | SystemException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			boolean organizationNameExists = false;
+			try {
+				JSONObject json = JSONFactoryUtil.createJSONObject();
+				if(!organizationName.equalsIgnoreCase(prevOrganizationName)){
+					for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
+						//While updating check if the biobank name already exists! The biobank name is deemed to already exist if its name equals any other biobanks'
+						//name except the name of the current one being updated.
+						if(organization.getName().equalsIgnoreCase(organizationName) /*&& !organization.getName().equalsIgnoreCase(prevOrganizationName)*/){
+							organizationNameExists = true;
+							json.put("organizationNameExists", organizationNameExists == true ? true : false);
+							resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
+							
+							break;
+						}
 					}
 				}
+			} catch (SystemException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (SystemException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}
+		
+		/* Check for duplicate biobank id */
+		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("biobankId")
+				|| ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("biobankNamebiobankId")){
+			String biobankId = ParamUtil.getString(resourceRequest, "biobankId");
+			boolean biobankIdExists = false;
+			String prevBiobankId = null;
+			try {
+				prevBiobankId = BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(organizationId).getBiobankId();
+			} catch (PortalException | SystemException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				JSONObject json = JSONFactoryUtil.createJSONObject();
+				if(!biobankId.equalsIgnoreCase(prevBiobankId)){
+					for(BiobankGeneralInformation biobank : BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
+						if(biobank.getBiobankId().equalsIgnoreCase(biobankId)){
+							biobankIdExists = true;
+							json.put("biobankIdExists", biobankIdExists == true ? true : false);
+							resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
+							
+							break;
+						}
+					}
+				}
+			} catch (SystemException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

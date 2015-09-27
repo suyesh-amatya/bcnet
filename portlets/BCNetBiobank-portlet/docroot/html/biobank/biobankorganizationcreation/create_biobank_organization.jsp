@@ -44,23 +44,24 @@
 			<aui:column columnWidth="30">
 				<aui:input name="url" label="URL"/>
 			</aui:column>
-			<aui:column columnWidth="25">
-				<aui:select name="juristicPersonId" label='Juristic Person <i class="icon-asterisk"></i>' >
-					<aui:option>Select</aui:option>
-					<%
-						for (JuristicPerson juristicPerson : juristicPersons) {
+			<aui:column columnWidth="30">
+				<div id="juristic-person">
+					<aui:select name="juristicPersonId" label='Juristic Person <i class="icon-asterisk"></i>' >
+						<aui:option>Select</aui:option>
+						<%
+							for (JuristicPerson juristicPerson : juristicPersons) {
+							
+						%>
 						
-					%>
-					
-							<aui:option 
-							 value="<%= juristicPerson.getJuristicPersonId()%>">
-								<%=juristicPerson.getName() %>
-							</aui:option>
-					<% 
-						}
-					%>
-				</aui:select>
-				
+								<aui:option 
+								 value="<%= juristicPerson.getJuristicPersonId()%>">
+									<%=juristicPerson.getName() %>
+								</aui:option>
+						<% 
+							}
+						%>
+					</aui:select>
+				</div>
 				<%
 					String portletId = (String) request.getAttribute(WebKeys.PORTLET_ID);
 					String portletNamespace = PortalUtil.getPortletNamespace(portletId);
@@ -87,12 +88,11 @@
 		
 				<c:set var="portletURL" value="<%=addJuristicPersonURL%>" />
 				
-				
-			</aui:column>
-			<aui:column columnWidth="5">
-				<aui:a cssClass="jp" href="#" onClick="${portletNameSpaceVal}showPopup('${portletURL}')" >
-					<liferay-ui:icon image="add" message="Add Juristic Person" />
-				</aui:a>
+				<div id="juristic-person-add">
+					<aui:a href="#" onClick="${portletNameSpaceVal}showPopup('${portletURL}')" >
+						<liferay-ui:icon image="add" message="Add Juristic Person" />
+					</aui:a>
+				</div>
 			</aui:column>
 			<aui:column columnWidth="30">
 				<aui:select name="countryCode" label='Country <i class="icon-asterisk"></i>' >
