@@ -49,7 +49,6 @@
 					 defined. So the input box will not be displayed if "type" is not specified. -->
 				
 				<aui:input name="name" label='Name <i class="icon-asterisk"></i>' type="text" value="<%=organization.getName() %>"/>
-				<!-- <div id="organizationNameError" style="display:none;">test</div> -->
 				<div class="form-validator-stack help-inline" id="organizationNameError" style="display:none;">
 					<div role="alert" class="required">The Name is already taken.</div>
 				</div>
@@ -361,7 +360,7 @@
 			        dataType: 'json',
 	        		on:{
 			        	success: function(){
-			        		if(this.get('responseData')!=null && this.get('responseData').organizationNameExists){
+			        		if(this.get('responseData') != null && this.get('responseData').organizationNameExists){
 				        		A.one("#<portlet:namespace/>name").get('parentNode').removeClass('success').addClass('error');
 				        		A.one("#<portlet:namespace/>name").addClass('error-field lfr-input-text').removeClass('success-field');
 				        		A.one("#<portlet:namespace/>name").get('parentNode').append(A.one('#organizationNameError').show());
@@ -394,7 +393,7 @@
 			        dataType: 'json',
 	        		on:{
 			        	success: function(){
-			        		if(this.get('responseData')!=null && this.get('responseData').biobankIdExists){
+			        		if(this.get('responseData') != null && this.get('responseData').biobankIdExists){
 				        		A.one("#<portlet:namespace/>biobankId").get('parentNode').removeClass('success').addClass('error');
 				        		A.one("#<portlet:namespace/>biobankId").addClass('error-field lfr-input-text').removeClass('success-field');
 				        		A.one("#<portlet:namespace/>biobankId").get('parentNode').append(A.one('#biobankIdError').show());
@@ -426,7 +425,7 @@
 			        dataType: 'json',
 	        		on:{
 			        	success: function(){
-			        		if(this.get('responseData')){
+			        		if(Object.keys(this.get('responseData')).length != 0 ){
 			        			if(this.get('responseData').organizationNameExists){
 					        		A.one("#<portlet:namespace/>name").get('parentNode').removeClass('success').addClass('error');
 					        		A.one("#<portlet:namespace/>name").addClass('error-field lfr-input-text').removeClass('success-field');

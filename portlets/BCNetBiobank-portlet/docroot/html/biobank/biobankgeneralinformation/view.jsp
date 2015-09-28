@@ -1,5 +1,7 @@
 <%@ include file="/html/init.jsp" %>
 
+<liferay-ui:success key="biobank-add-success" message="biobank-add-success"/>
+
 <%
 // Parameters for permission Checking
 long groupId = scopeGroupId;
@@ -8,7 +10,6 @@ String primKey = portletDisplay.getResourcePK();
 String actionId_edit_biobank_general_information = "EDIT_BIOBANK_GENERAL_INFORMATION";
 String actionId_delete_biobank = "DELETE_BIOBANK";
 %>
-
 
 <%
 	Organization organization = null;
@@ -33,7 +34,7 @@ String actionId_delete_biobank = "DELETE_BIOBANK";
 	
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
-<liferay-ui:error key="duplicate-name" message="Biobank Name Already Taken!" />
+
 <portlet:renderURL var="addBiobankGeneralInformationURL">
 	<portlet:param name="mvcPath" value="/html/biobank/biobankgeneralinformation/edit_biobank_general_information.jsp" />
 	<portlet:param name="biobankDbId" value="<%= String.valueOf(organizationId) %>" />

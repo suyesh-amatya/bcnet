@@ -34,6 +34,9 @@
 			</aui:column>
 			<aui:column columnWidth="30">
 				<aui:input name="biobankId" label='Biobank Id <i class="icon-asterisk"></i>' />
+				<div class="form-validator-stack help-inline" id="biobankIdError" style="display:none;">
+					<div role="alert" class="required">The Biobank Id is already taken.</div>
+				</div>
 			</aui:column>
 			<aui:column columnWidth="30">
 				<aui:input name="acronym" label="Acronym"/>
@@ -240,7 +243,7 @@
 </aui:script>
 
 
-<portlet:resourceURL var="checkOrganizationNameURL"></portlet:resourceURL>
+<portlet:resourceURL var="checkOrganizationNameIdURL"></portlet:resourceURL>
 
 <aui:script use="aui-base,aui-form-validator,aui-io-request">
 	AUI().use('aui-base','aui-form-validator','aui-io-request', function(A){
@@ -292,33 +295,101 @@
       	});
       	
       	
-		var organizationNameExists = false;
-		var url = '<%=checkOrganizationNameURL.toString()%>';
+		var url = '<%=checkOrganizationNameIdURL.toString()%>';
 		
+		/* Check for duplicate biobank name */
 		A.one("#<portlet:namespace/>name").on('blur',function(event){
-			A.one('#organizationNameError').hide();
-		});
-		
-		A.one("#<portlet:namespace/>fm").on('submit',function(event){
-			
 			var organizationName = A.one("#<portlet:namespace/>name").get("value");
 			A.io.request(
 				url, 
 				{
 			        method: 'get',
 			        data: {
-			        	<portlet:namespace/>name :organizationName
+			        	<portlet:namespace/>name :organizationName,
+			        	<portlet:namespace/>type :"biobankName"
 			        },
 			        dataType: 'json',
 	        		on:{
 			        	success: function(){
-			        		if(this.get('responseData')!=null && this.get('responseData').organizationNameExists){
+			        		if(this.get('responseData') != null && this.get('responseData').organizationNameExists){
 				        		A.one("#<portlet:namespace/>name").get('parentNode').removeClass('success').addClass('error');
 				        		A.one("#<portlet:namespace/>name").addClass('error-field lfr-input-text').removeClass('success-field');
 				        		A.one("#<portlet:namespace/>name").get('parentNode').append(A.one('#organizationNameError').show());
+				        		
 			        		}
 			        		else{
 			        			A.one('#organizationNameError').hide();
+			        		}
+			        	}
+		        	}
+       		});
+			
+		});
+		
+		
+		/* Check for duplicate biobank id */
+		A.one("#<portlet:namespace/>biobankId").on('blur',function(event){
+			var biobankId = A.one("#<portlet:namespace/>biobankId").get("value");
+			A.io.request(
+				url, 
+				{
+			        method: 'get',
+			        data: {
+			        	<portlet:namespace/>biobankId :biobankId,
+			        	<portlet:namespace/>type :"biobankId"
+			        },
+			        dataType: 'json',
+	        		on:{
+			        	success: function(){
+			        		if(this.get('responseData') != null && this.get('responseData').biobankIdExists){
+				        		A.one("#<portlet:namespace/>biobankId").get('parentNode').removeClass('success').addClass('error');
+				        		A.one("#<portlet:namespace/>biobankId").addClass('error-field lfr-input-text').removeClass('success-field');
+				        		A.one("#<portlet:namespace/>biobankId").get('parentNode').append(A.one('#biobankIdError').show());
+				        		
+			        		}
+			        		else{
+			        			A.one('#biobankIdError').hide();
+			        		}
+			        	}
+		        	}
+       		});
+			
+		});
+
+		/* Validation on submit */
+		A.one("#<portlet:namespace/>fm").on('submit',function(event){
+			var organizationName = A.one("#<portlet:namespace/>name").get("value");
+			var biobankId = A.one("#<portlet:namespace/>biobankId").get("value");
+			A.io.request(
+				url, 
+				{
+			        method: 'get',
+			        data: {
+			        	<portlet:namespace/>name :organizationName,
+			        	<portlet:namespace/>biobankId :biobankId,
+			        	<portlet:namespace/>type :"biobankNamebiobankId"
+			        },
+			        dataType: 'json',
+	        		on:{
+			        	success: function(){
+			        		if(Object.keys(this.get('responseData')).length != 0 ){
+			        			if(this.get('responseData').organizationNameExists){
+					        		A.one("#<portlet:namespace/>name").get('parentNode').removeClass('success').addClass('error');
+					        		A.one("#<portlet:namespace/>name").addClass('error-field lfr-input-text').removeClass('success-field');
+					        		A.one("#<portlet:namespace/>name").get('parentNode').append(A.one('#organizationNameError').show());
+				        		}
+			        			
+			        			if(this.get('responseData').biobankIdExists){
+					        		A.one("#<portlet:namespace/>biobankId").get('parentNode').removeClass('success').addClass('error');
+					        		A.one("#<portlet:namespace/>biobankId").addClass('error-field lfr-input-text').removeClass('success-field');
+					        		A.one("#<portlet:namespace/>biobankId").get('parentNode').append(A.one('#biobankIdError').show());
+					        		
+				        		}
+			        		}
+			        		
+			        		else{
+			        			A.one('#organizationNameError').hide();
+			        			A.one('#biobankIdError').hide();
 			        			if(!validator.hasErrors()){
 				        			document.<portlet:namespace/>fm.submit();
 			        			}
@@ -327,6 +398,7 @@
 		        	}
        		});
         });
+		
 	});
 
 </aui:script>

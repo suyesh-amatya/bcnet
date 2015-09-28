@@ -15,6 +15,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -41,24 +42,57 @@ public class BiobankOrganizationCreationPortlet extends MVCPortlet {
  
 
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse){
-		String organizationName = ParamUtil.getString(resourceRequest, "name");
+		JSONObject json = JSONFactoryUtil.createJSONObject();
 		
-		boolean organizationNameExists = false;
-		try {
-			JSONObject json = JSONFactoryUtil.createJSONObject();
+		/* Check for duplicate biobank name */
+		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("biobankName")
+				|| ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("biobankNamebiobankId")){
+			String organizationName = ParamUtil.getString(resourceRequest, "name");
+			boolean organizationNameExists = false;
 			
-			for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
-				//While adding check if the biobank name already exists! The biobank name is deemed to already exist if its name equals any other biobanks'
-				//name.
-				if(organization.getName().equalsIgnoreCase(organizationName)){
-					organizationNameExists = true;
-					json.put("organizationNameExists", organizationNameExists == true ? true : false);
-					resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
-					
-					break;
+			try {
+				for(Organization organization : OrganizationLocalServiceUtil.getOrganizations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
+					//While adding check if the biobank name already exists! The biobank name is deemed to already exist if its name equals any other biobanks'
+					//name.
+					if(organization.getName().equalsIgnoreCase(organizationName)){
+						organizationNameExists = true;
+						json.put("organizationNameExists", organizationNameExists == true ? true : false);
+						
+						break;
+					}
 				}
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (SystemException | IOException e) {
+		}
+		
+		
+		/* Check for duplicate biobank id */
+		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("biobankId")
+				|| ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("biobankNamebiobankId")){
+			String biobankId = ParamUtil.getString(resourceRequest, "biobankId");
+			boolean biobankIdExists = false;
+			
+			try {
+				for(BiobankGeneralInformation biobank : BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformations(QueryUtil.ALL_POS,QueryUtil.ALL_POS)){
+					if(biobank.getBiobankId().equalsIgnoreCase(biobankId)){
+						biobankIdExists = true;
+						json.put("biobankIdExists", biobankIdExists == true ? true : false);
+						
+						break;
+					}
+				}
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		try {
+			resourceResponse.getPortletOutputStream().write(json.toString().getBytes());
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -72,6 +106,7 @@ public class BiobankOrganizationCreationPortlet extends MVCPortlet {
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(biobank.getBiobankDbId());
 		
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		SessionMessages.add(request, "biobank-add-success");
 		response.sendRedirect(themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL());
 
 	}
