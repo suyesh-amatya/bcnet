@@ -53,7 +53,7 @@ public class SampleCollectionCreationPortlet extends MVCPortlet {
 		}
 		
 		
-		/* Check for duplicate biobank id */
+		/* Check for duplicate sample collection id */
 		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("scId")
 				|| ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("scNamescId")){
 			String sampleCollectionId = ParamUtil.getString(resourceRequest, "sampleCollectionId");
