@@ -294,26 +294,26 @@
 <aui:script use="aui-base,aui-form-validator,aui-io-request">
 	AUI().use('aui-base','aui-form-validator','aui-io-request', function(A){
 		var rules = {
-	      		<portlet:namespace/>name: {
-	        		required: true
-	      		},
-	      		
-	      		<portlet:namespace/>biobankId: {
-	        		required: true
-	      		},
-	      		
-	      		<portlet:namespace/>url: {
-	        		url: true
-	      		},
-	      		
-	      		<portlet:namespace/>juristicPersonId: {
-	        		required: true
-	      		},
-	      		
-	      		<portlet:namespace/>countryCode: {
-	        		required: true
-	      		},
-	      	};
+      		<portlet:namespace/>name: {
+        		required: true
+      		},
+      		
+      		<portlet:namespace/>biobankId: {
+        		required: true
+      		},
+      		
+      		<portlet:namespace/>url: {
+        		url: true
+      		},
+      		
+      		<portlet:namespace/>juristicPersonId: {
+        		required: true
+      		},
+      		
+      		<portlet:namespace/>countryCode: {
+        		required: true
+      		},
+      	};
 
 		var fieldStrings = {
 			<portlet:namespace/>name: {
@@ -345,7 +345,7 @@
 		var url = '<%=checkOrganizationNameIdURL.toString()%>';
 		
 		/* Check for duplicate biobank name */
-		A.one("#<portlet:namespace/>name").on('blur',function(event){
+		A.one("#<portlet:namespace/>name").on('blur', function(event){
 			//A.one('#organizationNameError').hide();
 			var organizationName = A.one("#<portlet:namespace/>name").get("value");
 			A.io.request(
@@ -379,7 +379,7 @@
 		});
 		
 		/* Check for duplicate biobank id */
-		A.one("#<portlet:namespace/>biobankId").on('blur',function(event){
+		A.one("#<portlet:namespace/>biobankId").on('blur', function(event){
 			var biobankId = A.one("#<portlet:namespace/>biobankId").get("value");
 			A.io.request(
 				url, 
@@ -409,7 +409,7 @@
 		});
 		
 		/* Validation on submit */
-		A.one("#<portlet:namespace/>fm").on('submit',function(event){
+		A.one("#<portlet:namespace/>fm").on('submit', function(event){
 			var organizationName = A.one("#<portlet:namespace/>name").get("value");
 			var biobankId = A.one("#<portlet:namespace/>biobankId").get("value");
 			A.io.request(

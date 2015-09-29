@@ -1,5 +1,7 @@
 <%@ include file="/html/init.jsp" %> 
 
+<liferay-ui:success key="sample-collection-add-success" message="sample-collection-add-success"/>
+
 <%
 	HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
 	httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
