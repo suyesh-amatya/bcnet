@@ -554,6 +554,8 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+
+
 	<portlet>
 		<portlet-name>sample-upload</portlet-name>
 		<display-name>Sample Upload</display-name>

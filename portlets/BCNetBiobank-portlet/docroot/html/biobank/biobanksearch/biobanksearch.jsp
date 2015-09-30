@@ -72,23 +72,31 @@
 		modelVar="biobankGeneralInformation" escapedModel="<%= true %>"
 	>
 	
-		<liferay-ui:panel-container accordion="false">
-		<%
-			String countryName = "";
+		<div class="well biobankSearch"  id="<%=biobankGeneralInformation.getBiobankDbId()%>">
+			<div class="biobankSearchAccordionTitle">
+			<%
+				Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankGeneralInformation.getBiobankDbId());
+				String orgPath = themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL();
+				String countryName = "";
+		
+				try {
+					countryName = CountryServiceUtil.getCountryByA2
+							(biobankGeneralInformation.getCountryCode()).getName();
+				} 
+				catch (Exception e) {
+				}
 	
-			try {
-				countryName = CountryServiceUtil.getCountryByA2
-						(biobankGeneralInformation.getCountryCode()).getName();
-			} 
-			catch (Exception e) {
-			}
-
-			String title = "<b>"+biobankGeneralInformation.getBiobankName()+"</b>"+"<br/>"+countryName.toUpperCase()+"<br/><a href="+biobankGeneralInformation.getUrl()+">"+biobankGeneralInformation.getUrl()+"</a>";
-			String attributeListName = "";
-			String attributeListValue = "";
-		%>
-			<liferay-ui:panel title="<%=title %>" defaultState="" cssClass="biobankSearchAccordionTitle"> 
-		<%		
+				String title = "<a href="+orgPath+"><b>"+biobankGeneralInformation.getBiobankName()+"</b></a>"+"<br/>"+countryName.toUpperCase()+"<br/><a href="+biobankGeneralInformation.getUrl()+" target=\"_blank\">"+biobankGeneralInformation.getUrl()+"</a>";
+				
+				out.println(title);
+				
+				String attributeListName = "";
+				String attributeListValue = "";
+			%>
+			</div>
+			<h6 class="header toggler-header-collapsed"><a href="#">More</a></h6>
+			<p class="content toggler-content-collapsed">
+			<%		
 			
 			
 			List<BiobankAttributeLists> biobankAttributeLists = biobankGeneralInformation.getBiobankAttributeLists();
@@ -101,11 +109,11 @@
 						attributeListName = biobankAttribute.getAttributeListName();
 						if(i!=0){ out.println("<br/>");}
 					
-		%>
+			%>
 					
 						<b><%=attributeListName %>:</b>
 	
-		<%
+			<%
 						out.println(biobankAttribute.getAttributeListValue());
 					
 					}
@@ -119,83 +127,40 @@
 			else{
 				 out.println("No Services and Facilities Available For This Biobank");
 			}
-		%>
-				
-			
-			</liferay-ui:panel>
-			
-		</liferay-ui:panel-container> 
+			%>
+			</p>
+		</div>
+		
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
-
-<%-- <liferay-ui:search-container emptyResultsMessage="biobank-empty-results-message">
-	<liferay-ui:search-container-results
-		results="<%= BiobankGeneralInformationLocalServiceUtil.findBiobanksByKeywordsCountry(keywords, countryCode, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= searchResults.size() %>"
-	/>
 	
-	<liferay-ui:search-container-row
-		className="com.bcnet.portlet.biobank.model.BiobankGeneralInformation"
-		keyProperty="biobankDbId"
-		modelVar="biobankGeneralInformation" escapedModel="<%= true %>"
-	>
-		
-
-		
-		<liferay-ui:search-container-column-text name="Search Results"> --%>
-	<%-- <%	
-		for(BiobankGeneralInformation biobankgeneralinformation : searchResults) {
-	if(biobankDbId != biobankgeneralinformation.getBiobankDbId()) {out.println(biobankgeneralinformation.getBiobankDbId());
-		%><h4 class="header toggler-header-collapsed"><span><%= biobankgeneralinformation.getBiobankName() %></span></h4><%
-	}
-	%><p class="content toggler-content-collapsed"><%
-	String attributelistname = "";
-	String attributelistvalue = "";
-	List<BiobankAttributeLists> biobankattributelists = biobankgeneralinformation.getBiobankAttributeLists();
-	out.println(biobankattributelists);
-	for(BiobankAttributeLists biobankattribute : biobankattributelists){
-		if(attributelistname.equalsIgnoreCase(biobankattribute.getAttributeListName())) {
-			if(!attributelistvalue.equalsIgnoreCase("")) {
-				attributelistvalue += ", ";
-			}
-			attributelistvalue += biobankattribute.getAttributeListValue();
-		} else if(!attributelistname.equalsIgnoreCase("")) {
-			%><%= biobankattribute.getAttributeListName() %>:<br />
-			<%= attributelistvalue %>:<br /><%
-			
-			attributelistname = biobankattribute.getAttributeListName();
-			attributelistvalue = "";
+<aui:script>
+AUI().use('aui-toggler', function(A){
+	A.all("h6 .header, .toggler-header-collapsed").on('click', function(event){
+		if(event.target.get('text')=='More'){
+		 event.target.set('text', 'Less');
 		}
-	}
-	%></p>
-<%
-}
-%> --%>
-		
-		<%-- <table>
-			<tbody>
-				<tr>
-					<td>
-						<a href="http://catalogue.rd-connect.eu/web/clinical-registry-investigating-bardet-biedl-syndrome/home"><%=biobankGeneralInformation.getBiobankName() %></a>
-					</td>
-				</tr>
-				<tr>
-					<td><%=biobankGeneralInformation.getDescription()%></td>
-				</tr>
-				<tr>
-					<td>
-						<a href="https://cribbs.marshfieldclinic.org/"><%=biobankGeneralInformation.getUrl() %></a>
-					</td>
-				</tr>
-			</tbody>
-		</table> --%>
-		<%-- </liferay-ui:search-container-column-text>
-	</liferay-ui:search-container-row>
-
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container> --%>
-
-
-		
+		else{
+		 event.target.set('text', 'More');
+		}
+		 
+		var containerId = event.target.get('parentNode').get('parentNode').get('id');
+		new A.TogglerDelegate(
+	    	{
+		        animated: true,
+		        closeAllOnExpand: true,
+		        container: "#"+containerId,
+		        content: '.content',
+		        expanded: false,
+		        header: '.header',
+		        transition: {
+					duration: 0.2,
+					easing: 'cubic-bezier(0, 0.1, 0, 1)'
+		        }
+	    	}
+		); 
+	});
+});
+</aui:script>

@@ -2176,6 +2176,9 @@ div#topmenu-position .portlet-borderless-bar {
 div#_biobanksearch_WAR_BCNetBiobankportlet_biobankGeneralInformationsSearchContainer {
   display: none; }
 
+div .biobankSearchAccordionTitle {
+  color: #0af; }
+
 div .biobankSearchAccordionTitle span.title-text {
   color: #0af; }
 
@@ -2197,6 +2200,13 @@ div#juristic-person-add {
 
 div .well {
   position: relative; }
+
+div.well.biobankSearch {
+  padding: 8px 15px;
+  background-color: #FFFFFF; }
+
+div.well.biobankSearch:hover {
+  background-color: #F5F5F5; }
 
 div .well .biobankOrganizationDelete {
   position: absolute;
