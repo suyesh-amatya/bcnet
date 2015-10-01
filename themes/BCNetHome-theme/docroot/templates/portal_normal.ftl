@@ -97,17 +97,16 @@ ${theme.include(body_top_include)}
 			
 					<#if !is_signed_in>
 						<div id="sign-in-register">
-						<a href="${sign_in_url}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a> |
-						
-						<#--<#assign create_account_url = portletURLFactory.create(request, "58", page.getPlid(), "RENDER_PHASE")/>
-						create_account_url.setWindowState("maximized");
-						create_account_url.setPortletMode("view");
-						create_account_url.setParameter("saveLastPath", "0");
-						create_account_url.setParameter("struts_action", "/login/create_account");-->
-						<a href="${themeDisplay.getURLPortal()}/web/guest/home?p_p_id=58&p_p_lifecycle=1&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Fcreate_account" data-redirect="${is_login_redirect_required?string}" id="register" rel="nofollow">Register</a>
+							<a href="${sign_in_url}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a> |
+							
+							<#--<#assign create_account_url = portletURLFactory.create(request, "58", page.getPlid(), "RENDER_PHASE")/>
+							create_account_url.setWindowState("maximized");
+							create_account_url.setPortletMode("view");
+							create_account_url.setParameter("saveLastPath", "0");
+							create_account_url.setParameter("struts_action", "/login/create_account");-->
+							<a href="${themeDisplay.getURLPortal()}/web/guest/home?p_p_id=58&p_p_lifecycle=1&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Fcreate_account" data-redirect="${is_login_redirect_required?string}" id="register" rel="nofollow">Register</a>
 						</div>
 					</#if>
-					
 				</header>
 				
 				<div id="topmenu-position">

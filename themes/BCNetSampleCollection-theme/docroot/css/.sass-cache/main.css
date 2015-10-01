@@ -2318,6 +2318,11 @@ ul {
   margin: 0; }
 
 /***Container Page End***/
+/***Sign in Register Start***/
+div#sign-in-register {
+  text-align: right; }
+
+/***Sign in Register End***/
 /***Navigation Menu Start***/
 div#topmenu-position {
   height: 31px;

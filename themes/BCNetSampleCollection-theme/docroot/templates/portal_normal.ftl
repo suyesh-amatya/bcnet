@@ -84,10 +84,14 @@ ${theme.include(body_top_include)}
 						</div>
 						<div class="break"></div>
 					</div>
-			
+					
 					<#if !is_signed_in>
-						<a href="${sign_in_url}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a>
+						<div id="sign-in-register">
+							<a href="${sign_in_url}?scdbid=${request.getParameter("scdbid")}" data-redirect="${is_login_redirect_required?string}" id="sign-in" rel="nofollow">${sign_in_text}</a> |
+							<a href="${themeDisplay.getURLPortal()}/web/guest/home?p_p_id=58&p_p_lifecycle=1&p_p_state=maximized&p_p_mode=view&saveLastPath=0&_58_struts_action=%2Flogin%2Fcreate_account" data-redirect="${is_login_redirect_required?string}" id="register" rel="nofollow">Register</a>
+						</div>
 					</#if>
+					
 					
 				</header>
 				
