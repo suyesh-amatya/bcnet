@@ -27,7 +27,6 @@
 	String name = portletDisplay.getRootPortletId();
 	String primKey = portletDisplay.getResourcePK();
 	String actionId_edit_biobank_general_information = "EDIT_BIOBANK_GENERAL_INFORMATION";
-	String actionId_delete_biobank = "DELETE_BIOBANK";
 	if(permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_general_information)){
 %>
 

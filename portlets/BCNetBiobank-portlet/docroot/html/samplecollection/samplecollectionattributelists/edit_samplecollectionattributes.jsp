@@ -17,6 +17,26 @@
 	String redirect = ParamUtil.getString(request, "redirect");
 	
 	
+	
+	// Parameters for permission Checking
+	long groupId = scopeGroupId;
+	String name = portletDisplay.getRootPortletId();
+	String primKey = portletDisplay.getResourcePK();
+	String actionId_edit_sample_collection_attribute_lists = "EDIT_SAMPLE_COLLECTION_ATTRIBUTE_LISTS";
+
+	boolean editSampleCollectionAttributeLists = false;
+
+	SampleCollectionContact selSampleCollectionContact = 
+			SampleCollectionContactLocalServiceUtil.getSampleCollectionContact(sampleCollectionDbId, themeDisplay.getUserId());
+
+	if(selSampleCollectionContact != null){
+		if(selSampleCollectionContact.getSampleCollectionOwner() || selSampleCollectionContact.getSampleCollectionEditor()){
+			editSampleCollectionAttributeLists = true;
+		}
+	}
+	
+	if(permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_sample_collection_attribute_lists) || editSampleCollectionAttributeLists){
+	
 	/* Data Categories Lists for input-move-boxes */
 	List<SampleCollectionAttributeListsMaster> dataCategoriesList = SampleCollectionAttributeListsMasterLocalServiceUtil.
 										getSampleCollectionAttributeListsMasterByAttributeListName("Data Categories");
@@ -399,6 +419,10 @@
 		<aui:button onClick="<%=redirect.toString()%>"  type="cancel" />
 	</aui:button-row>
 </aui:form>
+
+<%		
+	}
+%>
 
 <script type="text/javascript">
 function <portlet:namespace />selectAll(selectbox){

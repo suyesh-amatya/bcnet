@@ -15,6 +15,21 @@
 	String actionId_edit_sample_collection_general_information = "EDIT_SAMPLE_COLLECTION_GENERAL_INFORMATION";
 	String actionId_delete_sample_collection = "DELETE_SAMPLE_COLLECTION";
 	
+	boolean editSampleCollection = false;
+	boolean deleteSampleCollection = false;
+	
+	SampleCollectionContact selSampleCollectionContact = 
+			SampleCollectionContactLocalServiceUtil.getSampleCollectionContact(sampleCollectionDbId, themeDisplay.getUserId());
+
+	if(selSampleCollectionContact != null){
+		if(selSampleCollectionContact.getSampleCollectionOwner()){
+			editSampleCollection = true;
+			deleteSampleCollection = true;
+		}
+		if(selSampleCollectionContact.getSampleCollectionEditor()){
+			editSampleCollection = true;
+		}
+	}
 
 	SampleCollection sampleCollection = null;
 	sampleCollection = SampleCollectionLocalServiceUtil.getSampleCollection(sampleCollectionDbId);
@@ -39,7 +54,7 @@
 		<b><%=sampleCollection.getName() %></b>
 		
 		<c:choose>		
-			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_sample_collection_general_information) %>">
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_sample_collection_general_information) || editSampleCollection %>">
 				<!-- Building the edit URL first and then appending "scdbid" as a URL parameter. -->
 				<a href="<%=editSampleCollectionGeneralInformationURL.toString()+"&scdbid="+sampleCollectionDbId%>">
 				<liferay-ui:icon image="edit" message="Edit Sample Collection" cssClass="sampleCollectionEdit"/>
@@ -48,7 +63,7 @@
 		</c:choose>
 		
 		<c:choose>		
-			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_sample_collection) %>">
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_sample_collection) || deleteSampleCollection %>">
 				<liferay-ui:icon-delete url="<%= deleteSampleCollectionURL.toString() %>" message="Delete Sample Collection" cssClass="sampleCollectionDelete"
 				confirmation="Are you sure you want to delete it?"/>
 			</c:when>

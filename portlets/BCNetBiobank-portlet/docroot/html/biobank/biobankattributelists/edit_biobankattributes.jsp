@@ -24,6 +24,14 @@
 	String redirect = ParamUtil.getString(request, "redirect");
 	String cancelURL = themeDisplay.getURLPortal() + "/web" + organization.getGroup().getFriendlyURL();
 	
+	// Parameters for permission Checking
+	long groupId = scopeGroupId;
+	String name = portletDisplay.getRootPortletId();
+	String primKey = portletDisplay.getResourcePK();
+	String actionId_edit_biobank_attribute_lists = "EDIT_BIOBANK_ATTRIBUTE_LISTS";
+
+	if(permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_biobank_attribute_lists)){
+	
 	/* Type of Repository Lists for input-move-boxes */
 	List<BiobankAttributeListsMaster> typeOfRepositoryList = BiobankAttributeListsMasterLocalServiceUtil.
 										getBiobankAttributeListsMasterByAttributeListName("Type of Repository");
@@ -570,6 +578,14 @@
 		<aui:button onClick="<%=redirect.toString()%>"  type="cancel" />
 	</aui:button-row>
 </aui:form>
+<%
+	}
+	else{
+		%>		
+<div class="alert alert-error">You do not have permission to edit it!</div>
+<%		
+	}
+%>
 
 <script type="text/javascript">
 function <portlet:namespace />selectAll(selectbox){

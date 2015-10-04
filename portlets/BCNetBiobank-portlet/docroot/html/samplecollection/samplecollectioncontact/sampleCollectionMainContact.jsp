@@ -5,8 +5,29 @@ long sampleCollectionDbId = ParamUtil.getLong(request, "sampleCollectionDbId");
 long sampleCollectionMainContactUserId = ParamUtil.getLong(request, "sampleCollectionMainContactUserId");
 String redirect = ParamUtil.getString(request, "redirect");
 User sampleCollectionContactUser = null;
+
+//Parameters for permission Checking
+Role administratorRole = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), "Administrator");
+Role curatorRole = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), "Curator");
+boolean isAdministrator = UserLocalServiceUtil.hasRoleUser(administratorRole.getRoleId(), themeDisplay.getUserId());
+boolean isCurator = UserLocalServiceUtil.hasRoleUser(curatorRole.getRoleId(), themeDisplay.getUserId());
+boolean manageSampleCollectionMainContact = false;
+
+if(isAdministrator || isCurator){
+	manageSampleCollectionMainContact = true;
+}
+
+SampleCollectionContact selSampleCollectionContact = SampleCollectionContactLocalServiceUtil.getSampleCollectionContact(sampleCollectionDbId, themeDisplay.getUserId());
+
+if(selSampleCollectionContact != null){
+	if(selSampleCollectionContact.getSampleCollectionOwner()){
+		manageSampleCollectionMainContact = true;
+	}
+}
+
 %>
 
+<c:if test="<%=manageSampleCollectionMainContact  %>">
 <portlet:actionURL name="editSampleCollectionMainContact" var="editSampleCollectionMainContactURL" windowState="normal" />
 <aui:form action="<%= editSampleCollectionMainContactURL %>" method="post" name="fm">
 	<aui:fieldset>
@@ -35,3 +56,4 @@ User sampleCollectionContactUser = null;
 		<aui:button type="cancel" onClick="<%= redirect %>"/>
 	</aui:button-row>
 </aui:form>
+</c:if>

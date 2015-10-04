@@ -13,9 +13,26 @@
 	String redirect = ParamUtil.getString(request, "redirect");
 	String currentURL = PortalUtil.getCurrentURL(request);
 	
+	// Parameters for permission Checking
+	long groupId = scopeGroupId;
+	String name = portletDisplay.getRootPortletId();
+	String primKey = portletDisplay.getResourcePK();
+	String actionId_edit_sample_collection_general_information = "EDIT_SAMPLE_COLLECTION_GENERAL_INFORMATION";
+
+	boolean editSampleCollection = false;
+	
+	SampleCollectionContact selSampleCollectionContact = 
+			SampleCollectionContactLocalServiceUtil.getSampleCollectionContact(sampleCollectionDbId, themeDisplay.getUserId());
+
+	if(selSampleCollectionContact != null){
+		if(selSampleCollectionContact.getSampleCollectionOwner() || selSampleCollectionContact.getSampleCollectionEditor()){
+			editSampleCollection = true;
+		}
+	}
 	
 %>
 
+<c:if test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_sample_collection_general_information) || editSampleCollection %>">
 <portlet:renderURL var="viewSampleCollectionGeneralInfomrationURL" />
 <portlet:actionURL name='updateSampleCollection' var="updateSampleCollectionURL" windowState="normal" />
 	
@@ -71,6 +88,8 @@
 		</aui:column>
 	</aui:button-row>
 </aui:form>
+</c:if>
+
 
 <portlet:resourceURL var="checkSampleCollectionNameIdURL"></portlet:resourceURL>
 

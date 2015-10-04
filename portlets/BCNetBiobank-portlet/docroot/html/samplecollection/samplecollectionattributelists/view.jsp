@@ -7,6 +7,8 @@ String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
 String actionId_edit_sample_collection_attribute_lists = "EDIT_SAMPLE_COLLECTION_ATTRIBUTE_LISTS";
 String actionId_delete_sample_collection_attribute_lists = "DELETE_SAMPLE_COLLECTION_ATTRIBUTE_LISTS";
+
+
 %>
 
 
@@ -14,6 +16,23 @@ String actionId_delete_sample_collection_attribute_lists = "DELETE_SAMPLE_COLLEC
 	HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
 	httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
 	long sampleCollectionDbId = Long.parseLong(httpRequest.getParameter("scdbid"));
+	
+	// Parameters for permission Checking
+	boolean editSampleCollectionAttributeLists = false;
+	boolean deleteSampleCollectionAttributeLists = false;
+
+	SampleCollectionContact selSampleCollectionContact = 
+			SampleCollectionContactLocalServiceUtil.getSampleCollectionContact(sampleCollectionDbId, themeDisplay.getUserId());
+
+	if(selSampleCollectionContact != null){
+		if(selSampleCollectionContact.getSampleCollectionOwner()){
+			editSampleCollectionAttributeLists = true;
+			deleteSampleCollectionAttributeLists = true;
+		}
+		if(selSampleCollectionContact.getSampleCollectionEditor()){
+			editSampleCollectionAttributeLists = true;
+		}
+	}
 	
 	SampleCollection sampleCollection = null;
 	
@@ -37,7 +56,7 @@ String actionId_delete_sample_collection_attribute_lists = "DELETE_SAMPLE_COLLEC
 	<span class="list-group-item-active">
 		Attributes for <b><%=sampleCollection.getName()%></b>
 		<c:choose>		
-			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_sample_collection_attribute_lists) %>">
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_edit_sample_collection_attribute_lists) || editSampleCollectionAttributeLists%>">
 				<!-- Passing "scdbid" as a url parameter, because in absence of this parameter samplecollection theme redirects to the page "/sample-collections".
 				But we are not accessing this parameter on the edit page. We are passing "sampleCollectionDbId" as a portlet parameter in the render url,
 				which we access on the edit page. -->
@@ -47,7 +66,7 @@ String actionId_delete_sample_collection_attribute_lists = "DELETE_SAMPLE_COLLEC
 			</c:when>
 		</c:choose>
 		<c:choose>		
-			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_sample_collection_attribute_lists) %>">
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId_delete_sample_collection_attribute_lists) || deleteSampleCollectionAttributeLists %>">
 				<liferay-ui:icon-delete url="<%= deleteSampleCollectionAttributesURL.toString() %>" message="Delete Sample Collection Attributes" cssClass="sampleCollectionDelete"
 						confirmation="Are you sure you want to delete it?"/>
 			</c:when>
