@@ -134,6 +134,21 @@ public interface SampleModel extends BaseModel<Sample> {
 	public void setHashedSampleId(String hashedSampleId);
 
 	/**
+	 * Returns the hashed individual ID of this sample.
+	 *
+	 * @return the hashed individual ID of this sample
+	 */
+	@AutoEscape
+	public String getHashedIndividualId();
+
+	/**
+	 * Sets the hashed individual ID of this sample.
+	 *
+	 * @param hashedIndividualId the hashed individual ID of this sample
+	 */
+	public void setHashedIndividualId(String hashedIndividualId);
+
+	/**
 	 * Returns the material type of this sample.
 	 *
 	 * @return the material type of this sample
@@ -401,6 +416,21 @@ public interface SampleModel extends BaseModel<Sample> {
 	 * @param diseaseFreeText the disease free text of this sample
 	 */
 	public void setDiseaseFreeText(String diseaseFreeText);
+
+	/**
+	 * Returns the country of origin of this sample.
+	 *
+	 * @return the country of origin of this sample
+	 */
+	@AutoEscape
+	public String getCountryOfOrigin();
+
+	/**
+	 * Sets the country of origin of this sample.
+	 *
+	 * @param countryOfOrigin the country of origin of this sample
+	 */
+	public void setCountryOfOrigin(String countryOfOrigin);
 
 	@Override
 	public boolean isNew();

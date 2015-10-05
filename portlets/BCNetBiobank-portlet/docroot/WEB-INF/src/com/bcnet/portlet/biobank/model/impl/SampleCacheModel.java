@@ -37,7 +37,7 @@ import java.util.Date;
 public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{uuid_=");
 		sb.append(uuid_);
@@ -49,6 +49,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		sb.append(biobankId);
 		sb.append(", hashedSampleId=");
 		sb.append(hashedSampleId);
+		sb.append(", hashedIndividualId=");
+		sb.append(hashedIndividualId);
 		sb.append(", materialType=");
 		sb.append(materialType);
 		sb.append(", container=");
@@ -85,6 +87,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		sb.append(diseaseOntologyDescription);
 		sb.append(", diseaseFreeText=");
 		sb.append(diseaseFreeText);
+		sb.append(", countryOfOrigin=");
+		sb.append(countryOfOrigin);
 		sb.append("}");
 
 		return sb.toString();
@@ -122,6 +126,13 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		}
 		else {
 			sampleImpl.setHashedSampleId(hashedSampleId);
+		}
+
+		if (hashedIndividualId == null) {
+			sampleImpl.setHashedIndividualId(StringPool.BLANK);
+		}
+		else {
+			sampleImpl.setHashedIndividualId(hashedIndividualId);
 		}
 
 		if (materialType == null) {
@@ -239,6 +250,13 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 			sampleImpl.setDiseaseFreeText(diseaseFreeText);
 		}
 
+		if (countryOfOrigin == null) {
+			sampleImpl.setCountryOfOrigin(StringPool.BLANK);
+		}
+		else {
+			sampleImpl.setCountryOfOrigin(countryOfOrigin);
+		}
+
 		sampleImpl.resetOriginalValues();
 
 		return sampleImpl;
@@ -251,6 +269,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		sampleCollectionId = objectInput.readUTF();
 		biobankId = objectInput.readUTF();
 		hashedSampleId = objectInput.readUTF();
+		hashedIndividualId = objectInput.readUTF();
 		materialType = objectInput.readUTF();
 		container = objectInput.readUTF();
 		storageTemperature = objectInput.readUTF();
@@ -269,6 +288,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		diseaseOntologyCode = objectInput.readUTF();
 		diseaseOntologyDescription = objectInput.readUTF();
 		diseaseFreeText = objectInput.readUTF();
+		countryOfOrigin = objectInput.readUTF();
 	}
 
 	@Override
@@ -302,6 +322,13 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		}
 		else {
 			objectOutput.writeUTF(hashedSampleId);
+		}
+
+		if (hashedIndividualId == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(hashedIndividualId);
 		}
 
 		if (materialType == null) {
@@ -413,6 +440,13 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		else {
 			objectOutput.writeUTF(diseaseFreeText);
 		}
+
+		if (countryOfOrigin == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(countryOfOrigin);
+		}
 	}
 
 	public String uuid_;
@@ -420,6 +454,7 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	public String sampleCollectionId;
 	public String biobankId;
 	public String hashedSampleId;
+	public String hashedIndividualId;
 	public String materialType;
 	public String container;
 	public String storageTemperature;
@@ -438,4 +473,5 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	public String diseaseOntologyCode;
 	public String diseaseOntologyDescription;
 	public String diseaseFreeText;
+	public String countryOfOrigin;
 }

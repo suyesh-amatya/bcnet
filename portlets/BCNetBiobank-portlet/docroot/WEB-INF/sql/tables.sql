@@ -67,6 +67,7 @@ create table sample (
 	sampleCollectionId VARCHAR(75) null,
 	biobankId VARCHAR(75) null,
 	hashedSampleId VARCHAR(75) null,
+	hashedIndividualId VARCHAR(75) null,
 	materialType VARCHAR(75) null,
 	container VARCHAR(75) null,
 	storageTemperature VARCHAR(75) null,
@@ -84,7 +85,8 @@ create table sample (
 	diseaseOntologyVersion VARCHAR(75) null,
 	diseaseOntologyCode VARCHAR(75) null,
 	diseaseOntologyDescription VARCHAR(75) null,
-	diseaseFreeText VARCHAR(75) null
+	diseaseFreeText VARCHAR(75) null,
+	countryOfOrigin VARCHAR(75) null
 );
 
 create table samplecollection (

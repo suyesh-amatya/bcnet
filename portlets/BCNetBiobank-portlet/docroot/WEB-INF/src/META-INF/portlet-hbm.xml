@@ -61,6 +61,7 @@
 		<property name="sampleCollectionId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="biobankId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="hashedSampleId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="hashedIndividualId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="materialType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="container" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="storageTemperature" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -79,6 +80,7 @@
 		<property name="diseaseOntologyCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseaseOntologyDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseaseFreeText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="countryOfOrigin" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.bcnet.portlet.biobank.model.impl.SampleCollectionImpl" table="samplecollection">
 		<cache usage="read-write" />

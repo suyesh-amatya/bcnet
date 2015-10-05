@@ -871,6 +871,7 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 		sampleImpl.setSampleCollectionId(sample.getSampleCollectionId());
 		sampleImpl.setBiobankId(sample.getBiobankId());
 		sampleImpl.setHashedSampleId(sample.getHashedSampleId());
+		sampleImpl.setHashedIndividualId(sample.getHashedIndividualId());
 		sampleImpl.setMaterialType(sample.getMaterialType());
 		sampleImpl.setContainer(sample.getContainer());
 		sampleImpl.setStorageTemperature(sample.getStorageTemperature());
@@ -889,6 +890,7 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 		sampleImpl.setDiseaseOntologyCode(sample.getDiseaseOntologyCode());
 		sampleImpl.setDiseaseOntologyDescription(sample.getDiseaseOntologyDescription());
 		sampleImpl.setDiseaseFreeText(sample.getDiseaseFreeText());
+		sampleImpl.setCountryOfOrigin(sample.getCountryOfOrigin());
 
 		return sampleImpl;
 	}

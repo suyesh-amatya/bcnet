@@ -30,6 +30,7 @@ div.dt-button-collection{
 		        	<th>Actions</th>
 		            <th>sampleCollectionId</th>
 		            <th>hashedSampleId</th>
+		            <th>hashedIndividualId</th>
 		            <th>materialType</th>
 		            <th>container</th>
 		            <th>storageTemperature</th>
@@ -48,6 +49,7 @@ div.dt-button-collection{
 		            <th>diseaseOntologyCode</th>
 		            <th>diseaseOntologyDescription</th>
 		            <th>diseaseFreeText</th>
+		            <th>countryOfOrigin</th>
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -76,6 +78,7 @@ div.dt-button-collection{
 		        	</td>
 		            <td><%=sample.getSampleCollectionId() %></td>
 		            <td><%=sample.getHashedSampleId() %></td>
+		            <td><%=sample.getHashedIndividualId() %></td>
 		            <td><%=sample.getMaterialType() %></td>
 		            <td><%=sample.getContainer() %></td>
 		            <td><%=sample.getStorageTemperature() %></td>
@@ -94,6 +97,7 @@ div.dt-button-collection{
 		            <td><%=sample.getDiseaseOntologyCode() %></td>
 		            <td><%=sample.getDiseaseOntologyDescription() %></td>
 		            <td><%=sample.getDiseaseFreeText() %></td>
+		            <td><%=sample.getCountryOfOrigin() %></td>
 		        </tr>
 		  <%
 		    }

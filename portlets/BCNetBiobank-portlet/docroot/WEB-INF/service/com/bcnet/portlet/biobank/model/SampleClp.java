@@ -78,6 +78,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		attributes.put("sampleCollectionId", getSampleCollectionId());
 		attributes.put("biobankId", getBiobankId());
 		attributes.put("hashedSampleId", getHashedSampleId());
+		attributes.put("hashedIndividualId", getHashedIndividualId());
 		attributes.put("materialType", getMaterialType());
 		attributes.put("container", getContainer());
 		attributes.put("storageTemperature", getStorageTemperature());
@@ -100,6 +101,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		attributes.put("diseaseOntologyDescription",
 			getDiseaseOntologyDescription());
 		attributes.put("diseaseFreeText", getDiseaseFreeText());
+		attributes.put("countryOfOrigin", getCountryOfOrigin());
 
 		return attributes;
 	}
@@ -134,6 +136,12 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 		if (hashedSampleId != null) {
 			setHashedSampleId(hashedSampleId);
+		}
+
+		String hashedIndividualId = (String)attributes.get("hashedIndividualId");
+
+		if (hashedIndividualId != null) {
+			setHashedIndividualId(hashedIndividualId);
 		}
 
 		String materialType = (String)attributes.get("materialType");
@@ -251,6 +259,12 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		if (diseaseFreeText != null) {
 			setDiseaseFreeText(diseaseFreeText);
 		}
+
+		String countryOfOrigin = (String)attributes.get("countryOfOrigin");
+
+		if (countryOfOrigin != null) {
+			setCountryOfOrigin(countryOfOrigin);
+		}
 	}
 
 	@Override
@@ -363,6 +377,30 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 						String.class);
 
 				method.invoke(_sampleRemoteModel, hashedSampleId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getHashedIndividualId() {
+		return _hashedIndividualId;
+	}
+
+	@Override
+	public void setHashedIndividualId(String hashedIndividualId) {
+		_hashedIndividualId = hashedIndividualId;
+
+		if (_sampleRemoteModel != null) {
+			try {
+				Class<?> clazz = _sampleRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setHashedIndividualId",
+						String.class);
+
+				method.invoke(_sampleRemoteModel, hashedIndividualId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -798,6 +836,30 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		}
 	}
 
+	@Override
+	public String getCountryOfOrigin() {
+		return _countryOfOrigin;
+	}
+
+	@Override
+	public void setCountryOfOrigin(String countryOfOrigin) {
+		_countryOfOrigin = countryOfOrigin;
+
+		if (_sampleRemoteModel != null) {
+			try {
+				Class<?> clazz = _sampleRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCountryOfOrigin",
+						String.class);
+
+				method.invoke(_sampleRemoteModel, countryOfOrigin);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getSampleRemoteModel() {
 		return _sampleRemoteModel;
 	}
@@ -872,6 +934,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		clone.setSampleCollectionId(getSampleCollectionId());
 		clone.setBiobankId(getBiobankId());
 		clone.setHashedSampleId(getHashedSampleId());
+		clone.setHashedIndividualId(getHashedIndividualId());
 		clone.setMaterialType(getMaterialType());
 		clone.setContainer(getContainer());
 		clone.setStorageTemperature(getStorageTemperature());
@@ -890,6 +953,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		clone.setDiseaseOntologyCode(getDiseaseOntologyCode());
 		clone.setDiseaseOntologyDescription(getDiseaseOntologyDescription());
 		clone.setDiseaseFreeText(getDiseaseFreeText());
+		clone.setCountryOfOrigin(getCountryOfOrigin());
 
 		return clone;
 	}
@@ -942,7 +1006,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{uuid_=");
 		sb.append(getUuid_());
@@ -954,6 +1018,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getBiobankId());
 		sb.append(", hashedSampleId=");
 		sb.append(getHashedSampleId());
+		sb.append(", hashedIndividualId=");
+		sb.append(getHashedIndividualId());
 		sb.append(", materialType=");
 		sb.append(getMaterialType());
 		sb.append(", container=");
@@ -990,6 +1056,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getDiseaseOntologyDescription());
 		sb.append(", diseaseFreeText=");
 		sb.append(getDiseaseFreeText());
+		sb.append(", countryOfOrigin=");
+		sb.append(getCountryOfOrigin());
 		sb.append("}");
 
 		return sb.toString();
@@ -997,7 +1065,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.bcnet.portlet.biobank.model.Sample");
@@ -1022,6 +1090,10 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(
 			"<column><column-name>hashedSampleId</column-name><column-value><![CDATA[");
 		sb.append(getHashedSampleId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hashedIndividualId</column-name><column-value><![CDATA[");
+		sb.append(getHashedIndividualId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>materialType</column-name><column-value><![CDATA[");
@@ -1095,6 +1167,10 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 			"<column><column-name>diseaseFreeText</column-name><column-value><![CDATA[");
 		sb.append(getDiseaseFreeText());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryOfOrigin</column-name><column-value><![CDATA[");
+		sb.append(getCountryOfOrigin());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1106,6 +1182,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _sampleCollectionId;
 	private String _biobankId;
 	private String _hashedSampleId;
+	private String _hashedIndividualId;
 	private String _materialType;
 	private String _container;
 	private String _storageTemperature;
@@ -1124,6 +1201,7 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _diseaseOntologyCode;
 	private String _diseaseOntologyDescription;
 	private String _diseaseFreeText;
+	private String _countryOfOrigin;
 	private BaseModel<?> _sampleRemoteModel;
 	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

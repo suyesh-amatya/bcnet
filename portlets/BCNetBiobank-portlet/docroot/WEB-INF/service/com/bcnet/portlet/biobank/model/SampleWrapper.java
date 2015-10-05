@@ -54,6 +54,7 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 		attributes.put("sampleCollectionId", getSampleCollectionId());
 		attributes.put("biobankId", getBiobankId());
 		attributes.put("hashedSampleId", getHashedSampleId());
+		attributes.put("hashedIndividualId", getHashedIndividualId());
 		attributes.put("materialType", getMaterialType());
 		attributes.put("container", getContainer());
 		attributes.put("storageTemperature", getStorageTemperature());
@@ -76,6 +77,7 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 		attributes.put("diseaseOntologyDescription",
 			getDiseaseOntologyDescription());
 		attributes.put("diseaseFreeText", getDiseaseFreeText());
+		attributes.put("countryOfOrigin", getCountryOfOrigin());
 
 		return attributes;
 	}
@@ -110,6 +112,12 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 
 		if (hashedSampleId != null) {
 			setHashedSampleId(hashedSampleId);
+		}
+
+		String hashedIndividualId = (String)attributes.get("hashedIndividualId");
+
+		if (hashedIndividualId != null) {
+			setHashedIndividualId(hashedIndividualId);
 		}
 
 		String materialType = (String)attributes.get("materialType");
@@ -226,6 +234,12 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 
 		if (diseaseFreeText != null) {
 			setDiseaseFreeText(diseaseFreeText);
+		}
+
+		String countryOfOrigin = (String)attributes.get("countryOfOrigin");
+
+		if (countryOfOrigin != null) {
+			setCountryOfOrigin(countryOfOrigin);
 		}
 	}
 
@@ -347,6 +361,26 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	@Override
 	public void setHashedSampleId(java.lang.String hashedSampleId) {
 		_sample.setHashedSampleId(hashedSampleId);
+	}
+
+	/**
+	* Returns the hashed individual ID of this sample.
+	*
+	* @return the hashed individual ID of this sample
+	*/
+	@Override
+	public java.lang.String getHashedIndividualId() {
+		return _sample.getHashedIndividualId();
+	}
+
+	/**
+	* Sets the hashed individual ID of this sample.
+	*
+	* @param hashedIndividualId the hashed individual ID of this sample
+	*/
+	@Override
+	public void setHashedIndividualId(java.lang.String hashedIndividualId) {
+		_sample.setHashedIndividualId(hashedIndividualId);
 	}
 
 	/**
@@ -714,6 +748,26 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	@Override
 	public void setDiseaseFreeText(java.lang.String diseaseFreeText) {
 		_sample.setDiseaseFreeText(diseaseFreeText);
+	}
+
+	/**
+	* Returns the country of origin of this sample.
+	*
+	* @return the country of origin of this sample
+	*/
+	@Override
+	public java.lang.String getCountryOfOrigin() {
+		return _sample.getCountryOfOrigin();
+	}
+
+	/**
+	* Sets the country of origin of this sample.
+	*
+	* @param countryOfOrigin the country of origin of this sample
+	*/
+	@Override
+	public void setCountryOfOrigin(java.lang.String countryOfOrigin) {
+		_sample.setCountryOfOrigin(countryOfOrigin);
 	}
 
 	@Override

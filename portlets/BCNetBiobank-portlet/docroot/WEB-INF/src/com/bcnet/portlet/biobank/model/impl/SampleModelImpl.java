@@ -69,6 +69,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			{ "sampleCollectionId", Types.VARCHAR },
 			{ "biobankId", Types.VARCHAR },
 			{ "hashedSampleId", Types.VARCHAR },
+			{ "hashedIndividualId", Types.VARCHAR },
 			{ "materialType", Types.VARCHAR },
 			{ "container", Types.VARCHAR },
 			{ "storageTemperature", Types.VARCHAR },
@@ -86,9 +87,10 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			{ "diseaseOntologyVersion", Types.VARCHAR },
 			{ "diseaseOntologyCode", Types.VARCHAR },
 			{ "diseaseOntologyDescription", Types.VARCHAR },
-			{ "diseaseFreeText", Types.VARCHAR }
+			{ "diseaseFreeText", Types.VARCHAR },
+			{ "countryOfOrigin", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sample (uuid_ VARCHAR(75) null,sampleDbId LONG not null primary key,sampleCollectionId VARCHAR(75) null,biobankId VARCHAR(75) null,hashedSampleId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime DATE null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartOntologyDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageHigh LONG,ageLow LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseOntologyDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sample (uuid_ VARCHAR(75) null,sampleDbId LONG not null primary key,sampleCollectionId VARCHAR(75) null,biobankId VARCHAR(75) null,hashedSampleId VARCHAR(75) null,hashedIndividualId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime DATE null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartOntologyDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageHigh LONG,ageLow LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseOntologyDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null,countryOfOrigin VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sample";
 	public static final String ORDER_BY_JPQL = " ORDER BY sample.sampleDbId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sample.sampleDbId ASC";
@@ -125,6 +127,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		model.setSampleCollectionId(soapModel.getSampleCollectionId());
 		model.setBiobankId(soapModel.getBiobankId());
 		model.setHashedSampleId(soapModel.getHashedSampleId());
+		model.setHashedIndividualId(soapModel.getHashedIndividualId());
 		model.setMaterialType(soapModel.getMaterialType());
 		model.setContainer(soapModel.getContainer());
 		model.setStorageTemperature(soapModel.getStorageTemperature());
@@ -143,6 +146,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		model.setDiseaseOntologyCode(soapModel.getDiseaseOntologyCode());
 		model.setDiseaseOntologyDescription(soapModel.getDiseaseOntologyDescription());
 		model.setDiseaseFreeText(soapModel.getDiseaseFreeText());
+		model.setCountryOfOrigin(soapModel.getCountryOfOrigin());
 
 		return model;
 	}
@@ -212,6 +216,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		attributes.put("sampleCollectionId", getSampleCollectionId());
 		attributes.put("biobankId", getBiobankId());
 		attributes.put("hashedSampleId", getHashedSampleId());
+		attributes.put("hashedIndividualId", getHashedIndividualId());
 		attributes.put("materialType", getMaterialType());
 		attributes.put("container", getContainer());
 		attributes.put("storageTemperature", getStorageTemperature());
@@ -234,6 +239,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		attributes.put("diseaseOntologyDescription",
 			getDiseaseOntologyDescription());
 		attributes.put("diseaseFreeText", getDiseaseFreeText());
+		attributes.put("countryOfOrigin", getCountryOfOrigin());
 
 		return attributes;
 	}
@@ -268,6 +274,12 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 		if (hashedSampleId != null) {
 			setHashedSampleId(hashedSampleId);
+		}
+
+		String hashedIndividualId = (String)attributes.get("hashedIndividualId");
+
+		if (hashedIndividualId != null) {
+			setHashedIndividualId(hashedIndividualId);
 		}
 
 		String materialType = (String)attributes.get("materialType");
@@ -385,6 +397,12 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		if (diseaseFreeText != null) {
 			setDiseaseFreeText(diseaseFreeText);
 		}
+
+		String countryOfOrigin = (String)attributes.get("countryOfOrigin");
+
+		if (countryOfOrigin != null) {
+			setCountryOfOrigin(countryOfOrigin);
+		}
 	}
 
 	@JSON
@@ -470,6 +488,22 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	@Override
 	public void setHashedSampleId(String hashedSampleId) {
 		_hashedSampleId = hashedSampleId;
+	}
+
+	@JSON
+	@Override
+	public String getHashedIndividualId() {
+		if (_hashedIndividualId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _hashedIndividualId;
+		}
+	}
+
+	@Override
+	public void setHashedIndividualId(String hashedIndividualId) {
+		_hashedIndividualId = hashedIndividualId;
 	}
 
 	@JSON
@@ -747,6 +781,22 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		_diseaseFreeText = diseaseFreeText;
 	}
 
+	@JSON
+	@Override
+	public String getCountryOfOrigin() {
+		if (_countryOfOrigin == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _countryOfOrigin;
+		}
+	}
+
+	@Override
+	public void setCountryOfOrigin(String countryOfOrigin) {
+		_countryOfOrigin = countryOfOrigin;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -783,6 +833,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sampleImpl.setSampleCollectionId(getSampleCollectionId());
 		sampleImpl.setBiobankId(getBiobankId());
 		sampleImpl.setHashedSampleId(getHashedSampleId());
+		sampleImpl.setHashedIndividualId(getHashedIndividualId());
 		sampleImpl.setMaterialType(getMaterialType());
 		sampleImpl.setContainer(getContainer());
 		sampleImpl.setStorageTemperature(getStorageTemperature());
@@ -801,6 +852,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sampleImpl.setDiseaseOntologyCode(getDiseaseOntologyCode());
 		sampleImpl.setDiseaseOntologyDescription(getDiseaseOntologyDescription());
 		sampleImpl.setDiseaseFreeText(getDiseaseFreeText());
+		sampleImpl.setCountryOfOrigin(getCountryOfOrigin());
 
 		sampleImpl.resetOriginalValues();
 
@@ -894,6 +946,14 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 		if ((hashedSampleId != null) && (hashedSampleId.length() == 0)) {
 			sampleCacheModel.hashedSampleId = null;
+		}
+
+		sampleCacheModel.hashedIndividualId = getHashedIndividualId();
+
+		String hashedIndividualId = sampleCacheModel.hashedIndividualId;
+
+		if ((hashedIndividualId != null) && (hashedIndividualId.length() == 0)) {
+			sampleCacheModel.hashedIndividualId = null;
 		}
 
 		sampleCacheModel.materialType = getMaterialType();
@@ -1037,12 +1097,20 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			sampleCacheModel.diseaseFreeText = null;
 		}
 
+		sampleCacheModel.countryOfOrigin = getCountryOfOrigin();
+
+		String countryOfOrigin = sampleCacheModel.countryOfOrigin;
+
+		if ((countryOfOrigin != null) && (countryOfOrigin.length() == 0)) {
+			sampleCacheModel.countryOfOrigin = null;
+		}
+
 		return sampleCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{uuid_=");
 		sb.append(getUuid_());
@@ -1054,6 +1122,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sb.append(getBiobankId());
 		sb.append(", hashedSampleId=");
 		sb.append(getHashedSampleId());
+		sb.append(", hashedIndividualId=");
+		sb.append(getHashedIndividualId());
 		sb.append(", materialType=");
 		sb.append(getMaterialType());
 		sb.append(", container=");
@@ -1090,6 +1160,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sb.append(getDiseaseOntologyDescription());
 		sb.append(", diseaseFreeText=");
 		sb.append(getDiseaseFreeText());
+		sb.append(", countryOfOrigin=");
+		sb.append(getCountryOfOrigin());
 		sb.append("}");
 
 		return sb.toString();
@@ -1097,7 +1169,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.bcnet.portlet.biobank.model.Sample");
@@ -1122,6 +1194,10 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sb.append(
 			"<column><column-name>hashedSampleId</column-name><column-value><![CDATA[");
 		sb.append(getHashedSampleId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hashedIndividualId</column-name><column-value><![CDATA[");
+		sb.append(getHashedIndividualId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>materialType</column-name><column-value><![CDATA[");
@@ -1195,6 +1271,10 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			"<column><column-name>diseaseFreeText</column-name><column-value><![CDATA[");
 		sb.append(getDiseaseFreeText());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryOfOrigin</column-name><column-value><![CDATA[");
+		sb.append(getCountryOfOrigin());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1209,6 +1289,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	private String _sampleCollectionId;
 	private String _biobankId;
 	private String _hashedSampleId;
+	private String _hashedIndividualId;
 	private String _materialType;
 	private String _container;
 	private String _storageTemperature;
@@ -1227,6 +1308,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	private String _diseaseOntologyCode;
 	private String _diseaseOntologyDescription;
 	private String _diseaseFreeText;
+	private String _countryOfOrigin;
 	private long _columnBitmask;
 	private Sample _escapedModel;
 }

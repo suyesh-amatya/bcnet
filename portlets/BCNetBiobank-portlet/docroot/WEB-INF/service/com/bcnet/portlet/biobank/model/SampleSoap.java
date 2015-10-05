@@ -36,6 +36,7 @@ public class SampleSoap implements Serializable {
 		soapModel.setSampleCollectionId(model.getSampleCollectionId());
 		soapModel.setBiobankId(model.getBiobankId());
 		soapModel.setHashedSampleId(model.getHashedSampleId());
+		soapModel.setHashedIndividualId(model.getHashedIndividualId());
 		soapModel.setMaterialType(model.getMaterialType());
 		soapModel.setContainer(model.getContainer());
 		soapModel.setStorageTemperature(model.getStorageTemperature());
@@ -54,6 +55,7 @@ public class SampleSoap implements Serializable {
 		soapModel.setDiseaseOntologyCode(model.getDiseaseOntologyCode());
 		soapModel.setDiseaseOntologyDescription(model.getDiseaseOntologyDescription());
 		soapModel.setDiseaseFreeText(model.getDiseaseFreeText());
+		soapModel.setCountryOfOrigin(model.getCountryOfOrigin());
 
 		return soapModel;
 	}
@@ -144,6 +146,14 @@ public class SampleSoap implements Serializable {
 
 	public void setHashedSampleId(String hashedSampleId) {
 		_hashedSampleId = hashedSampleId;
+	}
+
+	public String getHashedIndividualId() {
+		return _hashedIndividualId;
+	}
+
+	public void setHashedIndividualId(String hashedIndividualId) {
+		_hashedIndividualId = hashedIndividualId;
 	}
 
 	public String getMaterialType() {
@@ -292,11 +302,20 @@ public class SampleSoap implements Serializable {
 		_diseaseFreeText = diseaseFreeText;
 	}
 
+	public String getCountryOfOrigin() {
+		return _countryOfOrigin;
+	}
+
+	public void setCountryOfOrigin(String countryOfOrigin) {
+		_countryOfOrigin = countryOfOrigin;
+	}
+
 	private String _uuid_;
 	private long _sampleDbId;
 	private String _sampleCollectionId;
 	private String _biobankId;
 	private String _hashedSampleId;
+	private String _hashedIndividualId;
 	private String _materialType;
 	private String _container;
 	private String _storageTemperature;
@@ -315,4 +334,5 @@ public class SampleSoap implements Serializable {
 	private String _diseaseOntologyCode;
 	private String _diseaseOntologyDescription;
 	private String _diseaseFreeText;
+	private String _countryOfOrigin;
 }

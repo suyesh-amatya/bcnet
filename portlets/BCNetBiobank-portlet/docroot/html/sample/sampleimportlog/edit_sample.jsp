@@ -31,19 +31,25 @@
 						</aui:input>
 					</aui:column>
 					<aui:column columnWidth="30">
-						<aui:input name="materialType" label='Material Type <i class="icon-asterisk"></i>' showRequiredLabel="false" value="<%=sample.getMaterialType() %>">
-						<aui:validator name="required" errorMessage="The Material Type field is required."/>
-						</aui:input>
+						<aui:input name="hashedIndividualId" label="Hashed Individual Id" value="<%=sample.getHashedIndividualId() %>"/>
 					</aui:column>
 				</aui:row>
 				
 				<aui:row>
+					<aui:column columnWidth="30">
+						<aui:input name="materialType" label='Material Type <i class="icon-asterisk"></i>' showRequiredLabel="false" value="<%=sample.getMaterialType() %>">
+						<aui:validator name="required" errorMessage="The Material Type field is required."/>
+						</aui:input>
+					</aui:column>
 					<aui:column columnWidth="30">
 						<aui:input name="container" label="Container" value="<%=sample.getContainer() %>"/>
 					</aui:column>
 					<aui:column columnWidth="30">
 						<aui:input name="storageTemperature" label="Storage Temperature" value="<%=sample.getStorageTemperature() %>"/>
 					</aui:column>
+				</aui:row>
+			
+				<aui:row>
 					<%
 					
 						Calendar c = Calendar.getInstance();
@@ -165,27 +171,27 @@
 							</aui:select>
 						</div>
 					</aui:column>
-				</aui:row>
-			
-				<aui:row>
 					<aui:column columnWidth="30">
 						<aui:input name="anatomicalPartOntology" label="Anatomical Part Ontology" value="<%=sample.getAnatomicalPartOntology() %>"/>
 					</aui:column>
 					<aui:column columnWidth="30">
 						<aui:input name="anatomicalPartOntologyVersion" label="Anatomical Part Ontology Version" value="<%=sample.getAnatomicalPartOntologyVersion() %>"/>
 					</aui:column>
-					<aui:column columnWidth="30">
-						<aui:input name="anatomicalPartOntologyCode" label="Anatomical Part Ontology Code" value="<%=sample.getAnatomicalPartOntologyCode() %>" />
-					</aui:column>
 				</aui:row>
 				
 				<aui:row>
+					<aui:column columnWidth="30">
+						<aui:input name="anatomicalPartOntologyCode" label="Anatomical Part Ontology Code" value="<%=sample.getAnatomicalPartOntologyCode() %>" />
+					</aui:column>
 					<aui:column columnWidth="30">
 						<aui:input name="anatomicalPartOntologyDescription" label="Anatomical Part Ontology Description" value="<%=sample.getAnatomicalPartOntologyDescription() %>"/>
 					</aui:column>
 					<aui:column columnWidth="30">
 						<aui:input name="anatomicalPartFreeText" label="Anatomical Part Free Text" value="<%=sample.getAnatomicalPartFreeText() %>"/>
 					</aui:column>
+				</aui:row>
+				
+				<aui:row>
 					<aui:column columnWidth="30">
 						<aui:select name="sex">
 							<aui:option>Select</aui:option>
@@ -195,9 +201,6 @@
 							<aui:option value="Undifferentiated" selected="<%=\"Undifferentiated\".equalsIgnoreCase(sample.getSex()) %>">Undifferentiated</aui:option>
 						</aui:select>
 					</aui:column>
-				</aui:row>
-				
-				<aui:row>
 					<aui:column columnWidth="30">
 						<div id="sample-age-low">
 							<aui:input name="ageLow" label="Age Low" value="<%=sample.getAgeLow() %>"/>
@@ -218,20 +221,26 @@
 					<aui:column columnWidth="30">
 						<aui:input name="diseaseOntology" label="Disease Ontology" value="<%=sample.getDiseaseOntology() %>"/>
 					</aui:column>
-					<aui:column columnWidth="30">
-						<aui:input name="diseaseOntologyVersion" label="Disease Ontology Version" value="<%=sample.getDiseaseOntologyVersion() %>"/>
-					</aui:column>
 				</aui:row>
 				
 				<aui:row>
+					<aui:column columnWidth="30">
+						<aui:input name="diseaseOntologyVersion" label="Disease Ontology Version" value="<%=sample.getDiseaseOntologyVersion() %>"/>
+					</aui:column>
 					<aui:column columnWidth="30">
 						<aui:input name="diseaseOntologyCode" label="Disease Ontology Code" value="<%=sample.getDiseaseOntologyCode() %>" />
 					</aui:column>
 					<aui:column columnWidth="30">
 						<aui:input name="diseaseOntologyDescription" label="Disease Ontology Description" value="<%=sample.getDiseaseOntologyDescription() %>"/>
 					</aui:column>
+				</aui:row>
+				
+				<aui:row>
 					<aui:column columnWidth="30">
 						<aui:input name="diseaseFreeText" label="Disease Free Text" value="<%=sample.getDiseaseFreeText() %>"/>
+					</aui:column>
+					<aui:column columnWidth="30">
+						<aui:input name="countryOfOrigin" label="Country of Origin" value="<%=sample.getCountryOfOrigin() %>"/>
 					</aui:column>
 				</aui:row>
 			</aui:fieldset>

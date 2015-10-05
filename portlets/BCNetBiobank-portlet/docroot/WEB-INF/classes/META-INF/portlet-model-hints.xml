@@ -35,6 +35,7 @@
 		<field name="sampleCollectionId" type="String" />
 		<field name="biobankId" type="String" />
 		<field name="hashedSampleId" type="String" />
+		<field name="hashedIndividualId" type="String" />
 		<field name="materialType" type="String" />
 		<field name="container" type="String" />
 		<field name="storageTemperature" type="String" />
@@ -53,6 +54,7 @@
 		<field name="diseaseOntologyCode" type="String" />
 		<field name="diseaseOntologyDescription" type="String" />
 		<field name="diseaseFreeText" type="String" />
+		<field name="countryOfOrigin" type="String" />
 	</model>
 	<model name="com.bcnet.portlet.biobank.model.SampleCollection">
 		<field name="sampleCollectionDbId" type="long" />

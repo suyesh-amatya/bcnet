@@ -132,7 +132,41 @@ public class SampleUploadPortlet extends MVCPortlet {
 	}
 	
 	
-	private void readXLSXFile(InputStream inputStream, ActionRequest request) throws IOException, SystemException {
+	private void readXLSXFile(InputStream inputStream, ActionRequest request) throws IOException {
+		// TODO Auto-generated method stub
+		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+		// Get first sheet from the workbook
+		XSSFSheet sheet = workbook.getSheet("sample");
+		
+		Iterator<Row> rowIterator = sheet.rowIterator();
+		while (rowIterator.hasNext()) {
+			XSSFRow row = (XSSFRow) rowIterator.next();
+			System.out.println(row.getRowNum()+" "+ isRowEmpty(row));
+		}
+		/*System.out.println("getLastRowNum"+ sheet.getLastRowNum());
+		System.out.println("getPhysicalNumberOfRows"+ sheet.getPhysicalNumberOfRows());
+		System.out.println(isRowEmpty(sheet.getRow(sheet.getLastRowNum())) );
+		//System.out.println(isRowEmpty(sheet.getRow(sheet.getPhysicalNumberOfRows())) );
+		System.out.println(isRowEmpty(sheet.getRow(40)) );
+		System.out.println(isRowEmpty(sheet.getRow(41)) );
+		System.out.println(isRowEmpty(sheet.getRow(46)) );
+		System.out.println(isRowEmpty(sheet.getRow(48)) );
+		System.out.println(isRowEmpty(sheet.getRow(49)) );
+		System.out.println(isRowEmpty(sheet.getRow(50)) );
+		System.out.println(isRowEmpty(sheet.getRow(4)) );*/
+		
+	}
+
+	private static boolean isRowEmpty(Row row) {
+	    for (int c = row.getFirstCellNum(); c < row.getLastCellNum(); c++) {
+	        Cell cell = row.getCell(c);
+	        if (cell != null && cell.getCellType() != Cell.CELL_TYPE_BLANK)
+	            return false;
+	    }
+	    return true;
+	}
+
+	private void readXLSXFiles(InputStream inputStream, ActionRequest request) throws IOException, SystemException {
 		// TODO Auto-generated method stub
 		System.out.println("readXLSXFile");
 
@@ -164,6 +198,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 		int sampleCollectionId_column = -1;
 		int biobankId_column = -1;
 		int hashedSampleId_column = -1;
+		int hashedIndividualId_column = -1;
 		int materialType_column = -1;
 		int container_column = -1;
 		int storageTemperature_column = -1;
@@ -182,6 +217,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 		int diseaseOntologyCode_column = -1;
 		int diseaseOntologyDescription_column = -1;
 		int diseaseFreeText_column = -1;
+		int countryOfOrigin_column = -1;
 		
 		
 		while (rowIterator.hasNext()) {
@@ -209,6 +245,10 @@ public class SampleUploadPortlet extends MVCPortlet {
 						case "hashedSampleId":
 							//hashedSampleId_column = cellcounter;
 							hashedSampleId_column = cell.getColumnIndex();
+							break;
+						case "hashedIndividualId":
+							//hashedIndividualId_column = cellcounter;
+							hashedIndividualId_column = cell.getColumnIndex();
 							break;
 						case "materialType":
 							//materialType_column = cellcounter;
@@ -282,6 +322,10 @@ public class SampleUploadPortlet extends MVCPortlet {
 							//diseaseFreeText_column = cellcounter;
 							diseaseFreeText_column = cell.getColumnIndex();
 							break;
+						case "countryOfOrigin":
+							//countryOfOrigin_column = cellcounter;
+							countryOfOrigin_column = cell.getColumnIndex();
+							break;
 						default:
 							if(!extra_columns.equalsIgnoreCase("")) {
 								extra_columns += "; ";
@@ -337,7 +381,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 				sample.setUuid_(uuid_);
 				long sampleDbId = CounterLocalServiceUtil.increment();
 				sample.setSampleDbId(sampleDbId);
-
+				
 				//Try to add sampleCollectionId
 				try{
 					sample.setSampleCollectionId(fmt.formatCellValue(row.getCell(sampleCollectionId_column)));
@@ -380,6 +424,22 @@ public class SampleUploadPortlet extends MVCPortlet {
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
 							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample::readXLSXFile] "
 							+ " Problem adding hashedSampleId from row " + rowcount + " to the database.");
+					e.printStackTrace();
+					if(!rowerrors.equalsIgnoreCase("")) {
+						rowerrors += "; ";
+					}
+					rowerrors += rowcount;
+				}
+				
+				//Try to add hashedIndividualId
+				try{
+					sample.setHashedIndividualId(row.getCell(hashedIndividualId_column).toString());
+				}
+				catch(Exception e){
+					sample.setHashedIndividualId("");
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample::readXLSXFile] "
+							+ " Problem adding hashedIndividualId from row " + rowcount + " to the database.");
 					e.printStackTrace();
 					if(!rowerrors.equalsIgnoreCase("")) {
 						rowerrors += "; ";
@@ -669,6 +729,22 @@ public class SampleUploadPortlet extends MVCPortlet {
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
 							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample::readXLSXFile] "
 							+ " Problem adding diseaseFreeText from row " + rowcount + " to the database.");
+					e.printStackTrace();
+					if(!rowerrors.equalsIgnoreCase("")) {
+						rowerrors += "; ";
+					}
+					rowerrors += rowcount;
+				}
+				
+				//Try to add countryOfOrigin
+				try{
+					sample.setCountryOfOrigin(row.getCell(countryOfOrigin_column).toString());
+				}
+				catch(Exception e){
+					sample.setCountryOfOrigin("");
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample::readXLSXFile] "
+							+ " Problem adding countryOfOrigin from row " + rowcount + " to the database.");
 					e.printStackTrace();
 					if(!rowerrors.equalsIgnoreCase("")) {
 						rowerrors += "; ";
