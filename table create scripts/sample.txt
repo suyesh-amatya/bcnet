@@ -1,11 +1,11 @@
-CREATE TABLE IF NOT EXISTS `bcnet`.`sample` (
+﻿CREATE TABLE IF NOT EXISTS `bcnet`.`sample` (
   `uuid_` varchar(75) NOT NULL,
   `sampleDbId` bigint(20) NOT NULL AUTO_INCREMENT,
   `sampleCollectionId` varchar(255) DEFAULT NULL,
-  `biobankId` varchar(255) DEFAULT NULL,
-  `hashedSampleId` varchar(255) DEFAULT NULL,
-  `hashedIndividualId` varchar(255) DEFAULT NULL
-  `materialType` varchar(255) DEFAULT NULL,
+  `biobankId` varchar(255) NOT NULL,
+  `hashedSampleId` varchar(255) NOT NULL,
+  `hashedIndividualId` varchar(255) DEFAULT NULL,
+  `materialType` varchar(255) NOT NULL,
   `container` varchar(45) DEFAULT NULL,
   `storageTemperature` varchar(45) DEFAULT NULL COMMENT 'Text string of letters with the temperature for the long-term storage of the biospecimens in the sample collection. Can be one or several of the following values:  Room temperature, +4 °C, -18 °C to -35 °C, -60 °C to -85 °C, Liquid nitrogen, Other. T',
   `sampledTime` datetime DEFAULT NULL,
@@ -23,6 +23,6 @@ CREATE TABLE IF NOT EXISTS `bcnet`.`sample` (
   `diseaseOntologyCode` varchar(255) DEFAULT NULL,
   `diseaseOntologyDescription` varchar(255) DEFAULT NULL COMMENT 'for the specified diseaseOntology',
   `diseaseFreeText` varchar(255) DEFAULT NULL,
-  `countryOfOrigin` VARCHAR(255) DEFAULT NULL,
+  `countryOfOrigin` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`sampleDbId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

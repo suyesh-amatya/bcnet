@@ -1,7 +1,16 @@
 <%@ include file="/html/init.jsp" %>
 
 <%
+if(renderRequest.getAttribute("error") != null) {
+	System.out.println(renderRequest.getAttribute("error"));
+	out.println(renderRequest.getAttribute("error"));
+%>
+<a href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_xlsx" />
+				<portlet:param name="error" value='<%= renderRequest.getAttribute("error").toString() %>' />
+				</portlet:resourceURL>">Download Disease Matrix as XLSX File</a>
 
+<%
+}
 	List<BiobankGeneralInformation> biobanks = BiobankGeneralInformationLocalServiceUtil.getAllBiobankGeneralInformations();
 
 	if(renderRequest.getAttribute("xls-header-not-defined-columns-missing") != null) {

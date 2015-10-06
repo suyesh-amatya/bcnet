@@ -3,17 +3,24 @@ package com.bcnet.portlet.sample;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -27,10 +34,12 @@ import com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -132,16 +141,78 @@ public class SampleUploadPortlet extends MVCPortlet {
 	}
 	
 	
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException{
+		String error = ParamUtil.getString(resourceRequest, "error");
+		File file = new File("errorfile.txt");
+		OutputStream out = resourceResponse.getPortletOutputStream();
+		resourceResponse.setContentType("Content-type: application/octet-stream");
+		PortalUtil.getHttpServletResponse(resourceResponse).setHeader("Content-disposition", "attachment; filename=errorfile.txt");
+		//resourceResponse.addProperty("Content-disposition", "attachment; filename=errorfile.txt");
+		
+		out.write(error.getBytes(Charset.forName("UTF-8")));
+		//new FileOutputStream(file);
+		out.flush();
+		out.close();
+		System.out.println("serveResource"+error);
+	}
+	
 	private void readXLSXFile(InputStream inputStream, ActionRequest request) throws IOException {
 		// TODO Auto-generated method stub
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 		// Get first sheet from the workbook
 		XSSFSheet sheet = workbook.getSheet("sample");
-		
+		String errorStr = "";
+		if(errorStr!=""){
+			System.out.println("errorStr"+errorStr);
+		}
 		Iterator<Row> rowIterator = sheet.rowIterator();
 		while (rowIterator.hasNext()) {
 			XSSFRow row = (XSSFRow) rowIterator.next();
 			System.out.println(row.getRowNum()+" "+ isRowEmpty(row));
+			Iterator<Cell> cellIterator = row.cellIterator();
+			while (cellIterator.hasNext()) {
+				XSSFCell cell = (XSSFCell)cellIterator.next();
+				switch (cell.getCellType()) {
+                case Cell.CELL_TYPE_STRING:
+                    System.out.println(cell.getRichStringCellValue().getString());
+                    break;
+                case Cell.CELL_TYPE_NUMERIC:
+                    if (DateUtil.isCellDateFormatted(cell)) {
+                        System.out.println(cell.getDateCellValue());
+                    } else {
+                        System.out.println(cell.getNumericCellValue());
+                    }
+                    break;
+                case Cell.CELL_TYPE_BOOLEAN:
+                    System.out.println(cell.getBooleanCellValue());
+                    break;
+                case Cell.CELL_TYPE_FORMULA:
+                    System.out.println(cell.getCellFormula());
+                    break;
+                case Cell.CELL_TYPE_BLANK:
+                	errorStr+="Empty value in:"+ cell.getRowIndex()+" "+cell.getColumnIndex();
+                	//System.out.println("Empty value in:"+ cell.getRowIndex()+" "+cell.getColumnIndex());
+                	break;
+                default:
+                    System.out.println();
+				}
+				/*if(cell.getCellType() != Cell.CELL_TYPE_BLANK){
+					System.out.println(cell.getStringCellValue());
+				}
+				else{
+					errorStr+="Empty value in:"+ cell.getRowIndex()+cell.getColumnIndex();
+					System.out.println("Empty value in:"+ cell.getRowIndex()+cell.getColumnIndex());
+				}
+				*/
+				
+			}
+		}
+		if(errorStr!=""){
+			System.out.println("errorStr"+errorStr);
+			request.setAttribute("error", errorStr);
+		}
+		else{
+			
 		}
 		/*System.out.println("getLastRowNum"+ sheet.getLastRowNum());
 		System.out.println("getPhysicalNumberOfRows"+ sheet.getPhysicalNumberOfRows());
