@@ -35,14 +35,21 @@ div#sample-import-detail .clear{
 	margin-top: 10px;
 }
 
-div.sample-edit-form{
+div.sample-edit-form, div.sample-import-form{
 	border-radius: 4px;
 	padding-left: 0;
 	margin-bottom: 20px;
 	width: auto;
 }
 
-.sample-edit-form-header{
+div.sample-import-form .control-group, div.sample-import-form .button-holder{
+    margin-left: 10px;
+}
+
+div.sample-import-form div#download-template-file{
+	text-align: right;
+}
+.sample-edit-form-header, .sample-import-form-header{
 	z-index: 2;
 	color: #fff;
 	background-color: #428bca;
@@ -58,12 +65,12 @@ div.sample-edit-form{
 	height:auto;
 }
 
-div.sample-edit-form-container{
+div.sample-edit-form-container, div.sample-import-form-container{
 	border: 1px solid #ddd;
 	border-top: 0;
 }
 
-.sample-edit-form-container label.control-label{
+.sample-edit-form-container label.control-label, .sample-import-form-container label.control-label{
 	margin-top: 15px;	
 }
 

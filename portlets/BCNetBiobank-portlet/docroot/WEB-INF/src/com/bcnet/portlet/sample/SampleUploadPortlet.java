@@ -60,6 +60,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	private static String sourceFileName;
 	private static String biobankId;
+	private static String errorStr;
 	
 	public void uploadSample(ActionRequest request, ActionResponse response) throws Exception {
 		
@@ -143,17 +144,18 @@ public class SampleUploadPortlet extends MVCPortlet {
 	
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException{
 		String error = ParamUtil.getString(resourceRequest, "error");
-		File file = new File("errorfile.txt");
+		System.out.println("serveResource"+error);
+		//File file = new File("errorfile.txt");
 		OutputStream out = resourceResponse.getPortletOutputStream();
 		resourceResponse.setContentType("Content-type: application/octet-stream");
 		PortalUtil.getHttpServletResponse(resourceResponse).setHeader("Content-disposition", "attachment; filename=errorfile.txt");
 		//resourceResponse.addProperty("Content-disposition", "attachment; filename=errorfile.txt");
 		
-		out.write(error.getBytes(Charset.forName("UTF-8")));
+		out.write(errorStr.getBytes(Charset.forName("UTF-8")));
 		//new FileOutputStream(file);
 		out.flush();
 		out.close();
-		System.out.println("serveResource"+error);
+		
 	}
 	
 	private void readXLSXFile(InputStream inputStream, ActionRequest request) throws IOException {
@@ -161,7 +163,20 @@ public class SampleUploadPortlet extends MVCPortlet {
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 		// Get first sheet from the workbook
 		XSSFSheet sheet = workbook.getSheet("sample");
-		String errorStr = "";
+		
+		/*sheet.getRow(0).getCell(22).setCellValue("test");
+		File file = new File("C:\\Users\\suyama\\Desktop\\sample to upload\\BCNet catalog template-Prolifica.xlsx");
+		try{
+			FileOutputStream fileOut = new FileOutputStream(file);
+			workbook.write(fileOut);
+			System.out.println("can write");
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("File is open");
+		}*/
+		/*UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+		File uploadedFile = uploadRequest.getFile("fileupload");
+		System.out.println(uploadedFile.getAbsolutePath()+ " "+uploadedFile.getName());*/
 		if(errorStr!=""){
 			System.out.println("errorStr"+errorStr);
 		}
