@@ -48,7 +48,9 @@ div.sample-import-form .control-group, div.sample-import-form .button-holder{
 
 div.sample-import-form div#download-template-file{
 	text-align: right;
+	margin: 5px;
 }
+
 .sample-edit-form-header, .sample-import-form-header{
 	z-index: 2;
 	color: #fff;

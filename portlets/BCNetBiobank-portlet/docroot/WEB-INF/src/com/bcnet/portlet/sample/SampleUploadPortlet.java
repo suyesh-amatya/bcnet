@@ -18,10 +18,14 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -38,6 +42,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
@@ -143,21 +148,108 @@ public class SampleUploadPortlet extends MVCPortlet {
 	
 	
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException{
-		String error = ParamUtil.getString(resourceRequest, "error");
-		System.out.println("serveResource"+error);
-		//File file = new File("errorfile.txt");
+		System.out.println(errorStr);
+		String templateFileName = "BCNet_SampleImport_Template";
+		String cmd = resourceRequest.getParameter(Constants.CMD);
+		Workbook wb;
 		OutputStream out = resourceResponse.getPortletOutputStream();
+		if(cmd.equalsIgnoreCase("xlsxTemplate")){
+			wb = generateXLSXTemplateFile();
+			templateFileName += ".xlsx";
+		}
+		else{
+			wb = generateXLSTemplateFile();
+			templateFileName += ".xls";
+		}
+		
+		if(cmd.equalsIgnoreCase("xlsxTemplate") || cmd.equalsIgnoreCase("xlsTemplate")){
+			resourceResponse.setContentType("application/vnd.ms-excel");
+			resourceResponse.addProperty("Content-disposition", "attachment; filename=" + templateFileName);
+			wb.write(out);
+			out.flush();
+			out.close();
+			errorStr="eee";
+		}
+		System.out.println(errorStr);
+			
+		errorStr=null;
+		/*OutputStream errorout = resourceResponse.getPortletOutputStream();
 		resourceResponse.setContentType("Content-type: application/octet-stream");
 		PortalUtil.getHttpServletResponse(resourceResponse).setHeader("Content-disposition", "attachment; filename=errorfile.txt");
 		//resourceResponse.addProperty("Content-disposition", "attachment; filename=errorfile.txt");
+		if(errorStr!=null){
+			errorout.write(errorStr.getBytes(Charset.forName("UTF-8")));
+		}
+		errorout.flush();
+		errorout.close();*/
 		
-		out.write(errorStr.getBytes(Charset.forName("UTF-8")));
-		//new FileOutputStream(file);
-		out.flush();
-		out.close();
 		
 	}
 	
+	private Workbook generateXLSXTemplateFile() {
+		// TODO Auto-generated method stub
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet("sample");
+		Row row = sheet.createRow(0);
+		row.createCell(0).setCellValue("sampleCollectionId");
+		row.createCell(1).setCellValue("hashedSampleId");
+		row.createCell(2).setCellValue("hashedIndividualId");
+		row.createCell(3).setCellValue("materialType");
+		row.createCell(4).setCellValue("container");
+		row.createCell(5).setCellValue("storageTemperature");
+		row.createCell(6).setCellValue("sampledTime");
+		row.createCell(7).setCellValue("anatomicalPartOntology");
+		row.createCell(8).setCellValue("anatomicalPartOntologyVersion");
+		row.createCell(9).setCellValue("anatomicalPartOntologyCode");
+		row.createCell(10).setCellValue("anatomicalPartOntologyDescription");
+		row.createCell(11).setCellValue("anatomicalPartFreeText");
+		row.createCell(12).setCellValue("sex");
+		row.createCell(13).setCellValue("ageLow");
+		row.createCell(14).setCellValue("ageHigh");
+		row.createCell(15).setCellValue("ageUnit");
+		row.createCell(16).setCellValue("diseaseOntology");
+		row.createCell(17).setCellValue("diseaseOntologyVersion");
+		row.createCell(18).setCellValue("diseaseOntologyCode");
+		row.createCell(19).setCellValue("diseaseOntologyDescription");
+		row.createCell(20).setCellValue("diseaseFreeText");
+		row.createCell(21).setCellValue("countryOfOrigin");
+		return workbook;
+	}
+	
+	private Workbook generateXLSTemplateFile() {
+		// TODO Auto-generated method stub
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		HSSFSheet sheet = workbook.createSheet("sample");
+		Row row = sheet.createRow(0);
+		row.createCell(0).setCellValue("sampleCollectionId");
+		row.createCell(1).setCellValue("hashedSampleId");
+		row.createCell(2).setCellValue("hashedIndividualId");
+		row.createCell(3).setCellValue("materialType");
+		row.createCell(4).setCellValue("container");
+		row.createCell(5).setCellValue("storageTemperature");
+		row.createCell(6).setCellValue("sampledTime");
+		row.createCell(7).setCellValue("anatomicalPartOntology");
+		row.createCell(8).setCellValue("anatomicalPartOntologyVersion");
+		row.createCell(9).setCellValue("anatomicalPartOntologyCode");
+		row.createCell(10).setCellValue("anatomicalPartOntologyDescription");
+		row.createCell(11).setCellValue("anatomicalPartFreeText");
+		row.createCell(12).setCellValue("sex");
+		row.createCell(13).setCellValue("ageLow");
+		row.createCell(14).setCellValue("ageHigh");
+		row.createCell(15).setCellValue("ageUnit");
+		row.createCell(16).setCellValue("diseaseOntology");
+		row.createCell(17).setCellValue("diseaseOntologyVersion");
+		row.createCell(18).setCellValue("diseaseOntologyCode");
+		row.createCell(19).setCellValue("diseaseOntologyDescription");
+		row.createCell(20).setCellValue("diseaseFreeText");
+		row.createCell(21).setCellValue("countryOfOrigin");
+		return workbook;
+	}
+
+
+	
+
+
 	private void readXLSXFile(InputStream inputStream, ActionRequest request) throws IOException {
 		// TODO Auto-generated method stub
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);

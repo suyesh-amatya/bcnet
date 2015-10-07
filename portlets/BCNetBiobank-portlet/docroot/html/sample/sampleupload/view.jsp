@@ -48,6 +48,13 @@ if(renderRequest.getAttribute("error") != null) {
 
 <portlet:renderURL var="viewSampleUploadURL" />
 
+<portlet:resourceURL var="downloadTemplateFileXlsxURL">
+	<portlet:param name="<%=Constants.CMD %>" value="xlsxTemplate"/>	
+</portlet:resourceURL>
+
+<portlet:resourceURL var="downloadTemplateFileXlsURL">
+	<portlet:param name="<%=Constants.CMD %>" value="xlsTemplate"/>	
+</portlet:resourceURL>
 
 <div class="sample-import-form">
 	<div class="sample-import-form-header">Sample Import</div>
@@ -56,7 +63,13 @@ if(renderRequest.getAttribute("error") != null) {
 			<aui:fieldset>
 				<aui:row>
 					<div id="download-template-file">
-						<aui:a href="#">Download Template File (.xlsx)</aui:a> | <aui:a href="#">Download Template File (.xls)</aui:a>
+						<aui:a href="<%=downloadTemplateFileXlsxURL.toString()%>">
+							Download Template File (.xlsx)
+						</aui:a> 
+						&nbsp;&#124;&nbsp;
+						<aui:a href="<%=downloadTemplateFileXlsURL.toString()%>">
+							Download Template File (.xls)
+						</aui:a>
 					</div>
 				</aui:row>
 				<aui:row>
