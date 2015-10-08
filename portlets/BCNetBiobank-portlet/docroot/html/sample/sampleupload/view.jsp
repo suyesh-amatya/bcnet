@@ -5,7 +5,7 @@ if(renderRequest.getAttribute("error") != null) {
 	System.out.println(renderRequest.getAttribute("error"));
 	out.println(renderRequest.getAttribute("error"));
 %>
-<a href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="export_xlsx" />
+<a href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="error" />
 				<%-- <portlet:param name="error" value='<%= renderRequest.getAttribute("error").toString() %>' /> --%>
 				</portlet:resourceURL>">Download Disease Matrix as XLSX File</a>
 

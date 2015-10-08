@@ -9,8 +9,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -31,6 +33,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.model.SampleImportLog;
 import com.bcnet.portlet.biobank.model.impl.SampleImpl;
 import com.bcnet.portlet.biobank.model.impl.SampleImportLogImpl;
@@ -65,7 +68,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	private static String sourceFileName;
 	private static String biobankId;
-	private static String errorStr;
+	private String errorStr;
 	
 	public void uploadSample(ActionRequest request, ActionResponse response) throws Exception {
 		
@@ -151,13 +154,13 @@ public class SampleUploadPortlet extends MVCPortlet {
 		System.out.println(errorStr);
 		String templateFileName = "BCNet_SampleImport_Template";
 		String cmd = resourceRequest.getParameter(Constants.CMD);
-		Workbook wb;
+		Workbook wb = null;
 		OutputStream out = resourceResponse.getPortletOutputStream();
 		if(cmd.equalsIgnoreCase("xlsxTemplate")){
 			wb = generateXLSXTemplateFile();
 			templateFileName += ".xlsx";
 		}
-		else{
+		else if(cmd.equalsIgnoreCase("xlsTemplate")){
 			wb = generateXLSTemplateFile();
 			templateFileName += ".xls";
 		}
@@ -168,20 +171,21 @@ public class SampleUploadPortlet extends MVCPortlet {
 			wb.write(out);
 			out.flush();
 			out.close();
-			errorStr="eee";
 		}
 		System.out.println(errorStr);
 			
-		errorStr=null;
-		/*OutputStream errorout = resourceResponse.getPortletOutputStream();
-		resourceResponse.setContentType("Content-type: application/octet-stream");
-		PortalUtil.getHttpServletResponse(resourceResponse).setHeader("Content-disposition", "attachment; filename=errorfile.txt");
-		//resourceResponse.addProperty("Content-disposition", "attachment; filename=errorfile.txt");
-		if(errorStr!=null){
-			errorout.write(errorStr.getBytes(Charset.forName("UTF-8")));
+		if(cmd.equalsIgnoreCase("error")){
+			OutputStream errorout = resourceResponse.getPortletOutputStream();
+			resourceResponse.setContentType("Content-type: application/octet-stream");
+			PortalUtil.getHttpServletResponse(resourceResponse).setHeader("Content-disposition", "attachment; filename=errorfile.txt");
+			//resourceResponse.addProperty("Content-disposition", "attachment; filename=errorfile.txt");
+			if(errorStr!=null){
+				errorout.write(errorStr.getBytes(Charset.forName("UTF-8")));
+			}
+			errorout.flush();
+			errorout.close();
 		}
-		errorout.flush();
-		errorout.close();*/
+		
 		
 		
 	}
@@ -250,7 +254,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 	
 
 
-	private void readXLSXFile(InputStream inputStream, ActionRequest request) throws IOException {
+	private void readXLSXFiles(InputStream inputStream, ActionRequest request) throws IOException {
 		// TODO Auto-generated method stub
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 		// Get first sheet from the workbook
@@ -269,10 +273,11 @@ public class SampleUploadPortlet extends MVCPortlet {
 		/*UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
 		File uploadedFile = uploadRequest.getFile("fileupload");
 		System.out.println(uploadedFile.getAbsolutePath()+ " "+uploadedFile.getName());*/
-		if(errorStr!=""){
+		errorStr = "";
+/*		if(errorStr!=""){
 			System.out.println("errorStr"+errorStr);
 		}
-		Iterator<Row> rowIterator = sheet.rowIterator();
+*/		Iterator<Row> rowIterator = sheet.rowIterator();
 		while (rowIterator.hasNext()) {
 			XSSFRow row = (XSSFRow) rowIterator.next();
 			System.out.println(row.getRowNum()+" "+ isRowEmpty(row));
@@ -321,17 +326,6 @@ public class SampleUploadPortlet extends MVCPortlet {
 		else{
 			
 		}
-		/*System.out.println("getLastRowNum"+ sheet.getLastRowNum());
-		System.out.println("getPhysicalNumberOfRows"+ sheet.getPhysicalNumberOfRows());
-		System.out.println(isRowEmpty(sheet.getRow(sheet.getLastRowNum())) );
-		//System.out.println(isRowEmpty(sheet.getRow(sheet.getPhysicalNumberOfRows())) );
-		System.out.println(isRowEmpty(sheet.getRow(40)) );
-		System.out.println(isRowEmpty(sheet.getRow(41)) );
-		System.out.println(isRowEmpty(sheet.getRow(46)) );
-		System.out.println(isRowEmpty(sheet.getRow(48)) );
-		System.out.println(isRowEmpty(sheet.getRow(49)) );
-		System.out.println(isRowEmpty(sheet.getRow(50)) );
-		System.out.println(isRowEmpty(sheet.getRow(4)) );*/
 		
 	}
 
@@ -344,7 +338,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 	    return true;
 	}
 
-	private void readXLSXFiles(InputStream inputStream, ActionRequest request) throws IOException, SystemException {
+	private void readXLSXFile(InputStream inputStream, ActionRequest request) throws IOException, SystemException {
 		// TODO Auto-generated method stub
 		System.out.println("readXLSXFile");
 
@@ -366,12 +360,14 @@ public class SampleUploadPortlet extends MVCPortlet {
 
 		
 		Iterator<Row> rowIterator = sheet.rowIterator();
-
+		
+		errorStr = "";
 		boolean header = true;
 		boolean importLog = true;
 		int rowcount = 1;
 		String rowerrors = "";
 		String uuid_ = PortalUUIDUtil.generate();
+		List<Sample> sampleList = new ArrayList<Sample>();
 
 		int sampleCollectionId_column = -1;
 		int biobankId_column = -1;
@@ -522,6 +518,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 
 				}
 				
+				header = false;
 				/*if(!extra_columns.equalsIgnoreCase("")){
 					request.setAttribute("xls-header-not-defined-extra-columns", extra_columns);
 					SessionMessages.add(request, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
@@ -529,33 +526,88 @@ public class SampleUploadPortlet extends MVCPortlet {
 					return;
 				}*/
 				
-				
-				if(hashedSampleId_column < 0 || materialType_column < 0){
-					if(hashedSampleId_column < 0){
-						column_missing += "hashedSampleId";
-					}
-					if(!column_missing.equalsIgnoreCase("") && materialType_column < 0) {
-						column_missing += "; ";
-					}
-					if (materialType_column < 0){
-						column_missing += "materialType";
-					}
-					request.setAttribute("xls-header-not-defined-columns-missing", column_missing);
-					SessionMessages.add(request, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
-					workbook.close();
-					return;
-					
+				if(sampleCollectionId_column < 0){
+					column_missing += "sampleCollectionId, ";
 				}
+				if(hashedSampleId_column < 0){
+					column_missing += "hashedSampleId, ";
+				}
+				if(hashedIndividualId_column < 0){
+					column_missing += "hashedIndividualId, ";
+				}
+				if (materialType_column < 0){
+					column_missing += "materialType, ";
+				}
+				if (container_column < 0){
+					column_missing += "container, ";
+				}
+				if (storageTemperature_column < 0){
+					column_missing += "storageTemperature, ";
+				}
+				if (sampledTime_column < 0){
+					column_missing += "sampledTime, ";
+				}
+				if (anatomicalPartOntology_column < 0){
+					column_missing += "anatomicalPartOntology, ";
+				}
+				if (anatomicalPartOntologyVersion_column < 0){
+					column_missing += "anatomicalPartOntologyVersion, ";
+				}
+				if (anatomicalPartOntologyCode_column < 0){
+					column_missing += "anatomicalPartOntologyCode, ";
+				}
+				if (anatomicalPartOntologyDescription_column < 0){
+					column_missing += "anatomicalPartOntologyDescription, ";
+				}
+				if (anatomicalPartFreeText_column < 0){
+					column_missing += "anatomicalPartFreeText, ";
+				}
+				if (sex_column < 0){
+					column_missing += "sex, ";
+				}
+				if (ageLow_column < 0){
+					column_missing += "ageLow, ";
+				}
+				if (ageHigh_column < 0){
+					column_missing += "ageHigh, ";
+				}
+				if (ageUnit_column < 0){
+					column_missing += "ageUnit, ";
+				}
+				if (diseaseOntology_column < 0){
+					column_missing += "diseaseOntology, ";
+				}
+				if (diseaseOntologyVersion_column < 0){
+					column_missing += "diseaseOntologyVersion, ";
+				}
+				if (diseaseOntologyCode_column < 0){
+					column_missing += "diseaseOntologyCode, ";
+				}
+				if (diseaseOntologyDescription_column < 0){
+					column_missing += "diseaseOntologyDescription, ";
+				}
+				if (diseaseFreeText_column < 0){
+					column_missing += "diseaseFreeText, ";
+				}
+				if (countryOfOrigin_column < 0){
+					column_missing += "countryOfOrigin, ";
+				}
+				
+				request.setAttribute("xls-header-not-defined-columns-missing", column_missing);
+				SessionMessages.add(request, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
+				workbook.close();
+				return;
+					
 					
 
-				header = false;
+				
 
 			}
 			else{
 
 				rowcount ++;
 
-				SampleImpl sample = new SampleImpl();
+				Sample sample = new SampleImpl();
 				sample.setUuid_(uuid_);
 				long sampleDbId = CounterLocalServiceUtil.increment();
 				sample.setSampleDbId(sampleDbId);
@@ -930,8 +982,18 @@ public class SampleUploadPortlet extends MVCPortlet {
 					rowerrors += rowcount;
 				}
 
-				SampleLocalServiceUtil.addSample(sample);
-				request.setAttribute("sample", sample);
+				sampleList.add(sample);
+				//SampleLocalServiceUtil.addSample(sample);
+				//request.setAttribute("sample", sample);
+				
+				
+
+			}
+			
+			if(errorStr != ""){
+				for(Sample sample : sampleList){
+					SampleLocalServiceUtil.addSample(sample);
+				}
 				
 				if(importLog){
 					SampleImportLog sampleImportLog = new SampleImportLogImpl();
@@ -944,7 +1006,6 @@ public class SampleUploadPortlet extends MVCPortlet {
 					SampleImportLogLocalServiceUtil.addSampleImportLog(sampleImportLog);
 					importLog = false;
 				}
-
 			}
 
 		}
