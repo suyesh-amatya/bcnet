@@ -254,7 +254,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 	
 
 
-	private void readXLSXFiles(InputStream inputStream, ActionRequest request) throws IOException {
+	private void readXLSXFile(InputStream inputStream, ActionRequest request) throws IOException {
 		// TODO Auto-generated method stub
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 		// Get first sheet from the workbook
@@ -281,7 +281,10 @@ public class SampleUploadPortlet extends MVCPortlet {
 		while (rowIterator.hasNext()) {
 			XSSFRow row = (XSSFRow) rowIterator.next();
 			System.out.println(row.getRowNum()+" "+ isRowEmpty(row));
-			Iterator<Cell> cellIterator = row.cellIterator();
+			System.out.println(row.getCell(0));
+			System.out.println(row.getCell(1));
+			System.out.println(row.getCell(2));
+			/*Iterator<Cell> cellIterator = row.cellIterator();
 			while (cellIterator.hasNext()) {
 				XSSFCell cell = (XSSFCell)cellIterator.next();
 				switch (cell.getCellType()) {
@@ -308,16 +311,16 @@ public class SampleUploadPortlet extends MVCPortlet {
                 default:
                     System.out.println();
 				}
-				/*if(cell.getCellType() != Cell.CELL_TYPE_BLANK){
+				if(cell.getCellType() != Cell.CELL_TYPE_BLANK){
 					System.out.println(cell.getStringCellValue());
 				}
 				else{
 					errorStr+="Empty value in:"+ cell.getRowIndex()+cell.getColumnIndex();
 					System.out.println("Empty value in:"+ cell.getRowIndex()+cell.getColumnIndex());
 				}
-				*/
 				
-			}
+				
+			}*/
 		}
 		if(errorStr!=""){
 			System.out.println("errorStr"+errorStr);
@@ -338,7 +341,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 	    return true;
 	}
 
-	private void readXLSXFile(InputStream inputStream, ActionRequest request) throws IOException, SystemException {
+	private void readXLSXFiles(InputStream inputStream, ActionRequest request) throws IOException, SystemException {
 		// TODO Auto-generated method stub
 		System.out.println("readXLSXFile");
 
@@ -593,10 +596,12 @@ public class SampleUploadPortlet extends MVCPortlet {
 					column_missing += "countryOfOrigin, ";
 				}
 				
-				request.setAttribute("xls-header-not-defined-columns-missing", column_missing);
-				SessionMessages.add(request, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
-				workbook.close();
-				return;
+				if(column_missing != ""){
+					request.setAttribute("xls-header-not-defined-columns-missing", column_missing);
+					SessionMessages.add(request, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
+					workbook.close();
+					return;
+				}
 					
 					
 
