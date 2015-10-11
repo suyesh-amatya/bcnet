@@ -1,45 +1,62 @@
 <%@ include file="/html/init.jsp" %>
 
-<%
-if(renderRequest.getAttribute("error") != null) {
-	System.out.println(renderRequest.getAttribute("error"));
-	out.println(renderRequest.getAttribute("error"));
-%>
-<a href="<portlet:resourceURL><portlet:param name="<%=Constants.CMD%>" value="error" />
-				<%-- <portlet:param name="error" value='<%= renderRequest.getAttribute("error").toString() %>' /> --%>
-				</portlet:resourceURL>">Download Disease Matrix as XLSX File</a>
+<liferay-ui:error key="file-upload-wrong-type" message="file-upload-wrong-type"/>	
+
+<liferay-ui:error key="file-not-found" message="file-not-found"/>
+
+<liferay-ui:error key='file-size-zero' message="file-size-zero"/>
+
+<liferay-ui:error key='xls-sheet-not-found' message="xls-sheet-not-found"/>
+
+<liferay-ui:error key='xls-headers-not-string' message="xls-headers-not-string"/>
+
 
 <%
-}
-	List<BiobankGeneralInformation> biobanks = BiobankGeneralInformationLocalServiceUtil.getAllBiobankGeneralInformations();
+	if(renderRequest.getAttribute("error") != null) {
+%>
+
+		<portlet:resourceURL var="downloadErrorReportURL">
+			<portlet:param name="<%=Constants.CMD%>" value="error" />
+			<portlet:param name="errorFileName" value="<%=renderRequest.getAttribute(\"errorFileName\").toString() %>"/>
+		</portlet:resourceURL>
+		<div class="alert alert-error">
+			<aui:a href="<%=downloadErrorReportURL.toString()%>">Download Error Report</aui:a>
+		</div>	
+
+<%
+	}
+
 
 	if(renderRequest.getAttribute("xls-header-not-defined-columns-missing") != null) {
-		%>
+%>
 		<div class="alert alert-error">
 			<liferay-ui:message key='xls-header-not-defined-columns-missing' arguments='<%= renderRequest.getAttribute("xls-header-not-defined-columns-missing") %>'/>
 		</div>
-		<%
+<%
 	}
 
 	if(renderRequest.getAttribute("xls-header-not-defined-extra-columns") != null) {
-		%>
+%>
 		<div class="alert alert-error">
 			<liferay-ui:message key='xls-header-not-defined-extra-columns' arguments='<%= renderRequest.getAttribute("xls-header-not-defined-extra-columns") %>'/>
 		</div>
-		<%
+<%
 	}
 	
 	if(renderRequest.getAttribute("xls-row-import-errors") != null) {
-		%>
-		<div style="margin:10px; padding: 10px; background-color: #0066FF;opacity: 0.4;filter: alpha(opacity=40);color: #ffffff;" >
+%>
+		<!-- <div style="margin:10px; padding: 10px; background-color: #0066FF;opacity: 0.4;filter: alpha(opacity=40);color: #ffffff;" > -->
+		<div class="alert alert-error">
 			<liferay-ui:message key='xls-row-import-errors' arguments='<%= renderRequest.getAttribute("xls-row-import-errors") %>'/>
 		</div>
-		<%
+<%
 	}
+	
+	List<BiobankGeneralInformation> biobanks = BiobankGeneralInformationLocalServiceUtil.getAllBiobankGeneralInformations();
 	
 %>
 
-<liferay-ui:error key="file-upload-wrong-type" message="file-upload-wrong-type"></liferay-ui:error>	
+
 
 
 

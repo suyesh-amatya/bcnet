@@ -144,8 +144,8 @@
 		<column name="anatomicalPartOntologyDescription" type="String" />
 		<column name="anatomicalPartFreeText" type="String" />
 		<column name="sex" type="String" />
-		<column name="ageHigh" type="long" />
 		<column name="ageLow" type="long" />
+		<column name="ageHigh" type="long" />
 		<column name="ageUnit" type="String" />
 		<column name="diseaseOntology" type="String" />
 		<column name="diseaseOntologyVersion" type="String" />

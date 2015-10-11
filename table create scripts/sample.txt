@@ -1,4 +1,4 @@
-﻿CREATE TABLE IF NOT EXISTS `bcnet`.`sample` (
+CREATE TABLE IF NOT EXISTS `bcnet`.`sample` (
   `uuid_` varchar(75) NOT NULL,
   `sampleDbId` bigint(20) NOT NULL AUTO_INCREMENT,
   `sampleCollectionId` varchar(255) DEFAULT NULL,
@@ -15,8 +15,8 @@
   `anatomicalPartOntologyDescription` varchar(255) DEFAULT NULL COMMENT 'for the specified anatomicalPartOntology',
   `anatomicalPartFreeText` varchar(255) DEFAULT NULL,
   `sex` varchar(45) DEFAULT NULL,
-  `ageHigh` int(11) DEFAULT NULL,
   `ageLow` int(11) DEFAULT NULL,
+  `ageHigh` int(11) DEFAULT NULL,  
   `ageUnit` varchar(45) DEFAULT NULL,
   `diseaseOntology` varchar(255) DEFAULT NULL COMMENT '(from lookup table)',
   `diseaseOntologyVersion` varchar(255) DEFAULT NULL,
