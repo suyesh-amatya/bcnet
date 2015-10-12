@@ -6,6 +6,8 @@
 
 <liferay-ui:error key='file-size-zero' message="file-size-zero"/>
 
+<liferay-ui:error key='xls-sheet-no-data' message="xls-sheet-no-data"/>
+
 <liferay-ui:error key='xls-sheet-not-found' message="xls-sheet-not-found"/>
 
 <liferay-ui:error key='xls-headers-not-string' message="xls-headers-not-string"/>

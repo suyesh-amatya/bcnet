@@ -21,6 +21,7 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -253,13 +254,20 @@ public class SampleUploadPortlet extends MVCPortlet {
 		
 		// Get first sheet from the workbook
 		XSSFSheet sheet = workbook.getSheet("sample");
+		
 		if(sheet == null) {
 			SessionErrors.add(request, "xls-sheet-not-found");
-			System.err.println("No Sample Sheet found.");
+			System.err.println("No Sample sheet found.");
 			workbook.close();
 			return;
 		}
 
+		if(sheet.getPhysicalNumberOfRows() < 2){
+			SessionErrors.add(request, "xls-sheet-no-data");
+			System.err.println("Sample sheet seems to be empty.");
+			workbook.close();
+			return;
+		}
 		
 		Iterator<Row> rowIterator = sheet.rowIterator();
 		
@@ -298,7 +306,9 @@ public class SampleUploadPortlet extends MVCPortlet {
 		
 		while (rowIterator.hasNext()) {
 			XSSFRow row = (XSSFRow) rowIterator.next();
-
+			
+			
+			
 			int cellcounter = 0;
 			if (header) {
 				Iterator<Cell> cellIterator = row.cellIterator();
@@ -307,6 +317,525 @@ public class SampleUploadPortlet extends MVCPortlet {
 				
 				while (cellIterator.hasNext()) {
 					XSSFCell cell = (XSSFCell)cellIterator.next();
+					String cellHeaderTitle = null;
+					
+					try{
+						cellHeaderTitle = cell.getStringCellValue().trim();
+					}
+					catch(IllegalStateException e){
+						e.printStackTrace();
+						SessionErrors.add(request, "xls-headers-not-string");
+						System.err.println("Only string format are allowed for the headers in the excel file.");
+						workbook.close();
+						return;
+					}
+						
+					
+					switch(cellHeaderTitle){
+						case "sampleCollectionId":
+							//sampleCollectionId_column = cellcounter;
+							sampleCollectionId_column = cell.getColumnIndex();
+							break;
+						case "biobankId":
+							//biobankId_column = cellcounter;
+							//Not necessary to define this case. The biobankId is provided via the form.
+							biobankId_column = cell.getColumnIndex();
+							break;
+						case "hashedSampleId":
+							//hashedSampleId_column = cellcounter;
+							hashedSampleId_column = cell.getColumnIndex();
+							break;
+						case "hashedIndividualId":
+							//hashedIndividualId_column = cellcounter;
+							hashedIndividualId_column = cell.getColumnIndex();
+							break;
+						case "materialType":
+							//materialType_column = cellcounter;
+							materialType_column = cell.getColumnIndex();
+							break;
+						case "container":
+							//container_column = cellcounter;
+							container_column = cell.getColumnIndex();
+							break;
+						case "storageTemperature":
+							//storageTemperature_column = cellcounter;
+							storageTemperature_column = cell.getColumnIndex();
+							break;
+						case "sampledTime":
+							//sampledTime_column = cellcounter;
+							sampledTime_column = cell.getColumnIndex();
+							break;
+						case "anatomicalPartOntology":
+							//anatomicalPartOntology_column = cellcounter;
+							anatomicalPartOntology_column = cell.getColumnIndex();
+							break;
+						case "anatomicalPartOntologyVersion":
+							//anatomicalPartOntologyVersion_column = cellcounter;
+							anatomicalPartOntologyVersion_column = cell.getColumnIndex();
+							break;
+						case "anatomicalPartOntologyCode":
+							//anatomicalPartOntologyCode_column = cellcounter;
+							anatomicalPartOntologyCode_column = cell.getColumnIndex();
+							break;
+						case "anatomicalPartOntologyDescription":
+							//anatomicalPartOntologyDescription_column = cellcounter;
+							anatomicalPartOntologyDescription_column = cell.getColumnIndex();
+							break;
+						case "anatomicalPartFreeText":
+							//anatomicalPartFreeText_column = cellcounter;
+							anatomicalPartFreeText_column = cell.getColumnIndex();
+							break;
+						case "sex":
+							//sex_column = cellcounter;
+							sex_column = cell.getColumnIndex();
+							break;
+						case "ageLow":
+							//ageLow_column = cellcounter;
+							ageLow_column = cell.getColumnIndex();
+							break;
+						case "ageHigh":
+							//ageHigh_column = cellcounter;
+							ageHigh_column = cell.getColumnIndex();
+							break;
+						case "ageUnit":
+							//ageUnit_column = cellcounter;
+							ageUnit_column = cell.getColumnIndex();
+							break;
+						case "diseaseOntology":
+							//diseaseOntology_column = cellcounter;
+							diseaseOntology_column = cell.getColumnIndex();
+							break;
+						case "diseaseOntologyVersion":
+							//diseaseOntologyVersion_column = cellcounter;
+							diseaseOntologyVersion_column = cell.getColumnIndex();
+							break;
+						case "diseaseOntologyCode":
+							//diseaseOntologyCode_column = cellcounter;
+							diseaseOntologyCode_column = cell.getColumnIndex();
+							break;
+						case "diseaseOntologyDescription":
+							//diseaseOntologyDescription_column = cellcounter;
+							diseaseOntologyDescription_column = cell.getColumnIndex();
+							break;
+						case "diseaseFreeText":
+							//diseaseFreeText_column = cellcounter;
+							diseaseFreeText_column = cell.getColumnIndex();
+							break;
+						case "countryOfOrigin":
+							//countryOfOrigin_column = cellcounter;
+							countryOfOrigin_column = cell.getColumnIndex();
+							break;
+						default:
+							if(!extra_columns.equalsIgnoreCase("")) {
+								extra_columns += "; ";
+							}
+							extra_columns += cell.getStringCellValue().trim();
+							
+							System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+									+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUploadPortlet::readXLSXFile] "
+									+ "The field " + cell.getStringCellValue().trim() + " could not be mapped for header.");
+							break;
+					}
+					
+					System.out.println("Header: " + cellcounter + ":" + cell.getStringCellValue());
+					cellcounter++;
+					
+
+				}
+				
+				header = false;
+				if(!extra_columns.equalsIgnoreCase("")){
+					request.setAttribute("xls-header-not-defined-extra-columns", extra_columns);
+					SessionMessages.add(request, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
+					workbook.close();
+					return;
+				}
+				
+				if(sampleCollectionId_column < 0){
+					column_missing += "sampleCollectionId, ";
+				}
+				if(hashedSampleId_column < 0){
+					column_missing += "hashedSampleId, ";
+				}
+				if(hashedIndividualId_column < 0){
+					column_missing += "hashedIndividualId, ";
+				}
+				if (materialType_column < 0){
+					column_missing += "materialType, ";
+				}
+				if (container_column < 0){
+					column_missing += "container, ";
+				}
+				if (storageTemperature_column < 0){
+					column_missing += "storageTemperature, ";
+				}
+				if (sampledTime_column < 0){
+					column_missing += "sampledTime, ";
+				}
+				if (anatomicalPartOntology_column < 0){
+					column_missing += "anatomicalPartOntology, ";
+				}
+				if (anatomicalPartOntologyVersion_column < 0){
+					column_missing += "anatomicalPartOntologyVersion, ";
+				}
+				if (anatomicalPartOntologyCode_column < 0){
+					column_missing += "anatomicalPartOntologyCode, ";
+				}
+				if (anatomicalPartOntologyDescription_column < 0){
+					column_missing += "anatomicalPartOntologyDescription, ";
+				}
+				if (anatomicalPartFreeText_column < 0){
+					column_missing += "anatomicalPartFreeText, ";
+				}
+				if (sex_column < 0){
+					column_missing += "sex, ";
+				}
+				if (ageLow_column < 0){
+					column_missing += "ageLow, ";
+				}
+				if (ageHigh_column < 0){
+					column_missing += "ageHigh, ";
+				}
+				if (ageUnit_column < 0){
+					column_missing += "ageUnit, ";
+				}
+				if (diseaseOntology_column < 0){
+					column_missing += "diseaseOntology, ";
+				}
+				if (diseaseOntologyVersion_column < 0){
+					column_missing += "diseaseOntologyVersion, ";
+				}
+				if (diseaseOntologyCode_column < 0){
+					column_missing += "diseaseOntologyCode, ";
+				}
+				if (diseaseOntologyDescription_column < 0){
+					column_missing += "diseaseOntologyDescription, ";
+				}
+				if (diseaseFreeText_column < 0){
+					column_missing += "diseaseFreeText, ";
+				}
+				if (countryOfOrigin_column < 0){
+					column_missing += "countryOfOrigin, ";
+				}
+				
+				if(!column_missing.equalsIgnoreCase("")){
+					request.setAttribute("xls-header-not-defined-columns-missing", column_missing);
+					SessionMessages.add(request, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
+					workbook.close();
+					return;
+				}
+
+			}
+			else{
+
+				rowcount ++;
+
+				Sample sample = new SampleImpl();
+				sample.setUuid_(uuid_);
+				long sampleDbId = CounterLocalServiceUtil.increment();
+				sample.setSampleDbId(sampleDbId);
+				
+				//Try to add sampleCollectionId
+				String sampleCollectionId = fmt.formatCellValue(row.getCell(sampleCollectionId_column)).trim();
+				sample.setSampleCollectionId(sampleCollectionId);
+
+				//Try to add biobankId
+				//sample.setBiobankId(fmt.formatCellValue(row.getCell(biobankId_column)));
+				sample.setBiobankId(biobankId);
+
+				//Try to add hashedSampleId
+				String hashedSampleId = fmt.formatCellValue(row.getCell(hashedSampleId_column)).trim();
+				if(hashedSampleId.equalsIgnoreCase("")){
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+							+ " Problem adding hashedSampleId from row " + rowcount + " to the database.");
+					if(!rowerrors.equalsIgnoreCase("")) {
+						rowerrors += "; ";
+					}
+					rowerrors += rowcount;
+					errorStr += " The hashedSampleId from row " + rowcount + " is empty. \n";
+				}
+				else{
+					sample.setHashedSampleId(hashedSampleId);
+				}
+					
+				//Try to add hashedIndividualId
+				String hashedIndividualId = fmt.formatCellValue(row.getCell(hashedIndividualId_column)).trim();
+				sample.setHashedIndividualId(hashedIndividualId);
+
+				//Try to add materialType
+				String materialType = fmt.formatCellValue(row.getCell(materialType_column)).trim();
+				if(materialType.equalsIgnoreCase("")){
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+							+ " Problem adding materialType from row " + rowcount + " to the database.");
+					if(!rowerrors.equalsIgnoreCase("")) {
+						rowerrors += "; ";
+					}
+					rowerrors += rowcount;
+					errorStr += " The materialType from row " + rowcount + " is empty. \n";
+				}
+				else{
+					sample.setMaterialType(materialType);
+				}
+					
+				//Try to add container
+				String container = fmt.formatCellValue(row.getCell(container_column)).trim();
+				sample.setContainer(container);
+
+				//Try to add storageTemperature
+				String storageTemperature = fmt.formatCellValue(row.getCell(storageTemperature_column)).trim();
+				sample.setStorageTemperature(storageTemperature);
+
+				//Try to add sampledTime
+				String sampledTime = fmt.formatCellValue(row.getCell(sampledTime_column)).trim();
+				if(!sampledTime.equalsIgnoreCase("")){
+					try{
+						Cell sampledTimeCell = row.getCell(sampledTime_column);
+						if(sampledTimeCell.getCellType() == Cell.CELL_TYPE_NUMERIC){
+							if(DateUtil.isCellDateFormatted(sampledTimeCell)){
+								sample.setSampledTime(sdf.parse(sdf.format(sampledTimeCell.getDateCellValue())));
+							}
+							else{
+								System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+										+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+										+ " Problem adding sampledTime from row " + rowcount + " to the database.");
+								if(!rowerrors.equalsIgnoreCase("")) {
+									rowerrors += "; ";
+								}
+								rowerrors += rowcount;
+								errorStr += " The sampledTime from row " + rowcount + " has incorrect format. \n";
+							}
+						}
+						else{
+							System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+									+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+									+ " Problem adding sampledTime from row " + rowcount + " to the database.");
+							if(!rowerrors.equalsIgnoreCase("")) {
+								rowerrors += "; ";
+							}
+							rowerrors += rowcount;
+							errorStr += " The sampledTime from row " + rowcount + " is not in numeric format. \n";
+						}
+					}
+					catch(IllegalStateException | ParseException  e){
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+								+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+								+ " Problem adding sampledTime from row " + rowcount + " to the database.");
+						e.printStackTrace();
+						if(!rowerrors.equalsIgnoreCase("")) {
+							rowerrors += "; ";
+						}
+						rowerrors += rowcount;
+						errorStr += " The sampledTime from row " + rowcount + " has incorrect format. \n";
+					}
+				}
+				
+
+				//Try to add anatomicalPartOntology
+				String anatomicalPartOntology = fmt.formatCellValue(row.getCell(anatomicalPartOntology_column)).trim();
+				sample.setAnatomicalPartOntology(anatomicalPartOntology);
+
+				//Try to add anatomicalPartOntologyVersion
+				String anatomicalPartOntologyVersion = fmt.formatCellValue(row.getCell(anatomicalPartOntologyVersion_column)).trim();
+				sample.setAnatomicalPartOntologyVersion(anatomicalPartOntologyVersion);
+
+				//Try to add anatomicalPartOntologyCode
+				String anatomicalPartOntologyCode = fmt.formatCellValue(row.getCell(anatomicalPartOntologyCode_column)).trim();
+				sample.setAnatomicalPartOntologyCode(anatomicalPartOntologyCode);
+
+				//Try to add anatomicalPartOntologyDescription
+				String anatomicalPartOntologyDescription = fmt.formatCellValue(row.getCell(anatomicalPartOntologyDescription_column)).trim();
+				sample.setAnatomicalPartOntologyDescription(anatomicalPartOntologyDescription);
+
+				//Try to add anatomicalPartFreeText
+				String anatomicalPartFreeText = fmt.formatCellValue(row.getCell(anatomicalPartFreeText_column)).trim();
+				sample.setAnatomicalPartFreeText(anatomicalPartFreeText);
+	
+				//Try to add sex
+				String sex = fmt.formatCellValue(row.getCell(sex_column)).trim();
+				sample.setSex(sex);
+				
+				//Try to add ageLow
+				try{
+					String ageLowValue = fmt.formatCellValue(row.getCell(ageLow_column)).trim();
+					if(!ageLowValue.equals("")){
+						long ageLow = Long.valueOf(ageLowValue);
+						sample.setAgeLow(ageLow);
+					}
+				}
+				catch(NumberFormatException e){
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+							+ " Problem adding ageLow from row " + rowcount + " to the database.");
+					e.printStackTrace();
+					if(!rowerrors.equalsIgnoreCase("")) {
+						rowerrors += "; ";
+					}
+					rowerrors += rowcount;
+					errorStr += " The ageLow from row " + rowcount + " is not a number. \n";
+				}
+
+				//Try to add ageHigh
+				try{
+					String ageHighValue = fmt.formatCellValue(row.getCell(ageHigh_column)).trim();
+					if(!ageHighValue.equals("")){
+						long ageHigh = Long.valueOf(ageHighValue);
+						sample.setAgeHigh(ageHigh);
+					}
+				}
+				catch(NumberFormatException e){
+					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+							+ " Problem adding ageHigh from row " + rowcount + " to the database.");
+					e.printStackTrace();
+					if(!rowerrors.equalsIgnoreCase("")) {
+						rowerrors += "; ";
+					}
+					rowerrors += rowcount;
+					errorStr += " The ageHigh from row " + rowcount + " is not a number. \n";
+				}
+
+				//Try to add ageUnit
+				String ageUnit = fmt.formatCellValue(row.getCell(ageUnit_column)).trim();
+				sample.setAgeUnit(ageUnit);
+
+				//Try to add diseaseOntology
+				String diseaseOntology = fmt.formatCellValue(row.getCell(diseaseOntology_column)).trim();
+				sample.setDiseaseOntology(diseaseOntology);
+
+				//Try to add diseaseOntologyVersion
+				String diseaseOntologyVersion = fmt.formatCellValue(row.getCell(diseaseOntologyVersion_column)).trim();
+				sample.setDiseaseOntologyVersion(diseaseOntologyVersion);
+
+				//Try to add diseaseOntologyCode
+				String diseaseOntologyCode = fmt.formatCellValue(row.getCell(diseaseOntologyCode_column)).trim();
+				sample.setDiseaseOntologyCode(diseaseOntologyCode);
+
+				//Try to add diseaseOntologyDescription
+				String diseaseOntologyDescription = fmt.formatCellValue(row.getCell(diseaseOntologyDescription_column)).trim();
+				sample.setDiseaseOntologyDescription(diseaseOntologyDescription);
+
+				//Try to add diseaseFreeText
+				String diseaseFreeText = fmt.formatCellValue(row.getCell(diseaseFreeText_column)).trim();
+				sample.setDiseaseFreeText(diseaseFreeText);
+				
+				//Try to add countryOfOrigin
+				String countryOfOrigin = fmt.formatCellValue(row.getCell(countryOfOrigin_column)).trim();
+				sample.setCountryOfOrigin(countryOfOrigin);
+
+				sampleList.add(sample);
+				
+				System.out.println(sample);
+
+			}
+			
+		
+		}
+		
+		if(errorStr.trim().equals("")){
+			for(Sample sample : sampleList){
+				SampleLocalServiceUtil.addSample(sample);
+				
+			}
+			
+			if(importLog){
+				SampleImportLog sampleImportLog = new SampleImportLogImpl();
+				sampleImportLog.setUuid(uuid_);
+				long importId = CounterLocalServiceUtil.increment();
+				sampleImportLog.setImportId(importId);
+				sampleImportLog.setFileName(sourceFileName);
+				sampleImportLog.setUserId(PortalUtil.getUserId(request));
+				sampleImportLog.setDateOfImport(new Date());
+				SampleImportLogLocalServiceUtil.addSampleImportLog(sampleImportLog);
+				importLog = false;
+			}
+		}
+		else{
+			request.setAttribute("error", errorStr);
+			SessionErrors.add(request, "xls-import-errors");
+			request.setAttribute("errorFileName", sourceFileName);
+		}
+		
+		if(!rowerrors.equalsIgnoreCase("")) {
+			request.setAttribute("xls-row-import-errors", rowerrors);
+			SessionMessages.add(request, SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
+		}
+		
+		workbook.close();
+		
+		return;
+	}
+
+	private void readXLSFile(InputStream inputStream, ActionRequest request) throws IOException, SystemException {
+		// TODO Auto-generated method stub
+		System.out.println("readXLSFile");
+
+		HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+		
+		// Get first sheet from the workbook
+		HSSFSheet sheet = workbook.getSheet("sample");
+		
+		if(sheet == null) {
+			SessionErrors.add(request, "xls-sheet-not-found");
+			System.err.println("No Sample Sheet found.");
+			workbook.close();
+			return;
+		}
+		
+		if(sheet.getPhysicalNumberOfRows() < 2){
+			SessionErrors.add(request, "xls-sheet-no-data");
+			System.err.println("Sample sheet seems to be empty.");
+			workbook.close();
+			return;
+		}
+
+		Iterator<Row> rowIterator = sheet.rowIterator();
+		
+		errorStr = "";
+		boolean header = true;
+		boolean importLog = true;
+		int rowcount = 1;
+		String rowerrors = "";
+		String uuid_ = PortalUUIDUtil.generate();
+		List<Sample> sampleList = new ArrayList<Sample>();
+
+		int sampleCollectionId_column = -1;
+		int biobankId_column = -1;
+		int hashedSampleId_column = -1;
+		int hashedIndividualId_column = -1;
+		int materialType_column = -1;
+		int container_column = -1;
+		int storageTemperature_column = -1;
+		int sampledTime_column = -1;
+		int anatomicalPartOntology_column = -1;
+		int anatomicalPartOntologyVersion_column = -1;
+		int anatomicalPartOntologyCode_column = -1;
+		int anatomicalPartOntologyDescription_column = -1;
+		int anatomicalPartFreeText_column = -1;
+		int sex_column = -1;
+		int ageHigh_column = -1;
+		int ageLow_column = -1;
+		int ageUnit_column = -1;
+		int diseaseOntology_column = -1;
+		int diseaseOntologyVersion_column = -1;
+		int diseaseOntologyCode_column = -1;
+		int diseaseOntologyDescription_column = -1;
+		int diseaseFreeText_column = -1;
+		int countryOfOrigin_column = -1;
+		
+		
+		while (rowIterator.hasNext()) {
+			HSSFRow row = (HSSFRow) rowIterator.next();
+
+			int cellcounter = 0;
+			if (header) {
+				Iterator<Cell> cellIterator = row.cellIterator();
+				String column_missing = "";
+				String extra_columns = "";
+				
+				while (cellIterator.hasNext()) {
+					HSSFCell cell = (HSSFCell)cellIterator.next();
 					String cellHeaderTitle = null;
 					
 					try{
@@ -749,11 +1278,6 @@ public class SampleUploadPortlet extends MVCPortlet {
 		workbook.close();
 		
 		return;
-	}
-
-	private void readXLSFile(InputStream inputStream, ActionRequest request) {
-		// TODO Auto-generated method stub
-		System.out.println("readXLSFile");
 	}
 	
 	
