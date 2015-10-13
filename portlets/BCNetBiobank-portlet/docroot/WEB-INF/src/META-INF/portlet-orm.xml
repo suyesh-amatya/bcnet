@@ -75,8 +75,8 @@
 			<basic name="anatomicalPartOntologyDescription" />
 			<basic name="anatomicalPartFreeText" />
 			<basic name="sex" />
-			<basic name="ageHigh" />
 			<basic name="ageLow" />
+			<basic name="ageHigh" />
 			<basic name="ageUnit" />
 			<basic name="diseaseOntology" />
 			<basic name="diseaseOntologyVersion" />

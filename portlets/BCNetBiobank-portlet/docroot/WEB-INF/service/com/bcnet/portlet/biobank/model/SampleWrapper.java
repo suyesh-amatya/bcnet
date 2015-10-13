@@ -68,8 +68,8 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 			getAnatomicalPartOntologyDescription());
 		attributes.put("anatomicalPartFreeText", getAnatomicalPartFreeText());
 		attributes.put("sex", getSex());
-		attributes.put("ageHigh", getAgeHigh());
 		attributes.put("ageLow", getAgeLow());
+		attributes.put("ageHigh", getAgeHigh());
 		attributes.put("ageUnit", getAgeUnit());
 		attributes.put("diseaseOntology", getDiseaseOntology());
 		attributes.put("diseaseOntologyVersion", getDiseaseOntologyVersion());
@@ -185,16 +185,16 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 			setSex(sex);
 		}
 
-		Long ageHigh = (Long)attributes.get("ageHigh");
-
-		if (ageHigh != null) {
-			setAgeHigh(ageHigh);
-		}
-
 		Long ageLow = (Long)attributes.get("ageLow");
 
 		if (ageLow != null) {
 			setAgeLow(ageLow);
+		}
+
+		Long ageHigh = (Long)attributes.get("ageHigh");
+
+		if (ageHigh != null) {
+			setAgeHigh(ageHigh);
 		}
 
 		String ageUnit = (String)attributes.get("ageUnit");
@@ -589,26 +589,6 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	}
 
 	/**
-	* Returns the age high of this sample.
-	*
-	* @return the age high of this sample
-	*/
-	@Override
-	public long getAgeHigh() {
-		return _sample.getAgeHigh();
-	}
-
-	/**
-	* Sets the age high of this sample.
-	*
-	* @param ageHigh the age high of this sample
-	*/
-	@Override
-	public void setAgeHigh(long ageHigh) {
-		_sample.setAgeHigh(ageHigh);
-	}
-
-	/**
 	* Returns the age low of this sample.
 	*
 	* @return the age low of this sample
@@ -626,6 +606,26 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	@Override
 	public void setAgeLow(long ageLow) {
 		_sample.setAgeLow(ageLow);
+	}
+
+	/**
+	* Returns the age high of this sample.
+	*
+	* @return the age high of this sample
+	*/
+	@Override
+	public long getAgeHigh() {
+		return _sample.getAgeHigh();
+	}
+
+	/**
+	* Sets the age high of this sample.
+	*
+	* @param ageHigh the age high of this sample
+	*/
+	@Override
+	public void setAgeHigh(long ageHigh) {
+		_sample.setAgeHigh(ageHigh);
 	}
 
 	/**

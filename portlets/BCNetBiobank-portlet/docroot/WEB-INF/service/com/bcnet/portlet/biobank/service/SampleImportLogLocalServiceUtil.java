@@ -275,6 +275,11 @@ public class SampleImportLogLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.bcnet.portlet.biobank.model.SampleImportLog getSampleImportLogByUuid(
+		java.lang.String uuid) {
+		return getService().getSampleImportLogByUuid(uuid);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

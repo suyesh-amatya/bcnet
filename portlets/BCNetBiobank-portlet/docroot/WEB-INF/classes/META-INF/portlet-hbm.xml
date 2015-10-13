@@ -72,8 +72,8 @@
 		<property name="anatomicalPartOntologyDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="anatomicalPartFreeText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sex" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ageHigh" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="ageLow" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ageHigh" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="ageUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseaseOntology" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="diseaseOntologyVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />

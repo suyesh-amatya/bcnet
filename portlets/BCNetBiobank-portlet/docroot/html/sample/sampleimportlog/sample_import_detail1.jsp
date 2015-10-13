@@ -16,10 +16,11 @@ div.dt-button-collection{
 	String fileName = ParamUtil.getString(request, "fileName");
 
 	List<Sample> samplesByuuid = SampleLocalServiceUtil.getSamplesByuuid(uuid);
+	Date dateOfImport = SampleImportLogLocalServiceUtil.getSampleImportLogByUuid(uuid).getDateOfImport();
 	String biobankName = BiobankGeneralInformationLocalServiceUtil.getBiobankByBiobankId(samplesByuuid.get(0).getBiobankId()).getBiobankName();
 %>
 
-<h6>Samples Imported in a batch from file <%=fileName%> for <%=biobankName %></h6>
+<h6>Samples Imported in a batch from file <%=fileName%> for <%=biobankName %> on <%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(dateOfImport) %></h6>
 
 
 <div id="sample-import-detail">

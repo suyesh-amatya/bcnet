@@ -71,10 +71,10 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		sb.append(anatomicalPartFreeText);
 		sb.append(", sex=");
 		sb.append(sex);
-		sb.append(", ageHigh=");
-		sb.append(ageHigh);
 		sb.append(", ageLow=");
 		sb.append(ageLow);
+		sb.append(", ageHigh=");
+		sb.append(ageHigh);
 		sb.append(", ageUnit=");
 		sb.append(ageUnit);
 		sb.append(", diseaseOntology=");
@@ -205,8 +205,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 			sampleImpl.setSex(sex);
 		}
 
-		sampleImpl.setAgeHigh(ageHigh);
 		sampleImpl.setAgeLow(ageLow);
+		sampleImpl.setAgeHigh(ageHigh);
 
 		if (ageUnit == null) {
 			sampleImpl.setAgeUnit(StringPool.BLANK);
@@ -280,8 +280,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		anatomicalPartOntologyDescription = objectInput.readUTF();
 		anatomicalPartFreeText = objectInput.readUTF();
 		sex = objectInput.readUTF();
-		ageHigh = objectInput.readLong();
 		ageLow = objectInput.readLong();
+		ageHigh = objectInput.readLong();
 		ageUnit = objectInput.readUTF();
 		diseaseOntology = objectInput.readUTF();
 		diseaseOntologyVersion = objectInput.readUTF();
@@ -396,8 +396,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 			objectOutput.writeUTF(sex);
 		}
 
-		objectOutput.writeLong(ageHigh);
 		objectOutput.writeLong(ageLow);
+		objectOutput.writeLong(ageHigh);
 
 		if (ageUnit == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -465,8 +465,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	public String anatomicalPartOntologyDescription;
 	public String anatomicalPartFreeText;
 	public String sex;
-	public long ageHigh;
 	public long ageLow;
+	public long ageHigh;
 	public String ageUnit;
 	public String diseaseOntology;
 	public String diseaseOntologyVersion;

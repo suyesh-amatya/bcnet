@@ -336,10 +336,6 @@ public class BiobankAttributeListsClp extends BaseModelImpl<BiobankAttributeList
 		}
 	}
 
-	public Class<?> getClpSerializerClass() {
-		return _clpSerializerClass;
-	}
-
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -397,5 +393,4 @@ public class BiobankAttributeListsClp extends BaseModelImpl<BiobankAttributeList
 	private String _attributeListName;
 	private String _attributeListValue;
 	private BaseModel<?> _biobankAttributeListsRemoteModel;
-	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

@@ -46,8 +46,8 @@
 		<field name="anatomicalPartOntologyDescription" type="String" />
 		<field name="anatomicalPartFreeText" type="String" />
 		<field name="sex" type="String" />
-		<field name="ageHigh" type="long" />
 		<field name="ageLow" type="long" />
+		<field name="ageHigh" type="long" />
 		<field name="ageUnit" type="String" />
 		<field name="diseaseOntology" type="String" />
 		<field name="diseaseOntologyVersion" type="String" />

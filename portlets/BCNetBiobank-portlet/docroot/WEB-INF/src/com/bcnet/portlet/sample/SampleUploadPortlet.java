@@ -3,7 +3,6 @@ package com.bcnet.portlet.sample;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -19,7 +18,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -43,7 +41,6 @@ import com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -252,7 +249,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 		
-		// Get first sheet from the workbook
+		// Get the sample sheet from the workbook
 		XSSFSheet sheet = workbook.getSheet("sample");
 		
 		if(sheet == null) {
@@ -773,23 +770,23 @@ public class SampleUploadPortlet extends MVCPortlet {
 
 		HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
 		
-		// Get first sheet from the workbook
+		// Get the sample sheet from the workbook
 		HSSFSheet sheet = workbook.getSheet("sample");
 		
 		if(sheet == null) {
 			SessionErrors.add(request, "xls-sheet-not-found");
-			System.err.println("No Sample Sheet found.");
+			System.err.println("No Sample sheet found.");
 			workbook.close();
 			return;
 		}
-		
+
 		if(sheet.getPhysicalNumberOfRows() < 2){
 			SessionErrors.add(request, "xls-sheet-no-data");
 			System.err.println("Sample sheet seems to be empty.");
 			workbook.close();
 			return;
 		}
-
+		
 		Iterator<Row> rowIterator = sheet.rowIterator();
 		
 		errorStr = "";
@@ -827,7 +824,9 @@ public class SampleUploadPortlet extends MVCPortlet {
 		
 		while (rowIterator.hasNext()) {
 			HSSFRow row = (HSSFRow) rowIterator.next();
-
+			
+			
+			
 			int cellcounter = 0;
 			if (header) {
 				Iterator<Cell> cellIterator = row.cellIterator();
@@ -1177,8 +1176,11 @@ public class SampleUploadPortlet extends MVCPortlet {
 				
 				//Try to add ageLow
 				try{
-					long ageLow = Long.valueOf(fmt.formatCellValue(row.getCell(ageLow_column)).trim());
-					sample.setAgeLow(ageLow);
+					String ageLowValue = fmt.formatCellValue(row.getCell(ageLow_column)).trim();
+					if(!ageLowValue.equals("")){
+						long ageLow = Long.valueOf(ageLowValue);
+						sample.setAgeLow(ageLow);
+					}
 				}
 				catch(NumberFormatException e){
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
@@ -1194,8 +1196,11 @@ public class SampleUploadPortlet extends MVCPortlet {
 
 				//Try to add ageHigh
 				try{
-					long ageHigh = Long.valueOf(fmt.formatCellValue(row.getCell(ageHigh_column)).trim());
-					sample.setAgeHigh(ageHigh);
+					String ageHighValue = fmt.formatCellValue(row.getCell(ageHigh_column)).trim();
+					if(!ageHighValue.equals("")){
+						long ageHigh = Long.valueOf(ageHighValue);
+						sample.setAgeHigh(ageHigh);
+					}
 				}
 				catch(NumberFormatException e){
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
@@ -1243,7 +1248,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 
 			}
 			
-
+		
 		}
 		
 		if(errorStr.trim().equals("")){

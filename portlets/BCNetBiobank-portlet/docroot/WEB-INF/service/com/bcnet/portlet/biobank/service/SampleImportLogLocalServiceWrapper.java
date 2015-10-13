@@ -289,6 +289,12 @@ public class SampleImportLogLocalServiceWrapper
 			arguments);
 	}
 
+	@Override
+	public com.bcnet.portlet.biobank.model.SampleImportLog getSampleImportLogByUuid(
+		java.lang.String uuid) {
+		return _sampleImportLogLocalService.getSampleImportLogByUuid(uuid);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

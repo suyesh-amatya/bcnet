@@ -300,20 +300,6 @@ public interface SampleModel extends BaseModel<Sample> {
 	public void setSex(String sex);
 
 	/**
-	 * Returns the age high of this sample.
-	 *
-	 * @return the age high of this sample
-	 */
-	public long getAgeHigh();
-
-	/**
-	 * Sets the age high of this sample.
-	 *
-	 * @param ageHigh the age high of this sample
-	 */
-	public void setAgeHigh(long ageHigh);
-
-	/**
 	 * Returns the age low of this sample.
 	 *
 	 * @return the age low of this sample
@@ -326,6 +312,20 @@ public interface SampleModel extends BaseModel<Sample> {
 	 * @param ageLow the age low of this sample
 	 */
 	public void setAgeLow(long ageLow);
+
+	/**
+	 * Returns the age high of this sample.
+	 *
+	 * @return the age high of this sample
+	 */
+	public long getAgeHigh();
+
+	/**
+	 * Sets the age high of this sample.
+	 *
+	 * @param ageHigh the age high of this sample
+	 */
+	public void setAgeHigh(long ageHigh);
 
 	/**
 	 * Returns the age unit of this sample.
@@ -469,19 +469,19 @@ public interface SampleModel extends BaseModel<Sample> {
 	public Object clone();
 
 	@Override
-	public int compareTo(com.bcnet.portlet.biobank.model.Sample sample);
+	public int compareTo(Sample sample);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<com.bcnet.portlet.biobank.model.Sample> toCacheModel();
+	public CacheModel<Sample> toCacheModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.Sample toEscapedModel();
+	public Sample toEscapedModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.Sample toUnescapedModel();
+	public Sample toUnescapedModel();
 
 	@Override
 	public String toString();

@@ -14,7 +14,10 @@
 
 package com.bcnet.portlet.biobank.service.impl;
 
+import com.bcnet.portlet.biobank.NoSuchSampleImportLogException;
+import com.bcnet.portlet.biobank.model.SampleImportLog;
 import com.bcnet.portlet.biobank.service.base.SampleImportLogLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the sample import log local service.
@@ -37,4 +40,17 @@ public class SampleImportLogLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil} to access the sample import log local service.
 	 */
+	
+	public SampleImportLog getSampleImportLogByUuid(String uuid){
+		try {
+			return sampleImportLogPersistence.findByUuid_First(uuid, null);
+		} catch (NoSuchSampleImportLogException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

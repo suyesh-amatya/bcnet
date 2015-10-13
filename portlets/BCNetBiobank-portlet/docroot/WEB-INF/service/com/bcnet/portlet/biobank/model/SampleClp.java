@@ -92,8 +92,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 			getAnatomicalPartOntologyDescription());
 		attributes.put("anatomicalPartFreeText", getAnatomicalPartFreeText());
 		attributes.put("sex", getSex());
-		attributes.put("ageHigh", getAgeHigh());
 		attributes.put("ageLow", getAgeLow());
+		attributes.put("ageHigh", getAgeHigh());
 		attributes.put("ageUnit", getAgeUnit());
 		attributes.put("diseaseOntology", getDiseaseOntology());
 		attributes.put("diseaseOntologyVersion", getDiseaseOntologyVersion());
@@ -209,16 +209,16 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 			setSex(sex);
 		}
 
-		Long ageHigh = (Long)attributes.get("ageHigh");
-
-		if (ageHigh != null) {
-			setAgeHigh(ageHigh);
-		}
-
 		Long ageLow = (Long)attributes.get("ageLow");
 
 		if (ageLow != null) {
 			setAgeLow(ageLow);
+		}
+
+		Long ageHigh = (Long)attributes.get("ageHigh");
+
+		if (ageHigh != null) {
+			setAgeHigh(ageHigh);
 		}
 
 		String ageUnit = (String)attributes.get("ageUnit");
@@ -648,29 +648,6 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	}
 
 	@Override
-	public long getAgeHigh() {
-		return _ageHigh;
-	}
-
-	@Override
-	public void setAgeHigh(long ageHigh) {
-		_ageHigh = ageHigh;
-
-		if (_sampleRemoteModel != null) {
-			try {
-				Class<?> clazz = _sampleRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setAgeHigh", long.class);
-
-				method.invoke(_sampleRemoteModel, ageHigh);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
 	public long getAgeLow() {
 		return _ageLow;
 	}
@@ -686,6 +663,29 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 				Method method = clazz.getMethod("setAgeLow", long.class);
 
 				method.invoke(_sampleRemoteModel, ageLow);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getAgeHigh() {
+		return _ageHigh;
+	}
+
+	@Override
+	public void setAgeHigh(long ageHigh) {
+		_ageHigh = ageHigh;
+
+		if (_sampleRemoteModel != null) {
+			try {
+				Class<?> clazz = _sampleRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAgeHigh", long.class);
+
+				method.invoke(_sampleRemoteModel, ageHigh);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -945,8 +945,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		clone.setAnatomicalPartOntologyDescription(getAnatomicalPartOntologyDescription());
 		clone.setAnatomicalPartFreeText(getAnatomicalPartFreeText());
 		clone.setSex(getSex());
-		clone.setAgeHigh(getAgeHigh());
 		clone.setAgeLow(getAgeLow());
+		clone.setAgeHigh(getAgeHigh());
 		clone.setAgeUnit(getAgeUnit());
 		clone.setDiseaseOntology(getDiseaseOntology());
 		clone.setDiseaseOntologyVersion(getDiseaseOntologyVersion());
@@ -995,10 +995,6 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		}
 	}
 
-	public Class<?> getClpSerializerClass() {
-		return _clpSerializerClass;
-	}
-
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -1040,10 +1036,10 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getAnatomicalPartFreeText());
 		sb.append(", sex=");
 		sb.append(getSex());
-		sb.append(", ageHigh=");
-		sb.append(getAgeHigh());
 		sb.append(", ageLow=");
 		sb.append(getAgeLow());
+		sb.append(", ageHigh=");
+		sb.append(getAgeHigh());
 		sb.append(", ageUnit=");
 		sb.append(getAgeUnit());
 		sb.append(", diseaseOntology=");
@@ -1136,12 +1132,12 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getSex());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>ageHigh</column-name><column-value><![CDATA[");
-		sb.append(getAgeHigh());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>ageLow</column-name><column-value><![CDATA[");
 		sb.append(getAgeLow());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ageHigh</column-name><column-value><![CDATA[");
+		sb.append(getAgeHigh());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ageUnit</column-name><column-value><![CDATA[");
@@ -1193,8 +1189,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _anatomicalPartOntologyDescription;
 	private String _anatomicalPartFreeText;
 	private String _sex;
-	private long _ageHigh;
 	private long _ageLow;
+	private long _ageHigh;
 	private String _ageUnit;
 	private String _diseaseOntology;
 	private String _diseaseOntologyVersion;
@@ -1203,5 +1199,4 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _diseaseFreeText;
 	private String _countryOfOrigin;
 	private BaseModel<?> _sampleRemoteModel;
-	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

@@ -80,8 +80,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			{ "anatomicalPartOntologyDescription", Types.VARCHAR },
 			{ "anatomicalPartFreeText", Types.VARCHAR },
 			{ "sex", Types.VARCHAR },
-			{ "ageHigh", Types.BIGINT },
 			{ "ageLow", Types.BIGINT },
+			{ "ageHigh", Types.BIGINT },
 			{ "ageUnit", Types.VARCHAR },
 			{ "diseaseOntology", Types.VARCHAR },
 			{ "diseaseOntologyVersion", Types.VARCHAR },
@@ -90,7 +90,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			{ "diseaseFreeText", Types.VARCHAR },
 			{ "countryOfOrigin", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sample (uuid_ VARCHAR(75) null,sampleDbId LONG not null primary key,sampleCollectionId VARCHAR(75) null,biobankId VARCHAR(75) null,hashedSampleId VARCHAR(75) null,hashedIndividualId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime DATE null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartOntologyDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageHigh LONG,ageLow LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseOntologyDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null,countryOfOrigin VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sample (uuid_ VARCHAR(75) null,sampleDbId LONG not null primary key,sampleCollectionId VARCHAR(75) null,biobankId VARCHAR(75) null,hashedSampleId VARCHAR(75) null,hashedIndividualId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime DATE null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartOntologyDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageLow LONG,ageHigh LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseOntologyDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null,countryOfOrigin VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sample";
 	public static final String ORDER_BY_JPQL = " ORDER BY sample.sampleDbId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sample.sampleDbId ASC";
@@ -138,8 +138,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		model.setAnatomicalPartOntologyDescription(soapModel.getAnatomicalPartOntologyDescription());
 		model.setAnatomicalPartFreeText(soapModel.getAnatomicalPartFreeText());
 		model.setSex(soapModel.getSex());
-		model.setAgeHigh(soapModel.getAgeHigh());
 		model.setAgeLow(soapModel.getAgeLow());
+		model.setAgeHigh(soapModel.getAgeHigh());
 		model.setAgeUnit(soapModel.getAgeUnit());
 		model.setDiseaseOntology(soapModel.getDiseaseOntology());
 		model.setDiseaseOntologyVersion(soapModel.getDiseaseOntologyVersion());
@@ -230,8 +230,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			getAnatomicalPartOntologyDescription());
 		attributes.put("anatomicalPartFreeText", getAnatomicalPartFreeText());
 		attributes.put("sex", getSex());
-		attributes.put("ageHigh", getAgeHigh());
 		attributes.put("ageLow", getAgeLow());
+		attributes.put("ageHigh", getAgeHigh());
 		attributes.put("ageUnit", getAgeUnit());
 		attributes.put("diseaseOntology", getDiseaseOntology());
 		attributes.put("diseaseOntologyVersion", getDiseaseOntologyVersion());
@@ -347,16 +347,16 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			setSex(sex);
 		}
 
-		Long ageHigh = (Long)attributes.get("ageHigh");
-
-		if (ageHigh != null) {
-			setAgeHigh(ageHigh);
-		}
-
 		Long ageLow = (Long)attributes.get("ageLow");
 
 		if (ageLow != null) {
 			setAgeLow(ageLow);
+		}
+
+		Long ageHigh = (Long)attributes.get("ageHigh");
+
+		if (ageHigh != null) {
+			setAgeHigh(ageHigh);
 		}
 
 		String ageUnit = (String)attributes.get("ageUnit");
@@ -665,17 +665,6 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@JSON
 	@Override
-	public long getAgeHigh() {
-		return _ageHigh;
-	}
-
-	@Override
-	public void setAgeHigh(long ageHigh) {
-		_ageHigh = ageHigh;
-	}
-
-	@JSON
-	@Override
 	public long getAgeLow() {
 		return _ageLow;
 	}
@@ -683,6 +672,17 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	@Override
 	public void setAgeLow(long ageLow) {
 		_ageLow = ageLow;
+	}
+
+	@JSON
+	@Override
+	public long getAgeHigh() {
+		return _ageHigh;
+	}
+
+	@Override
+	public void setAgeHigh(long ageHigh) {
+		_ageHigh = ageHigh;
 	}
 
 	@JSON
@@ -844,8 +844,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sampleImpl.setAnatomicalPartOntologyDescription(getAnatomicalPartOntologyDescription());
 		sampleImpl.setAnatomicalPartFreeText(getAnatomicalPartFreeText());
 		sampleImpl.setSex(getSex());
-		sampleImpl.setAgeHigh(getAgeHigh());
 		sampleImpl.setAgeLow(getAgeLow());
+		sampleImpl.setAgeHigh(getAgeHigh());
 		sampleImpl.setAgeUnit(getAgeUnit());
 		sampleImpl.setDiseaseOntology(getDiseaseOntology());
 		sampleImpl.setDiseaseOntologyVersion(getDiseaseOntologyVersion());
@@ -1042,9 +1042,9 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			sampleCacheModel.sex = null;
 		}
 
-		sampleCacheModel.ageHigh = getAgeHigh();
-
 		sampleCacheModel.ageLow = getAgeLow();
+
+		sampleCacheModel.ageHigh = getAgeHigh();
 
 		sampleCacheModel.ageUnit = getAgeUnit();
 
@@ -1144,10 +1144,10 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sb.append(getAnatomicalPartFreeText());
 		sb.append(", sex=");
 		sb.append(getSex());
-		sb.append(", ageHigh=");
-		sb.append(getAgeHigh());
 		sb.append(", ageLow=");
 		sb.append(getAgeLow());
+		sb.append(", ageHigh=");
+		sb.append(getAgeHigh());
 		sb.append(", ageUnit=");
 		sb.append(getAgeUnit());
 		sb.append(", diseaseOntology=");
@@ -1240,12 +1240,12 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sb.append(getSex());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>ageHigh</column-name><column-value><![CDATA[");
-		sb.append(getAgeHigh());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>ageLow</column-name><column-value><![CDATA[");
 		sb.append(getAgeLow());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ageHigh</column-name><column-value><![CDATA[");
+		sb.append(getAgeHigh());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>ageUnit</column-name><column-value><![CDATA[");
@@ -1300,8 +1300,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	private String _anatomicalPartOntologyDescription;
 	private String _anatomicalPartFreeText;
 	private String _sex;
-	private long _ageHigh;
 	private long _ageLow;
+	private long _ageHigh;
 	private String _ageUnit;
 	private String _diseaseOntology;
 	private String _diseaseOntologyVersion;

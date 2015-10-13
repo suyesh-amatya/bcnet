@@ -882,8 +882,8 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 		sampleImpl.setAnatomicalPartOntologyDescription(sample.getAnatomicalPartOntologyDescription());
 		sampleImpl.setAnatomicalPartFreeText(sample.getAnatomicalPartFreeText());
 		sampleImpl.setSex(sample.getSex());
-		sampleImpl.setAgeHigh(sample.getAgeHigh());
 		sampleImpl.setAgeLow(sample.getAgeLow());
+		sampleImpl.setAgeHigh(sample.getAgeHigh());
 		sampleImpl.setAgeUnit(sample.getAgeUnit());
 		sampleImpl.setDiseaseOntology(sample.getDiseaseOntology());
 		sampleImpl.setDiseaseOntologyVersion(sample.getDiseaseOntologyVersion());

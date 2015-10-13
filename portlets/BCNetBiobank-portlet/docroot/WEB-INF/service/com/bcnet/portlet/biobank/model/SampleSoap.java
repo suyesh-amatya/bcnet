@@ -47,8 +47,8 @@ public class SampleSoap implements Serializable {
 		soapModel.setAnatomicalPartOntologyDescription(model.getAnatomicalPartOntologyDescription());
 		soapModel.setAnatomicalPartFreeText(model.getAnatomicalPartFreeText());
 		soapModel.setSex(model.getSex());
-		soapModel.setAgeHigh(model.getAgeHigh());
 		soapModel.setAgeLow(model.getAgeLow());
+		soapModel.setAgeHigh(model.getAgeHigh());
 		soapModel.setAgeUnit(model.getAgeUnit());
 		soapModel.setDiseaseOntology(model.getDiseaseOntology());
 		soapModel.setDiseaseOntologyVersion(model.getDiseaseOntologyVersion());
@@ -238,20 +238,20 @@ public class SampleSoap implements Serializable {
 		_sex = sex;
 	}
 
-	public long getAgeHigh() {
-		return _ageHigh;
-	}
-
-	public void setAgeHigh(long ageHigh) {
-		_ageHigh = ageHigh;
-	}
-
 	public long getAgeLow() {
 		return _ageLow;
 	}
 
 	public void setAgeLow(long ageLow) {
 		_ageLow = ageLow;
+	}
+
+	public long getAgeHigh() {
+		return _ageHigh;
+	}
+
+	public void setAgeHigh(long ageHigh) {
+		_ageHigh = ageHigh;
 	}
 
 	public String getAgeUnit() {
@@ -326,8 +326,8 @@ public class SampleSoap implements Serializable {
 	private String _anatomicalPartOntologyDescription;
 	private String _anatomicalPartFreeText;
 	private String _sex;
-	private long _ageHigh;
 	private long _ageLow;
+	private long _ageHigh;
 	private String _ageUnit;
 	private String _diseaseOntology;
 	private String _diseaseOntologyVersion;
