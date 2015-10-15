@@ -58,6 +58,7 @@ if(optionsDisplayMaincontact_option) {
 		sampleCollectionMainContactUser = UserLocalServiceUtil.getUser(sampleCollectionMainContactUserId);
 	}
 	catch(Exception e){
+		System.out.println("null sampleCollectionMainContact");
 	}
 	
 	

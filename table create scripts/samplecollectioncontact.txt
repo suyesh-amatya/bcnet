@@ -11,10 +11,5 @@ CREATE TABLE IF NOT EXISTS `BCNet`.`samplecollectioncontact` (
     FOREIGN KEY (`sampleCollectionDbId`)
     REFERENCES `BCNet`.`samplecollection` (`sampleCollectionDbId`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_samplecollectioncontact_userId`
-    FOREIGN KEY (`userId`)
-    REFERENCES `BCNet`.`user_` (`userId`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8;
