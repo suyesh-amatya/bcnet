@@ -11,6 +11,7 @@ HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest)
 httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
 long sampleCollectionDbId = Long.parseLong(httpRequest.getParameter("scdbid"));
 
+
 //Parameters for permission Checking
 Role administratorRole = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), "Administrator");
 Role curatorRole = RoleLocalServiceUtil.getRole(themeDisplay.getCompanyId(), "Curator");
@@ -52,14 +53,19 @@ long sampleCollectionMainContactUserId = 0;
 if(optionsDisplayMaincontact_option) {
 	SampleCollectionContact sampleCollectionMainContact = null;
 	User sampleCollectionMainContactUser = null;
-	try{
-		sampleCollectionMainContact = SampleCollectionContactLocalServiceUtil.getSampleCollectionMainContact(sampleCollectionDbId);
+	
+	sampleCollectionMainContact = SampleCollectionContactLocalServiceUtil.getSampleCollectionMainContact(sampleCollectionDbId);
+	if(sampleCollectionMainContact != null){
 		sampleCollectionMainContactUserId = sampleCollectionMainContact.getUserId();
-		sampleCollectionMainContactUser = UserLocalServiceUtil.getUser(sampleCollectionMainContactUserId);
+		try{
+			sampleCollectionMainContactUser = UserLocalServiceUtil.getUser(sampleCollectionMainContactUserId);
+		}
+		catch(NoSuchUserException e){
+			SampleCollectionContactLocalServiceUtil.deleteSampleCollectionContact(sampleCollectionMainContact.getPrimaryKey());
+		}
 	}
-	catch(Exception e){
-		System.out.println("null sampleCollectionMainContact");
-	}
+		
+	
 	
 	
 
@@ -83,7 +89,7 @@ if(optionsDisplayMaincontact_option) {
 			 %>
 		</span>
 		<% 
-		if(sampleCollectionMainContact != null) {
+		if(sampleCollectionMainContact != null && sampleCollectionMainContactUser != null) {
 			String imgPath = themeDisplay.getPathImage()+"/user_portrait?screenName="+sampleCollectionMainContactUser.getScreenName()+"&amp;companyId="+sampleCollectionMainContactUser.getCompanyId();
 			
 		%>
@@ -175,14 +181,23 @@ String optionsDisplayPeopleTitle_option = GetterUtil.getString(portletPreference
 </div>
 
 <% 
-//Get list of SampleCollectionContact From a Sample Collection
+//Loop the list of SampleCollectionContacts From a Sample Collection
 List<SampleCollectionContact> sampleCollectionContacts = SampleCollectionContactLocalServiceUtil.getSampleCollectionContactsBySampleCollectionDbId(sampleCollectionDbId);
+
+
 int row = 0;
 
 User sampleCollectionContactUser = null;
 for(SampleCollectionContact sampleCollectionContact : sampleCollectionContacts) {
 	long sampleCollectionContactUserId = sampleCollectionContact.getUserId();
-	sampleCollectionContactUser = UserLocalServiceUtil.getUser(sampleCollectionContactUserId);
+	try{
+		sampleCollectionContactUser = UserLocalServiceUtil.getUser(sampleCollectionContactUserId);
+	}
+	catch(NoSuchUserException e){
+		SampleCollectionContactLocalServiceUtil.deleteSampleCollectionContact(sampleCollectionContact.getPrimaryKey());
+		continue;
+	}
+	
 	if(sampleCollectionMainContactUserId == sampleCollectionContact.getUserId()) {
 		continue;
 	}
