@@ -43,10 +43,10 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		sb.append(uuid_);
 		sb.append(", sampleDbId=");
 		sb.append(sampleDbId);
-		sb.append(", sampleCollectionId=");
-		sb.append(sampleCollectionId);
-		sb.append(", biobankId=");
-		sb.append(biobankId);
+		sb.append(", sampleCollectionDbId=");
+		sb.append(sampleCollectionDbId);
+		sb.append(", biobankDbId=");
+		sb.append(biobankDbId);
 		sb.append(", hashedSampleId=");
 		sb.append(hashedSampleId);
 		sb.append(", hashedIndividualId=");
@@ -106,20 +106,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		}
 
 		sampleImpl.setSampleDbId(sampleDbId);
-
-		if (sampleCollectionId == null) {
-			sampleImpl.setSampleCollectionId(StringPool.BLANK);
-		}
-		else {
-			sampleImpl.setSampleCollectionId(sampleCollectionId);
-		}
-
-		if (biobankId == null) {
-			sampleImpl.setBiobankId(StringPool.BLANK);
-		}
-		else {
-			sampleImpl.setBiobankId(biobankId);
-		}
+		sampleImpl.setSampleCollectionDbId(sampleCollectionDbId);
+		sampleImpl.setBiobankDbId(biobankDbId);
 
 		if (hashedSampleId == null) {
 			sampleImpl.setHashedSampleId(StringPool.BLANK);
@@ -266,8 +254,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		uuid_ = objectInput.readUTF();
 		sampleDbId = objectInput.readLong();
-		sampleCollectionId = objectInput.readUTF();
-		biobankId = objectInput.readUTF();
+		sampleCollectionDbId = objectInput.readLong();
+		biobankDbId = objectInput.readLong();
 		hashedSampleId = objectInput.readUTF();
 		hashedIndividualId = objectInput.readUTF();
 		materialType = objectInput.readUTF();
@@ -302,20 +290,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 		}
 
 		objectOutput.writeLong(sampleDbId);
-
-		if (sampleCollectionId == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(sampleCollectionId);
-		}
-
-		if (biobankId == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(biobankId);
-		}
+		objectOutput.writeLong(sampleCollectionDbId);
+		objectOutput.writeLong(biobankDbId);
 
 		if (hashedSampleId == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -451,8 +427,8 @@ public class SampleCacheModel implements CacheModel<Sample>, Externalizable {
 
 	public String uuid_;
 	public long sampleDbId;
-	public String sampleCollectionId;
-	public String biobankId;
+	public long sampleCollectionDbId;
+	public long biobankDbId;
 	public String hashedSampleId;
 	public String hashedIndividualId;
 	public String materialType;

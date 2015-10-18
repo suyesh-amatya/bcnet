@@ -66,8 +66,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "sampleDbId", Types.BIGINT },
-			{ "sampleCollectionId", Types.VARCHAR },
-			{ "biobankId", Types.VARCHAR },
+			{ "sampleCollectionDbId", Types.BIGINT },
+			{ "biobankDbId", Types.BIGINT },
 			{ "hashedSampleId", Types.VARCHAR },
 			{ "hashedIndividualId", Types.VARCHAR },
 			{ "materialType", Types.VARCHAR },
@@ -90,7 +90,7 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			{ "diseaseFreeText", Types.VARCHAR },
 			{ "countryOfOrigin", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sample (uuid_ VARCHAR(75) null,sampleDbId LONG not null primary key,sampleCollectionId VARCHAR(75) null,biobankId VARCHAR(75) null,hashedSampleId VARCHAR(75) null,hashedIndividualId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime DATE null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartOntologyDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageLow LONG,ageHigh LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseOntologyDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null,countryOfOrigin VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table sample (uuid_ VARCHAR(75) null,sampleDbId LONG not null primary key,sampleCollectionDbId LONG,biobankDbId LONG,hashedSampleId VARCHAR(75) null,hashedIndividualId VARCHAR(75) null,materialType VARCHAR(75) null,container VARCHAR(75) null,storageTemperature VARCHAR(75) null,sampledTime DATE null,anatomicalPartOntology VARCHAR(75) null,anatomicalPartOntologyVersion VARCHAR(75) null,anatomicalPartOntologyCode VARCHAR(75) null,anatomicalPartOntologyDescription VARCHAR(75) null,anatomicalPartFreeText VARCHAR(75) null,sex VARCHAR(75) null,ageLow LONG,ageHigh LONG,ageUnit VARCHAR(75) null,diseaseOntology VARCHAR(75) null,diseaseOntologyVersion VARCHAR(75) null,diseaseOntologyCode VARCHAR(75) null,diseaseOntologyDescription VARCHAR(75) null,diseaseFreeText VARCHAR(75) null,countryOfOrigin VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sample";
 	public static final String ORDER_BY_JPQL = " ORDER BY sample.sampleDbId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sample.sampleDbId ASC";
@@ -124,8 +124,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 		model.setUuid_(soapModel.getUuid_());
 		model.setSampleDbId(soapModel.getSampleDbId());
-		model.setSampleCollectionId(soapModel.getSampleCollectionId());
-		model.setBiobankId(soapModel.getBiobankId());
+		model.setSampleCollectionDbId(soapModel.getSampleCollectionDbId());
+		model.setBiobankDbId(soapModel.getBiobankDbId());
 		model.setHashedSampleId(soapModel.getHashedSampleId());
 		model.setHashedIndividualId(soapModel.getHashedIndividualId());
 		model.setMaterialType(soapModel.getMaterialType());
@@ -213,8 +213,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 		attributes.put("uuid_", getUuid_());
 		attributes.put("sampleDbId", getSampleDbId());
-		attributes.put("sampleCollectionId", getSampleCollectionId());
-		attributes.put("biobankId", getBiobankId());
+		attributes.put("sampleCollectionDbId", getSampleCollectionDbId());
+		attributes.put("biobankDbId", getBiobankDbId());
 		attributes.put("hashedSampleId", getHashedSampleId());
 		attributes.put("hashedIndividualId", getHashedIndividualId());
 		attributes.put("materialType", getMaterialType());
@@ -258,16 +258,16 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 			setSampleDbId(sampleDbId);
 		}
 
-		String sampleCollectionId = (String)attributes.get("sampleCollectionId");
+		Long sampleCollectionDbId = (Long)attributes.get("sampleCollectionDbId");
 
-		if (sampleCollectionId != null) {
-			setSampleCollectionId(sampleCollectionId);
+		if (sampleCollectionDbId != null) {
+			setSampleCollectionDbId(sampleCollectionDbId);
 		}
 
-		String biobankId = (String)attributes.get("biobankId");
+		Long biobankDbId = (Long)attributes.get("biobankDbId");
 
-		if (biobankId != null) {
-			setBiobankId(biobankId);
+		if (biobankDbId != null) {
+			setBiobankDbId(biobankDbId);
 		}
 
 		String hashedSampleId = (String)attributes.get("hashedSampleId");
@@ -444,34 +444,24 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@JSON
 	@Override
-	public String getSampleCollectionId() {
-		if (_sampleCollectionId == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sampleCollectionId;
-		}
+	public long getSampleCollectionDbId() {
+		return _sampleCollectionDbId;
 	}
 
 	@Override
-	public void setSampleCollectionId(String sampleCollectionId) {
-		_sampleCollectionId = sampleCollectionId;
+	public void setSampleCollectionDbId(long sampleCollectionDbId) {
+		_sampleCollectionDbId = sampleCollectionDbId;
 	}
 
 	@JSON
 	@Override
-	public String getBiobankId() {
-		if (_biobankId == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _biobankId;
-		}
+	public long getBiobankDbId() {
+		return _biobankDbId;
 	}
 
 	@Override
-	public void setBiobankId(String biobankId) {
-		_biobankId = biobankId;
+	public void setBiobankDbId(long biobankDbId) {
+		_biobankDbId = biobankDbId;
 	}
 
 	@JSON
@@ -830,8 +820,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 		sampleImpl.setUuid_(getUuid_());
 		sampleImpl.setSampleDbId(getSampleDbId());
-		sampleImpl.setSampleCollectionId(getSampleCollectionId());
-		sampleImpl.setBiobankId(getBiobankId());
+		sampleImpl.setSampleCollectionDbId(getSampleCollectionDbId());
+		sampleImpl.setBiobankDbId(getBiobankDbId());
 		sampleImpl.setHashedSampleId(getHashedSampleId());
 		sampleImpl.setHashedIndividualId(getHashedIndividualId());
 		sampleImpl.setMaterialType(getMaterialType());
@@ -924,21 +914,9 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 		sampleCacheModel.sampleDbId = getSampleDbId();
 
-		sampleCacheModel.sampleCollectionId = getSampleCollectionId();
+		sampleCacheModel.sampleCollectionDbId = getSampleCollectionDbId();
 
-		String sampleCollectionId = sampleCacheModel.sampleCollectionId;
-
-		if ((sampleCollectionId != null) && (sampleCollectionId.length() == 0)) {
-			sampleCacheModel.sampleCollectionId = null;
-		}
-
-		sampleCacheModel.biobankId = getBiobankId();
-
-		String biobankId = sampleCacheModel.biobankId;
-
-		if ((biobankId != null) && (biobankId.length() == 0)) {
-			sampleCacheModel.biobankId = null;
-		}
+		sampleCacheModel.biobankDbId = getBiobankDbId();
 
 		sampleCacheModel.hashedSampleId = getHashedSampleId();
 
@@ -1116,10 +1094,10 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sb.append(getUuid_());
 		sb.append(", sampleDbId=");
 		sb.append(getSampleDbId());
-		sb.append(", sampleCollectionId=");
-		sb.append(getSampleCollectionId());
-		sb.append(", biobankId=");
-		sb.append(getBiobankId());
+		sb.append(", sampleCollectionDbId=");
+		sb.append(getSampleCollectionDbId());
+		sb.append(", biobankDbId=");
+		sb.append(getBiobankDbId());
 		sb.append(", hashedSampleId=");
 		sb.append(getHashedSampleId());
 		sb.append(", hashedIndividualId=");
@@ -1184,12 +1162,12 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 		sb.append(getSampleDbId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sampleCollectionId</column-name><column-value><![CDATA[");
-		sb.append(getSampleCollectionId());
+			"<column><column-name>sampleCollectionDbId</column-name><column-value><![CDATA[");
+		sb.append(getSampleCollectionDbId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>biobankId</column-name><column-value><![CDATA[");
-		sb.append(getBiobankId());
+			"<column><column-name>biobankDbId</column-name><column-value><![CDATA[");
+		sb.append(getBiobankDbId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>hashedSampleId</column-name><column-value><![CDATA[");
@@ -1286,8 +1264,8 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	private String _uuid_;
 	private String _originalUuid_;
 	private long _sampleDbId;
-	private String _sampleCollectionId;
-	private String _biobankId;
+	private long _sampleCollectionDbId;
+	private long _biobankDbId;
 	private String _hashedSampleId;
 	private String _hashedIndividualId;
 	private String _materialType;

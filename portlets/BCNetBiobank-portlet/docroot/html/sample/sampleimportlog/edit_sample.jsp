@@ -1,6 +1,11 @@
 <%@ include file="/html/init.jsp" %>
 
+<liferay-ui:error key="sample-collection-does-not-exist" message="The Sample Collection Id does not exist." />
+
 <%
+
+	String editSampleFormURL = PortalUtil.getCurrentURL(renderRequest);
+
 	long sampleDbId = ParamUtil.getLong(request, "sampleDbId");
 	String redirect =  ParamUtil.getString(request, "redirect");
 	
@@ -19,15 +24,25 @@
 	<div class="sample-edit-form-header">Edit Sample</div>
 	<div class="sample-edit-form-container">
 		<aui:form action="<%= editSampleURL %>" method="POST" name="fm">
+			<aui:input name="editSampleFormURL" type="hidden" value="<%=editSampleFormURL %>"></aui:input>
 			<aui:fieldset>
 				<aui:row>
 					<aui:column columnWidth="30">
+						<%
+		        		String sampleCollectionId = "";
+		        		try{
+		        			sampleCollectionId = SampleCollectionLocalServiceUtil.getSampleCollection(sample.getSampleCollectionDbId()).getSampleCollectionId();
+		        		}
+		        		catch(NoSuchSampleCollectionException e){
+		        			e.printStackTrace();
+		        		}
+		        		%>
 						<aui:input name="sampleCollectionId" label="Sample Collection Id"
-							value="<%=sample.getSampleCollectionId() %>"/>
+							value="<%=sampleCollectionId %>"/>
 					</aui:column>
 					<aui:column columnWidth="30">
 						<aui:input name="hashedSampleId" label='Hashed Sample Id <i class="icon-asterisk"></i>' showRequiredLabel="false" value="<%=sample.getHashedSampleId() %>">
-						<aui:validator name="required" errorMessage="The Hashed Sample Id field is required."/>
+							<aui:validator name="required" errorMessage="The Hashed Sample Id field is required."/>
 						</aui:input>
 					</aui:column>
 					<aui:column columnWidth="30">

@@ -89,34 +89,32 @@ public interface SampleModel extends BaseModel<Sample> {
 	public void setSampleDbId(long sampleDbId);
 
 	/**
-	 * Returns the sample collection ID of this sample.
+	 * Returns the sample collection db ID of this sample.
 	 *
-	 * @return the sample collection ID of this sample
+	 * @return the sample collection db ID of this sample
 	 */
-	@AutoEscape
-	public String getSampleCollectionId();
+	public long getSampleCollectionDbId();
 
 	/**
-	 * Sets the sample collection ID of this sample.
+	 * Sets the sample collection db ID of this sample.
 	 *
-	 * @param sampleCollectionId the sample collection ID of this sample
+	 * @param sampleCollectionDbId the sample collection db ID of this sample
 	 */
-	public void setSampleCollectionId(String sampleCollectionId);
+	public void setSampleCollectionDbId(long sampleCollectionDbId);
 
 	/**
-	 * Returns the biobank ID of this sample.
+	 * Returns the biobank db ID of this sample.
 	 *
-	 * @return the biobank ID of this sample
+	 * @return the biobank db ID of this sample
 	 */
-	@AutoEscape
-	public String getBiobankId();
+	public long getBiobankDbId();
 
 	/**
-	 * Sets the biobank ID of this sample.
+	 * Sets the biobank db ID of this sample.
 	 *
-	 * @param biobankId the biobank ID of this sample
+	 * @param biobankDbId the biobank db ID of this sample
 	 */
-	public void setBiobankId(String biobankId);
+	public void setBiobankDbId(long biobankDbId);
 
 	/**
 	 * Returns the hashed sample ID of this sample.
@@ -469,19 +467,19 @@ public interface SampleModel extends BaseModel<Sample> {
 	public Object clone();
 
 	@Override
-	public int compareTo(Sample sample);
+	public int compareTo(com.bcnet.portlet.biobank.model.Sample sample);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Sample> toCacheModel();
+	public CacheModel<com.bcnet.portlet.biobank.model.Sample> toCacheModel();
 
 	@Override
-	public Sample toEscapedModel();
+	public com.bcnet.portlet.biobank.model.Sample toEscapedModel();
 
 	@Override
-	public Sample toUnescapedModel();
+	public com.bcnet.portlet.biobank.model.Sample toUnescapedModel();
 
 	@Override
 	public String toString();

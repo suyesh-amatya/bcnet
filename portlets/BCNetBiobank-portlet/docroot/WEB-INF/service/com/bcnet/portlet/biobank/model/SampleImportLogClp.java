@@ -380,6 +380,10 @@ public class SampleImportLogClp extends BaseModelImpl<SampleImportLog>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -445,4 +449,5 @@ public class SampleImportLogClp extends BaseModelImpl<SampleImportLog>
 	private String _userUuid;
 	private Date _dateOfImport;
 	private BaseModel<?> _sampleImportLogRemoteModel;
+	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

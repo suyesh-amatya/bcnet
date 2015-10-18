@@ -64,8 +64,8 @@ create table juristicperson (
 create table sample (
 	uuid_ VARCHAR(75) null,
 	sampleDbId LONG not null primary key,
-	sampleCollectionId VARCHAR(75) null,
-	biobankId VARCHAR(75) null,
+	sampleCollectionDbId LONG,
+	biobankDbId LONG,
 	hashedSampleId VARCHAR(75) null,
 	hashedIndividualId VARCHAR(75) null,
 	materialType VARCHAR(75) null,

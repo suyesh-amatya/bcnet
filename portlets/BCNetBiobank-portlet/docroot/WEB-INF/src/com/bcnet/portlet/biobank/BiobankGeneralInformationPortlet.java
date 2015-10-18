@@ -206,11 +206,11 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 				OrganizationLocalServiceUtil.deleteUserOrganization(userid, organization);
 			}
 			
-			OrganizationLocalServiceUtil.deleteOrganization(organization);			
-			BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);			
+			OrganizationLocalServiceUtil.deleteOrganization(organization);	
 			BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeListsBybiobankDbId(biobankDbId);
+			BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);			
 			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-			response.sendRedirect(themeDisplay.getURLPortal());
+			response.sendRedirect(themeDisplay.getURLPortal()+"/biobanks");
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

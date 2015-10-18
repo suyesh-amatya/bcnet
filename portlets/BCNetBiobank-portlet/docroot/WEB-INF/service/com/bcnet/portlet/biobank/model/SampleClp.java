@@ -75,8 +75,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 		attributes.put("uuid_", getUuid_());
 		attributes.put("sampleDbId", getSampleDbId());
-		attributes.put("sampleCollectionId", getSampleCollectionId());
-		attributes.put("biobankId", getBiobankId());
+		attributes.put("sampleCollectionDbId", getSampleCollectionDbId());
+		attributes.put("biobankDbId", getBiobankDbId());
 		attributes.put("hashedSampleId", getHashedSampleId());
 		attributes.put("hashedIndividualId", getHashedIndividualId());
 		attributes.put("materialType", getMaterialType());
@@ -120,16 +120,16 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 			setSampleDbId(sampleDbId);
 		}
 
-		String sampleCollectionId = (String)attributes.get("sampleCollectionId");
+		Long sampleCollectionDbId = (Long)attributes.get("sampleCollectionDbId");
 
-		if (sampleCollectionId != null) {
-			setSampleCollectionId(sampleCollectionId);
+		if (sampleCollectionDbId != null) {
+			setSampleCollectionDbId(sampleCollectionDbId);
 		}
 
-		String biobankId = (String)attributes.get("biobankId");
+		Long biobankDbId = (Long)attributes.get("biobankDbId");
 
-		if (biobankId != null) {
-			setBiobankId(biobankId);
+		if (biobankDbId != null) {
+			setBiobankDbId(biobankDbId);
 		}
 
 		String hashedSampleId = (String)attributes.get("hashedSampleId");
@@ -314,22 +314,22 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	}
 
 	@Override
-	public String getSampleCollectionId() {
-		return _sampleCollectionId;
+	public long getSampleCollectionDbId() {
+		return _sampleCollectionDbId;
 	}
 
 	@Override
-	public void setSampleCollectionId(String sampleCollectionId) {
-		_sampleCollectionId = sampleCollectionId;
+	public void setSampleCollectionDbId(long sampleCollectionDbId) {
+		_sampleCollectionDbId = sampleCollectionDbId;
 
 		if (_sampleRemoteModel != null) {
 			try {
 				Class<?> clazz = _sampleRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSampleCollectionId",
-						String.class);
+				Method method = clazz.getMethod("setSampleCollectionDbId",
+						long.class);
 
-				method.invoke(_sampleRemoteModel, sampleCollectionId);
+				method.invoke(_sampleRemoteModel, sampleCollectionDbId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -338,21 +338,21 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	}
 
 	@Override
-	public String getBiobankId() {
-		return _biobankId;
+	public long getBiobankDbId() {
+		return _biobankDbId;
 	}
 
 	@Override
-	public void setBiobankId(String biobankId) {
-		_biobankId = biobankId;
+	public void setBiobankDbId(long biobankDbId) {
+		_biobankDbId = biobankDbId;
 
 		if (_sampleRemoteModel != null) {
 			try {
 				Class<?> clazz = _sampleRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setBiobankId", String.class);
+				Method method = clazz.getMethod("setBiobankDbId", long.class);
 
-				method.invoke(_sampleRemoteModel, biobankId);
+				method.invoke(_sampleRemoteModel, biobankDbId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -931,8 +931,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 		clone.setUuid_(getUuid_());
 		clone.setSampleDbId(getSampleDbId());
-		clone.setSampleCollectionId(getSampleCollectionId());
-		clone.setBiobankId(getBiobankId());
+		clone.setSampleCollectionDbId(getSampleCollectionDbId());
+		clone.setBiobankDbId(getBiobankDbId());
 		clone.setHashedSampleId(getHashedSampleId());
 		clone.setHashedIndividualId(getHashedIndividualId());
 		clone.setMaterialType(getMaterialType());
@@ -995,6 +995,10 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -1008,10 +1012,10 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getUuid_());
 		sb.append(", sampleDbId=");
 		sb.append(getSampleDbId());
-		sb.append(", sampleCollectionId=");
-		sb.append(getSampleCollectionId());
-		sb.append(", biobankId=");
-		sb.append(getBiobankId());
+		sb.append(", sampleCollectionDbId=");
+		sb.append(getSampleCollectionDbId());
+		sb.append(", biobankDbId=");
+		sb.append(getBiobankDbId());
 		sb.append(", hashedSampleId=");
 		sb.append(getHashedSampleId());
 		sb.append(", hashedIndividualId=");
@@ -1076,12 +1080,12 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 		sb.append(getSampleDbId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sampleCollectionId</column-name><column-value><![CDATA[");
-		sb.append(getSampleCollectionId());
+			"<column><column-name>sampleCollectionDbId</column-name><column-value><![CDATA[");
+		sb.append(getSampleCollectionDbId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>biobankId</column-name><column-value><![CDATA[");
-		sb.append(getBiobankId());
+			"<column><column-name>biobankDbId</column-name><column-value><![CDATA[");
+		sb.append(getBiobankDbId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>hashedSampleId</column-name><column-value><![CDATA[");
@@ -1175,8 +1179,8 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 
 	private String _uuid_;
 	private long _sampleDbId;
-	private String _sampleCollectionId;
-	private String _biobankId;
+	private long _sampleCollectionDbId;
+	private long _biobankDbId;
 	private String _hashedSampleId;
 	private String _hashedIndividualId;
 	private String _materialType;
@@ -1199,4 +1203,5 @@ public class SampleClp extends BaseModelImpl<Sample> implements Sample {
 	private String _diseaseFreeText;
 	private String _countryOfOrigin;
 	private BaseModel<?> _sampleRemoteModel;
+	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

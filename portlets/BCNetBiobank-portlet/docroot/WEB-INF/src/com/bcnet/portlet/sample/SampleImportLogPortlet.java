@@ -8,9 +8,12 @@ import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.servlet.RequestDispatcher;
 
+import com.bcnet.portlet.biobank.NoSuchSampleCollectionException;
 import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.model.SampleCollection;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
@@ -21,7 +24,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -47,10 +54,11 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		sendRedirect(request, response);
 	}
 	
-	public void editSample(ActionRequest request, ActionResponse response) throws PortalException, SystemException{
+	public void editSample(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException{
 		long sampleDbId = ParamUtil.getLong(request, "sampleDbId");
 		String sampleCollectionId = ParamUtil.getString(request, "sampleCollectionId");
 		String hashedSampleId = ParamUtil.getString(request, "hashedSampleId");
+		String hashedIndividualId = ParamUtil.getString(request, "hashedIndividualId");
 		String materialType = ParamUtil.getString(request, "materialType");
 		String container = ParamUtil.getString(request, "container");
 		String storageTemperature = ParamUtil.getString(request, "storageTemperature");
@@ -83,11 +91,33 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		String diseaseOntologyCode = ParamUtil.getString(request, "diseaseOntologyCode");
 		String diseaseOntologyDescription = ParamUtil.getString(request, "diseaseOntologyDescription");
 		String diseaseFreeText = ParamUtil.getString(request, "diseaseFreeText");
+		String countryOfOrigin = ParamUtil.getString(request, "countryOfOrigin");
 				
 		Sample sample = SampleLocalServiceUtil.getSample(sampleDbId);
 		
-		sample.setSampleCollectionId(sampleCollectionId);
+		if(!sampleCollectionId.equals("")){
+			
+			try{
+				SampleCollection sampleCollection = SampleCollectionLocalServiceUtil.getSampleCollectionBySampleCollectionId(sampleCollectionId);
+				sample.setSampleCollectionDbId(sampleCollection.getSampleCollectionDbId());
+				
+			}
+			catch(NoSuchSampleCollectionException e){
+				e.printStackTrace();
+				ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+				SessionErrors.add(request, "sample-collection-does-not-exist");
+				response.sendRedirect(themeDisplay.getURLPortal()+ParamUtil.getString(request, "editSampleFormURL"));
+				return;
+			}
+			
+		}
+		else{
+			sample.setSampleCollectionDbId(0);
+		}
+		
+		
 		sample.setHashedSampleId(hashedSampleId);
+		sample.setHashedIndividualId(hashedIndividualId);
 		sample.setMaterialType(materialType);
 		sample.setContainer(container);
 		sample.setStorageTemperature(storageTemperature);
@@ -106,8 +136,12 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		sample.setDiseaseOntologyCode(diseaseOntologyCode);
 		sample.setDiseaseOntologyDescription(diseaseOntologyDescription);
 		sample.setDiseaseFreeText(diseaseFreeText);
+		sample.setCountryOfOrigin(countryOfOrigin);
+		
 		
 		SampleLocalServiceUtil.updateSample(sample);
+		
+		//sendRedirect(request, response);
 	}
 	
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException{
@@ -140,7 +174,7 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		}
 		
 		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("storageTemperature")){
-			String[] storageTemperature = {"RT", "2 �C to 10 �C", "-18 �C to -35 �C", "-60 �C to -85 �C", "LN", "Other"};
+			String[] storageTemperature = {"RT", "2 °C to 10 °C", "-18 °C to -35 °C", "-60 °C to -85 °C", "LN", "Other"};
 			JSONArray jsonArray =  JSONFactoryUtil.createJSONArray();
 			for(String str:storageTemperature){
 				jsonArray.put(str);

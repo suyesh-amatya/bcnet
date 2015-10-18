@@ -868,8 +868,8 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 
 		sampleImpl.setUuid_(sample.getUuid_());
 		sampleImpl.setSampleDbId(sample.getSampleDbId());
-		sampleImpl.setSampleCollectionId(sample.getSampleCollectionId());
-		sampleImpl.setBiobankId(sample.getBiobankId());
+		sampleImpl.setSampleCollectionDbId(sample.getSampleCollectionDbId());
+		sampleImpl.setBiobankDbId(sample.getBiobankDbId());
 		sampleImpl.setHashedSampleId(sample.getHashedSampleId());
 		sampleImpl.setHashedIndividualId(sample.getHashedIndividualId());
 		sampleImpl.setMaterialType(sample.getMaterialType());

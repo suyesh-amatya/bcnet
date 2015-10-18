@@ -33,10 +33,13 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.bcnet.portlet.biobank.NoSuchSampleCollectionException;
 import com.bcnet.portlet.biobank.model.Sample;
+import com.bcnet.portlet.biobank.model.SampleCollection;
 import com.bcnet.portlet.biobank.model.SampleImportLog;
 import com.bcnet.portlet.biobank.model.impl.SampleImpl;
 import com.bcnet.portlet.biobank.model.impl.SampleImportLogImpl;
+import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleImportLogLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -66,7 +69,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 	private static final String FORM_FILE_INPUT = "fileupload";
 	private static final String TEMPLATE_FILE_NAME = "BCNet_SampleImport_Template";
 	private static String sourceFileName;
-	private static String biobankId;
+	private static long biobankDbId;
 	private String errorStr;
 	
 	public void uploadSample(ActionRequest request, ActionResponse response) throws IOException, SystemException {
@@ -76,11 +79,11 @@ public class SampleUploadPortlet extends MVCPortlet {
 		
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
 		
-		//Normally the form data is accessed like ParamUtil.getString(request, "biobankId") or request.getParameter("biobankId").
+		//Normally the form data is accessed like ParamUtil.getString(request, "biobankDbId") or request.getParameter("biobankDbId").
 		//But since the form has enctype="multipart/form-data", it cannot be accessed via request but instead UploadPortletRequest should be used.
-		//So the ways to access the form data in such case will be: ParamUtil.getString(uploadRequest, "biobankId") or uploadRequest.getParameter("biobankId").
+		//So the ways to access the form data in such case will be: ParamUtil.getString(uploadRequest, "biobankDbId") or uploadRequest.getParameter("biobankDbId").
 		
-		biobankId = uploadRequest.getParameter("biobankId");
+		biobankDbId = Long.parseLong(uploadRequest.getParameter("biobankDbId"));
 		
 		long sizeInBytes = uploadRequest.getSize(FORM_FILE_INPUT);
  
@@ -532,13 +535,29 @@ public class SampleUploadPortlet extends MVCPortlet {
 				long sampleDbId = CounterLocalServiceUtil.increment();
 				sample.setSampleDbId(sampleDbId);
 				
-				//Try to add sampleCollectionId
+				//Try to add sampleCollectionDbId
 				String sampleCollectionId = fmt.formatCellValue(row.getCell(sampleCollectionId_column)).trim();
-				sample.setSampleCollectionId(sampleCollectionId);
+				if(!sampleCollectionId.equalsIgnoreCase("")){
+					try {
+						SampleCollection sampleCollection = SampleCollectionLocalServiceUtil.getSampleCollectionBySampleCollectionId(sampleCollectionId);
+						sample.setSampleCollectionDbId(sampleCollection.getSampleCollectionDbId());
+					} catch (NoSuchSampleCollectionException e) {
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+								+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+								+ " Problem adding sampleCollectionId from row " + rowcount + " to the database.");
+						e.printStackTrace();
+						if(!rowerrors.equalsIgnoreCase("")) {
+							rowerrors += "; ";
+						}
+						rowerrors += rowcount;
+						errorStr += " The sampleCollectionId from row " + rowcount + " has not already been created. \n";
+					}
+				}
+				
 
-				//Try to add biobankId
-				//sample.setBiobankId(fmt.formatCellValue(row.getCell(biobankId_column)));
-				sample.setBiobankId(biobankId);
+				//Try to add biobankDbId
+				//sample.setBiobankDbId(fmt.formatCellValue(row.getCell(biobankId_column)));
+				sample.setBiobankDbId(biobankDbId);
 
 				//Try to add hashedSampleId
 				String hashedSampleId = fmt.formatCellValue(row.getCell(hashedSampleId_column)).trim();
@@ -950,7 +969,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 							extra_columns += cell.getStringCellValue().trim();
 							
 							System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
-									+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUploadPortlet::readXLSXFile] "
+									+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUploadPortlet::readXLSFile] "
 									+ "The field " + cell.getStringCellValue().trim() + " could not be mapped for header.");
 							break;
 					}
@@ -1053,19 +1072,36 @@ public class SampleUploadPortlet extends MVCPortlet {
 				long sampleDbId = CounterLocalServiceUtil.increment();
 				sample.setSampleDbId(sampleDbId);
 				
-				//Try to add sampleCollectionId
+				
+				//Try to add sampleCollectionDbId
 				String sampleCollectionId = fmt.formatCellValue(row.getCell(sampleCollectionId_column)).trim();
-				sample.setSampleCollectionId(sampleCollectionId);
+				if(!sampleCollectionId.equalsIgnoreCase("")){
+					try {
+						SampleCollection sampleCollection = SampleCollectionLocalServiceUtil.getSampleCollectionBySampleCollectionId(sampleCollectionId);
+						sample.setSampleCollectionDbId(sampleCollection.getSampleCollectionDbId());
+					} catch (NoSuchSampleCollectionException e) {
+						System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
+								+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSFile] "
+								+ " Problem adding sampleCollectionId from row " + rowcount + " to the database.");
+						e.printStackTrace();
+						if(!rowerrors.equalsIgnoreCase("")) {
+							rowerrors += "; ";
+						}
+						rowerrors += rowcount;
+						errorStr += " The sampleCollectionId from row " + rowcount + " has not already been created. \n";
+					}
+				}
+				
 
-				//Try to add biobankId
-				//sample.setBiobankId(fmt.formatCellValue(row.getCell(biobankId_column)));
-				sample.setBiobankId(biobankId);
+				//Try to add biobankDbId
+				//sample.setBiobankDbId(fmt.formatCellValue(row.getCell(biobankId_column)));
+				sample.setBiobankDbId(biobankDbId);
 
 				//Try to add hashedSampleId
 				String hashedSampleId = fmt.formatCellValue(row.getCell(hashedSampleId_column)).trim();
 				if(hashedSampleId.equalsIgnoreCase("")){
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
-							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSFile] "
 							+ " Problem adding hashedSampleId from row " + rowcount + " to the database.");
 					if(!rowerrors.equalsIgnoreCase("")) {
 						rowerrors += "; ";
@@ -1085,7 +1121,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 				String materialType = fmt.formatCellValue(row.getCell(materialType_column)).trim();
 				if(materialType.equalsIgnoreCase("")){
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
-							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSFile] "
 							+ " Problem adding materialType from row " + rowcount + " to the database.");
 					if(!rowerrors.equalsIgnoreCase("")) {
 						rowerrors += "; ";
@@ -1116,7 +1152,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 							}
 							else{
 								System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
-										+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+										+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSFile] "
 										+ " Problem adding sampledTime from row " + rowcount + " to the database.");
 								if(!rowerrors.equalsIgnoreCase("")) {
 									rowerrors += "; ";
@@ -1127,7 +1163,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 						}
 						else{
 							System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
-									+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+									+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSFile] "
 									+ " Problem adding sampledTime from row " + rowcount + " to the database.");
 							if(!rowerrors.equalsIgnoreCase("")) {
 								rowerrors += "; ";
@@ -1138,7 +1174,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 					}
 					catch(IllegalStateException | ParseException  e){
 						System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
-								+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+								+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSFile] "
 								+ " Problem adding sampledTime from row " + rowcount + " to the database.");
 						e.printStackTrace();
 						if(!rowerrors.equalsIgnoreCase("")) {
@@ -1184,7 +1220,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 				}
 				catch(NumberFormatException e){
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
-							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSFile] "
 							+ " Problem adding ageLow from row " + rowcount + " to the database.");
 					e.printStackTrace();
 					if(!rowerrors.equalsIgnoreCase("")) {
@@ -1204,7 +1240,7 @@ public class SampleUploadPortlet extends MVCPortlet {
 				}
 				catch(NumberFormatException e){
 					System.err.println("[" + date_format_apache_error.format(new Date()) + "] "
-							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSXFile] "
+							+ "[info] [BCNetBiobank-portlet::com.bcnet.portlet.sample.SampleUloadPortlet::readXLSFile] "
 							+ " Problem adding ageHigh from row " + rowcount + " to the database.");
 					e.printStackTrace();
 					if(!rowerrors.equalsIgnoreCase("")) {

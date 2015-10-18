@@ -8,6 +8,8 @@ div.dt-button-collection{
 }
 </style>
 
+
+
 <%
 	
 	String redirect = PortalUtil.getCurrentURL(renderRequest);
@@ -17,7 +19,7 @@ div.dt-button-collection{
 
 	List<Sample> samplesByuuid = SampleLocalServiceUtil.getSamplesByuuid(uuid);
 	Date dateOfImport = SampleImportLogLocalServiceUtil.getSampleImportLogByUuid(uuid).getDateOfImport();
-	String biobankName = BiobankGeneralInformationLocalServiceUtil.getBiobankByBiobankId(samplesByuuid.get(0).getBiobankId()).getBiobankName();
+	String biobankName = BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(samplesByuuid.get(0).getBiobankDbId()).getBiobankName();
 %>
 
 <h6>Samples Imported in a batch from file <%=fileName%> for <%=biobankName %> on <%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(dateOfImport) %></h6>
@@ -77,7 +79,16 @@ div.dt-button-collection{
 							confirmation="<%= \"Are you sure you want to delete this sample? \" %>"
 						/>
 		        	</td>
-		            <td><%=sample.getSampleCollectionId() %></td>
+		        	<%
+		        		String sampleCollectionId = "";
+		        		try{
+		        			sampleCollectionId = SampleCollectionLocalServiceUtil.getSampleCollection(sample.getSampleCollectionDbId()).getSampleCollectionId();
+		        		}
+		        		catch(NoSuchSampleCollectionException e){
+		        			e.printStackTrace();
+		        		}
+		        	%>
+		            <td><%=sampleCollectionId %></td>
 		            <td><%=sample.getHashedSampleId() %></td>
 		            <td><%=sample.getHashedIndividualId() %></td>
 		            <td><%=sample.getMaterialType() %></td>

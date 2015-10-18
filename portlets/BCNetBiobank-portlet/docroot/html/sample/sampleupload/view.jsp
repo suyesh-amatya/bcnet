@@ -93,13 +93,13 @@
 				</aui:row>
 				<aui:row>
 					<aui:column>
-						<aui:select name="biobankId" label='Biobank <i class="icon-asterisk"></i>' showRequiredLabel="false">
+						<aui:select name="biobankDbId" label='Biobank <i class="icon-asterisk"></i>' showRequiredLabel="false">
 							<aui:option>Select the Biobank to import the sample for:</aui:option>
 							<%
 								for (BiobankGeneralInformation biobank : biobanks) {
 								
 							%>
-									<aui:option value="<%= biobank.getBiobankId() %>">
+									<aui:option value="<%= biobank.getBiobankDbId() %>">
 										<%=biobank.getBiobankName() %>
 									</aui:option>
 							<% 

@@ -130,8 +130,8 @@
 	<entity name="Sample" local-service="true" remote-service="true" table="sample">
 		<column name="uuid_" type="String" />
 		<column name="sampleDbId" type="long" primary="true" />
-		<column name="sampleCollectionId" type="String" />
-		<column name="biobankId" type="String" />
+		<column name="sampleCollectionDbId" type="long" />
+		<column name="biobankDbId" type="long" />
 		<column name="hashedSampleId" type="String" />
 		<column name="hashedIndividualId" type="String" />
 		<column name="materialType" type="String" />

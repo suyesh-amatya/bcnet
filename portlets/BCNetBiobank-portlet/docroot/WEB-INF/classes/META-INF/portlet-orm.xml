@@ -59,8 +59,8 @@
 		<attributes>
 			<id name="sampleDbId" />
 			<basic name="uuid_" />
-			<basic name="sampleCollectionId" />
-			<basic name="biobankId" />
+			<basic name="sampleCollectionDbId" />
+			<basic name="biobankDbId" />
 			<basic name="hashedSampleId" />
 			<basic name="hashedIndividualId" />
 			<basic name="materialType" />

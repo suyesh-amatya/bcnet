@@ -74,6 +74,7 @@
 <%@ page import="javax.portlet.PortletRequest"%>
 
 
+<%@ page import="com.bcnet.portlet.biobank.NoSuchSampleCollectionException" %>
 
 <%@ page import="com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster" %>
 <%@ page import="com.bcnet.portlet.biobank.model.BiobankAttributeLists" %>

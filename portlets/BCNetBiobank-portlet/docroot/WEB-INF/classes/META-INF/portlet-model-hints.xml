@@ -32,8 +32,8 @@
 	<model name="com.bcnet.portlet.biobank.model.Sample">
 		<field name="uuid_" type="String" />
 		<field name="sampleDbId" type="long" />
-		<field name="sampleCollectionId" type="String" />
-		<field name="biobankId" type="String" />
+		<field name="sampleCollectionDbId" type="long" />
+		<field name="biobankDbId" type="long" />
 		<field name="hashedSampleId" type="String" />
 		<field name="hashedIndividualId" type="String" />
 		<field name="materialType" type="String" />

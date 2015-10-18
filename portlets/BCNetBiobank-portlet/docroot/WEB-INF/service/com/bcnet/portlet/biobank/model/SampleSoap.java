@@ -33,8 +33,8 @@ public class SampleSoap implements Serializable {
 
 		soapModel.setUuid_(model.getUuid_());
 		soapModel.setSampleDbId(model.getSampleDbId());
-		soapModel.setSampleCollectionId(model.getSampleCollectionId());
-		soapModel.setBiobankId(model.getBiobankId());
+		soapModel.setSampleCollectionDbId(model.getSampleCollectionDbId());
+		soapModel.setBiobankDbId(model.getBiobankDbId());
 		soapModel.setHashedSampleId(model.getHashedSampleId());
 		soapModel.setHashedIndividualId(model.getHashedIndividualId());
 		soapModel.setMaterialType(model.getMaterialType());
@@ -124,20 +124,20 @@ public class SampleSoap implements Serializable {
 		_sampleDbId = sampleDbId;
 	}
 
-	public String getSampleCollectionId() {
-		return _sampleCollectionId;
+	public long getSampleCollectionDbId() {
+		return _sampleCollectionDbId;
 	}
 
-	public void setSampleCollectionId(String sampleCollectionId) {
-		_sampleCollectionId = sampleCollectionId;
+	public void setSampleCollectionDbId(long sampleCollectionDbId) {
+		_sampleCollectionDbId = sampleCollectionDbId;
 	}
 
-	public String getBiobankId() {
-		return _biobankId;
+	public long getBiobankDbId() {
+		return _biobankDbId;
 	}
 
-	public void setBiobankId(String biobankId) {
-		_biobankId = biobankId;
+	public void setBiobankDbId(long biobankDbId) {
+		_biobankDbId = biobankDbId;
 	}
 
 	public String getHashedSampleId() {
@@ -312,8 +312,8 @@ public class SampleSoap implements Serializable {
 
 	private String _uuid_;
 	private long _sampleDbId;
-	private String _sampleCollectionId;
-	private String _biobankId;
+	private long _sampleCollectionDbId;
+	private long _biobankDbId;
 	private String _hashedSampleId;
 	private String _hashedIndividualId;
 	private String _materialType;

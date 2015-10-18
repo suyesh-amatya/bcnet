@@ -51,8 +51,8 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 
 		attributes.put("uuid_", getUuid_());
 		attributes.put("sampleDbId", getSampleDbId());
-		attributes.put("sampleCollectionId", getSampleCollectionId());
-		attributes.put("biobankId", getBiobankId());
+		attributes.put("sampleCollectionDbId", getSampleCollectionDbId());
+		attributes.put("biobankDbId", getBiobankDbId());
 		attributes.put("hashedSampleId", getHashedSampleId());
 		attributes.put("hashedIndividualId", getHashedIndividualId());
 		attributes.put("materialType", getMaterialType());
@@ -96,16 +96,16 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 			setSampleDbId(sampleDbId);
 		}
 
-		String sampleCollectionId = (String)attributes.get("sampleCollectionId");
+		Long sampleCollectionDbId = (Long)attributes.get("sampleCollectionDbId");
 
-		if (sampleCollectionId != null) {
-			setSampleCollectionId(sampleCollectionId);
+		if (sampleCollectionDbId != null) {
+			setSampleCollectionDbId(sampleCollectionDbId);
 		}
 
-		String biobankId = (String)attributes.get("biobankId");
+		Long biobankDbId = (Long)attributes.get("biobankDbId");
 
-		if (biobankId != null) {
-			setBiobankId(biobankId);
+		if (biobankDbId != null) {
+			setBiobankDbId(biobankDbId);
 		}
 
 		String hashedSampleId = (String)attributes.get("hashedSampleId");
@@ -304,43 +304,43 @@ public class SampleWrapper implements Sample, ModelWrapper<Sample> {
 	}
 
 	/**
-	* Returns the sample collection ID of this sample.
+	* Returns the sample collection db ID of this sample.
 	*
-	* @return the sample collection ID of this sample
+	* @return the sample collection db ID of this sample
 	*/
 	@Override
-	public java.lang.String getSampleCollectionId() {
-		return _sample.getSampleCollectionId();
+	public long getSampleCollectionDbId() {
+		return _sample.getSampleCollectionDbId();
 	}
 
 	/**
-	* Sets the sample collection ID of this sample.
+	* Sets the sample collection db ID of this sample.
 	*
-	* @param sampleCollectionId the sample collection ID of this sample
+	* @param sampleCollectionDbId the sample collection db ID of this sample
 	*/
 	@Override
-	public void setSampleCollectionId(java.lang.String sampleCollectionId) {
-		_sample.setSampleCollectionId(sampleCollectionId);
+	public void setSampleCollectionDbId(long sampleCollectionDbId) {
+		_sample.setSampleCollectionDbId(sampleCollectionDbId);
 	}
 
 	/**
-	* Returns the biobank ID of this sample.
+	* Returns the biobank db ID of this sample.
 	*
-	* @return the biobank ID of this sample
+	* @return the biobank db ID of this sample
 	*/
 	@Override
-	public java.lang.String getBiobankId() {
-		return _sample.getBiobankId();
+	public long getBiobankDbId() {
+		return _sample.getBiobankDbId();
 	}
 
 	/**
-	* Sets the biobank ID of this sample.
+	* Sets the biobank db ID of this sample.
 	*
-	* @param biobankId the biobank ID of this sample
+	* @param biobankDbId the biobank db ID of this sample
 	*/
 	@Override
-	public void setBiobankId(java.lang.String biobankId) {
-		_sample.setBiobankId(biobankId);
+	public void setBiobankDbId(long biobankDbId) {
+		_sample.setBiobankDbId(biobankDbId);
 	}
 
 	/**
