@@ -24,5 +24,6 @@
 	<category name="BCNet Sample">
 		<portlet id="sample-upload"></portlet>
 		<portlet id="sample-import-log"></portlet>
+		<portlet id="sample-lister-search"></portlet>
 	</category>
 </display>

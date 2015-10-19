@@ -21,7 +21,6 @@ import java.io.Serializable;
 
 /**
  * @author suyama
- * @generated
  */
 public class SampleCollectionContactPK implements Comparable<SampleCollectionContactPK>,
 	Serializable {

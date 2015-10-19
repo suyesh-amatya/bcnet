@@ -202,20 +202,19 @@ public interface SampleCollectionContactModel extends BaseModel<SampleCollection
 	public Object clone();
 
 	@Override
-	public int compareTo(
-		com.bcnet.portlet.biobank.model.SampleCollectionContact sampleCollectionContact);
+	public int compareTo(SampleCollectionContact sampleCollectionContact);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<com.bcnet.portlet.biobank.model.SampleCollectionContact> toCacheModel();
+	public CacheModel<SampleCollectionContact> toCacheModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.SampleCollectionContact toEscapedModel();
+	public SampleCollectionContact toEscapedModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.SampleCollectionContact toUnescapedModel();
+	public SampleCollectionContact toUnescapedModel();
 
 	@Override
 	public String toString();

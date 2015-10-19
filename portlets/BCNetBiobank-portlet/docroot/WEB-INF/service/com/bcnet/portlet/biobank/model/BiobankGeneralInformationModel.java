@@ -239,20 +239,19 @@ public interface BiobankGeneralInformationModel extends BaseModel<BiobankGeneral
 	public Object clone();
 
 	@Override
-	public int compareTo(
-		com.bcnet.portlet.biobank.model.BiobankGeneralInformation biobankGeneralInformation);
+	public int compareTo(BiobankGeneralInformation biobankGeneralInformation);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<com.bcnet.portlet.biobank.model.BiobankGeneralInformation> toCacheModel();
+	public CacheModel<BiobankGeneralInformation> toCacheModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation toEscapedModel();
+	public BiobankGeneralInformation toEscapedModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation toUnescapedModel();
+	public BiobankGeneralInformation toUnescapedModel();
 
 	@Override
 	public String toString();

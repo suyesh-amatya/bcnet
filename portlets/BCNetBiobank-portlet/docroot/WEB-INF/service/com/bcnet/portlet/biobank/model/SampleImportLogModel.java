@@ -184,20 +184,19 @@ public interface SampleImportLogModel extends BaseModel<SampleImportLog> {
 	public Object clone();
 
 	@Override
-	public int compareTo(
-		com.bcnet.portlet.biobank.model.SampleImportLog sampleImportLog);
+	public int compareTo(SampleImportLog sampleImportLog);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<com.bcnet.portlet.biobank.model.SampleImportLog> toCacheModel();
+	public CacheModel<SampleImportLog> toCacheModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.SampleImportLog toEscapedModel();
+	public SampleImportLog toEscapedModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.SampleImportLog toUnescapedModel();
+	public SampleImportLog toUnescapedModel();
 
 	@Override
 	public String toString();

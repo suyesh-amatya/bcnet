@@ -4,14 +4,12 @@ import java.math.BigInteger;
 import java.util.List;
 
 import com.bcnet.portlet.biobank.model.BiobankGeneralInformation;
-import com.bcnet.portlet.biobank.model.impl.BiobankAttributeListsImpl;
 import com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationImpl;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;

@@ -8,10 +8,8 @@ import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.servlet.RequestDispatcher;
 
 import com.bcnet.portlet.biobank.NoSuchSampleCollectionException;
 import com.bcnet.portlet.biobank.model.Sample;
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -174,7 +171,7 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		}
 		
 		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("storageTemperature")){
-			String[] storageTemperature = {"RT", "2 째C to 10 째C", "-18 째C to -35 째C", "-60 째C to -85 째C", "LN", "Other"};
+			String[] storageTemperature = {"RT", "2 캜 to 10 캜", "-18 캜 to -35 캜", "-60 캜 to -85 캜", "LN", "Other"};
 			JSONArray jsonArray =  JSONFactoryUtil.createJSONArray();
 			for(String str:storageTemperature){
 				jsonArray.put(str);

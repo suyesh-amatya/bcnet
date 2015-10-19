@@ -71,7 +71,7 @@
 	}
 
 	List<Sample> samplesByuuid = SampleLocalServiceUtil.getSamplesByuuid(uuid);
-	String biobankName = BiobankGeneralInformationLocalServiceUtil.getBiobankByBiobankId(samplesByuuid.get(0).getBiobankId()).getBiobankName();
+	String biobankName = BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(samplesByuuid.get(0).getBiobankDbId()).getBiobankName();
 %>
 
 <%-- <portlet:renderURL var="viewSampleImportDetailsURL1">
@@ -329,7 +329,37 @@ the varImpl parameter in iteratorURL in search container. -->
 	</div>
 </div>
 
-<aui:script use="aui-base">
+<portlet:resourceURL var="checkBoxURL"></portlet:resourceURL>
+
+<aui:script use="aui-base,aui-io-request">
+var url = '<%=checkBoxURL.toString()%>';
+var containerValue = false;
+
+A.one("#<portlet:namespace/>containerCheckbox").on('change',function(event){
+	containerValue = A.one("#<portlet:namespace/>container").get("value");
+	A.io.request(
+			url, 
+			{
+		        method: 'get',
+		        data: {
+		        	<portlet:namespace/>containerCheckbox :containerValue,
+		        	<portlet:namespace/>type :"check"
+		        }
+		        
+   		});
+});
+A.io.request(url, {
+	  on: {
+	   success: function(data) {
+	    // if(this.get('responseData')){
+	    	 console.log(data);
+	    	 A.one("#<portlet:namespace/>containerCheckbox").attr("checked", true);
+	 		A.one("#<portlet:namespace/>container").attr("value", true);
+	     //}
+	   }
+	  }
+	});
+
 	//Hide Columns Filter 
 	A.one("#sample-import-detail-horizontal").on('click',function(event){
 		A.one("#sample-import-detail .span2").hide();
