@@ -190,6 +190,7 @@
 	<portlet>
 		<portlet-name>sample-lister-search</portlet-name>
 		<icon>/icon.png</icon>
+		<indexer-class>com.bcnet.portlet.sample.search.SampleIndexer</indexer-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
