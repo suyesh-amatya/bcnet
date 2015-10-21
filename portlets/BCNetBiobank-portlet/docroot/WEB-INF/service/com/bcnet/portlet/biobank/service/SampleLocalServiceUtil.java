@@ -70,10 +70,12 @@ public class SampleLocalServiceUtil {
 	* @return the sample that was removed
 	* @throws PortalException if a sample with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws com.bcnet.portlet.biobank.NoSuchSampleException
 	*/
 	public static com.bcnet.portlet.biobank.model.Sample deleteSample(
 		long sampleDbId)
-		throws com.liferay.portal.kernel.exception.PortalException,
+		throws com.bcnet.portlet.biobank.NoSuchSampleException,
+			com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().deleteSample(sampleDbId);
 	}

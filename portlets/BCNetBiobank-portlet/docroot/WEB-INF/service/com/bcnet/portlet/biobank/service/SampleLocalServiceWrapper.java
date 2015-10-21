@@ -61,10 +61,12 @@ public class SampleLocalServiceWrapper implements SampleLocalService,
 	* @return the sample that was removed
 	* @throws PortalException if a sample with the primary key could not be found
 	* @throws SystemException if a system exception occurred
+	* @throws com.bcnet.portlet.biobank.NoSuchSampleException
 	*/
 	@Override
 	public com.bcnet.portlet.biobank.model.Sample deleteSample(long sampleDbId)
-		throws com.liferay.portal.kernel.exception.PortalException,
+		throws com.bcnet.portlet.biobank.NoSuchSampleException,
+			com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _sampleLocalService.deleteSample(sampleDbId);
 	}

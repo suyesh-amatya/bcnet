@@ -104,11 +104,13 @@ public abstract class SampleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 * @return the sample that was removed
 	 * @throws PortalException if a sample with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public Sample deleteSample(long sampleDbId)
-		throws PortalException, SystemException {
+		throws PortalException, SystemException,
+			com.bcnet.portlet.biobank.NoSuchSampleException {
 		return samplePersistence.remove(sampleDbId);
 	}
 

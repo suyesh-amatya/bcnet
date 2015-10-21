@@ -16,9 +16,14 @@ package com.bcnet.portlet.biobank.service.impl;
 
 import java.util.List;
 
+import com.bcnet.portlet.biobank.NoSuchSampleException;
 import com.bcnet.portlet.biobank.model.Sample;
+import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.base.SampleLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 
 /**
  * The implementation of the sample local service.
@@ -40,6 +45,40 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.bcnet.portlet.biobank.service.SampleLocalServiceUtil} to access the sample local service.
 	 */
+	
+	public Sample addSample(Sample sample) throws SystemException{
+		System.out.println("-----SampleLocalServiceImpl called------");
+		Sample s = super.addSample(sample);
+		
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				Sample.class);
+
+		try {
+			indexer.reindex(s);
+		} catch (SearchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return s;
+	}
+	
+	public Sample deleteSample(long sampleDbId) throws NoSuchSampleException, SystemException{
+		
+		Sample sample = samplePersistence.remove(sampleDbId);
+		
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				Sample.class);
+
+		try {
+			indexer.delete(sample);
+		} catch (SearchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sample;
+		
+	}
+	
 	public void deleteSamplesByuuid(String uuid){
 		try {
 			samplePersistence.removeByuuid(uuid);

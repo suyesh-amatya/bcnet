@@ -19,6 +19,8 @@ div.dt-button-collection{
 
 	List<Sample> samplesByuuid = SampleLocalServiceUtil.getSamplesByuuid(uuid);
 	Date dateOfImport = SampleImportLogLocalServiceUtil.getSampleImportLogByUuid(uuid).getDateOfImport();
+	
+	if(!samplesByuuid.isEmpty()){
 	String biobankName = BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(samplesByuuid.get(0).getBiobankDbId()).getBiobankName();
 %>
 
@@ -118,6 +120,14 @@ div.dt-button-collection{
 		</table>
 	</div>
 </div>
+<%
+	}
+	else{
+%>
+<div class="alert alert-info"> The sample import log is empty. Seems like all the samples imported on this batch has been deleted. </div>
+<%		
+	}
+%>
 
 <script type="text/javascript">
 	$(document).ready( function () {

@@ -114,13 +114,23 @@ public class SampleLocalServiceClpInvoker {
 
 		_methodParameterTypes91 = new String[] { "java.lang.String" };
 
-		_methodName96 = "deleteSamplesByuuid";
+		_methodName96 = "addSample";
 
-		_methodParameterTypes96 = new String[] { "java.lang.String" };
+		_methodParameterTypes96 = new String[] {
+				"com.bcnet.portlet.biobank.model.Sample"
+			};
 
-		_methodName97 = "getSamplesByuuid";
+		_methodName97 = "deleteSample";
 
-		_methodParameterTypes97 = new String[] { "java.lang.String" };
+		_methodParameterTypes97 = new String[] { "long" };
+
+		_methodName98 = "deleteSamplesByuuid";
+
+		_methodParameterTypes98 = new String[] { "java.lang.String" };
+
+		_methodName99 = "getSamplesByuuid";
+
+		_methodParameterTypes99 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -226,13 +236,23 @@ public class SampleLocalServiceClpInvoker {
 
 		if (_methodName96.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+			return SampleLocalServiceUtil.addSample((com.bcnet.portlet.biobank.model.Sample)arguments[0]);
+		}
+
+		if (_methodName97.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+			return SampleLocalServiceUtil.deleteSample(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName98.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
 			SampleLocalServiceUtil.deleteSamplesByuuid((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName97.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+		if (_methodName99.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
 			return SampleLocalServiceUtil.getSamplesByuuid((java.lang.String)arguments[0]);
 		}
 
@@ -279,4 +299,8 @@ public class SampleLocalServiceClpInvoker {
 	private String[] _methodParameterTypes96;
 	private String _methodName97;
 	private String[] _methodParameterTypes97;
+	private String _methodName98;
+	private String[] _methodParameterTypes98;
+	private String _methodName99;
+	private String[] _methodParameterTypes99;
 }

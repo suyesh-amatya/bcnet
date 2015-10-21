@@ -178,7 +178,8 @@ public class SampleLocalServiceClp implements SampleLocalService {
 
 	@Override
 	public com.bcnet.portlet.biobank.model.Sample deleteSample(long sampleDbId)
-		throws com.liferay.portal.kernel.exception.PortalException,
+		throws com.bcnet.portlet.biobank.NoSuchSampleException,
+			com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -188,6 +189,10 @@ public class SampleLocalServiceClp implements SampleLocalService {
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.bcnet.portlet.biobank.NoSuchSampleException) {
+				throw (com.bcnet.portlet.biobank.NoSuchSampleException)t;
+			}
 
 			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
 				throw (com.liferay.portal.kernel.exception.PortalException)t;

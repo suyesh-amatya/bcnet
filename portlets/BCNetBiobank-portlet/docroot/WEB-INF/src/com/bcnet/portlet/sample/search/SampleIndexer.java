@@ -1,5 +1,7 @@
 package com.bcnet.portlet.sample.search;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
@@ -7,10 +9,18 @@ import javax.portlet.PortletURL;
 import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.persistence.SampleActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Company;
@@ -20,7 +30,8 @@ public class SampleIndexer extends BaseIndexer{
 
 	public static final String[] CLASS_NAMES = { Sample.class.getName() };
 	
-	public static final String PORTLET_ID = "sample-lister-search";
+	//public static final String PORTLET_ID = "sample-lister-search";
+	public static final String PORTLET_ID = "samplelistersearch_WAR_BCNetBiobankportlet";
 	
 	
 	@Override
@@ -36,18 +47,20 @@ public class SampleIndexer extends BaseIndexer{
 	}
 
 	@Override
-	protected void doDelete(Object arg0) throws Exception {
+	protected void doDelete(Object obj) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("-----doDelete called------");
 		Company company = CompanyLocalServiceUtil.getCompanyByMx(PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));
-		Sample sample = (Sample)arg0;
+		Sample sample = (Sample)obj;
 
         deleteDocument(company.getCompanyId(), sample.getSampleDbId());
 	}
 
 	@Override
-	protected Document doGetDocument(Object arg0) throws Exception {
+	protected Document doGetDocument(Object obj) throws Exception {
 		// TODO Auto-generated method stub
-		Sample sample = (Sample)arg0;
+		System.out.println("-----doGetDocument called------");
+		Sample sample = (Sample)obj;
 		
 		Document document = getBaseModelDocument(PORTLET_ID, sample);
 		
@@ -64,7 +77,7 @@ public class SampleIndexer extends BaseIndexer{
 		document.addText("anatomicalPartFreeText", sample.getAnatomicalPartFreeText());
 		document.addKeyword("sex", sample.getSex());
 		document.addNumber("ageLow", sample.getAgeLow());
-		document.addNumber("ageHight", sample.getAgeHigh());
+		document.addNumber("ageHigh", sample.getAgeHigh());
 		document.addText("ageUnit", sample.getAgeUnit());
 		document.addText("diseaseOntology", sample.getDiseaseOntology());
 		document.addKeyword("diseaseOntologyVersion", sample.getDiseaseOntologyVersion());
@@ -77,34 +90,80 @@ public class SampleIndexer extends BaseIndexer{
 	}
 
 	@Override
-	protected Summary doGetSummary(Document arg0, Locale arg1, String arg2,
-			PortletURL arg3) throws Exception {
+	protected Summary doGetSummary(Document document, Locale locale, String snippet,
+			PortletURL portletURL) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		Summary summary = createSummary(document);
 
-	@Override
-	protected void doReindex(Object arg0) throws Exception {
-		// TODO Auto-generated method stub
+        summary.setMaxContentLength(200);
+
+        return summary;
 		
 	}
 
 	@Override
-	protected void doReindex(String[] arg0) throws Exception {
+	protected void doReindex(Object obj) throws Exception {
 		// TODO Auto-generated method stub
+		Sample sample = (Sample)obj;
+
+         Document document = getDocument(sample);
+
+         Company company = CompanyLocalServiceUtil.getCompanyByMx(PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));
+         SearchEngineUtil.updateDocument(
+                 getSearchEngineId(), company.getCompanyId(), document);
 		
 	}
 
 	@Override
-	protected void doReindex(String arg0, long arg1) throws Exception {
+	protected void doReindex(String[] ids) throws Exception {
 		// TODO Auto-generated method stub
+		long companyId = GetterUtil.getLong(ids[0]);
+
+        reindexSamples(companyId);
+	}
+
+	protected void reindexSamples(long companyId) throws SystemException, PortalException {
+		// TODO Auto-generated method stub
+		final Collection<Document> documents = new ArrayList<Document>();
+
+        ActionableDynamicQuery actionableDynamicQuery = new SampleActionableDynamicQuery() {
+
+                @Override
+                protected void addCriteria(DynamicQuery dynamicQuery) {
+                }
+
+                @Override
+                protected void performAction(Object object) throws PortalException {
+                        Sample sample = (Sample) object;
+
+                        Document document = getDocument(sample);
+
+                        documents.add(document);
+                }
+
+        };
+
+        actionableDynamicQuery.setCompanyId(companyId);
+
+        actionableDynamicQuery.performActions();
+
+        SearchEngineUtil.updateDocuments(getSearchEngineId(), companyId,
+                        documents);
+	}
+
+	@Override
+	protected void doReindex(String className, long classPK) throws Exception {
+		// TODO Auto-generated method stub
+		Sample sample = SampleLocalServiceUtil.getSample(classPK);
+
+        doReindex(sample);
 		
 	}
 
 	@Override
 	protected String getPortletId(SearchContext arg0) {
 		// TODO Auto-generated method stub
-		return null;
+		return PORTLET_ID;
 	}
 
 }
