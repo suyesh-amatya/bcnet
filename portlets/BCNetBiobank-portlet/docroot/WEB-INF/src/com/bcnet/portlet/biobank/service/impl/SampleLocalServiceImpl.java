@@ -27,7 +27,10 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.TermQuery;
+import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 
 /**
@@ -84,11 +87,11 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 		//searchContext.setAttribute("content", keywords);
 		searchContext.setAttributes(attributes);
 		searchContext.setCompanyId(companyId);
-		
-		/* MultiValueFacet facet = new MultiValueFacet(searchContext);
+		System.out.println(searchContext.getAttributes());
+		 /*MultiValueFacet facet = new MultiValueFacet(searchContext);
 		 
 	        facet.setFieldName("anatomicalPartFreeText");
-	        facet.setFieldName("sampleCollectionName");
+	        //facet.setFieldName("sampleCollectionName");
 	        searchContext.addFacet(facet);*/
 		
 		
@@ -96,6 +99,8 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
 
+		TermQuery termQuery = TermQueryFactoryUtil.create(searchContext, "countryOfOrigin", keywords);
+		TermQuery termQuery1 = TermQueryFactoryUtil.create(searchContext, "anatomicalPartFreeText", keywords);
 		searchContext.setQueryConfig(queryConfig);
 		
 		System.out.println(searchContext.getCompanyId());
@@ -103,8 +108,9 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 				Sample.class);
 		System.out.println("-----SampleLocalServiceImpl search called------"+indexer.getFullQuery(searchContext));
 		System.out.println("-----SampleLocalServiceImpl search called------"+indexer);
+		return SearchEngineUtil.search(searchContext, termQuery1);
 		
-		return indexer.search(searchContext);
+		//return indexer.search(searchContext);
 	}
 	
 	public Sample addSample(Sample sample) throws SystemException{

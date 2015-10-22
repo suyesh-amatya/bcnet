@@ -71,7 +71,10 @@ public class SampleIndexer extends BaseIndexer{
 		
 		Document document = getBaseModelDocument(PORTLET_ID, sample);
 		
-		document.addText("sampleCollectionName", SampleCollectionLocalServiceUtil.getSampleCollection(sample.getSampleCollectionDbId()).getName());
+		if(sample.getSampleCollectionDbId() > 0){
+			document.addText("sampleCollectionName", SampleCollectionLocalServiceUtil.getSampleCollection(sample.getSampleCollectionDbId()).getName());
+		}
+		
 		document.addText("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName());
 		document.addKeyword("materialType", sample.getMaterialType());
 		document.addKeyword("container", sample.getContainer());
