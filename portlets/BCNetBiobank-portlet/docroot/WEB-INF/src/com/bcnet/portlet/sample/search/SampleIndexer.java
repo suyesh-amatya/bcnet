@@ -17,8 +17,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -46,6 +48,11 @@ public class SampleIndexer extends BaseIndexer{
 		return PORTLET_ID;
 	}
 
+	public Hits search(SearchContext searchContext) throws SearchException{
+		System.out.println("-----search called from SampleIndexer------");
+		return super.search(searchContext);
+	}
+	
 	@Override
 	protected void doDelete(Object obj) throws Exception {
 		// TODO Auto-generated method stub

@@ -14,16 +14,21 @@
 
 package com.bcnet.portlet.biobank.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import com.bcnet.portlet.biobank.NoSuchSampleException;
 import com.bcnet.portlet.biobank.model.Sample;
-import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.base.SampleLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 
 /**
  * The implementation of the sample local service.
@@ -46,8 +51,64 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.bcnet.portlet.biobank.service.SampleLocalServiceUtil} to access the sample local service.
 	 */
 	
+	public Hits search(long companyId, String keywords) throws SearchException{
+		SearchContext searchContext = new SearchContext();
+		searchContext.setAndSearch(false);
+		searchContext.setKeywords(keywords);
+		Map<String, Serializable> attributes = new java.util.HashMap<String, Serializable>();
+		attributes.put("sampleCollectionName", keywords);
+		attributes.put("biobankName", keywords);
+		attributes.put("materialType", keywords);
+		attributes.put("container", keywords);
+		attributes.put("storageTemperature", keywords);
+		attributes.put("sampledTime", keywords);
+		attributes.put("anatomicalPartOntology", keywords);
+		attributes.put("anatomicalPartOntologyVersion", keywords);
+		attributes.put("anatomicalPartOntologyCode", keywords);
+		attributes.put("anatomicalPartOntologyDescription", keywords);
+		attributes.put("anatomicalPartFreeText", keywords);
+		attributes.put("sex", keywords);
+		attributes.put("ageLow", keywords);
+		attributes.put("ageHigh", keywords);
+		attributes.put("ageUnit", keywords);
+		attributes.put("diseaseOntology", keywords);
+		attributes.put("diseaseOntologyVersion", keywords);
+		attributes.put("diseaseOntologyCode", keywords);
+		attributes.put("diseaseOntologyDescription", keywords);
+		attributes.put("diseaseFreeText", keywords);
+		attributes.put("countryOfOrigin", keywords);
+		
+		searchContext.setAttribute("container", keywords);
+		
+		
+		//searchContext.setAttribute("content", keywords);
+		searchContext.setAttributes(attributes);
+		searchContext.setCompanyId(companyId);
+		
+		/* MultiValueFacet facet = new MultiValueFacet(searchContext);
+		 
+	        facet.setFieldName("anatomicalPartFreeText");
+	        facet.setFieldName("sampleCollectionName");
+	        searchContext.addFacet(facet);*/
+		
+		
+		QueryConfig queryConfig = new QueryConfig();
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		searchContext.setQueryConfig(queryConfig);
+		
+		System.out.println(searchContext.getCompanyId());
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				Sample.class);
+		System.out.println("-----SampleLocalServiceImpl search called------"+indexer.getFullQuery(searchContext));
+		System.out.println("-----SampleLocalServiceImpl search called------"+indexer);
+		
+		return indexer.search(searchContext);
+	}
+	
 	public Sample addSample(Sample sample) throws SystemException{
-		System.out.println("-----SampleLocalServiceImpl called------");
+		System.out.println("-----SampleLocalServiceImpl addSample called------");
 		Sample s = super.addSample(sample);
 		
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
@@ -63,7 +124,7 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 	}
 	
 	public Sample deleteSample(long sampleDbId) throws NoSuchSampleException, SystemException{
-		
+		System.out.println("-----SampleLocalServiceImpl deleteSample called------");
 		Sample sample = samplePersistence.remove(sampleDbId);
 		
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(

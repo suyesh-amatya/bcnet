@@ -114,13 +114,17 @@ public class SampleLocalServiceClp implements SampleLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "deleteSamplesByuuid";
+		_methodName19 = "search";
 
-		_methodParameterTypes19 = new String[] { "java.lang.String" };
+		_methodParameterTypes19 = new String[] { "long", "java.lang.String" };
 
-		_methodName20 = "getSamplesByuuid";
+		_methodName20 = "deleteSamplesByuuid";
 
 		_methodParameterTypes20 = new String[] { "java.lang.String" };
+
+		_methodName21 = "getSamplesByuuid";
+
+		_methodParameterTypes21 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -675,10 +679,44 @@ public class SampleLocalServiceClp implements SampleLocalService {
 	}
 
 	@Override
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String keywords)
+		throws com.liferay.portal.kernel.search.SearchException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						companyId,
+						
+					ClpSerializer.translateInput(keywords)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.search.SearchException) {
+				throw (com.liferay.portal.kernel.search.SearchException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.search.Hits)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public void deleteSamplesByuuid(java.lang.String uuid) {
 		try {
-			_invokableLocalService.invokeMethod(_methodName19,
-				_methodParameterTypes19,
+			_invokableLocalService.invokeMethod(_methodName20,
+				_methodParameterTypes20,
 				new Object[] { ClpSerializer.translateInput(uuid) });
 		}
 		catch (Throwable t) {
@@ -700,8 +738,8 @@ public class SampleLocalServiceClp implements SampleLocalService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] { ClpSerializer.translateInput(uuid) });
 		}
 		catch (Throwable t) {
@@ -760,4 +798,6 @@ public class SampleLocalServiceClp implements SampleLocalService {
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

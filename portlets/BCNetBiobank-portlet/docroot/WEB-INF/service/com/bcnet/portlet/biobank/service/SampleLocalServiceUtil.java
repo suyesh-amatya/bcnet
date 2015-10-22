@@ -277,6 +277,12 @@ public class SampleLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		java.lang.String keywords)
+		throws com.liferay.portal.kernel.search.SearchException {
+		return getService().search(companyId, keywords);
+	}
+
 	public static void deleteSamplesByuuid(java.lang.String uuid) {
 		getService().deleteSamplesByuuid(uuid);
 	}
