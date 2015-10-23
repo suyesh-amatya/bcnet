@@ -100,7 +100,7 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 		queryConfig.setScoreEnabled(false);
 
 		TermQuery termQuery = TermQueryFactoryUtil.create(searchContext, "countryOfOrigin", keywords);
-		TermQuery termQuery1 = TermQueryFactoryUtil.create(searchContext, "anatomicalPartFreeText", keywords);
+		TermQuery termQuery1 = TermQueryFactoryUtil.create(searchContext, "materialType", keywords);
 		searchContext.setQueryConfig(queryConfig);
 		
 		System.out.println(searchContext.getCompanyId());
