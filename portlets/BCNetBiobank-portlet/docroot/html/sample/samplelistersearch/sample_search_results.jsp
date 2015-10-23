@@ -48,6 +48,7 @@ System.out.println("Indexer"+indexer.getFullQuery(searchContext));
         for (int i = 0; i < hits.getDocs().length; i++) {
                 Document doc = hits.doc(i);
 System.out.println(doc.toString());
+out.println(doc.toString());
                 long entryId = GetterUtil
                 .getLong(doc.get(Field.ENTRY_CLASS_PK));
 

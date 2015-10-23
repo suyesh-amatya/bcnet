@@ -15,6 +15,7 @@
 package com.bcnet.portlet.biobank.service.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,15 +23,21 @@ import com.bcnet.portlet.biobank.NoSuchSampleException;
 import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.service.base.SampleLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
+import com.liferay.portal.kernel.search.TermRangeQuery;
+import com.liferay.portal.kernel.search.TermRangeQueryFactoryUtil;
 import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 
 /**
@@ -55,10 +62,14 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 	 */
 	
 	public Hits search(long companyId, String keywords) throws SearchException{
+		System.out.println("-----SampleLocalServiceImpl search called------");
+		
 		SearchContext searchContext = new SearchContext();
-		searchContext.setAndSearch(false);
-		searchContext.setKeywords(keywords);
-		Map<String, Serializable> attributes = new java.util.HashMap<String, Serializable>();
+		//searchContext.setAndSearch(false);
+		
+		
+		Map<String, Serializable> attributes = new HashMap<String, Serializable>();
+		
 		attributes.put("sampleCollectionName", keywords);
 		attributes.put("biobankName", keywords);
 		attributes.put("materialType", keywords);
@@ -80,36 +91,45 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 		attributes.put("diseaseOntologyDescription", keywords);
 		attributes.put("diseaseFreeText", keywords);
 		attributes.put("countryOfOrigin", keywords);
-		
-		searchContext.setAttribute("container", keywords);
-		
-		
-		//searchContext.setAttribute("content", keywords);
+
 		searchContext.setAttributes(attributes);
 		searchContext.setCompanyId(companyId);
+		searchContext.setKeywords(keywords);
 		System.out.println(searchContext.getAttributes());
-		 /*MultiValueFacet facet = new MultiValueFacet(searchContext);
-		 
-	        facet.setFieldName("anatomicalPartFreeText");
-	        //facet.setFieldName("sampleCollectionName");
-	        searchContext.addFacet(facet);*/
-		
-		
+        
 		QueryConfig queryConfig = new QueryConfig();
+		
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
-
-		TermQuery termQuery = TermQueryFactoryUtil.create(searchContext, "countryOfOrigin", keywords);
-		TermQuery termQuery1 = TermQueryFactoryUtil.create(searchContext, "materialType", keywords);
+		//searchContext.setAttribute("materialType:", keywords);
 		searchContext.setQueryConfig(queryConfig);
+		
+		BooleanQuery searchQuery = BooleanQueryFactoryUtil.create(searchContext);
+		 
+		TermQuery termQuery = TermQueryFactoryUtil.create(searchContext, "materialType", keywords);
+		TermQuery termQuery1 = TermQueryFactoryUtil.create(searchContext, "container", keywords);
+		TermQuery termQuery2 = TermQueryFactoryUtil.create(searchContext, "anatomicalPartFreeText", keywords);
+		TermRangeQuery termRangeQuery = TermRangeQueryFactoryUtil.create(searchContext, "materialType", "blood", "plasma", true, true);
+		
+		try {
+			searchQuery.add(termQuery, BooleanClauseOccur.SHOULD);
+			searchQuery.add(termQuery1, BooleanClauseOccur.SHOULD);
+			searchQuery.add(termQuery2, BooleanClauseOccur.SHOULD);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println(searchContext.getCompanyId());
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 				Sample.class);
 		System.out.println("-----SampleLocalServiceImpl search called------"+indexer.getFullQuery(searchContext));
 		System.out.println("-----SampleLocalServiceImpl search called------"+indexer);
-		return SearchEngineUtil.search(searchContext, termQuery1);
-		
+		System.out.println(termQuery.toString());
+		System.out.println(termQuery1.toString());
+		System.out.println(termQuery2.toString());
+		System.out.println(termRangeQuery.toString());
+		return SearchEngineUtil.search(searchContext, searchQuery);
 		//return indexer.search(searchContext);
 	}
 	

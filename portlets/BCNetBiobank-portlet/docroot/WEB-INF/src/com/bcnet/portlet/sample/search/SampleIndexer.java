@@ -17,6 +17,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -74,9 +75,10 @@ public class SampleIndexer extends BaseIndexer{
 		if(sample.getSampleCollectionDbId() > 0){
 			document.addText("sampleCollectionName", SampleCollectionLocalServiceUtil.getSampleCollection(sample.getSampleCollectionDbId()).getName());
 		}
-		
-		document.addText("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName());
-		document.addKeyword("materialType", sample.getMaterialType());
+		document.add(new Field("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName()));
+		document.add(new Field("materialType", sample.getMaterialType()));
+		//document.addText("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName());
+		//document.addKeyword("materialType", sample.getMaterialType());
 		document.addKeyword("container", sample.getContainer());
 		document.addText("storageTemperature", sample.getStorageTemperature());
 		document.addDate("sampledTime", sample.getSampledTime());
