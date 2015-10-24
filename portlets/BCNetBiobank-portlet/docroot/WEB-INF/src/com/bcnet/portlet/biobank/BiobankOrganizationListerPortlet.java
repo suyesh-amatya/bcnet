@@ -7,8 +7,10 @@ import javax.portlet.ActionResponse;
 
 import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -26,37 +28,42 @@ public class BiobankOrganizationListerPortlet extends MVCPortlet {
 	public void deleteBiobankOrganization(ActionRequest request, ActionResponse response){
 		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
 		
-		try {
-			Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);
-			long organizationid = organization.getOrganizationId();
-			
-			List<User> users = UserLocalServiceUtil.getOrganizationUsers(biobankDbId);
-			
-			for(User user : users){
-				long userid = user.getUserId();
-				List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(userid, organization.getGroup().getGroupId());
-				long[] userid_array = { userid };
-				for (UserGroupRole ugr : usergrouprolles) {
-					UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userid_array, organization.getGroup().getGroupId(), ugr.getRoleId());
+		if(SampleLocalServiceUtil.getSamplesByBiobankDbId(biobankDbId).isEmpty()){
+			try {
+				Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);
+				long organizationid = organization.getOrganizationId();
+				
+				List<User> users = UserLocalServiceUtil.getOrganizationUsers(biobankDbId);
+				
+				for(User user : users){
+					long userid = user.getUserId();
+					List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(userid, organization.getGroup().getGroupId());
+					long[] userid_array = { userid };
+					for (UserGroupRole ugr : usergrouprolles) {
+						UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userid_array, organization.getGroup().getGroupId(), ugr.getRoleId());
+					}
+					
+					String user_positions = user.getExpandoBridge().getAttribute("Role within the organisation").toString();
+					String new_user_positions = user_positions.replaceAll("(?m)(?<=^|;)"+organizationid+"[^;]*;", "");
+					user.getExpandoBridge().setAttribute("Role within the organisation", new_user_positions);
+					
+					OrganizationLocalServiceUtil.deleteUserOrganization(userid, organization);
 				}
 				
-				String user_positions = user.getExpandoBridge().getAttribute("Role within the organisation").toString();
-				String new_user_positions = user_positions.replaceAll("(?m)(?<=^|;)"+organizationid+"[^;]*;", "");
-				user.getExpandoBridge().setAttribute("Role within the organisation", new_user_positions);
+				OrganizationLocalServiceUtil.deleteOrganization(organization);			
+				BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);			
+				BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeListsBybiobankDbId(biobankDbId);
 				
-				OrganizationLocalServiceUtil.deleteUserOrganization(userid, organization);
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
-			OrganizationLocalServiceUtil.deleteOrganization(organization);			
-			BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);			
-			BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeListsBybiobankDbId(biobankDbId);
-			
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}
+		else{
+			SessionErrors.add(request, "samples-exist-for-this-biobank");
 		}
 	}
 }

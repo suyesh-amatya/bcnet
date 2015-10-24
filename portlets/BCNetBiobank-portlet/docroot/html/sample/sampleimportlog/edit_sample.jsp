@@ -1,6 +1,6 @@
 <%@ include file="/html/init.jsp" %>
 
-<liferay-ui:error key="sample-collection-does-not-exist" message="The Sample Collection Id does not exist." />
+<liferay-ui:error key="sample-collection-does-not-exist" message="sample-collection-does-not-exist" />
 
 <%
 

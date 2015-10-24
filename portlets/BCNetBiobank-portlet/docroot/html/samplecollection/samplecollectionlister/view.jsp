@@ -1,5 +1,7 @@
 <%@ include file="/html/init.jsp" %>
 
+<liferay-ui:error key="samples-exist-for-this-sample-collection" message="samples-exist-for-this-sample-collection"/>
+
 <%!
    com.liferay.portal.kernel.dao.search.SearchContainer<SampleCollection> searchContainer = null;
 %>

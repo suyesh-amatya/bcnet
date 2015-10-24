@@ -12,6 +12,7 @@ import com.bcnet.portlet.biobank.model.BiobankGeneralInformation;
 import com.bcnet.portlet.biobank.model.impl.BiobankGeneralInformationImpl;
 import com.bcnet.portlet.biobank.service.BiobankAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -185,39 +186,45 @@ public class BiobankGeneralInformationPortlet extends MVCPortlet {
 	public void deleteBiobankOrganization(ActionRequest request, ActionResponse response) throws IOException{
 		long biobankDbId = ParamUtil.getLong(request, "biobankDbId");
 		
-		try {
-			Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);	
-			long organizationid = organization.getOrganizationId();
-			
-			List<User> users = UserLocalServiceUtil.getOrganizationUsers(biobankDbId);
-			
-			for(User user : users){
-				long userid = user.getUserId();
-				List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(userid, organization.getGroup().getGroupId());
-				long[] userid_array = { userid };
-				for (UserGroupRole ugr : usergrouprolles) {
-					UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userid_array, organization.getGroup().getGroupId(), ugr.getRoleId());
+		if(SampleLocalServiceUtil.getSamplesByBiobankDbId(biobankDbId).isEmpty()){
+			try {
+				Organization organization = OrganizationLocalServiceUtil.getOrganization(biobankDbId);	
+				long organizationid = organization.getOrganizationId();
+				
+				List<User> users = UserLocalServiceUtil.getOrganizationUsers(biobankDbId);
+				
+				for(User user : users){
+					long userid = user.getUserId();
+					List<UserGroupRole> usergrouprolles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(userid, organization.getGroup().getGroupId());
+					long[] userid_array = { userid };
+					for (UserGroupRole ugr : usergrouprolles) {
+						UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userid_array, organization.getGroup().getGroupId(), ugr.getRoleId());
+					}
+					
+					String user_positions = user.getExpandoBridge().getAttribute("Role within the organisation").toString();
+					String new_user_positions = user_positions.replaceAll("(?m)(?<=^|;)"+organizationid+"[^;]*;", "");
+					user.getExpandoBridge().setAttribute("Role within the organisation", new_user_positions);
+					
+					OrganizationLocalServiceUtil.deleteUserOrganization(userid, organization);
 				}
 				
-				String user_positions = user.getExpandoBridge().getAttribute("Role within the organisation").toString();
-				String new_user_positions = user_positions.replaceAll("(?m)(?<=^|;)"+organizationid+"[^;]*;", "");
-				user.getExpandoBridge().setAttribute("Role within the organisation", new_user_positions);
-				
-				OrganizationLocalServiceUtil.deleteUserOrganization(userid, organization);
+				OrganizationLocalServiceUtil.deleteOrganization(organization);	
+				BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeListsBybiobankDbId(biobankDbId);
+				BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);			
+				ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+				response.sendRedirect(themeDisplay.getURLPortal()+"/biobanks");
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
-			OrganizationLocalServiceUtil.deleteOrganization(organization);	
-			BiobankAttributeListsLocalServiceUtil.deleteBiobankAttributeListsBybiobankDbId(biobankDbId);
-			BiobankGeneralInformationLocalServiceUtil.deleteBiobankGeneralInformation(biobankDbId);			
-			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-			response.sendRedirect(themeDisplay.getURLPortal()+"/biobanks");
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		else{
+			SessionErrors.add(request, "samples-exist-for-this-biobank");
+		}
+		
 	}
 	
 

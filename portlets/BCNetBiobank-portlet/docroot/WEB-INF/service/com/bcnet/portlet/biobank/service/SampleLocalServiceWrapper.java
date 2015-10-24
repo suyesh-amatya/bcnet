@@ -300,6 +300,18 @@ public class SampleLocalServiceWrapper implements SampleLocalService,
 		return _sampleLocalService.getSamplesByuuid(uuid);
 	}
 
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.Sample> getSamplesByBiobankDbId(
+		long biobankDbId) {
+		return _sampleLocalService.getSamplesByBiobankDbId(biobankDbId);
+	}
+
+	@Override
+	public java.util.List<com.bcnet.portlet.biobank.model.Sample> getSamplesBySampleCollectionDbId(
+		long sampleCollectionDbId) {
+		return _sampleLocalService.getSamplesBySampleCollectionDbId(sampleCollectionDbId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

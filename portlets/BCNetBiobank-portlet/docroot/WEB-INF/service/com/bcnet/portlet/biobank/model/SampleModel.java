@@ -467,19 +467,19 @@ public interface SampleModel extends BaseModel<Sample> {
 	public Object clone();
 
 	@Override
-	public int compareTo(Sample sample);
+	public int compareTo(com.bcnet.portlet.biobank.model.Sample sample);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<Sample> toCacheModel();
+	public CacheModel<com.bcnet.portlet.biobank.model.Sample> toCacheModel();
 
 	@Override
-	public Sample toEscapedModel();
+	public com.bcnet.portlet.biobank.model.Sample toEscapedModel();
 
 	@Override
-	public Sample toUnescapedModel();
+	public com.bcnet.portlet.biobank.model.Sample toUnescapedModel();
 
 	@Override
 	public String toString();

@@ -2,6 +2,8 @@
 
 <liferay-ui:success key="biobank-add-success" message="biobank-add-success"/>
 
+<liferay-ui:error key="samples-exist-for-this-biobank" message="samples-exist-for-this-biobank" />
+
 <%
 // Parameters for permission Checking
 long groupId = scopeGroupId;

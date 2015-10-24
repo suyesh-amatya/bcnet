@@ -2,9 +2,12 @@ package com.bcnet.portlet.sample.search;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
+
+
 
 import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
@@ -16,6 +19,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
@@ -26,8 +30,13 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 public class SampleIndexer extends BaseIndexer{
 
@@ -68,6 +77,7 @@ public class SampleIndexer extends BaseIndexer{
 	protected Document doGetDocument(Object obj) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("-----doGetDocument called------");
+		Company company = CompanyLocalServiceUtil.getCompanyByMx(PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));
 		Sample sample = (Sample)obj;
 		
 		Document document = getBaseModelDocument(PORTLET_ID, sample);
@@ -75,10 +85,10 @@ public class SampleIndexer extends BaseIndexer{
 		if(sample.getSampleCollectionDbId() > 0){
 			document.addText("sampleCollectionName", SampleCollectionLocalServiceUtil.getSampleCollection(sample.getSampleCollectionDbId()).getName());
 		}
-		document.add(new Field("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName()));
-		document.add(new Field("materialType", sample.getMaterialType()));
-		//document.addText("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName());
-		//document.addKeyword("materialType", sample.getMaterialType());
+		//document.add(new Field("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName()));
+		//document.add(new Field("materialType", sample.getMaterialType()));
+		document.addText("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName());
+		document.addKeyword("materialType", sample.getMaterialType());
 		document.addKeyword("container", sample.getContainer());
 		document.addText("storageTemperature", sample.getStorageTemperature());
 		document.addDate("sampledTime", sample.getSampledTime());
@@ -97,9 +107,50 @@ public class SampleIndexer extends BaseIndexer{
 		document.addText("diseaseOntologyDescription", sample.getDiseaseOntologyDescription());
 		document.addText("diseaseFreeText", sample.getDiseaseFreeText());
 		document.addKeyword("countryOfOrigin", sample.getCountryOfOrigin());
+		document.addNumber(Field.COMPANY_ID, company.getCompanyId());
+		document.addNumber(Field.GROUP_ID, company.getGroupId());
 		
 		return document;
 	}
+
+	
+	@Override
+	public void postProcessSearchQuery(BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		addSearchTerm(searchQuery, searchContext, "sampleCollectionName", true);
+		addSearchTerm(searchQuery, searchContext, "biobankName", true);
+		addSearchTerm(searchQuery, searchContext, "materialType", true);
+		addSearchTerm(searchQuery, searchContext, "container", true);
+		addSearchTerm(searchQuery, searchContext, "storageTemperature", true);
+		addSearchTerm(searchQuery, searchContext, "anatomicalPartOntology", true);
+		addSearchTerm(searchQuery, searchContext, "anatomicalPartOntologyVersion", true);
+		addSearchTerm(searchQuery, searchContext, "anatomicalPartOntologyCode", true);
+		addSearchTerm(searchQuery, searchContext, "anatomicalPartOntologyDescription", true);
+		addSearchTerm(searchQuery, searchContext, "anatomicalPartFreeText", true);
+		addSearchTerm(searchQuery, searchContext, "sex", true);
+		addSearchTerm(searchQuery, searchContext, "ageLow", true);
+		addSearchTerm(searchQuery, searchContext, "ageHigh", true);
+		addSearchTerm(searchQuery, searchContext, "ageUnit", true);
+		addSearchTerm(searchQuery, searchContext, "diseaseOntology", true);
+		addSearchTerm(searchQuery, searchContext, "diseaseOntologyVersion", true);
+		addSearchTerm(searchQuery, searchContext, "diseaseOntologyCode", true);
+		addSearchTerm(searchQuery, searchContext, "diseaseOntologyDescription", true);
+		addSearchTerm(searchQuery, searchContext, "diseaseFreeText", true);
+		addSearchTerm(searchQuery, searchContext, "countryOfOrigin", true);
+		
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params != null) {
+			String expandoAttributes = (String)params.get("expandoAttributes");
+
+			if (Validator.isNotNull(expandoAttributes)) {
+				addSearchExpando(searchQuery, searchContext, expandoAttributes);
+			}
+		}
+	}
+	
 
 	@Override
 	protected Summary doGetSummary(Document document, Locale locale, String snippet,

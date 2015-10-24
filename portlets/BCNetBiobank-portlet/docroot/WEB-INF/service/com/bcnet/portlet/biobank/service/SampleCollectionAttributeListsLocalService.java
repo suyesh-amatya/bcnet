@@ -16,6 +16,7 @@ package com.bcnet.portlet.biobank.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface SampleCollectionAttributeListsLocalService
 	* @return the sample collection attribute lists that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists addSampleCollectionAttributeLists(
 		com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists sampleCollectionAttributeLists)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface SampleCollectionAttributeListsLocalService
 	* @throws PortalException if a sample collection attribute lists with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists deleteSampleCollectionAttributeLists(
 		long sampleCollectionAttributeListsId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface SampleCollectionAttributeListsLocalService
 	* @return the sample collection attribute lists that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists deleteSampleCollectionAttributeLists(
 		com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists sampleCollectionAttributeLists)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -226,6 +230,7 @@ public interface SampleCollectionAttributeListsLocalService
 	* @return the sample collection attribute lists that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists updateSampleCollectionAttributeLists(
 		com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists sampleCollectionAttributeLists)
 		throws com.liferay.portal.kernel.exception.SystemException;

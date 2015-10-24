@@ -292,6 +292,17 @@ public class SampleLocalServiceUtil {
 		return getService().getSamplesByuuid(uuid);
 	}
 
+	public static java.util.List<com.bcnet.portlet.biobank.model.Sample> getSamplesByBiobankDbId(
+		long biobankDbId) {
+		return getService().getSamplesByBiobankDbId(biobankDbId);
+	}
+
+	public static java.util.List<com.bcnet.portlet.biobank.model.Sample> getSamplesBySampleCollectionDbId(
+		long sampleCollectionDbId) {
+		return getService()
+				   .getSamplesBySampleCollectionDbId(sampleCollectionDbId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

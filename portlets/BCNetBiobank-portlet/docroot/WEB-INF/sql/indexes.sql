@@ -10,6 +10,8 @@ create index IX_F785D414 on biobankattributelists (biobankId, attributeListName,
 create index IX_62815FF0 on biobankattributelistsmaster (attributeListName);
 create index IX_8C07D432 on biobankattributelistsmaster (attributeName);
 
+create index IX_7A797B9D on sample (biobankDbId);
+create index IX_6D3180E5 on sample (sampleCollectionDbId);
 create index IX_CE24C4C4 on sample (uuid_);
 
 create index IX_1F65AD65 on samplecollection (sampleCollectionId);

@@ -156,6 +156,12 @@
 		<finder name="uuid" return-type="Collection">
 			<finder-column name="uuid_" />
 		</finder>
+		<finder name="biobankDbId" return-type="Collection">
+			<finder-column name="biobankDbId" />
+		</finder>
+		<finder name="sampleCollectionDbId" return-type="Collection">
+			<finder-column name="sampleCollectionDbId" />
+		</finder>
 	</entity>
 	
 	

@@ -268,6 +268,342 @@ public class SampleUtil {
 	}
 
 	/**
+	* Returns all the samples where biobankDbId = &#63;.
+	*
+	* @param biobankDbId the biobank db ID
+	* @return the matching samples
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.bcnet.portlet.biobank.model.Sample> findBybiobankDbId(
+		long biobankDbId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findBybiobankDbId(biobankDbId);
+	}
+
+	/**
+	* Returns a range of all the samples where biobankDbId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param biobankDbId the biobank db ID
+	* @param start the lower bound of the range of samples
+	* @param end the upper bound of the range of samples (not inclusive)
+	* @return the range of matching samples
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.bcnet.portlet.biobank.model.Sample> findBybiobankDbId(
+		long biobankDbId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findBybiobankDbId(biobankDbId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the samples where biobankDbId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param biobankDbId the biobank db ID
+	* @param start the lower bound of the range of samples
+	* @param end the upper bound of the range of samples (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching samples
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.bcnet.portlet.biobank.model.Sample> findBybiobankDbId(
+		long biobankDbId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBybiobankDbId(biobankDbId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first sample in the ordered set where biobankDbId = &#63;.
+	*
+	* @param biobankDbId the biobank db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching sample
+	* @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample findBybiobankDbId_First(
+		long biobankDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.bcnet.portlet.biobank.NoSuchSampleException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBybiobankDbId_First(biobankDbId, orderByComparator);
+	}
+
+	/**
+	* Returns the first sample in the ordered set where biobankDbId = &#63;.
+	*
+	* @param biobankDbId the biobank db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching sample, or <code>null</code> if a matching sample could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample fetchBybiobankDbId_First(
+		long biobankDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchBybiobankDbId_First(biobankDbId, orderByComparator);
+	}
+
+	/**
+	* Returns the last sample in the ordered set where biobankDbId = &#63;.
+	*
+	* @param biobankDbId the biobank db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching sample
+	* @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample findBybiobankDbId_Last(
+		long biobankDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.bcnet.portlet.biobank.NoSuchSampleException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBybiobankDbId_Last(biobankDbId, orderByComparator);
+	}
+
+	/**
+	* Returns the last sample in the ordered set where biobankDbId = &#63;.
+	*
+	* @param biobankDbId the biobank db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching sample, or <code>null</code> if a matching sample could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample fetchBybiobankDbId_Last(
+		long biobankDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchBybiobankDbId_Last(biobankDbId, orderByComparator);
+	}
+
+	/**
+	* Returns the samples before and after the current sample in the ordered set where biobankDbId = &#63;.
+	*
+	* @param sampleDbId the primary key of the current sample
+	* @param biobankDbId the biobank db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next sample
+	* @throws com.bcnet.portlet.biobank.NoSuchSampleException if a sample with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample[] findBybiobankDbId_PrevAndNext(
+		long sampleDbId, long biobankDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.bcnet.portlet.biobank.NoSuchSampleException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBybiobankDbId_PrevAndNext(sampleDbId, biobankDbId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the samples where biobankDbId = &#63; from the database.
+	*
+	* @param biobankDbId the biobank db ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeBybiobankDbId(long biobankDbId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeBybiobankDbId(biobankDbId);
+	}
+
+	/**
+	* Returns the number of samples where biobankDbId = &#63;.
+	*
+	* @param biobankDbId the biobank db ID
+	* @return the number of matching samples
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countBybiobankDbId(long biobankDbId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countBybiobankDbId(biobankDbId);
+	}
+
+	/**
+	* Returns all the samples where sampleCollectionDbId = &#63;.
+	*
+	* @param sampleCollectionDbId the sample collection db ID
+	* @return the matching samples
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.bcnet.portlet.biobank.model.Sample> findBysampleCollectionDbId(
+		long sampleCollectionDbId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findBysampleCollectionDbId(sampleCollectionDbId);
+	}
+
+	/**
+	* Returns a range of all the samples where sampleCollectionDbId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param sampleCollectionDbId the sample collection db ID
+	* @param start the lower bound of the range of samples
+	* @param end the upper bound of the range of samples (not inclusive)
+	* @return the range of matching samples
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.bcnet.portlet.biobank.model.Sample> findBysampleCollectionDbId(
+		long sampleCollectionDbId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBysampleCollectionDbId(sampleCollectionDbId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the samples where sampleCollectionDbId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param sampleCollectionDbId the sample collection db ID
+	* @param start the lower bound of the range of samples
+	* @param end the upper bound of the range of samples (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching samples
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.bcnet.portlet.biobank.model.Sample> findBysampleCollectionDbId(
+		long sampleCollectionDbId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBysampleCollectionDbId(sampleCollectionDbId, start,
+			end, orderByComparator);
+	}
+
+	/**
+	* Returns the first sample in the ordered set where sampleCollectionDbId = &#63;.
+	*
+	* @param sampleCollectionDbId the sample collection db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching sample
+	* @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample findBysampleCollectionDbId_First(
+		long sampleCollectionDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.bcnet.portlet.biobank.NoSuchSampleException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBysampleCollectionDbId_First(sampleCollectionDbId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first sample in the ordered set where sampleCollectionDbId = &#63;.
+	*
+	* @param sampleCollectionDbId the sample collection db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching sample, or <code>null</code> if a matching sample could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample fetchBysampleCollectionDbId_First(
+		long sampleCollectionDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchBysampleCollectionDbId_First(sampleCollectionDbId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last sample in the ordered set where sampleCollectionDbId = &#63;.
+	*
+	* @param sampleCollectionDbId the sample collection db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching sample
+	* @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample findBysampleCollectionDbId_Last(
+		long sampleCollectionDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.bcnet.portlet.biobank.NoSuchSampleException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBysampleCollectionDbId_Last(sampleCollectionDbId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last sample in the ordered set where sampleCollectionDbId = &#63;.
+	*
+	* @param sampleCollectionDbId the sample collection db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching sample, or <code>null</code> if a matching sample could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample fetchBysampleCollectionDbId_Last(
+		long sampleCollectionDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchBysampleCollectionDbId_Last(sampleCollectionDbId,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the samples before and after the current sample in the ordered set where sampleCollectionDbId = &#63;.
+	*
+	* @param sampleDbId the primary key of the current sample
+	* @param sampleCollectionDbId the sample collection db ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next sample
+	* @throws com.bcnet.portlet.biobank.NoSuchSampleException if a sample with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.bcnet.portlet.biobank.model.Sample[] findBysampleCollectionDbId_PrevAndNext(
+		long sampleDbId, long sampleCollectionDbId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.bcnet.portlet.biobank.NoSuchSampleException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBysampleCollectionDbId_PrevAndNext(sampleDbId,
+			sampleCollectionDbId, orderByComparator);
+	}
+
+	/**
+	* Removes all the samples where sampleCollectionDbId = &#63; from the database.
+	*
+	* @param sampleCollectionDbId the sample collection db ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeBysampleCollectionDbId(long sampleCollectionDbId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeBysampleCollectionDbId(sampleCollectionDbId);
+	}
+
+	/**
+	* Returns the number of samples where sampleCollectionDbId = &#63;.
+	*
+	* @param sampleCollectionDbId the sample collection db ID
+	* @return the number of matching samples
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countBysampleCollectionDbId(long sampleCollectionDbId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countBysampleCollectionDbId(sampleCollectionDbId);
+	}
+
+	/**
 	* Caches the sample in the entity cache if it is enabled.
 	*
 	* @param sample the sample

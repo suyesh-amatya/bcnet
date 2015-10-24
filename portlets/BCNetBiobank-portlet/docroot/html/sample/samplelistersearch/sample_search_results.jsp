@@ -74,7 +74,7 @@ out.println(doc.toString());
         }
 %>
 
-<%-- <liferay-ui:search-container delta="10" emptyResultsMessage="no-entries-were-found">
+<liferay-ui:search-container delta="10" emptyResultsMessage="no-entries-were-found" iteratorURL="<%=searchURL %>">
         <liferay-ui:search-container-results
                 results="<%= entries %>"
                 total="<%= entries.size() %>"
@@ -82,21 +82,21 @@ out.println(doc.toString());
 
         <liferay-ui:search-container-row
                 className="com.bcnet.portlet.biobank.model.Sample"
-                keyProperty="entryId" modelVar="entry" escapedModel="<%=true%>">
+                keyProperty="sampleDbId" modelVar="sample" escapedModel="<%=true%>">
                 <liferay-ui:search-container-column-text name="guestbook"
-                        value="<%=guestbookMap.get(Long.toString(entry.getSampleDbId()))%>" />
+                        value="<%=guestbookMap.get(Long.toString(sample.getSampleDbId()))%>" />
 
-                <liferay-ui:search-container-column-text property="message" />
+                <liferay-ui:search-container-column-text property="container" />
 
-                <liferay-ui:search-container-column-text property="name" />
+                <liferay-ui:search-container-column-text property="diseaseFreeText" />
 
-                <liferay-ui:search-container-column-jsp
+                <<%-- liferay-ui:search-container-column-jsp
             path="/html/guestbook/guestbook_actions.jsp"
-            align="right" />
+            align="right" /> --%>
         </liferay-ui:search-container-row>
 
         <liferay-ui:search-iterator />
-</liferay-ui:search-container> --%>
+</liferay-ui:search-container>
 
 <%
         if (Validator.isNotNull(keywords)) {

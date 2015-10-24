@@ -11,12 +11,16 @@ import com.bcnet.portlet.biobank.model.SampleCollection;
 import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -139,11 +143,16 @@ public class SampleCollectionGeneralInformationPortlet extends MVCPortlet {
 		
 		long sampleCollectionDbId = ParamUtil.getLong(request, "scdbid");
 		
-		SampleCollectionContactLocalServiceUtil.deleteSampleCollectionContactsBySampleCollectionDbId(sampleCollectionDbId);
-		SampleCollectionAttributeListsLocalServiceUtil.deleteSampleCollectionAttributeListsBySampleCollectionDbId(sampleCollectionDbId);
-		SampleCollectionLocalServiceUtil.deleteSampleCollection(sampleCollectionDbId);
-		
-		sendRedirect(request, response);
-		
+		if(SampleLocalServiceUtil.getSamplesBySampleCollectionDbId(sampleCollectionDbId).isEmpty()){
+			SampleCollectionContactLocalServiceUtil.deleteSampleCollectionContactsBySampleCollectionDbId(sampleCollectionDbId);
+			SampleCollectionAttributeListsLocalServiceUtil.deleteSampleCollectionAttributeListsBySampleCollectionDbId(sampleCollectionDbId);
+			SampleCollectionLocalServiceUtil.deleteSampleCollection(sampleCollectionDbId);
+			sendRedirect(request, response);
+		}
+		else{
+			SessionErrors.add(request, "samples-exist-for-this-sample-collection");
+			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+			response.sendRedirect(themeDisplay.getURLPortal()+"/sample-collections/general-information?scdbid="+sampleCollectionDbId);
+		}
 	}
 }

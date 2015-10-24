@@ -16,6 +16,7 @@ package com.bcnet.portlet.biobank.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface BiobankGeneralInformationLocalService extends BaseLocalService,
 	* @return the biobank general information that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation addBiobankGeneralInformation(
 		com.bcnet.portlet.biobank.model.BiobankGeneralInformation biobankGeneralInformation)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface BiobankGeneralInformationLocalService extends BaseLocalService,
 	* @throws PortalException if a biobank general information with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation deleteBiobankGeneralInformation(
 		long biobankDbId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface BiobankGeneralInformationLocalService extends BaseLocalService,
 	* @return the biobank general information that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation deleteBiobankGeneralInformation(
 		com.bcnet.portlet.biobank.model.BiobankGeneralInformation biobankGeneralInformation)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -226,6 +230,7 @@ public interface BiobankGeneralInformationLocalService extends BaseLocalService,
 	* @return the biobank general information that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.BiobankGeneralInformation updateBiobankGeneralInformation(
 		com.bcnet.portlet.biobank.model.BiobankGeneralInformation biobankGeneralInformation)
 		throws com.liferay.portal.kernel.exception.SystemException;

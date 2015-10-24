@@ -557,6 +557,10 @@ public class SampleCollectionClp extends BaseModelImpl<SampleCollection>
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -656,4 +660,5 @@ public class SampleCollectionClp extends BaseModelImpl<SampleCollection>
 	private boolean _accreditation;
 	private boolean _qualityControl;
 	private BaseModel<?> _sampleCollectionRemoteModel;
+	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

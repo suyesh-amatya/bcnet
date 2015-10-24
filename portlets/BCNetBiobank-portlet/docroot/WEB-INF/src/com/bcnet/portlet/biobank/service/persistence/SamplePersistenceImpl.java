@@ -611,6 +611,998 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 	private static final String _FINDER_COLUMN_UUID_UUID__1 = "sample.uuid_ IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID__2 = "sample.uuid_ = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID__3 = "(sample.uuid_ IS NULL OR sample.uuid_ = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_BIOBANKDBID =
+		new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
+			SampleModelImpl.FINDER_CACHE_ENABLED, SampleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findBybiobankDbId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIOBANKDBID =
+		new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
+			SampleModelImpl.FINDER_CACHE_ENABLED, SampleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBybiobankDbId",
+			new String[] { Long.class.getName() },
+			SampleModelImpl.BIOBANKDBID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_BIOBANKDBID = new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
+			SampleModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBybiobankDbId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the samples where biobankDbId = &#63;.
+	 *
+	 * @param biobankDbId the biobank db ID
+	 * @return the matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Sample> findBybiobankDbId(long biobankDbId)
+		throws SystemException {
+		return findBybiobankDbId(biobankDbId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the samples where biobankDbId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param biobankDbId the biobank db ID
+	 * @param start the lower bound of the range of samples
+	 * @param end the upper bound of the range of samples (not inclusive)
+	 * @return the range of matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Sample> findBybiobankDbId(long biobankDbId, int start, int end)
+		throws SystemException {
+		return findBybiobankDbId(biobankDbId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the samples where biobankDbId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param biobankDbId the biobank db ID
+	 * @param start the lower bound of the range of samples
+	 * @param end the upper bound of the range of samples (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Sample> findBybiobankDbId(long biobankDbId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIOBANKDBID;
+			finderArgs = new Object[] { biobankDbId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_BIOBANKDBID;
+			finderArgs = new Object[] { biobankDbId, start, end, orderByComparator };
+		}
+
+		List<Sample> list = (List<Sample>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Sample sample : list) {
+				if ((biobankDbId != sample.getBiobankDbId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SAMPLE_WHERE);
+
+			query.append(_FINDER_COLUMN_BIOBANKDBID_BIOBANKDBID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(SampleModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(biobankDbId);
+
+				if (!pagination) {
+					list = (List<Sample>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Sample>(list);
+				}
+				else {
+					list = (List<Sample>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first sample in the ordered set where biobankDbId = &#63;.
+	 *
+	 * @param biobankDbId the biobank db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching sample
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample findBybiobankDbId_First(long biobankDbId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSampleException, SystemException {
+		Sample sample = fetchBybiobankDbId_First(biobankDbId, orderByComparator);
+
+		if (sample != null) {
+			return sample;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("biobankDbId=");
+		msg.append(biobankDbId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSampleException(msg.toString());
+	}
+
+	/**
+	 * Returns the first sample in the ordered set where biobankDbId = &#63;.
+	 *
+	 * @param biobankDbId the biobank db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching sample, or <code>null</code> if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample fetchBybiobankDbId_First(long biobankDbId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Sample> list = findBybiobankDbId(biobankDbId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last sample in the ordered set where biobankDbId = &#63;.
+	 *
+	 * @param biobankDbId the biobank db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching sample
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample findBybiobankDbId_Last(long biobankDbId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSampleException, SystemException {
+		Sample sample = fetchBybiobankDbId_Last(biobankDbId, orderByComparator);
+
+		if (sample != null) {
+			return sample;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("biobankDbId=");
+		msg.append(biobankDbId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSampleException(msg.toString());
+	}
+
+	/**
+	 * Returns the last sample in the ordered set where biobankDbId = &#63;.
+	 *
+	 * @param biobankDbId the biobank db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching sample, or <code>null</code> if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample fetchBybiobankDbId_Last(long biobankDbId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countBybiobankDbId(biobankDbId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Sample> list = findBybiobankDbId(biobankDbId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the samples before and after the current sample in the ordered set where biobankDbId = &#63;.
+	 *
+	 * @param sampleDbId the primary key of the current sample
+	 * @param biobankDbId the biobank db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next sample
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a sample with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample[] findBybiobankDbId_PrevAndNext(long sampleDbId,
+		long biobankDbId, OrderByComparator orderByComparator)
+		throws NoSuchSampleException, SystemException {
+		Sample sample = findByPrimaryKey(sampleDbId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Sample[] array = new SampleImpl[3];
+
+			array[0] = getBybiobankDbId_PrevAndNext(session, sample,
+					biobankDbId, orderByComparator, true);
+
+			array[1] = sample;
+
+			array[2] = getBybiobankDbId_PrevAndNext(session, sample,
+					biobankDbId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Sample getBybiobankDbId_PrevAndNext(Session session,
+		Sample sample, long biobankDbId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SAMPLE_WHERE);
+
+		query.append(_FINDER_COLUMN_BIOBANKDBID_BIOBANKDBID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(SampleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(biobankDbId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(sample);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Sample> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the samples where biobankDbId = &#63; from the database.
+	 *
+	 * @param biobankDbId the biobank db ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeBybiobankDbId(long biobankDbId) throws SystemException {
+		for (Sample sample : findBybiobankDbId(biobankDbId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(sample);
+		}
+	}
+
+	/**
+	 * Returns the number of samples where biobankDbId = &#63;.
+	 *
+	 * @param biobankDbId the biobank db ID
+	 * @return the number of matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countBybiobankDbId(long biobankDbId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_BIOBANKDBID;
+
+		Object[] finderArgs = new Object[] { biobankDbId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SAMPLE_WHERE);
+
+			query.append(_FINDER_COLUMN_BIOBANKDBID_BIOBANKDBID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(biobankDbId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_BIOBANKDBID_BIOBANKDBID_2 = "sample.biobankDbId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_SAMPLECOLLECTIONDBID =
+		new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
+			SampleModelImpl.FINDER_CACHE_ENABLED, SampleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findBysampleCollectionDbId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SAMPLECOLLECTIONDBID =
+		new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
+			SampleModelImpl.FINDER_CACHE_ENABLED, SampleImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findBysampleCollectionDbId",
+			new String[] { Long.class.getName() },
+			SampleModelImpl.SAMPLECOLLECTIONDBID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONDBID = new FinderPath(SampleModelImpl.ENTITY_CACHE_ENABLED,
+			SampleModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countBysampleCollectionDbId", new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the samples where sampleCollectionDbId = &#63;.
+	 *
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @return the matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Sample> findBysampleCollectionDbId(long sampleCollectionDbId)
+		throws SystemException {
+		return findBysampleCollectionDbId(sampleCollectionDbId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the samples where sampleCollectionDbId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @param start the lower bound of the range of samples
+	 * @param end the upper bound of the range of samples (not inclusive)
+	 * @return the range of matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Sample> findBysampleCollectionDbId(long sampleCollectionDbId,
+		int start, int end) throws SystemException {
+		return findBysampleCollectionDbId(sampleCollectionDbId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the samples where sampleCollectionDbId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.bcnet.portlet.biobank.model.impl.SampleModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @param start the lower bound of the range of samples
+	 * @param end the upper bound of the range of samples (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Sample> findBysampleCollectionDbId(long sampleCollectionDbId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SAMPLECOLLECTIONDBID;
+			finderArgs = new Object[] { sampleCollectionDbId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_SAMPLECOLLECTIONDBID;
+			finderArgs = new Object[] {
+					sampleCollectionDbId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Sample> list = (List<Sample>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Sample sample : list) {
+				if ((sampleCollectionDbId != sample.getSampleCollectionDbId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SAMPLE_WHERE);
+
+			query.append(_FINDER_COLUMN_SAMPLECOLLECTIONDBID_SAMPLECOLLECTIONDBID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(SampleModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(sampleCollectionDbId);
+
+				if (!pagination) {
+					list = (List<Sample>)QueryUtil.list(q, getDialect(), start,
+							end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Sample>(list);
+				}
+				else {
+					list = (List<Sample>)QueryUtil.list(q, getDialect(), start,
+							end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first sample in the ordered set where sampleCollectionDbId = &#63;.
+	 *
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching sample
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample findBysampleCollectionDbId_First(long sampleCollectionDbId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSampleException, SystemException {
+		Sample sample = fetchBysampleCollectionDbId_First(sampleCollectionDbId,
+				orderByComparator);
+
+		if (sample != null) {
+			return sample;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("sampleCollectionDbId=");
+		msg.append(sampleCollectionDbId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSampleException(msg.toString());
+	}
+
+	/**
+	 * Returns the first sample in the ordered set where sampleCollectionDbId = &#63;.
+	 *
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching sample, or <code>null</code> if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample fetchBysampleCollectionDbId_First(long sampleCollectionDbId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Sample> list = findBysampleCollectionDbId(sampleCollectionDbId, 0,
+				1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last sample in the ordered set where sampleCollectionDbId = &#63;.
+	 *
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching sample
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample findBysampleCollectionDbId_Last(long sampleCollectionDbId,
+		OrderByComparator orderByComparator)
+		throws NoSuchSampleException, SystemException {
+		Sample sample = fetchBysampleCollectionDbId_Last(sampleCollectionDbId,
+				orderByComparator);
+
+		if (sample != null) {
+			return sample;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("sampleCollectionDbId=");
+		msg.append(sampleCollectionDbId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSampleException(msg.toString());
+	}
+
+	/**
+	 * Returns the last sample in the ordered set where sampleCollectionDbId = &#63;.
+	 *
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching sample, or <code>null</code> if a matching sample could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample fetchBysampleCollectionDbId_Last(long sampleCollectionDbId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countBysampleCollectionDbId(sampleCollectionDbId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Sample> list = findBysampleCollectionDbId(sampleCollectionDbId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the samples before and after the current sample in the ordered set where sampleCollectionDbId = &#63;.
+	 *
+	 * @param sampleDbId the primary key of the current sample
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next sample
+	 * @throws com.bcnet.portlet.biobank.NoSuchSampleException if a sample with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Sample[] findBysampleCollectionDbId_PrevAndNext(long sampleDbId,
+		long sampleCollectionDbId, OrderByComparator orderByComparator)
+		throws NoSuchSampleException, SystemException {
+		Sample sample = findByPrimaryKey(sampleDbId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Sample[] array = new SampleImpl[3];
+
+			array[0] = getBysampleCollectionDbId_PrevAndNext(session, sample,
+					sampleCollectionDbId, orderByComparator, true);
+
+			array[1] = sample;
+
+			array[2] = getBysampleCollectionDbId_PrevAndNext(session, sample,
+					sampleCollectionDbId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Sample getBysampleCollectionDbId_PrevAndNext(Session session,
+		Sample sample, long sampleCollectionDbId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SAMPLE_WHERE);
+
+		query.append(_FINDER_COLUMN_SAMPLECOLLECTIONDBID_SAMPLECOLLECTIONDBID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(SampleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(sampleCollectionDbId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(sample);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Sample> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the samples where sampleCollectionDbId = &#63; from the database.
+	 *
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeBysampleCollectionDbId(long sampleCollectionDbId)
+		throws SystemException {
+		for (Sample sample : findBysampleCollectionDbId(sampleCollectionDbId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(sample);
+		}
+	}
+
+	/**
+	 * Returns the number of samples where sampleCollectionDbId = &#63;.
+	 *
+	 * @param sampleCollectionDbId the sample collection db ID
+	 * @return the number of matching samples
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countBysampleCollectionDbId(long sampleCollectionDbId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONDBID;
+
+		Object[] finderArgs = new Object[] { sampleCollectionDbId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SAMPLE_WHERE);
+
+			query.append(_FINDER_COLUMN_SAMPLECOLLECTIONDBID_SAMPLECOLLECTIONDBID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(sampleCollectionDbId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_SAMPLECOLLECTIONDBID_SAMPLECOLLECTIONDBID_2 =
+		"sample.sampleCollectionDbId = ?";
 
 	public SamplePersistenceImpl() {
 		setModelClass(Sample.class);
@@ -846,6 +1838,44 @@ public class SamplePersistenceImpl extends BasePersistenceImpl<Sample>
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
+					args);
+			}
+
+			if ((sampleModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIOBANKDBID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						sampleModelImpl.getOriginalBiobankDbId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BIOBANKDBID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIOBANKDBID,
+					args);
+
+				args = new Object[] { sampleModelImpl.getBiobankDbId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BIOBANKDBID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIOBANKDBID,
+					args);
+			}
+
+			if ((sampleModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SAMPLECOLLECTIONDBID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						sampleModelImpl.getOriginalSampleCollectionDbId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONDBID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SAMPLECOLLECTIONDBID,
+					args);
+
+				args = new Object[] { sampleModelImpl.getSampleCollectionDbId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SAMPLECOLLECTIONDBID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SAMPLECOLLECTIONDBID,
 					args);
 			}
 		}

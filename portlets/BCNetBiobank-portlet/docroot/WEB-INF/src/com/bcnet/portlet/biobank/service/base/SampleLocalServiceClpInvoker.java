@@ -135,6 +135,14 @@ public class SampleLocalServiceClpInvoker {
 		_methodName100 = "getSamplesByuuid";
 
 		_methodParameterTypes100 = new String[] { "java.lang.String" };
+
+		_methodName101 = "getSamplesByBiobankDbId";
+
+		_methodParameterTypes101 = new String[] { "long" };
+
+		_methodName102 = "getSamplesBySampleCollectionDbId";
+
+		_methodParameterTypes102 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -266,6 +274,16 @@ public class SampleLocalServiceClpInvoker {
 			return SampleLocalServiceUtil.getSamplesByuuid((java.lang.String)arguments[0]);
 		}
 
+		if (_methodName101.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+			return SampleLocalServiceUtil.getSamplesByBiobankDbId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName102.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
+			return SampleLocalServiceUtil.getSamplesBySampleCollectionDbId(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -315,4 +333,8 @@ public class SampleLocalServiceClpInvoker {
 	private String[] _methodParameterTypes99;
 	private String _methodName100;
 	private String[] _methodParameterTypes100;
+	private String _methodName101;
+	private String[] _methodParameterTypes101;
+	private String _methodName102;
+	private String[] _methodParameterTypes102;
 }

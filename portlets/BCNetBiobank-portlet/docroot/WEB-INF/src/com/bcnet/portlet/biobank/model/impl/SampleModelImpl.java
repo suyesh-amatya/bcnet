@@ -106,8 +106,10 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.bcnet.portlet.biobank.model.Sample"),
 			true);
-	public static long UUID__COLUMN_BITMASK = 1L;
-	public static long SAMPLEDBID_COLUMN_BITMASK = 2L;
+	public static long BIOBANKDBID_COLUMN_BITMASK = 1L;
+	public static long SAMPLECOLLECTIONDBID_COLUMN_BITMASK = 2L;
+	public static long UUID__COLUMN_BITMASK = 4L;
+	public static long SAMPLEDBID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -450,7 +452,19 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@Override
 	public void setSampleCollectionDbId(long sampleCollectionDbId) {
+		_columnBitmask |= SAMPLECOLLECTIONDBID_COLUMN_BITMASK;
+
+		if (!_setOriginalSampleCollectionDbId) {
+			_setOriginalSampleCollectionDbId = true;
+
+			_originalSampleCollectionDbId = _sampleCollectionDbId;
+		}
+
 		_sampleCollectionDbId = sampleCollectionDbId;
+	}
+
+	public long getOriginalSampleCollectionDbId() {
+		return _originalSampleCollectionDbId;
 	}
 
 	@JSON
@@ -461,7 +475,19 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 	@Override
 	public void setBiobankDbId(long biobankDbId) {
+		_columnBitmask |= BIOBANKDBID_COLUMN_BITMASK;
+
+		if (!_setOriginalBiobankDbId) {
+			_setOriginalBiobankDbId = true;
+
+			_originalBiobankDbId = _biobankDbId;
+		}
+
 		_biobankDbId = biobankDbId;
+	}
+
+	public long getOriginalBiobankDbId() {
+		return _originalBiobankDbId;
 	}
 
 	@JSON
@@ -897,6 +923,14 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 
 		sampleModelImpl._originalUuid_ = sampleModelImpl._uuid_;
 
+		sampleModelImpl._originalSampleCollectionDbId = sampleModelImpl._sampleCollectionDbId;
+
+		sampleModelImpl._setOriginalSampleCollectionDbId = false;
+
+		sampleModelImpl._originalBiobankDbId = sampleModelImpl._biobankDbId;
+
+		sampleModelImpl._setOriginalBiobankDbId = false;
+
 		sampleModelImpl._columnBitmask = 0;
 	}
 
@@ -1265,7 +1299,11 @@ public class SampleModelImpl extends BaseModelImpl<Sample>
 	private String _originalUuid_;
 	private long _sampleDbId;
 	private long _sampleCollectionDbId;
+	private long _originalSampleCollectionDbId;
+	private boolean _setOriginalSampleCollectionDbId;
 	private long _biobankDbId;
+	private long _originalBiobankDbId;
+	private boolean _setOriginalBiobankDbId;
 	private String _hashedSampleId;
 	private String _hashedIndividualId;
 	private String _materialType;

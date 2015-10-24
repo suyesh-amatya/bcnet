@@ -154,19 +154,19 @@ public interface SampleCollectionAttributeListsModel extends BaseModel<SampleCol
 
 	@Override
 	public int compareTo(
-		SampleCollectionAttributeLists sampleCollectionAttributeLists);
+		com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists sampleCollectionAttributeLists);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<SampleCollectionAttributeLists> toCacheModel();
+	public CacheModel<com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists> toCacheModel();
 
 	@Override
-	public SampleCollectionAttributeLists toEscapedModel();
+	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists toEscapedModel();
 
 	@Override
-	public SampleCollectionAttributeLists toUnescapedModel();
+	public com.bcnet.portlet.biobank.model.SampleCollectionAttributeLists toUnescapedModel();
 
 	@Override
 	public String toString();

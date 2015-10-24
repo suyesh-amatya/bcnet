@@ -524,6 +524,10 @@ public class BiobankGeneralInformationClp extends BaseModelImpl<BiobankGeneralIn
 		}
 	}
 
+	public Class<?> getClpSerializerClass() {
+		return _clpSerializerClass;
+	}
+
 	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
@@ -616,4 +620,5 @@ public class BiobankGeneralInformationClp extends BaseModelImpl<BiobankGeneralIn
 	private boolean _backup;
 	private boolean _trainingCourses;
 	private BaseModel<?> _biobankGeneralInformationRemoteModel;
+	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

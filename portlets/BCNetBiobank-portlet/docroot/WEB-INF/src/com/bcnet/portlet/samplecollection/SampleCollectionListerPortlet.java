@@ -8,8 +8,10 @@ import javax.portlet.ActionResponse;
 import com.bcnet.portlet.biobank.service.SampleCollectionAttributeListsLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionContactLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
+import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -22,11 +24,15 @@ public class SampleCollectionListerPortlet extends MVCPortlet {
 		
 		long sampleCollectionDbId = ParamUtil.getLong(request, "scdbid");
 		
-		SampleCollectionContactLocalServiceUtil.deleteSampleCollectionContactsBySampleCollectionDbId(sampleCollectionDbId);
-		SampleCollectionAttributeListsLocalServiceUtil.deleteSampleCollectionAttributeListsBySampleCollectionDbId(sampleCollectionDbId);
-		SampleCollectionLocalServiceUtil.deleteSampleCollection(sampleCollectionDbId);
-		
-		sendRedirect(request, response);
+		if(SampleLocalServiceUtil.getSamplesBySampleCollectionDbId(sampleCollectionDbId).isEmpty()){
+			SampleCollectionContactLocalServiceUtil.deleteSampleCollectionContactsBySampleCollectionDbId(sampleCollectionDbId);
+			SampleCollectionAttributeListsLocalServiceUtil.deleteSampleCollectionAttributeListsBySampleCollectionDbId(sampleCollectionDbId);
+			SampleCollectionLocalServiceUtil.deleteSampleCollection(sampleCollectionDbId);
+			sendRedirect(request, response);
+		}
+		else{
+			SessionErrors.add(request, "samples-exist-for-this-sample-collection");
+		}
 	}
 	
 	

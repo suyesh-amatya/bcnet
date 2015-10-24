@@ -79,4 +79,5 @@ public class BiobankGeneralInformationLocalServiceImpl
 	public BiobankGeneralInformation getBiobankByBiobankId(String biobankId) throws NoSuchBiobankGeneralInformationException, SystemException{
 		return biobankGeneralInformationPersistence.findBybiobankId(biobankId);
 	}
+	
 }

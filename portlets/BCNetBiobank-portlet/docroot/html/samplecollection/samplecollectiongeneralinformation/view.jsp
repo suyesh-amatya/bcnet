@@ -1,5 +1,7 @@
 <%@ include file="/html/init.jsp" %> 
 
+<liferay-ui:error key="samples-exist-for-this-sample-collection" message="samples-exist-for-this-sample-collection"/>
+
 <liferay-ui:success key="sample-collection-add-success" message="sample-collection-add-success"/>
 
 <%
