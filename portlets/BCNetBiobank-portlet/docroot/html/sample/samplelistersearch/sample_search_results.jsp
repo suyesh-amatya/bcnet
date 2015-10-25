@@ -1,9 +1,5 @@
 <%@include file="/html/init.jsp"%>
 
-<%
-    String keywords = ParamUtil.getString(request, "keywords");
-%>
-
 <liferay-portlet:renderURL varImpl="searchURL">
         <portlet:param name="mvcPath" value="/html/sample/samplelistersearch/sample_search_results.jsp" />
 </liferay-portlet:renderURL>
@@ -22,7 +18,7 @@
 
     <div class="search-form">
         <span class="aui-search-bar">
-            <aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-entries" type="text" />
+            <aui:input inlineField="<%= true %>" label="" name="keywords" size="50" title="search-entries" type="text" />
 
             <aui:button type="submit" value="search" />
         </span>
@@ -30,61 +26,51 @@
 </aui:form>
 
 <%
-        /* SearchContext searchContext = SearchContextFactory
-        .getInstance(request);
+    String keywords = ParamUtil.getString(request, "keywords");
 
-        searchContext.setKeywords(keywords);
-        searchContext.setAttribute("paginationType", "more");
-        searchContext.setStart(0);
-        searchContext.setEnd(10);
-        System.out.println("searchContext"+searchContext.getKeywords());
-        Indexer indexer = IndexerRegistryUtil.getIndexer(Sample.class); 
-System.out.println("Indexer"+indexer.getFullQuery(searchContext));
-        Hits hits = indexer.search(searchContext); */
-        Hits hits = SampleLocalServiceUtil.search(themeDisplay.getCompanyId(), keywords);
-        System.out.println("hits "+hits.toString());
-        List<Sample> entries = new ArrayList<Sample>();
-        System.out.println("hits "+hits.getDocs().length);
-        for (int i = 0; i < hits.getDocs().length; i++) {
-                Document doc = hits.doc(i);
-System.out.println(doc.toString());
-out.println(doc.toString());
-                long entryId = GetterUtil
-                .getLong(doc.get(Field.ENTRY_CLASS_PK));
+	SearchContainer<Sample> sampleSearchContainer = new SearchContainer<Sample>(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, searchURL, null, "no-samples-match-search-criteria");
+	
 
-                Sample entry = null;
+    SearchContext searchContext = SearchContextFactory.getInstance(request);
+    
+    
+	Hits hits = SampleLocalServiceUtil.search(themeDisplay.getCompanyId(), keywords, sampleSearchContainer.getStart(), sampleSearchContainer.getEnd());
 
-                try {
-                        entry = SampleLocalServiceUtil.getSample(entryId);
-                } catch (PortalException pe) {
-                        _log.error(pe.getLocalizedMessage());
-                } catch (SystemException se) {
-                        _log.error(se.getLocalizedMessage());
-                }
+	List<Sample> samples = new ArrayList<Sample>();
 
-                entries.add(entry);
-        }
+	for (int i = 0; i < hits.getDocs().length; i++) {
+		Document doc = hits.doc(i);
+		
+		long sampleDbId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+		
+		Sample sample = null;
+		
+		try {
+			sample = SampleLocalServiceUtil.getSample(sampleDbId);
+		} catch (PortalException pe) {
+		        _log.error(pe.getLocalizedMessage());
+		} catch (SystemException se) {
+		        _log.error(se.getLocalizedMessage());
+		}
+		
+		samples.add(sample);
+	}
 
-        List<Sample> guestbooks = SampleLocalServiceUtil.getSamples(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-        //System.out.println("Sample "+guestbooks);
-        Map<String, String> guestbookMap = new HashMap<String, String>();
-
-        for (Sample guestbook : guestbooks) {
-                guestbookMap.put(Long.toString(guestbook.getSampleDbId()), guestbook.getHashedSampleId());
-        }
+       
+       
 %>
 
-<liferay-ui:search-container delta="10" emptyResultsMessage="no-entries-were-found" iteratorURL="<%=searchURL %>">
+<liferay-ui:search-container searchContainer="<%=sampleSearchContainer %>">
         <liferay-ui:search-container-results
-                results="<%= entries %>"
-                total="<%= entries.size() %>"
+                results="<%= samples %>"
+                total="<%= hits.getLength() %>"
         />
 
         <liferay-ui:search-container-row
                 className="com.bcnet.portlet.biobank.model.Sample"
                 keyProperty="sampleDbId" modelVar="sample" escapedModel="<%=true%>">
-                <liferay-ui:search-container-column-text name="guestbook"
-                        value="<%=guestbookMap.get(Long.toString(sample.getSampleDbId()))%>" />
+                <liferay-ui:search-container-column-text name="materialType"
+                        value="<%=sample.getMaterialType()%>" />
 
                 <liferay-ui:search-container-column-text property="container" />
 
@@ -107,28 +93,5 @@ out.println(doc.toString());
 %>
 
 <%!
-        private static Log _log = LogFactoryUtil.getLog("docroot.html.guestbook.view_search_jsp");
+	private static Log _log = LogFactoryUtil.getLog("docroot.html.sample.samplelistersearch.sample_search_results.jsp");
 %>
-<%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
-<%@ page import="com.liferay.portal.kernel.exception.PortalException" %>
-<%@ page import="com.liferay.portal.kernel.exception.SystemException" %>
-<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
-<%@ page import="com.liferay.portal.kernel.log.Log" %>
-<%@ page import="com.liferay.portal.kernel.log.LogFactoryUtil" %>
-<%@ page import="com.liferay.portal.kernel.search.Indexer" %>
-<%@ page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
-<%@ page import="com.liferay.portal.kernel.search.SearchContext" %>
-<%@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
-<%@ page import="com.liferay.portal.kernel.search.Hits" %>
-<%@ page import="com.liferay.portal.kernel.search.Document" %>
-<%@ page import="com.liferay.portal.kernel.search.Field" %>
-<%@ page import="com.liferay.portal.kernel.util.StringPool" %>
-<%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.Validator" %>
-<%@ page import="com.liferay.portal.util.PortalUtil" %>
-
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
-
-<%@ page import="javax.portlet.PortletURL" %>

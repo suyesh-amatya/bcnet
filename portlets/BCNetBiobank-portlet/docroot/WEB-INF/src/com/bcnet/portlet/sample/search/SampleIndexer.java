@@ -88,25 +88,25 @@ public class SampleIndexer extends BaseIndexer{
 		//document.add(new Field("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName()));
 		//document.add(new Field("materialType", sample.getMaterialType()));
 		document.addText("biobankName", BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(sample.getBiobankDbId()).getBiobankName());
-		document.addKeyword("materialType", sample.getMaterialType());
-		document.addKeyword("container", sample.getContainer());
+		document.addText("materialType", sample.getMaterialType());
+		document.addText("container", sample.getContainer());
 		document.addText("storageTemperature", sample.getStorageTemperature());
 		document.addDate("sampledTime", sample.getSampledTime());
 		document.addText("anatomicalPartOntology", sample.getAnatomicalPartOntology());
-		document.addKeyword("anatomicalPartOntologyVersion", sample.getAnatomicalPartOntologyVersion());
-		document.addKeyword("anatomicalPartOntologyCode", sample.getAnatomicalPartOntologyCode());
+		document.addText("anatomicalPartOntologyVersion", sample.getAnatomicalPartOntologyVersion());
+		document.addText("anatomicalPartOntologyCode", sample.getAnatomicalPartOntologyCode());
 		document.addText("anatomicalPartOntologyDescription", sample.getAnatomicalPartOntologyDescription());
 		document.addText("anatomicalPartFreeText", sample.getAnatomicalPartFreeText());
-		document.addKeyword("sex", sample.getSex());
+		document.addText("sex", sample.getSex());
 		document.addNumber("ageLow", sample.getAgeLow());
 		document.addNumber("ageHigh", sample.getAgeHigh());
 		document.addText("ageUnit", sample.getAgeUnit());
 		document.addText("diseaseOntology", sample.getDiseaseOntology());
-		document.addKeyword("diseaseOntologyVersion", sample.getDiseaseOntologyVersion());
-		document.addKeyword("diseaseOntologyCode", sample.getDiseaseOntologyCode());
+		document.addText("diseaseOntologyVersion", sample.getDiseaseOntologyVersion());
+		document.addText("diseaseOntologyCode", sample.getDiseaseOntologyCode());
 		document.addText("diseaseOntologyDescription", sample.getDiseaseOntologyDescription());
 		document.addText("diseaseFreeText", sample.getDiseaseFreeText());
-		document.addKeyword("countryOfOrigin", sample.getCountryOfOrigin());
+		document.addText("countryOfOrigin", sample.getCountryOfOrigin());
 		document.addNumber(Field.COMPANY_ID, company.getCompanyId());
 		document.addNumber(Field.GROUP_ID, company.getGroupId());
 		
@@ -117,12 +117,14 @@ public class SampleIndexer extends BaseIndexer{
 	@Override
 	public void postProcessSearchQuery(BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
-
+		System.out.println("-----postProcessSearchQuery called------");
+		
 		addSearchTerm(searchQuery, searchContext, "sampleCollectionName", true);
 		addSearchTerm(searchQuery, searchContext, "biobankName", true);
 		addSearchTerm(searchQuery, searchContext, "materialType", true);
 		addSearchTerm(searchQuery, searchContext, "container", true);
 		addSearchTerm(searchQuery, searchContext, "storageTemperature", true);
+		addSearchTerm(searchQuery, searchContext, "sampledTime", true);
 		addSearchTerm(searchQuery, searchContext, "anatomicalPartOntology", true);
 		addSearchTerm(searchQuery, searchContext, "anatomicalPartOntologyVersion", true);
 		addSearchTerm(searchQuery, searchContext, "anatomicalPartOntologyCode", true);

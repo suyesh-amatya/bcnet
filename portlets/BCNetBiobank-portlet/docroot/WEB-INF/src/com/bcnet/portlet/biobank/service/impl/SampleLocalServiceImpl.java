@@ -18,31 +18,16 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.bcnet.portlet.biobank.NoSuchSampleException;
 import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.service.base.SampleLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.search.BooleanClauseOccur;
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.ParseException;
-import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.search.TermQuery;
-import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
-import com.liferay.portal.kernel.search.TermRangeQuery;
-import com.liferay.portal.kernel.search.TermRangeQueryFactoryUtil;
-import com.liferay.portal.kernel.search.TokenizerUtil;
-import com.liferay.portal.kernel.search.facet.Facet;
-import com.liferay.portal.kernel.search.facet.MultiValueFacet;
-import com.liferay.portal.util.PortalUtil;
 
 /**
  * The implementation of the sample local service.
@@ -65,14 +50,17 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.bcnet.portlet.biobank.service.SampleLocalServiceUtil} to access the sample local service.
 	 */
 	
-	public Hits search(long companyId, String keywords) throws SearchException{
+	public Hits search(long companyId, String keywords, int start, int end) throws SearchException{
 		System.out.println("-----SampleLocalServiceImpl search called------");
 		
+		
 		SearchContext searchContext = new SearchContext();
+		
+		searchContext.setCompanyId(companyId);
+		searchContext.setKeywords(keywords);
 		searchContext.setAndSearch(false);
-		searchContext.setAttribute("paginationType", "more");
-        //searchContext.setStart(0);
-        //searchContext.setEnd(10);
+        searchContext.setStart(start);
+        searchContext.setEnd(end);
         
 		
 		Map<String, Serializable> attributes = new HashMap<String, Serializable>();
@@ -100,35 +88,8 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 		attributes.put("countryOfOrigin", keywords);
 
 		searchContext.setAttributes(attributes);
-		searchContext.setKeywords(keywords);
-		searchContext.setCompanyId(companyId);
 		
-		//System.out.println(searchContext.getAttributes());
-		System.out.println(searchContext.getCompanyId());
-		System.out.println(searchContext.getKeywords());
-		
-		/*String[] entryClassNames = { Sample.class.getName() };
-		searchContext.setEntryClassNames(entryClassNames);
-		MultiValueFacet biobankNameFacet = new MultiValueFacet(searchContext);
-		biobankNameFacet.setFieldName("biobankName");
-		searchContext.addFacet(biobankNameFacet);
-		
-		MultiValueFacet materialTypeFacet = new MultiValueFacet(searchContext);
-		materialTypeFacet.setFieldName("materialType");
-		searchContext.addFacet(materialTypeFacet);
-		searchContext.setAttribute("materialType", keywords);*/
-		//searchContext.setAttribute("entryClassName",Sample.class.getName());
-		//searchContext.setEntryClassNames(entryClassNames);
-		//searchContext.setAttribute("materialType", keywords);
-		System.out.println(searchContext.getAttributes());
-		
-		//QueryConfig queryConfig = new QueryConfig();
-		
-		//queryConfig.setHighlightEnabled(true);
-		//queryConfig.setScoreEnabled(true);
-		//searchContext.setAttribute("materialType:", keywords);
-		//searchContext.setQueryConfig(queryConfig);
-		
+		/*
 		BooleanQuery searchQuery = BooleanQueryFactoryUtil.create(searchContext);
 		
 		String[] partskeywords = keywords.split("\\s+");
@@ -153,6 +114,7 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 			TermQuery termQueryCountryOfOrigin = TermQueryFactoryUtil.create(searchContext, "countryOfOrigin", str);
 				
 			try {
+				
 				searchQuery.add(termQueryBiobankName, BooleanClauseOccur.SHOULD);
 				searchQuery.add(termQuerySampleCollectionName, BooleanClauseOccur.SHOULD);
 				searchQuery.add(termQueryMaterialType, BooleanClauseOccur.SHOULD);
@@ -180,28 +142,18 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 		}
 		
 		TermRangeQuery termRangeQuery = TermRangeQueryFactoryUtil.create(searchContext, "materialType", "blood", "plasma", true, true);
-		//System.out.println(termQuery2.toString());
-		//searchQuery.addRequiredTerm("container", keywords);
+		*/
 		
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(Sample.class);
 		
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-				Sample.class);
-		System.out.println("-----SampleLocalServiceImpl search called------"+indexer.getFullQuery(searchContext));
-		//System.out.println("-----SampleLocalServiceImpl search called------"+indexer);
-		//System.out.println(termQuery.toString());
-		//System.out.println(termQuery1.toString());
-		//System.out.println(termQuery2.toString());
-		//System.out.println(termRangeQuery.toString());
+		System.out.println("-----SampleLocalServiceImpl Indexer Full Query------"+indexer.getFullQuery(searchContext));
 		
-		System.out.println(TokenizerUtil.tokenize("materialType", keywords, "EN"));
-		System.out.println(searchContext.getFacets());
-		for(Entry<String, Facet> facet : searchContext.getFacets().entrySet()){
-			System.out.println(facet);
-		}
-		//return SearchEngineUtil.search(searchContext, searchQuery);
 		return indexer.search(searchContext);
+		//return SearchEngineUtil.search(searchContext, searchQuery);
+		
 	}
 	
+	// Also updates indexes on adding an entity.
 	public Sample addSample(Sample sample) throws SystemException{
 		System.out.println("-----SampleLocalServiceImpl addSample called------");
 		Sample s = super.addSample(sample);
@@ -218,6 +170,24 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 		return s;
 	}
 	
+	// Also updates indexes on updating an entity.
+	public Sample updateSample(Sample sample) throws SystemException{
+		System.out.println("-----SampleLocalServiceImpl updateSample called------");
+		Sample s = super.updateSample(sample);
+		
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				Sample.class);
+
+		try {
+			indexer.reindex(s);
+		} catch (SearchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return s;
+	}
+	
+	// Also updates indexes on deleting an entity.
 	public Sample deleteSample(long sampleDbId) throws NoSuchSampleException, SystemException{
 		System.out.println("-----SampleLocalServiceImpl deleteSample called------");
 		Sample sample = samplePersistence.remove(sampleDbId);
@@ -235,13 +205,30 @@ public class SampleLocalServiceImpl extends SampleLocalServiceBaseImpl {
 		
 	}
 	
+	// Also updates indexes on deleting entities.
 	public void deleteSamplesByuuid(String uuid){
-		try {
+		List<Sample> samplesList = getSamplesByuuid(uuid);
+		for(Sample sample : samplesList){
+			
+			try {
+				deleteSample(sample.getSampleDbId());
+			} catch (NoSuchSampleException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		// This way of delete is not used. Appropriate delete method is called in order to update the indexes while deleting.
+		/*try {
 			samplePersistence.removeByuuid(uuid);
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public List<Sample> getSamplesByuuid(String uuid){

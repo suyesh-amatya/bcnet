@@ -116,7 +116,9 @@ public class SampleLocalServiceClp implements SampleLocalService {
 
 		_methodName19 = "search";
 
-		_methodParameterTypes19 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes19 = new String[] {
+				"long", "java.lang.String", "int", "int"
+			};
 
 		_methodName20 = "deleteSamplesByuuid";
 
@@ -688,7 +690,7 @@ public class SampleLocalServiceClp implements SampleLocalService {
 
 	@Override
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String keywords)
+		java.lang.String keywords, int cur, int delta)
 		throws com.liferay.portal.kernel.search.SearchException {
 		Object returnObj = null;
 
@@ -698,7 +700,11 @@ public class SampleLocalServiceClp implements SampleLocalService {
 					new Object[] {
 						companyId,
 						
-					ClpSerializer.translateInput(keywords)
+					ClpSerializer.translateInput(keywords),
+						
+					cur,
+						
+					delta
 					});
 		}
 		catch (Throwable t) {

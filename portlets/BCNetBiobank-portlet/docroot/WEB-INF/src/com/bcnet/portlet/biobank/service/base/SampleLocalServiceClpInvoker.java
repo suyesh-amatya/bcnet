@@ -116,7 +116,9 @@ public class SampleLocalServiceClpInvoker {
 
 		_methodName96 = "search";
 
-		_methodParameterTypes96 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes96 = new String[] {
+				"long", "java.lang.String", "int", "int"
+			};
 
 		_methodName97 = "addSample";
 
@@ -124,25 +126,31 @@ public class SampleLocalServiceClpInvoker {
 				"com.bcnet.portlet.biobank.model.Sample"
 			};
 
-		_methodName98 = "deleteSample";
+		_methodName98 = "updateSample";
 
-		_methodParameterTypes98 = new String[] { "long" };
+		_methodParameterTypes98 = new String[] {
+				"com.bcnet.portlet.biobank.model.Sample"
+			};
 
-		_methodName99 = "deleteSamplesByuuid";
+		_methodName99 = "deleteSample";
 
-		_methodParameterTypes99 = new String[] { "java.lang.String" };
+		_methodParameterTypes99 = new String[] { "long" };
 
-		_methodName100 = "getSamplesByuuid";
+		_methodName100 = "deleteSamplesByuuid";
 
 		_methodParameterTypes100 = new String[] { "java.lang.String" };
 
-		_methodName101 = "getSamplesByBiobankDbId";
+		_methodName101 = "getSamplesByuuid";
 
-		_methodParameterTypes101 = new String[] { "long" };
+		_methodParameterTypes101 = new String[] { "java.lang.String" };
 
-		_methodName102 = "getSamplesBySampleCollectionDbId";
+		_methodName102 = "getSamplesByBiobankDbId";
 
 		_methodParameterTypes102 = new String[] { "long" };
+
+		_methodName103 = "getSamplesBySampleCollectionDbId";
+
+		_methodParameterTypes103 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -249,7 +257,9 @@ public class SampleLocalServiceClpInvoker {
 		if (_methodName96.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
 			return SampleLocalServiceUtil.search(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
+				(java.lang.String)arguments[1],
+				((Integer)arguments[2]).intValue(),
+				((Integer)arguments[3]).intValue());
 		}
 
 		if (_methodName97.equals(name) &&
@@ -259,28 +269,33 @@ public class SampleLocalServiceClpInvoker {
 
 		if (_methodName98.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
-			return SampleLocalServiceUtil.deleteSample(((Long)arguments[0]).longValue());
+			return SampleLocalServiceUtil.updateSample((com.bcnet.portlet.biobank.model.Sample)arguments[0]);
 		}
 
 		if (_methodName99.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+			return SampleLocalServiceUtil.deleteSample(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName100.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
 			SampleLocalServiceUtil.deleteSamplesByuuid((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName100.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
-			return SampleLocalServiceUtil.getSamplesByuuid((java.lang.String)arguments[0]);
-		}
-
 		if (_methodName101.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
-			return SampleLocalServiceUtil.getSamplesByBiobankDbId(((Long)arguments[0]).longValue());
+			return SampleLocalServiceUtil.getSamplesByuuid((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName102.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
+			return SampleLocalServiceUtil.getSamplesByBiobankDbId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName103.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
 			return SampleLocalServiceUtil.getSamplesBySampleCollectionDbId(((Long)arguments[0]).longValue());
 		}
 
@@ -337,4 +352,6 @@ public class SampleLocalServiceClpInvoker {
 	private String[] _methodParameterTypes101;
 	private String _methodName102;
 	private String[] _methodParameterTypes102;
+	private String _methodName103;
+	private String[] _methodParameterTypes103;
 }

@@ -254,7 +254,7 @@ public interface SampleLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String keywords)
+		java.lang.String keywords, int cur, int delta)
 		throws com.liferay.portal.kernel.search.SearchException;
 
 	public void deleteSamplesByuuid(java.lang.String uuid);
