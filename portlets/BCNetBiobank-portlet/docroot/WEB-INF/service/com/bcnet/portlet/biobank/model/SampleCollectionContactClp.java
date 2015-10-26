@@ -375,10 +375,6 @@ public class SampleCollectionContactClp extends BaseModelImpl<SampleCollectionCo
 		}
 	}
 
-	public Class<?> getClpSerializerClass() {
-		return _clpSerializerClass;
-	}
-
 	@Override
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
@@ -444,5 +440,4 @@ public class SampleCollectionContactClp extends BaseModelImpl<SampleCollectionCo
 	private boolean _sampleCollectionOwner;
 	private boolean _sampleCollectionEditor;
 	private BaseModel<?> _sampleCollectionContactRemoteModel;
-	private Class<?> _clpSerializerClass = com.bcnet.portlet.biobank.service.ClpSerializer.class;
 }

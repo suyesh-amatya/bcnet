@@ -96,7 +96,7 @@ div.dt-button-collection{
 				            <td><%=sample.getMaterialType() %></td>
 				            <td><%=sample.getContainer() %></td>
 				            <td><%=sample.getStorageTemperature() %></td>
-				            <td><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(sample.getSampledTime()) %></td>
+				            <td><%if(sample.getSampledTime() != null){ %><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(sample.getSampledTime()) %> <%}%></td>
 				            <td><%=sample.getAnatomicalPartOntology() %></td>
 				            <td><%=sample.getAnatomicalPartOntologyVersion() %></td>
 				            <td><%=sample.getAnatomicalPartOntologyCode() %></td>

@@ -7,8 +7,6 @@ import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
-
-
 import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
@@ -33,10 +31,6 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
-import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 public class SampleIndexer extends BaseIndexer{
 
@@ -44,6 +38,7 @@ public class SampleIndexer extends BaseIndexer{
 	
 	//public static final String PORTLET_ID = "sample-lister-search";
 	public static final String PORTLET_ID = "samplelistersearch_WAR_BCNetBiobankportlet";
+	
 	
 	
 	@Override
@@ -158,11 +153,43 @@ public class SampleIndexer extends BaseIndexer{
 	protected Summary doGetSummary(Document document, Locale locale, String snippet,
 			PortletURL portletURL) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("-----doGetSummary called------");
+		
 		Summary summary = createSummary(document);
-
+		String summaryContent = "";
+		
+		if(!document.get(Field.ENTRY_CLASS_PK).equals("")){
+			String hashedSampleId = SampleLocalServiceUtil.getSample(GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK))).getHashedSampleId()+" ";
+			summaryContent += hashedSampleId;
+		}
+		
+		if(!document.get("materialType").equals("")){
+			String materialType = document.get("materialType")+" ";
+			summaryContent += materialType;
+		}
+			
+		if(!document.get("diseaseOntology").equals("")){
+			String diseaseOntology = document.get("diseaseOntology")+" ";
+			summaryContent += diseaseOntology;
+		}
+		
+		if(!document.get("diseaseOntologyVersion").equals("")){
+			String diseaseOntologyVersion = document.get("diseaseOntologyVersion")+" ";
+			summaryContent += diseaseOntologyVersion;
+		}
+		
+		if(!document.get("diseaseOntologyCode").equals("")){
+			String diseaseOntologyCode = document.get("diseaseOntologyCode")+" ";
+			summaryContent += diseaseOntologyCode;
+		}
+		
+		
         summary.setMaxContentLength(200);
 
-        return summary;
+        portletURL.setParameter("mvcPath", "/html/sample/samplelistersearch/sample_search_results.jsp");
+        
+        return new Summary("summary", summaryContent, portletURL);
+        //return summary;
 		
 	}
 

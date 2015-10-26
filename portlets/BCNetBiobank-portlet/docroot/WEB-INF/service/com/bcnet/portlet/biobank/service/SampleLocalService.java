@@ -16,7 +16,6 @@ package com.bcnet.portlet.biobank.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -53,7 +52,6 @@ public interface SampleLocalService extends BaseLocalService,
 	* @return the sample that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.Sample addSample(
 		com.bcnet.portlet.biobank.model.Sample sample)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -75,7 +73,6 @@ public interface SampleLocalService extends BaseLocalService,
 	* @throws SystemException if a system exception occurred
 	* @throws com.bcnet.portlet.biobank.NoSuchSampleException
 	*/
-	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.Sample deleteSample(long sampleDbId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException,
@@ -88,7 +85,6 @@ public interface SampleLocalService extends BaseLocalService,
 	* @return the sample that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.Sample deleteSample(
 		com.bcnet.portlet.biobank.model.Sample sample)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -228,7 +224,6 @@ public interface SampleLocalService extends BaseLocalService,
 	* @return the sample that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.Sample updateSample(
 		com.bcnet.portlet.biobank.model.Sample sample)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -254,7 +249,7 @@ public interface SampleLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String keywords, int cur, int delta)
+		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.search.SearchException;
 
 	public void deleteSamplesByuuid(java.lang.String uuid);

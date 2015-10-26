@@ -30,6 +30,12 @@ div .biobankSearchAccordionTitle{
 	color: #0af;
 }
 
+div .sample-search-results-title{
+	color: #0af;
+	font-size: 17px;
+	font-weight: bold;
+}
+
 div .biobankSearchAccordionTitle span.title-text{
 	color: #0af;
 }
@@ -64,7 +70,21 @@ div.well.biobankSearch{
 	background-color: #FFFFFF;
 }
 
+div#sample-search-results-container .taglib-search-iterator-page-iterator-top{
+	display: none;
+}
+
+div.well.sample-search-results{
+	background-color: #FFFFFF;
+	margin-bottom: auto;
+	border: none;
+}
+
 div.well.biobankSearch:hover{
+	background-color: #F5F5F5;
+}
+
+div.well.sample-search-results:hover{
 	background-color: #F5F5F5;
 }
 

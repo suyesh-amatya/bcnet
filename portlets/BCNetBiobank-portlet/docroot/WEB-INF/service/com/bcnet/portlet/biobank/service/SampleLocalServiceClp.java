@@ -690,7 +690,7 @@ public class SampleLocalServiceClp implements SampleLocalService {
 
 	@Override
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String keywords, int cur, int delta)
+		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.search.SearchException {
 		Object returnObj = null;
 
@@ -702,9 +702,9 @@ public class SampleLocalServiceClp implements SampleLocalService {
 						
 					ClpSerializer.translateInput(keywords),
 						
-					cur,
+					start,
 						
-					delta
+					end
 					});
 		}
 		catch (Throwable t) {
