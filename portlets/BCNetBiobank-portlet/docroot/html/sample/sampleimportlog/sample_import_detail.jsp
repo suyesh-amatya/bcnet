@@ -1,505 +1,161 @@
 <%@ include file="/html/init.jsp" %>
 
-<%!
-   com.liferay.portal.kernel.dao.search.SearchContainer<Sample> searchContainer = null; 
-%>
+<!-- Trying to override the buttons.dataTables.min.css from the main.css in the plugin project or via theme did not work. So the overriding had to be done
+here itself in the file. -->
+<style>
+div.dt-button-collection{
+	width: auto;
+}
+</style>
+
+
 
 <%
-	//String currentURL = PortalUtil.getCurrentURL(request);
-	//out.println();
-	//HttpSession filterSession =  request.getSession();
-	//boolean container = false;
-	/* if(filterSession.getAttribute("container")!=null){
-		container = (boolean)filterSession.getAttribute("container");
-	}
-	else{
-		container = ParamUtil.getBoolean(request, "container");
-		filterSession.setAttribute("container", container);
-	} */
-	/* if(filterSession.getAttribute("container")==null)
-		container = ParamUtil.getBoolean(request, "container");
-	filterSession.setAttribute("container", container);
 	
-	out.println("caontaienr"+container);
-	out.println("Session container"+filterSession.getAttribute("container"));
-	 */
-	
-	
-	
-	//out.println(actionRequest.getAttribute("container"));
-	//boolean container = ParamUtil.getBoolean(request, "container");
-	/* boolean container = false;
-	if(renderRequest.getAttribute("container")!=null){
-		container = (Boolean)renderRequest.getAttribute("container");
-		out.println(container);
-	} */
-	
-	out.println("method"+request.getMethod());
-	boolean container = ParamUtil.getBoolean(request, "container");
-	out.println(container);
-	HttpSession filterSession =  request.getSession();
-	filterSession.setAttribute("container", Boolean.valueOf(container));
-	out.println("filterSession"+filterSession.getAttribute("container"));
-	
-	String containerrequest = request.getParameter("container");
-	out.println("containerrequest"+containerrequest);
-	
-	HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(renderRequest);
-	httpRequest = PortalUtil.getOriginalServletRequest(httpRequest);
-	httpRequest.setAttribute("container", Boolean.valueOf(container));
-	
-	
-	
+	String redirect = PortalUtil.getCurrentURL(renderRequest);
+
 	String uuid = ParamUtil.getString(request, "uuid");
 	String fileName = ParamUtil.getString(request, "fileName");
 
-	//orderByCol is the column name passed in the request while sorting
-	String orderByCol = ParamUtil.getString(request, "orderByCol"); 
-	 
-	//orderByType is passed in the request while sorting. It can be either asc or desc
-	String orderByType = ParamUtil.getString(request, "orderByType");
-	
-	//Logic for toggle asc and desc
-	if(orderByType.equals("desc")){
-	    orderByType = "asc";
-	}else{
-	    orderByType = "desc";
-	}
-	 
-	if(Validator.isNull(orderByType)){
-	    orderByType = "desc";
-	}
-
 	List<Sample> samplesByuuid = SampleLocalServiceUtil.getSamplesByuuid(uuid);
-	String biobankName = BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(samplesByuuid.get(0).getBiobankDbId()).getBiobankName();
+	Date dateOfImport = SampleImportLogLocalServiceUtil.getSampleImportLogByUuid(uuid).getDateOfImport();
+	
+	if(samplesByuuid != null && !samplesByuuid.isEmpty()){
+		String biobankName = BiobankGeneralInformationLocalServiceUtil.getBiobankGeneralInformation(samplesByuuid.get(0).getBiobankDbId()).getBiobankName();
 %>
 
-<%-- <portlet:renderURL var="viewSampleImportDetailsURL1">
-	<portlet:param name="mvcPath"
-		value="/html/sample/sampleimportlog/sample_import_detail.jsp" />
-	<portlet:param name="uuid" value="<%=uuid%>" />
-</portlet:renderURL> --%>
+		<h6>Samples Imported in a batch from file <%=fileName%> for <%=biobankName %> on <%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(dateOfImport) %></h6>
 
-<!-- Here we need to use liferay-portlet:renderURL instead of portlet:renderURL because we need to maintain the context of search container by setting 
-the varImpl parameter in iteratorURL in search container. -->
-<liferay-portlet:renderURL varImpl="iteratorURL">
-	<portlet:param name="mvcPath" value="/html/sample/sampleimportlog/sample_import_detail.jsp" />
-	<portlet:param name="uuid" value="<%=uuid%>" />
-	<portlet:param name="fileName" value="<%=fileName%>" />
-	<%-- <portlet:param name="container" value="<%=String.valueOf(container)%>" /> --%>
-</liferay-portlet:renderURL>
 
-<portlet:renderURL var="searchBiobankURL">
-	<portlet:param name="mvcPath" value="/html/sample/sampleimportlog/sample_import_detail.jsp" />
-	<portlet:param name="uuid" value="<%=uuid%>" />
-	<portlet:param name="fileName" value="<%=fileName%>" />
-	<%-- <portlet:param name="container" value="<%=String.valueOf(containerrequest)%>" /> --%>
-</portlet:renderURL>
-<%
-//iteratorURL.setParameter("container", String.valueOf(container));
-//iteratorURL.setProperty("container", String.valueOf(container));
-%>
-<ul id="sample-import-detail-small" style="display:none;" title="Show Columns Filter">
-	<li class="pull-right">
-		<button class="btn" type="button"><i class="icon-resize-small"></i></button>
-	</li>
-</ul>
-<ul id="sample-import-detail-horizontal" title="Hide Columns Filter">
-	<li class="pull-right">
-		<button class="btn" type="button"><i class="icon-resize-horizontal"></i></button>
-	</li>
-</ul>
-<h6>Samples Imported in a batch from file <%=fileName%> for <%=biobankName %></h6>
-<portlet:actionURL name='filterColumns' var="filterColumnsURL" windowState="normal" />
-
-<div id="sample-import-detail">
-	<div class="container-fluid">
-	    <div class="row-fluid">
-	        <div class="span2">
-				<div class="well sidebar-nav">
-					<aui:form action="<%= \"\" %>" method="POST" name="fm" >
-						<%-- <aui:input name="redirect" type="hidden" value="<%= currentURL %>" /> --%>
-						<ul class="nav nav-list">
-							<li class="nav-header">Columns to Display</li>
-							<!-- <li class="active"><a href="#">Link</a></li>
-							<li><a href="#">Link</a></li> -->
-							<aui:a href="#" id="selectAll">Select all</aui:a>&nbsp;&nbsp;
-							<aui:a href="#" id="deselectAll">Deselect all</aui:a>
-							<aui:input name="sampleCollectionId" type="checkbox" label="sampleCollectionId"></aui:input>
-							<aui:input name="hashedSampleId" type="checkbox" label="hashedSampleId"></aui:input>
-							<aui:input name="materialType" type="checkbox" label="materialType"></aui:input>
-							<aui:input name="container" type="checkbox" label="container" checked="<%=container==true %>" value="<%=container==true?\"true\":\"false\" %>"></aui:input>
-							<aui:input name="storageTemperature" type="checkbox" label="storageTemperature"></aui:input>
-							<aui:input name="sampledTime" type="checkbox" label="sampledTime"></aui:input>
-							<aui:input name="anatomicalPartOntology" type="checkbox" label="anatomicalPartOntology"></aui:input>
-							<aui:input name="anatomicalPartOntologyVersion" type="checkbox" label="anatomicalPartOntologyVersion"></aui:input>
-							<aui:input name="anatomicalPartOntologyCode" type="checkbox" label="anatomicalPartOntologyCode"></aui:input>
-							<aui:input name="anatomicalPartOntologyDescription" type="checkbox" label="anatomicalPartOntologyDescription"></aui:input>
-							<aui:input name="anatomicalPartFreeText" type="checkbox" label="anatomicalPartFreeText"></aui:input>
-							<aui:input name="sex" type="checkbox" label="sex"></aui:input>
-							<aui:input name="ageHigh" type="checkbox" label="ageHigh"></aui:input>
-							<aui:input name="ageLow" type="checkbox" label="ageLow"></aui:input>
-							<aui:input name="ageUnit" type="checkbox" label="ageUnit"></aui:input>
-							<aui:input name="diseaseOntology" type="checkbox" label="diseaseOntology"></aui:input>
-							<aui:input name="diseaseOntologyVersion" type="checkbox" label="diseaseOntologyVersion"></aui:input>
-							<aui:input name="diseaseOntologyCode" type="checkbox" label="diseaseOntologyCode"></aui:input>
-							<aui:input name="diseaseOntologyDescription" type="checkbox" label="diseaseOntologyDescription"></aui:input>
-							<aui:input name="diseaseFreeText" type="checkbox" label="diseaseFreeText"></aui:input>
-						</ul>
+		<div id="sample-import-detail">
+			<div class="container-fluid">
+				<table id="table_id" class="display">
+				    <thead>
+				        <tr>
+				        	<th>Actions</th>
+				            <th>sampleCollectionId</th>
+				            <th>hashedSampleId</th>
+				            <th>hashedIndividualId</th>
+				            <th>materialType</th>
+				            <th>container</th>
+				            <th>storageTemperature</th>
+				            <th>sampledTime</th>
+				            <th>anatomicalPartOntology</th>
+				            <th>anatomicalPartOntologyVersion</th>
+				            <th>anatomicalPartOntologyCode</th>
+				            <th>anatomicalPartOntologyDescription</th>
+				            <th>anatomicalPartFreeText</th>
+				            <th>sex</th>
+				            <th>ageLow</th>
+				            <th>ageHigh</th>
+				            <th>ageUnit</th>
+				            <th>diseaseOntology</th>
+				            <th>diseaseOntologyVersion</th>
+				            <th>diseaseOntologyCode</th>
+				            <th>diseaseOntologyDescription</th>
+				            <th>diseaseFreeText</th>
+				            <th>countryOfOrigin</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				    <%
+				    for(Sample sample: samplesByuuid){
+				    %>
+				    
+						<portlet:renderURL var="editSampleURL">
+							<portlet:param name="mvcPath" value="/html/sample/sampleimportlog/edit_sample.jsp" />
+							<portlet:param name="sampleDbId" value="<%= String.valueOf(sample.getSampleDbId()) %>" />
+							<portlet:param name="redirect" value="<%= redirect %>" />
+						</portlet:renderURL>
 						
-						<aui:button type="submit" value="test" name="submit"/>
-					</aui:form>
-				</div>
-	        </div>
-		
-			<div class="span10">
-				<liferay-ui:search-container
-					emptyResultsMessage="sample-empty-results-message"
-					orderByType="<%= orderByType %>" iteratorURL="<%=iteratorURL %>">
-				
-				
-					<%
-					List<Sample> samplesByuuidPerPage = ListUtil.subList(samplesByuuid, searchContainer.getStart(),searchContainer.getEnd());
-					List<Sample> sortableSamplesByuuid = new ArrayList<Sample>(samplesByuuidPerPage);
-					if(Validator.isNotNull(orderByCol)){
-					    BeanComparator comparator = new BeanComparator(orderByCol);
-					    if(orderByType.equalsIgnoreCase("desc")){
-					        Collections.sort(sortableSamplesByuuid, comparator);
-					    }else{
-					        Collections.sort(sortableSamplesByuuid, Collections.reverseOrder(comparator));
-					    }
-					
-					}
-					searchContainer.setResults(sortableSamplesByuuid);
-					searchContainer.setTotal(samplesByuuid.size());
-					%>
-					
-					
-					<liferay-ui:search-container-row
-						className="com.bcnet.portlet.biobank.model.Sample"
-						keyProperty="sampleDbId" modelVar="sample" escapedModel="<%= true %>">
-				
-						<liferay-ui:search-container-column-text 
-							name="sampleCollectionId"
-							property="sampleCollectionId" 
-							orderable="true"
-							orderableProperty="sampleCollectionId"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="hashedSampleId"
-							property="hashedSampleId" 
-							orderable="true"
-							orderableProperty="hashedSampleId"
-						/>
-				
-						<liferay-ui:search-container-column-text
-							name="materialType"
-							property="materialType" 
-							orderable="true"
-							orderableProperty="materialType" 
-						/>
-				<c:choose>
-				<c:when test="<%= container == true %>">
-						<liferay-ui:search-container-column-text 
-							name="container"
-							property="container" 
-							orderable="true"
-							orderableProperty="container"
-						/>
-						</c:when>
-				</c:choose>
-						<liferay-ui:search-container-column-text 
-							name="storageTemperature"
-							property="storageTemperature" 
-							orderable="true"
-							orderableProperty="storageTemperature"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="sampledTime"
-							property="sampledTime" 
-							orderable="true"
-							orderableProperty="sampledTime"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="anatomicalPartOntology"
-							property="anatomicalPartOntology" 
-							orderable="true"
-							orderableProperty="anatomicalPartOntology"
-						/>
-				
-						<liferay-ui:search-container-column-text
-							name="anatomicalPartOntologyVersion"
-							property="anatomicalPartOntologyVersion" 
-							orderable="true"
-							orderableProperty="anatomicalPartOntologyVersion"
-						/>
-				
-						<liferay-ui:search-container-column-text
-							name="anatomicalPartOntologyCode"
-							property="anatomicalPartOntologyCode" 
-							orderable="<%=true %>"
-							orderableProperty="anatomicalPartOntologyCode"
-						/>
-				
-						<liferay-ui:search-container-column-text
-							name="anatomicalPartOntologyDescription"
-							property="anatomicalPartOntologyDescription"
-							orderable="<%=true %>"
-							orderableProperty="anatomicalPartOntologyDescription"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="anatomicalPartFreeText"
-							property="anatomicalPartFreeText" 
-							orderable="<%=true %>"
-							orderableProperty="anatomicalPartFreeText"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="sex"
-							property="sex" 
-							orderable="<%=true %>"
-							orderableProperty="sex"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="ageHigh"
-							property="ageHigh" 
-							orderable="<%=true %>"
-							orderableProperty="ageHigh"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="ageLow"
-							property="ageLow"
-							orderable="<%=true %>"
-							orderableProperty="ageLow"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="ageUnit"
-							property="ageUnit" 
-							orderable="<%=true %>"
-							orderableProperty="ageUnit"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="diseaseOntology"
-							property="diseaseOntology"
-							orderable="<%=true %>"
-							orderableProperty="diseaseOntology"
-						/>
-				
-						<liferay-ui:search-container-column-text 
-							name="diseaseOntologyVersion"
-							property="diseaseOntologyVersion"
-							orderable="<%=true %>"
-							orderableProperty="diseaseOntologyVersion"
-						 />
-				
-						<liferay-ui:search-container-column-text 
-							name="diseaseOntologyCode"
-							property="diseaseOntologyCode"
-							orderable="<%=true %>"
-							orderableProperty="diseaseOntologyCode"
-						/>
-				
-						<liferay-ui:search-container-column-text
-							name="diseaseOntologyDescription"
-							property="diseaseOntologyDescription" 
-							orderable="<%=true %>"
-							orderableProperty="diseaseOntologyDescription"
-							/>
-				
-						<liferay-ui:search-container-column-text 
-							name="diseaseFreeText"
-							property="diseaseFreeText" 
-							orderable="<%=true %>"
-							orderableProperty="diseaseFreeText"
-						/>
-					</liferay-ui:search-container-row>
-				
-					<liferay-ui:search-iterator />
-				</liferay-ui:search-container>
+						<portlet:actionURL name="deleteSample" var="deleteSampleURL">
+							<portlet:param name="sampleDbId" value="<%= String.valueOf(sample.getSampleDbId()) %>" />
+							<portlet:param name="redirect" value="<%= redirect %>" />
+						</portlet:actionURL>
+						
+				        <tr>
+				        	<td>
+				        		<liferay-ui:icon image="edit" message="Edit Sample" url="<%= editSampleURL.toString() %>"/>&nbsp;
+				        		<liferay-ui:icon-delete url="<%= deleteSampleURL.toString() %>" 
+									message="<%= \"Delete Sample\" %>" 
+									confirmation="<%= \"Are you sure you want to delete this sample? \" %>"
+								/>
+				        	</td>
+				        	<%
+				        		String sampleCollectionId = "";
+				        		try{
+				        			sampleCollectionId = SampleCollectionLocalServiceUtil.getSampleCollection(sample.getSampleCollectionDbId()).getSampleCollectionId();
+				        		}
+				        		catch(NoSuchSampleCollectionException e){
+				        			e.printStackTrace();
+				        		}
+				        	%>
+				            <td><%=sampleCollectionId %></td>
+				            <td><%=sample.getHashedSampleId() %></td>
+				            <td><%=sample.getHashedIndividualId() %></td>
+				            <td><%=sample.getMaterialType() %></td>
+				            <td><%=sample.getContainer() %></td>
+				            <td><%=sample.getStorageTemperature() %></td>
+				            <td><%if(sample.getSampledTime() != null){ %><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(sample.getSampledTime()) %> <%}%></td>
+				            <td><%=sample.getAnatomicalPartOntology() %></td>
+				            <td><%=sample.getAnatomicalPartOntologyVersion() %></td>
+				            <td><%=sample.getAnatomicalPartOntologyCode() %></td>
+				            <td><%=sample.getAnatomicalPartOntologyDescription() %></td>
+				            <td><%=sample.getAnatomicalPartFreeText() %></td>
+				            <td><%=sample.getSex() %></td>
+				            <td><%=sample.getAgeLow() %></td>
+				            <td><%=sample.getAgeHigh() %></td>
+				            <td><%=sample.getAgeUnit() %></td>
+				            <td><%=sample.getDiseaseOntology() %></td>
+				            <td><%=sample.getDiseaseOntologyVersion() %></td>
+				            <td><%=sample.getDiseaseOntologyCode() %></td>
+				            <td><%=sample.getDiseaseOntologyDescription() %></td>
+				            <td><%=sample.getDiseaseFreeText() %></td>
+				            <td><%=sample.getCountryOfOrigin() %></td>
+				        </tr>
+				  <%
+				    }
+				  %>
+				    </tbody>
+				</table>
 			</div>
 		</div>
-	</div>
-</div>
+<%
+	}
+	else{
+%>
+		<div class="alert alert-info">
+			<liferay-ui:message key='sample-import-log-empty'/>
+		</div>
+<%		
+	}
+%>
 
-<portlet:resourceURL var="checkBoxURL"></portlet:resourceURL>
-
-<aui:script use="aui-base,aui-io-request">
-var url = '<%=checkBoxURL.toString()%>';
-var containerValue = false;
-
-A.one("#<portlet:namespace/>containerCheckbox").on('change',function(event){
-	containerValue = A.one("#<portlet:namespace/>container").get("value");
-	A.io.request(
-			url, 
-			{
-		        method: 'get',
-		        data: {
-		        	<portlet:namespace/>containerCheckbox :containerValue,
-		        	<portlet:namespace/>type :"check"
-		        }
-		        
-   		});
-});
-A.io.request(url, {
-	  on: {
-	   success: function(data) {
-	    // if(this.get('responseData')){
-	    	 console.log(data);
-	    	 A.one("#<portlet:namespace/>containerCheckbox").attr("checked", true);
-	 		A.one("#<portlet:namespace/>container").attr("value", true);
-	     //}
-	   }
-	  }
+<script type="text/javascript">
+	$(document).ready( function () {
+	    $('#table_id').DataTable({
+	    	"scrollX": true,
+	    	"pagingType": "full_numbers",
+	    	"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+	    	dom: 'l<"clear">Bfrtip',
+	        buttons: {
+	        	buttons: [
+	      	            {
+	      	            	extend:'colvis',
+	      	            	text: 'Show/Hide Columns',
+	      	            	columns: ':not(:first-child)'
+	      	            },
+	    	            {
+	    	                extend: 'colvisGroup',
+	    	                text: 'Show all',
+	    	                show: ':hidden'
+	    	            }
+	    	    ]
+	        },
+	        "order": [],
+	        "columnDefs": [
+	         	{ "orderable": false, "targets": 0  } 
+	         ]
+	    });
 	});
-
-	//Hide Columns Filter 
-	A.one("#sample-import-detail-horizontal").on('click',function(event){
-		A.one("#sample-import-detail .span2").hide();
-		A.one("#sample-import-detail .span10").addClass("span12").removeClass("span10");
-		A.one("#sample-import-detail-horizontal").hide();
-		A.one("#sample-import-detail-small").show();
-	});
-	
-	//Show Columns Filter
-	A.one("#sample-import-detail-small").on('click',function(event){
-		A.one("#sample-import-detail .span2").show();
-		A.one("#sample-import-detail .span12").addClass("span10").removeClass("span12");
-		A.one("#sample-import-detail-small").hide();
-		A.one("#sample-import-detail-horizontal").show();
-	});
-	
-	//Select All Columns
-	A.one("#<portlet:namespace/>selectAll").on('click',function(event){
-		A.one("#<portlet:namespace/>sampleCollectionIdCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>sampleCollectionId").attr("value", true);
-	
-		A.one("#<portlet:namespace/>hashedSampleIdCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>hashedSampleId").attr("value", true);
-		
-		A.one("#<portlet:namespace/>materialTypeCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>materialType").attr("value", true);
-		
-		A.one("#<portlet:namespace/>containerCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>container").attr("value", true);
-		
-		A.one("#<portlet:namespace/>storageTemperatureCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>storageTemperature").attr("value", true);
-		
-		A.one("#<portlet:namespace/>sampledTimeCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>sampledTime").attr("value", true);
-		
-		A.one("#<portlet:namespace/>anatomicalPartOntologyCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>anatomicalPartOntology").attr("value", true);
-		
-		A.one("#<portlet:namespace/>anatomicalPartOntologyVersionCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>anatomicalPartOntologyVersion").attr("value", true);
-		
-		A.one("#<portlet:namespace/>anatomicalPartOntologyCodeCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>anatomicalPartOntologyCode").attr("value", true);
-		
-		A.one("#<portlet:namespace/>anatomicalPartOntologyDescriptionCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>anatomicalPartOntologyDescription").attr("value", true);
-		
-		A.one("#<portlet:namespace/>anatomicalPartFreeTextCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>anatomicalPartFreeText").attr("value", true);
-		
-		A.one("#<portlet:namespace/>sexCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>sex").attr("value", true);
-		
-		A.one("#<portlet:namespace/>ageHighCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>ageHigh").attr("value", true);
-		
-		A.one("#<portlet:namespace/>ageLowCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>ageLow").attr("value", true);
-		
-		A.one("#<portlet:namespace/>ageUnitCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>ageUnit").attr("value", true);
-		
-		A.one("#<portlet:namespace/>diseaseOntologyCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>diseaseOntology").attr("value", true);
-		
-		A.one("#<portlet:namespace/>diseaseOntologyVersionCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>diseaseOntologyVersion").attr("value", true);
-		
-		A.one("#<portlet:namespace/>diseaseOntologyCodeCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>diseaseOntologyCode").attr("value", true);
-		
-		A.one("#<portlet:namespace/>diseaseOntologyDescriptionCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>diseaseOntologyDescription").attr("value", true);
-		
-		A.one("#<portlet:namespace/>diseaseFreeTextCheckbox").attr("checked", true);
-		A.one("#<portlet:namespace/>diseaseFreeText").attr("value", true);
-		
-	});
-	
-	//Deselect All Columns
-	A.one("#<portlet:namespace/>deselectAll").on('click',function(event){
-		A.one("#<portlet:namespace/>sampleCollectionIdCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>sampleCollectionId").attr("value", false);
-	
-		A.one("#<portlet:namespace/>hashedSampleIdCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>hashedSampleId").attr("value", false);
-		
-		A.one("#<portlet:namespace/>materialTypeCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>materialType").attr("value", false);
-		
-		A.one("#<portlet:namespace/>containerCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>container").attr("value", false);
-		
-		A.one("#<portlet:namespace/>storageTemperatureCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>storageTemperature").attr("value", false);
-		
-		A.one("#<portlet:namespace/>sampledTimeCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>sampledTime").attr("value", false);
-		
-		A.one("#<portlet:namespace/>anatomicalPartOntologyCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>anatomicalPartOntology").attr("value", false);
-		
-		A.one("#<portlet:namespace/>anatomicalPartOntologyVersionCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>anatomicalPartOntologyVersion").attr("value", false);
-		
-		A.one("#<portlet:namespace/>anatomicalPartOntologyCodeCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>anatomicalPartOntologyCode").attr("value", false);
-		
-		A.one("#<portlet:namespace/>anatomicalPartOntologyDescriptionCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>anatomicalPartOntologyDescription").attr("value", false);
-		
-		A.one("#<portlet:namespace/>anatomicalPartFreeTextCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>anatomicalPartFreeText").attr("value", false);
-		
-		A.one("#<portlet:namespace/>sexCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>sex").attr("value", false);
-		
-		A.one("#<portlet:namespace/>ageHighCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>ageHigh").attr("value", false);
-		
-		A.one("#<portlet:namespace/>ageLowCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>ageLow").attr("value", false);
-		
-		A.one("#<portlet:namespace/>ageUnitCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>ageUnit").attr("value", false);
-		
-		A.one("#<portlet:namespace/>diseaseOntologyCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>diseaseOntology").attr("value", false);
-		
-		A.one("#<portlet:namespace/>diseaseOntologyVersionCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>diseaseOntologyVersion").attr("value", false);
-		
-		A.one("#<portlet:namespace/>diseaseOntologyCodeCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>diseaseOntologyCode").attr("value", false);
-		
-		A.one("#<portlet:namespace/>diseaseOntologyDescriptionCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>diseaseOntologyDescription").attr("value", false);
-		
-		A.one("#<portlet:namespace/>diseaseFreeTextCheckbox").attr("checked", false);
-		A.one("#<portlet:namespace/>diseaseFreeText").attr("value", false);
-	});
-</aui:script>
+</script>

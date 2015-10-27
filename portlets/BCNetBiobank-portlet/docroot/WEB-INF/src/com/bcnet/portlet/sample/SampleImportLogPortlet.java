@@ -66,6 +66,12 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		
 		String yearmonthdayhourminute = null;
 		if(!yearmonthday.isEmpty()){
+			if(hour.isEmpty()){
+				hour = "00";
+			}
+			if(minute.isEmpty()){
+				minute = "00";
+			}
 			yearmonthdayhourminute = yearmonthday+" "+hour+":"+minute;
 			try {
 				sampledTime = sdf.parse(yearmonthdayhourminute);
@@ -171,7 +177,7 @@ public class SampleImportLogPortlet extends MVCPortlet {
 		}
 		
 		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("storageTemperature")){
-			String[] storageTemperature = {"RT", "2 °C to 10 °C", "-18 °C to -35 °C", "-60 °C to -85 °C", "LN", "Other"};
+			String[] storageTemperature = {"RT", "2C to 10C", "-18C to -35C", "-60C to -85C", "LN", "Other"};
 			JSONArray jsonArray =  JSONFactoryUtil.createJSONArray();
 			for(String str:storageTemperature){
 				jsonArray.put(str);

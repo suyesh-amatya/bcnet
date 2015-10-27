@@ -10,4 +10,5 @@
 	<resource file="resource-actions/samplecollectiongeneralinformation.xml" />
 	<resource file="resource-actions/samplecollectionlister.xml" />
 	<resource file="resource-actions/samplecollectionattributelists.xml" />
+	<resource file="resource-actions/sample.xml" />
 </resource-action-mapping>
