@@ -269,6 +269,13 @@ public class SampleUploadPortlet extends MVCPortlet {
 			return;
 		}
 		
+		if(sheet.getPhysicalNumberOfRows() > 1000){
+			SessionErrors.add(request, "xls-sheet-too-many-rows");
+			System.err.println("Sample sheet seems to have too many rows.");
+			workbook.close();
+			return;
+		}
+		
 		Iterator<Row> rowIterator = sheet.rowIterator();
 		
 		errorStr = "";
@@ -802,6 +809,13 @@ public class SampleUploadPortlet extends MVCPortlet {
 		if(sheet.getPhysicalNumberOfRows() < 2){
 			SessionErrors.add(request, "xls-sheet-no-data");
 			System.err.println("Sample sheet seems to be empty.");
+			workbook.close();
+			return;
+		}
+		
+		if(sheet.getPhysicalNumberOfRows() > 1000){
+			SessionErrors.add(request, "xls-sheet-too-many-rows");
+			System.err.println("Sample sheet seems to have too many rows.");
 			workbook.close();
 			return;
 		}

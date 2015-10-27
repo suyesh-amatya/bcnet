@@ -10,6 +10,8 @@
 
 <liferay-ui:error key='xls-sheet-not-found' message="xls-sheet-not-found"/>
 
+<liferay-ui:error key='xls-sheet-too-many-rows' message="xls-sheet-too-many-rows"/>
+
 <liferay-ui:error key='xls-headers-not-string' message="xls-headers-not-string"/>
 
 
