@@ -71,7 +71,7 @@
 <liferay-ui:search-container searchContainer="<%=sampleSearchContainer %>">
 	
 	<liferay-ui:search-container-results results="<%= samples %>" total="<%= hits.getLength() %>" />
-	
+	<p><b>Total Results:  <%= hits.getLength() %></b></p>
 	<liferay-ui:search-container-row
 		className="com.bcnet.portlet.biobank.model.Sample"
 		keyProperty="sampleDbId" modelVar="sample" escapedModel="<%=true%>">

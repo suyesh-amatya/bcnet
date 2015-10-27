@@ -5,7 +5,6 @@
 
 <%
 
-
 //Parameters for permission Checking
 long groupId = scopeGroupId;
 String name = portletDisplay.getRootPortletId();
@@ -17,7 +16,8 @@ String actionId_delete_biobank_attribute_lists_master = "DELETE_BIOBANK_ATTRIBUT
 String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
 
-<%= scopeGroupId %>
+<aui:input name="scopeGroupId" type="hidden" value="<%=scopeGroupId %>"></aui:input>
+<%-- <%= scopeGroupId %> --%>
 
 <aui:button-row>
 	<portlet:renderURL var="addBiobankAttributeListsMasterURL">
