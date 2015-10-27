@@ -133,7 +133,7 @@
 <aui:script use="aui-base,aui-form-validator">
 	AUI().use('aui-base','aui-form-validator',function(A){
 		var rules = {
-      		<portlet:namespace/>biobankId: {
+      		<portlet:namespace/>biobankDbId: {
         		required: true
       		}
       	};
