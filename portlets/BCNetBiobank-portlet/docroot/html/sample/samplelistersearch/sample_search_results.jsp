@@ -18,7 +18,7 @@
 
     <div class="search-form">
         <span class="aui-search-bar">
-            <aui:input inlineField="<%= true %>" label="Keywords" name="keywords" size="50" title="search-entries" type="text" />
+            <aui:input inlineField="<%= true %>" label="" name="keywords" placeholder="type-your-query" title="search-entries" type="text" />
 
             <aui:button type="submit" value="search" />
         </span>

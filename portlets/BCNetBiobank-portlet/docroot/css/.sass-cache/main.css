@@ -108,3 +108,16 @@ So increasing z-index value to bring it to the front. */
 .ui-datepicker {
   z-index: 9999 !important; }
 
+.search-form {
+  text-align: center; }
+
+.search-form input[type="text"] {
+  width: 500px;
+  margin-bottom: auto;
+  border: 1px solid #50a2f5;
+  height: 30px;
+  font-size: 18px; }
+
+.search-form .btn-primary {
+  height: 40px; }
+

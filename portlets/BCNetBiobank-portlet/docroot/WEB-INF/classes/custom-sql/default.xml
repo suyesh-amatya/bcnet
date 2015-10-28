@@ -31,18 +31,18 @@
 	
 	<sql id="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findBiobanksByKeywordsCountry">
 	<![CDATA[
-		SELECT biobank.*, organization_.name, biobankattributelists.biobankAttributeListsId, biobankattributelists.biobankDbId AS ID,
+		SELECT biobank.*, Organization_.name, biobankattributelists.biobankAttributeListsId, biobankattributelists.biobankDbId AS ID,
 			biobankattributelists.attributeListName, biobankattributelists.attributeListValue
 		FROM 
 			biobank 
 				INNER JOIN
-			organization_
-				ON biobank.biobankDbId = organization_.organizationId
+			Organization_
+				ON biobank.biobankDbId = Organization_.organizationId
 				LEFT JOIN
 			biobankattributelists
 				ON biobank.biobankDbId = biobankattributelists.biobankDbId
 			WHERE
-				((organization_.name LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				((Organization_.name LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(biobank.biobankId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(biobank.acronym LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(biobankattributelists.attributeListName LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -56,18 +56,18 @@
 	<![CDATA[
 		SELECT COUNT(*) from
 		(
-		SELECT biobank.*, organization_.name, biobankattributelists.biobankAttributeListsId, biobankattributelists.biobankDbId AS ID,
+		SELECT biobank.*, Organization_.name, biobankattributelists.biobankAttributeListsId, biobankattributelists.biobankDbId AS ID,
 			biobankattributelists.attributeListName, biobankattributelists.attributeListValue 
 		FROM 
 			biobank 
 				INNER JOIN
-			organization_
-				ON biobank.biobankDbId = organization_.organizationId
+			Organization_
+				ON biobank.biobankDbId = Organization_.organizationId
 				LEFT JOIN
 			biobankattributelists
 				ON biobank.biobankDbId = biobankattributelists.biobankDbId
 			WHERE
-				((organization_.name LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				((Organization_.name LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(biobank.biobankId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(biobank.acronym LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(biobankattributelists.attributeListName LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -80,12 +80,12 @@
 	
 	<sql id="com.bcnet.portlet.biobank.service.persistence.BiobankGeneralInformationFinder.findAllBiobankOrganizations">
 	<![CDATA[
-		SELECT biobank.*, organization_.name
+		SELECT biobank.*, Organization_.name
 		FROM 
 			biobank 
 				INNER JOIN
-			organization_
-				ON biobank.biobankDbId = organization_.organizationId
+			Organization_
+				ON biobank.biobankDbId = Organization_.organizationId
     ]]>
 	</sql>
 	
@@ -94,12 +94,12 @@
 	<![CDATA[
 		SELECT COUNT(*) from
 		(
-		SELECT biobank.*, organization_.name
+		SELECT biobank.*, Organization_.name
 		FROM 
 			biobank 
 				INNER JOIN
-			organization_
-				ON biobank.biobankDbId = organization_.organizationId
+			Organization_
+				ON biobank.biobankDbId = Organization_.organizationId
 		) dummy;
     ]]>
 	</sql>

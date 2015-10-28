@@ -105,7 +105,10 @@ public class BiobankOrganizationCreationPortlet extends MVCPortlet {
 		
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(biobank.getBiobankDbId());
 		
+		
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		
+		OrganizationLocalServiceUtil.rebuildTree(themeDisplay.getCompanyId());
 		SessionMessages.add(request, "biobank-add-success");
 		response.sendRedirect(themeDisplay.getURLPortal()+"/web"+organization.getGroup().getFriendlyURL());
 

@@ -242,7 +242,7 @@
     );
 </aui:script>
 
-
+ 
 <portlet:resourceURL var="checkOrganizationNameIdURL"></portlet:resourceURL>
 
 <aui:script use="aui-base,aui-form-validator,aui-io-request">
