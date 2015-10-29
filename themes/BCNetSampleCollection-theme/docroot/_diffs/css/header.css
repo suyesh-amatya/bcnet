@@ -26,6 +26,20 @@ div#section-logo-position{
 	padding-left:0;
 }
 
+
+div#catalog:before {
+    float: left;
+    /* max-width: 100px; */
+    margin-left: 25px;
+    margin-top: 45px;
+    /* font-weight: bold; */
+    font-size: 2em;
+    /*color: rgb(74, 158, 209);*/
+    color: #4A9ED1;
+    content: "*Catalog";
+}
+
+
 div#section-logo-position a{
 	display:block;
 	height:auto;

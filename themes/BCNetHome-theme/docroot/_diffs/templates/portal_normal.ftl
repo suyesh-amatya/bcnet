@@ -72,6 +72,9 @@ ${theme.include(body_top_include)}
 							</a>
 						</div>
 						
+						<div id="catalog">
+						</div>
+						
 						<div id="links-position">
 							<ul id="networks">
 								<li class="firstli">
