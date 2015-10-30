@@ -83,11 +83,13 @@ div.dt-button-collection{
 				        	</td>
 				        	<%
 				        		String sampleCollectionId = "";
-				        		try{
-				        			sampleCollectionId = SampleCollectionLocalServiceUtil.getSampleCollection(sample.getSampleCollectionDbId()).getSampleCollectionId();
-				        		}
-				        		catch(NoSuchSampleCollectionException e){
-				        			e.printStackTrace();
+				        		if(sample.getSampleCollectionDbId() > 0){
+				        			try{
+					        			sampleCollectionId = SampleCollectionLocalServiceUtil.getSampleCollection(sample.getSampleCollectionDbId()).getSampleCollectionId();
+					        		}
+					        		catch(NoSuchSampleCollectionException e){
+					        			e.printStackTrace();
+					        		}
 				        		}
 				        	%>
 				            <td><%=sampleCollectionId %></td>
