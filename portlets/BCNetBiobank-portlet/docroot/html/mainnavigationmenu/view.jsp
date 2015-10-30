@@ -15,6 +15,8 @@
 		List<Layout> mainlayouts = LayoutLocalServiceUtil.getLayouts(Long.parseLong(PropsUtil.get("bcnet.scopeGroupId")), false);
 		int count = 0;
 		String menuepoint = "";
+		
+		
 		for(Layout mainlayout : mainlayouts) {
 			if(mainlayout.getParentLayoutId() != 0) {
 				break;
@@ -29,12 +31,17 @@
 			menuepoint += "<li id=\"layout_" + mainlayout.getLayoutId() + "\" class=\"updateclassstring lfr-nav-deletable lfr-nav-sortable lfr-nav-updateable yui3-dd-drop\" role=\"presentation\">";
 			menuepoint += "<a role=\"menuitem\" href=\"" + mainlayout.getFriendlyURL() + "\" aria-labelledby=\"layout_" + mainlayout.getLayoutId() + "\"><span>" + mainlayout.getNameCurrentValue() +"</span></a>";
 			
+			boolean childulappended = false;
+			
 			if(mainlayout.hasChildren()) {
 				int childcount = 0;
 				
-				menuepoint += "<ul class=\"child-menu\" role=\"menu\">";
+				/*menuepoint += "<ul class=\"child-menu\" role=\"menu\">";*/
+				String childul = "";
 				
 				Iterator<Layout> childIterator = mainlayout.getChildren().iterator();
+				
+				
 				while(childIterator.hasNext()){
 					String childli = "";
 					
@@ -48,18 +55,33 @@
 						childli = "class=\"lastli\"";
 					}
 					childcount++;
+					
+					
 					//for(Layout childsetup : mainlayout.getChildren()) {
 					
 					if(childsetup.getNameCurrentValue().equals("Add Biobank") || childsetup.getNameCurrentValue().equals("Add Sample Collection")
 							|| childsetup.getNameCurrentValue().equals("Import Sample") || childsetup.getNameCurrentValue().equals("Sample Import Log")){
 						if(UserLocalServiceUtil.hasRoleUser(administratorRole.getRoleId(), themeDisplay.getUserId()) 
 								|| UserLocalServiceUtil.hasRoleUser(curatorRole.getRoleId(), themeDisplay.getUserId())){
+							
+							if(!childulappended){
+								childul += "<ul class=\"child-menu\" role=\"menu\">";
+								menuepoint +=childul;
+								childulappended = true;
+							}
+							
+							
 							menuepoint += "<li id=\"layout_" + childsetup.getLayoutId() + "\"  " +childli + "  role=\"presentation\">";
 							menuepoint += "<a role=\"menuitem\" href=\"" + childsetup.getFriendlyURL() + "\" aria-labelledby=\"layout_" + childsetup.getLayoutId() + "\"><span>" + childsetup.getNameCurrentValue() +"</span></a>";
 							menuepoint += "</li>";
 						}
 					}
 					else{
+						if(!childulappended){
+							childul += "<ul class=\"child-menu\" role=\"menu\">";
+							menuepoint +=childul;
+							childulappended = true;
+						}
 						menuepoint += "<li id=\"layout_" + childsetup.getLayoutId() + "\"  " +childli + "  role=\"presentation\">";
 						menuepoint += "<a role=\"menuitem\" href=\"" + childsetup.getFriendlyURL() + "\" aria-labelledby=\"layout_" + childsetup.getLayoutId() + "\"><span>" + childsetup.getNameCurrentValue() +"</span></a>";
 						menuepoint += "</li>";
@@ -67,7 +89,14 @@
 					//}
 					
 				}
-				menuepoint += "</ul>";
+				if(childulappended){
+					menuepoint += "</ul>";
+				}
+				
+				
+				
+				
+				
 			}
 			menuepoint += "</li>";
 			count++;

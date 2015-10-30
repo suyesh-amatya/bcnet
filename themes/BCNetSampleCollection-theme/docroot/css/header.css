@@ -29,16 +29,15 @@ div#section-logo-position{
 
 div#catalog:before {
     float: left;
-    /* max-width: 100px; */
+    max-width: 100px;
     margin-left: 25px;
     margin-top: 45px;
     /* font-weight: bold; */
-    font-size: 2em;
+    font-size: 2.9em;
     /*color: rgb(74, 158, 209);*/
     color: #4A9ED1;
     content: "*Catalog";
 }
-
 
 div#section-logo-position a{
 	display:block;
@@ -106,7 +105,38 @@ div#bottom-links{
 }
 
 
+@media only screen and (min-width : 1400px) {
+    div#catalog:before {
+	    float: left;
+	    /* max-width: 100px; */
+	    margin-left: 25px;
+	    margin-top: 45px;
+	    /* font-weight: bold; */
+	    font-size: 2.9em;
+	    /*color: rgb(74, 158, 209);*/
+	    color: #4A9ED1;
+	    content: "*Catalog";
+	    width: 600px;
+	    text-align: center;
+	}
+}
 
+@media only screen and (min-width : 1600px) {
+    div#catalog:before {
+	    float: left;
+	    /* max-width: 100px; */
+	    margin-left: 25px;
+	    margin-top: 45px;
+	    /* font-weight: bold; */
+	    font-size: 2.9em;
+	    /*color: rgb(74, 158, 209);*/
+	    color: #4A9ED1;
+	    content: "*Catalog";
+	    width: 600px;
+	    text-align: center;
+	    max-width: 600px;
+	}
+}
 
 
 @media screen and (max-width:8in), screen and (max-width:700px){
