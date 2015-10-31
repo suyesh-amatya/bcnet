@@ -153,19 +153,20 @@ public interface JuristicPersonModel extends BaseModel<JuristicPerson> {
 	public Object clone();
 
 	@Override
-	public int compareTo(JuristicPerson juristicPerson);
+	public int compareTo(
+		com.bcnet.portlet.biobank.model.JuristicPerson juristicPerson);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<JuristicPerson> toCacheModel();
+	public CacheModel<com.bcnet.portlet.biobank.model.JuristicPerson> toCacheModel();
 
 	@Override
-	public JuristicPerson toEscapedModel();
+	public com.bcnet.portlet.biobank.model.JuristicPerson toEscapedModel();
 
 	@Override
-	public JuristicPerson toUnescapedModel();
+	public com.bcnet.portlet.biobank.model.JuristicPerson toUnescapedModel();
 
 	@Override
 	public String toString();

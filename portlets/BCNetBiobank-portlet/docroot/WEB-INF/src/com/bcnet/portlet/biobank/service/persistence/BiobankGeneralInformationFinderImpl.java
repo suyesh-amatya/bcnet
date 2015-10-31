@@ -120,7 +120,7 @@ public class BiobankGeneralInformationFinderImpl extends BasePersistenceImpl<Bio
 	        String attributeListValueConcatStr = "";
 	        
 	        for(String str:partskeywords){
-	        	nameConcatStr += "organization_.name LIKE ? OR ";
+	        	nameConcatStr += "Organization_.name LIKE ? OR ";
 	        	biobankIdConcatStr += "biobank.biobankId LIKE ? OR ";
 	        	acronymConcatStr += "biobank.acronym LIKE ? OR ";
 	        	attributeListNameConcatStr += "biobankattributelists.attributeListName LIKE ? OR ";
@@ -129,7 +129,7 @@ public class BiobankGeneralInformationFinderImpl extends BasePersistenceImpl<Bio
 	        }
 	        
 	        
-	        sql = StringUtil.replace(sql, "(organization_.name LIKE ? OR ? IS NULL) AND", "("+nameConcatStr+"? IS NULL) OR");
+	        sql = StringUtil.replace(sql, "(Organization_.name LIKE ? OR ? IS NULL) AND", "("+nameConcatStr+"? IS NULL) OR");
 	        sql = StringUtil.replace(sql, "(biobank.biobankId LIKE ? OR ? IS NULL) AND", "("+biobankIdConcatStr+"? IS NULL) OR");
 	        sql = StringUtil.replace(sql, "(biobank.acronym LIKE ? OR ? IS NULL) AND", "("+acronymConcatStr+"? IS NULL) OR");
 	        sql = StringUtil.replace(sql, "(biobankattributelists.attributeListName LIKE ? OR ? IS NULL) AND", "("+attributeListNameConcatStr+"? IS NULL) OR");
@@ -143,7 +143,7 @@ public class BiobankGeneralInformationFinderImpl extends BasePersistenceImpl<Bio
 
 	        QueryPos qPos = QueryPos.getInstance(q);
 	        
-	        //Adding query parameters for organization_.name
+	        //Adding query parameters for Organization_.name
 	        for(int i=0; i<partskeywords.length; i++){
 	        	qPos.add("%" + partskeywords[i] + "%");
 	        	if(i==partskeywords.length-1){
@@ -187,7 +187,7 @@ public class BiobankGeneralInformationFinderImpl extends BasePersistenceImpl<Bio
 	        //Adding query parameters for biobank.countryCode
 	        qPos.add(countryCode);
 	        qPos.add(countryCode);
-
+	        
 	        return (List<BiobankGeneralInformation>) QueryUtil.list(q, getDialect(), begin, end);
 	    } catch (Exception e) {
 	        try {
@@ -221,7 +221,7 @@ public class BiobankGeneralInformationFinderImpl extends BasePersistenceImpl<Bio
 	        String attributeListValueConcatStr = "";
 	        
 	        for(String str:partskeywords){
-	        	nameConcatStr += "organization_.name LIKE ? OR ";
+	        	nameConcatStr += "Organization_.name LIKE ? OR ";
 	        	biobankIdConcatStr += "biobank.biobankId LIKE ? OR ";
 	        	acronymConcatStr += "biobank.acronym LIKE ? OR ";
 	        	attributeListNameConcatStr += "biobankattributelists.attributeListName LIKE ? OR ";
@@ -230,7 +230,7 @@ public class BiobankGeneralInformationFinderImpl extends BasePersistenceImpl<Bio
 	        }
 	        
 	        
-	        sql = StringUtil.replace(sql, "(organization_.name LIKE ? OR ? IS NULL) AND", "("+nameConcatStr+"? IS NULL) OR");
+	        sql = StringUtil.replace(sql, "(Organization_.name LIKE ? OR ? IS NULL) AND", "("+nameConcatStr+"? IS NULL) OR");
 	        sql = StringUtil.replace(sql, "(biobank.biobankId LIKE ? OR ? IS NULL) AND", "("+biobankIdConcatStr+"? IS NULL) OR");
 	        sql = StringUtil.replace(sql, "(biobank.acronym LIKE ? OR ? IS NULL) AND", "("+acronymConcatStr+"? IS NULL) OR");
 	        sql = StringUtil.replace(sql, "(biobankattributelists.attributeListName LIKE ? OR ? IS NULL) AND", "("+attributeListNameConcatStr+"? IS NULL) OR");
@@ -241,7 +241,7 @@ public class BiobankGeneralInformationFinderImpl extends BasePersistenceImpl<Bio
 
 	        QueryPos qPos = QueryPos.getInstance(q);
 	        
-	        //Adding query parameters for organization_.name
+	        //Adding query parameters for Organization_.name
 	        for(int i=0; i<partskeywords.length; i++){
 	        	qPos.add("%" + partskeywords[i] + "%");
 	        	if(i==partskeywords.length-1){

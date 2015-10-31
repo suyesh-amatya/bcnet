@@ -16,6 +16,7 @@ package com.bcnet.portlet.biobank.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -52,6 +53,7 @@ public interface BiobankAttributeListsMasterLocalService
 	* @return the biobank attribute lists master that was added
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster addBiobankAttributeListsMaster(
 		com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster biobankAttributeListsMaster)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -73,6 +75,7 @@ public interface BiobankAttributeListsMasterLocalService
 	* @throws PortalException if a biobank attribute lists master with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster deleteBiobankAttributeListsMaster(
 		long biobankAttributeListsMasterId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,6 +88,7 @@ public interface BiobankAttributeListsMasterLocalService
 	* @return the biobank attribute lists master that was removed
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster deleteBiobankAttributeListsMaster(
 		com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster biobankAttributeListsMaster)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -226,6 +230,7 @@ public interface BiobankAttributeListsMasterLocalService
 	* @return the biobank attribute lists master that was updated
 	* @throws SystemException if a system exception occurred
 	*/
+	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
 	public com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster updateBiobankAttributeListsMaster(
 		com.bcnet.portlet.biobank.model.BiobankAttributeListsMaster biobankAttributeListsMaster)
 		throws com.liferay.portal.kernel.exception.SystemException;
