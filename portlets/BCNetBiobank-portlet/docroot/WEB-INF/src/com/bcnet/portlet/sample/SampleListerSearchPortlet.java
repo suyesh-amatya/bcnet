@@ -4,17 +4,23 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import com.bcnet.portlet.biobank.NoSuchSampleCollectionException;
 import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.model.SampleCollection;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -130,6 +136,46 @@ public class SampleListerSearchPortlet extends MVCPortlet {
 		SampleLocalServiceUtil.updateSample(sample);
 		
 		//sendRedirect(request, response);
+	}
+	
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException{
+		
+		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("sampleCollectionId")){
+			JSONArray jsonArray =  JSONFactoryUtil.createJSONArray();
+			List<SampleCollection> sampleCollections = null;
+			try {
+				sampleCollections = SampleCollectionLocalServiceUtil.getSampleCollections(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			for(SampleCollection sc:sampleCollections){
+				jsonArray.put(sc.getSampleCollectionId());
+			}
+			resourceResponse.getPortletOutputStream().write(jsonArray.toString().getBytes());
+		}
+		
+		
+		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("materialType")){
+			String[] materialType = {"DNA", "RNA", "cDNA/mRNA", "microRNA", "Whole Blood", "Peripheral Blood Cells", "Plasma", "Serum", "Tissue; Cryo Preserved"
+					, "Tissue; Paraffin Preserved", "Cell Lines", "Urine", "Saliva", "Faeces", "Pathogen", "Other"};
+			JSONArray jsonArray =  JSONFactoryUtil.createJSONArray();
+			for(String str:materialType){
+				jsonArray.put(str);
+			}
+			resourceResponse.getPortletOutputStream().write(jsonArray.toString().getBytes());
+		}
+		
+		if(ParamUtil.getString(resourceRequest, "type").equalsIgnoreCase("storageTemperature")){
+			String[] storageTemperature = {"RT", "2C to 10C", "-18C to -35C", "-60C to -85C", "LN", "Other"};
+			JSONArray jsonArray =  JSONFactoryUtil.createJSONArray();
+			for(String str:storageTemperature){
+				jsonArray.put(str);
+			}
+			resourceResponse.getPortletOutputStream().write(jsonArray.toString().getBytes());
+		}
+		
 	}
 
 }
