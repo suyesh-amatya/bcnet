@@ -68,7 +68,7 @@
 			</li>
 			<li>
 				Also can be used with the <em>field:value</em>. Search for the <em>term</em> <em>international</em> but not <em>organization</em> in the <em>field biobankName</em>.
-				<code>biobankName:international -biobankName:organization</code>. Similary the <em>biobanName</em> must contain <em>"iarc"</em> or <em>materialType</em> must cotain <em>"buffy coat"</em>
+				<code>biobankName:international -biobankName:organization</code>. Similary the <em>biobankName</em> must contain <em>"iarc"</em> or <em>materialType</em> must cotain <em>"buffy coat"</em>
 				<code>+biobankName:"iarc"   +materialType:"buffy coat"</code>
 			</li>
 			<li>
