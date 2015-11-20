@@ -68,11 +68,14 @@ ${theme.include(body_top_include)}
 						
 						<div id="section-logo-position">
 							<a href="http://bcnet.iarc.fr/index.php">
-			                  <img src="${images_folder}/bcnet-title.gif" hspace="10"  align="top" title="BCNet" border="0" width="490px" height="85px">  
+			                  <img src="${images_folder}/bcnet-title.gif" hspace="10"  align="top" title="BCNet" border="0" width="490px" height="85px"/>  
 							</a>
 						</div>
 						
-						<div id="catalog">
+						<div id="catalogue">
+							<a href="http://bcnetcat.iarc.fr">
+			                  <img src="${images_folder}/bcnet-catalogue-title.png" align="top" title="BCNet Catalogue" border="0" width="319px" height="44px"/>  
+							</a>
 						</div>
 						
 						<div id="links-position">

@@ -8,7 +8,7 @@ div#logo-position{
 	float:left;
 	margin-top:11px;
 	max-height:82px;
-	width:35%;
+	width:30%;
 	max-width:320px;
 }
 
@@ -21,9 +21,18 @@ div#logo-position a{
 div#section-logo-position{
 	float:left;
 	margin-top:11px;
-	width:60%;
-	max-width:500px;
+	width:30%;
+	max-width:490px;
 	padding-left:0;
+}
+
+div#catalogue{
+	float:left;
+	margin-top:20px;
+	width:20%;
+	max-width:319px;
+	padding-left:0;
+	margin-left: 50px;
 }
 
 
@@ -45,7 +54,17 @@ div#section-logo-position a{
 	padding-left:10px;
 }
 
+div#catalogue a{
+	display:block;
+	height:auto;
+	padding-left:10px;
+}
+
 div#section-logo-position a img{
+	width:100%;
+}
+
+div#catalogue a img{
 	width:100%;
 }
 
@@ -63,7 +82,7 @@ div#links-position ul li{
 
 ul#networks{
 	float:right;
-	margin-top:4px;
+	margin:auto;
 }
 
 ul#networks li{
