@@ -8,9 +8,10 @@ div#logo-position{
 	float:left;
 	margin-top:11px;
 	max-height:82px;
-	width:35%;
+	width:30%;
 	max-width:320px;
 }
+
 
 div#logo-position a{
 	display:block;
@@ -21,9 +22,19 @@ div#logo-position a{
 div#section-logo-position{
 	float:left;
 	margin-top:11px;
-	width:60%;
-	max-width:500px;
+	width:30%;
+	max-width:490px;
 	padding-left:0;
+}
+
+
+div#catalogue{
+	float:left;
+	margin-top:20px;
+	width:20%;
+	max-width:319px;
+	padding-left:0;
+	margin-left: 50px;
 }
 
 
@@ -39,16 +50,29 @@ div#catalog:before {
     content: "*Catalog";
 }
 
+
 div#section-logo-position a{
 	display:block;
 	height:auto;
 	padding-left:10px;
 }
 
+
+div#catalogue a{
+	display:block;
+	height:auto;
+	padding-left:10px;
+}
+
+
 div#section-logo-position a img{
 	width:100%;
 }
 
+
+div#catalogue a img{
+	width:100%;
+}
 
 
 div#links-position{
@@ -57,14 +81,17 @@ div#links-position{
 	float:right;
 }
 
+
 div#links-position ul li{
 	float:left;
 }
 
+
 ul#networks{
 	float:right;
-	margin-top:4px;
+	margin:auto;
 }
+
 
 ul#networks li{
 	height:10px;
@@ -72,22 +99,27 @@ ul#networks li{
 	padding:0 5px;
 }
 
+
 ul#networks li a{
 	margin-top:-4px;
 	display:block;
 }
 
+
 ul#networks li.firstli{
 	border-left:medium none;
 }
+
 
 ul#networks li.lastli{
 	padding-right:0;
 }
 
+
 div#bottom-links{
 	display:none;
 }
+
 
 #section-link-position h1{
 	display: none;
@@ -121,6 +153,7 @@ div#bottom-links{
 	}
 }
 
+
 @media only screen and (min-width : 1600px) {
     div#catalog:before {
 	    float: left;
@@ -145,15 +178,18 @@ div#bottom-links{
 		margin-top:15px;
 	}
 	
+
 	div#logo-position a img{
 		min-width:151px;
 		min-height:33px;
 	}
 	
+
 	div#section-logo-position img{
 		display:none;
 	}
 	
+
 	div#section-logo-position{
 		display: block;
 		position:absolute;
@@ -163,6 +199,7 @@ div#bottom-links{
 		margin-top: 8px;
 	}
 	
+
 	div#links-position{
 		width:30%;
 		padding-right:0;
@@ -170,22 +207,27 @@ div#bottom-links{
 		position:relative;
 	}
 	
+
 	div#links-position ul{
 		display:none;
 	}
 	
+
 	div#links-position div.break{
 		clear:none;
 	}
 	
+
 	ul#networks{
 		display:block;
 	}
 	
+
 	div#bottom-links, div#bottom-links ul#networks{
 		display:block;
 	}
 	
+
 	div#bottom-links ul#networks{
 		margin:0 auto;
 		float:none;
@@ -193,10 +235,12 @@ div#bottom-links{
 		height:30px;
 	}
 	
+
 	div#bottom-links ul#networks li{
 		float:left;
 	}
 	
+
 	#section-link-position h1{
 		display:block;
 	}

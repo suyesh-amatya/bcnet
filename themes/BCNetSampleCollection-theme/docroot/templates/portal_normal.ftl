@@ -44,7 +44,8 @@ ${theme.include(body_top_include)}
 				<header id="banner" role="banner">
 					<div id="page-header">
 						<div id="logo-position">
-							<a class="${logo_css_class}" href="${site_default_url}" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
+							<a class="${logo_css_class}" href="http://www.iarc.fr/" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">
+							<#--<a class="${logo_css_class}" href="${site_default_url}" title="<@liferay.language_format arguments="${site_name}" key="go-to-x" />">-->
 								<img title="IARC" height="${site_logo_height}" src="${images_folder}/logoiarc.gif" width="${site_logo_width}" />
 							</a>
 			
@@ -57,12 +58,16 @@ ${theme.include(body_top_include)}
 						</div>
 						
 						<div id="section-logo-position">
-							<a href="/home">
-			                  <img src="${images_folder}/bcnet-title.gif" hspace="10"  align="top" title="BCNet" border="0">  
+							<a href="http://bcnet.iarc.fr">
+							<#--<a href="/home">-->
+			                  <img src="${images_folder}/bcnet-title.gif" hspace="10"  align="top" title="BCNet" border="0" width="490px" height="85px"/>  
 							</a>
 						</div>
 						
-						<div id="catalog">
+						<div id="catalogue">
+							<a href="http://bcnetcat.iarc.fr">
+			                  <img src="${images_folder}/bcnet-catalogue-title.png" align="top" title="BCNet Catalogue" border="0" width="319px" height="44px"/>  
+							</a>
 						</div>
 						
 						<div id="links-position">
