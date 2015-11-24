@@ -152,20 +152,19 @@ public interface BiobankAttributeListsModel extends BaseModel<BiobankAttributeLi
 	public Object clone();
 
 	@Override
-	public int compareTo(
-		com.bcnet.portlet.biobank.model.BiobankAttributeLists biobankAttributeLists);
+	public int compareTo(BiobankAttributeLists biobankAttributeLists);
 
 	@Override
 	public int hashCode();
 
 	@Override
-	public CacheModel<com.bcnet.portlet.biobank.model.BiobankAttributeLists> toCacheModel();
+	public CacheModel<BiobankAttributeLists> toCacheModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.BiobankAttributeLists toEscapedModel();
+	public BiobankAttributeLists toEscapedModel();
 
 	@Override
-	public com.bcnet.portlet.biobank.model.BiobankAttributeLists toUnescapedModel();
+	public BiobankAttributeLists toUnescapedModel();
 
 	@Override
 	public String toString();

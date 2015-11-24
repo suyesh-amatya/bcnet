@@ -3,6 +3,7 @@ package com.bcnet.portlet.sample.search;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
@@ -11,9 +12,7 @@ import com.bcnet.portlet.biobank.model.Sample;
 import com.bcnet.portlet.biobank.service.BiobankGeneralInformationLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleCollectionLocalServiceUtil;
 import com.bcnet.portlet.biobank.service.SampleLocalServiceUtil;
-import com.bcnet.portlet.biobank.service.persistence.SampleActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
@@ -196,12 +195,14 @@ public class SampleIndexer extends BaseIndexer{
 	@Override
 	protected void doReindex(Object obj) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("-----doReindex Object obj called------");
+		
 		Sample sample = (Sample)obj;
 
-         Document document = getDocument(sample);
+        Document document = getDocument(sample);
 
-         Company company = CompanyLocalServiceUtil.getCompanyByMx(PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));
-         SearchEngineUtil.updateDocument(
+        Company company = CompanyLocalServiceUtil.getCompanyByMx(PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));
+        SearchEngineUtil.updateDocument(
                  getSearchEngineId(), company.getCompanyId(), document);
 		
 	}
@@ -209,13 +210,19 @@ public class SampleIndexer extends BaseIndexer{
 	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("-----doReindex String[] ids called------");
+		
 		long companyId = GetterUtil.getLong(ids[0]);
 
         reindexSamples(companyId);
 	}
 
-	protected void reindexSamples(long companyId) throws SystemException, PortalException {
+	// This method has been reimplemented below to allow reindexing of custom entities from Control Panel -> Configuration -> Server Administration -> Resources
+	// or from Control Panel -> Apps -> App Manager -> Manage.
+	/*protected void reindexSamples(long companyId) throws SystemException, PortalException {
 		// TODO Auto-generated method stub
+		System.out.println("-----reindexSamples called------");
+		
 		final Collection<Document> documents = new ArrayList<Document>();
 
         ActionableDynamicQuery actionableDynamicQuery = new SampleActionableDynamicQuery() {
@@ -226,22 +233,53 @@ public class SampleIndexer extends BaseIndexer{
 
                 @Override
                 protected void performAction(Object object) throws PortalException {
-                        Sample sample = (Sample) object;
+                	System.out.println("-----reindexSamples.performAction called------");
+                    Sample sample = (Sample) object;
 
-                        Document document = getDocument(sample);
+                    Document document = getDocument(sample);
 
-                        documents.add(document);
+                    documents.add(document);
                 }
 
         };
 
+        //ClassLoader classLoader = (ClassLoader) PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(), "portletClassLoader");
+        //actionableDynamicQuery.setClassLoader(classLoader);
+        
         actionableDynamicQuery.setCompanyId(companyId);
 
         actionableDynamicQuery.performActions();
 
         SearchEngineUtil.updateDocuments(getSearchEngineId(), companyId,
                         documents);
+	}*/
+	
+	
+	// The new implementation of reindexSamples method to allow reindexing of custom entities from Control Panel -> Configuration -> Server Administration -> Resources
+	// or from Control Panel -> Apps -> App Manager -> Manage.
+	protected void reindexSamples(long companyId) throws SystemException, PortalException {
+		// TODO Auto-generated method stub
+		System.out.println("-----reindexSamples called------");
+		
+		final Collection<Document> documents = new ArrayList<Document>();
+		
+		List<Sample> sampleList = SampleLocalServiceUtil.getSamples(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		
+		if(sampleList.isEmpty()){
+			return;
+		}
+		
+		for(Sample sample : sampleList){
+			Document document = getDocument(sample);
+
+            documents.add(document);
+		}
+
+
+        SearchEngineUtil.updateDocuments(getSearchEngineId(), companyId,
+                        documents);
 	}
+	
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
