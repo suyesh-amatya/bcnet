@@ -20,7 +20,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 %>
 
 
-
+<div id="biobanks-lister-container">
 <liferay-ui:search-container emptyResultsMessage="biobank-empty-results-message">
 
 <%
@@ -51,6 +51,7 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 		</portlet:actionURL>
 		
 	
+		
 		<div class="well">
 			<a href="<%=orgPath%>"><b><%= biobankGeneralInformation.getBiobankName() %></b></a>
 			<%
@@ -84,3 +85,4 @@ String redirect = PortalUtil.getCurrentURL(renderRequest);
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
+</div>

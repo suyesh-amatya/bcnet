@@ -74,6 +74,14 @@ div#sample-search-results-container .taglib-search-iterator-page-iterator-top{
 	display: none;
 }
 
+div#biobanks-lister-container .taglib-search-iterator-page-iterator-top{
+	display: none;
+}
+
+div#biobanks-search-results-container .taglib-search-iterator-page-iterator-top{
+	display: none;
+}
+
 div.well.sample-search-results{
 	background-color: #FFFFFF;
 	margin-bottom: auto;

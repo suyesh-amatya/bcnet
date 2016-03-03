@@ -54,7 +54,7 @@
 </aui:form>
 
 
-
+<div id="biobanks-search-results-container">
 <liferay-ui:search-container emptyResultsMessage="biobank-empty-results-message">
 
 <%
@@ -135,6 +135,7 @@
 
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
+</div>
 	
 <aui:script>
 AUI().use('aui-toggler', function(A){
