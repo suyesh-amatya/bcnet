@@ -179,7 +179,7 @@ ${theme.include(body_top_include)}
 			<div id="footer">
 				<address>
 					IARC, 150 Cours Albert Thomas, 69372 Lyon CEDEX 08, France - Tel: +33 (0)4 72 73 84 85 - Fax: +33 (0)4 72 73 85 75<br/>
-					&copy; IARC 2014 - <a href="http://www.iarc.fr/en/copyright.php" target="_blank">All Rights Reserved.</a>
+					Privacy Policy &copy; IARC 2016 - <a href="http://www.iarc.fr/en/copyright.php" target="_blank">All Rights Reserved.</a>
 				</address>
 			</div>
 		</footer>
